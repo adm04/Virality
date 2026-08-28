@@ -1605,11 +1605,11 @@ body::before {
 
 .auth-gateway-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.15fr 0.85fr;
   width: 100%;
-  max-width: 880px;
-  min-height: 480px;
-  background: #101016;
+  max-width: 860px;
+  min-height: 460px;
+  background: #111117;
   border: var(--border-light);
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -1619,45 +1619,80 @@ body::before {
 }
 
 .auth-gateway-hero {
-  background: radial-gradient(circle at top left, rgba(139, 124, 246, 0.25) 0%, rgba(0, 245, 155, 0.12) 60%, rgba(10, 10, 15, 0.9) 100%), #0D0D12;
+  background: radial-gradient(circle at top left, rgba(139, 124, 246, 0.28) 0%, rgba(0, 245, 155, 0.14) 55%, rgba(13, 13, 18, 0.95) 100%), #0D0D12;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 40px;
+  padding: 38px 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: left;
 }
-.gateway-hero-header { display: flex; align-items: center; gap: 12px; }
-.gateway-brand-name { font-family: 'Clash Display', sans-serif; font-size: 16px; font-weight: 700; color: #FFFFFF; }
+.gateway-hero-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.gateway-brand-name {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+.gateway-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0;
+}
 .gateway-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
   border-radius: var(--radius-pill);
-  background: rgba(0, 245, 155, 0.12);
-  border: 1px solid rgba(0, 245, 155, 0.35);
+  background: rgba(0, 245, 155, 0.14);
+  border: 1px solid rgba(0, 245, 155, 0.4);
   color: var(--chart-1);
   font-size: 10px;
   font-weight: 800;
   font-family: 'JetBrains Mono', monospace;
-  margin-bottom: 12px;
+  letter-spacing: 0.06em;
 }
-.gateway-hero-title { font-family: 'Clash Display', sans-serif; font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1.15; margin-bottom: 10px; }
-.gateway-hero-sub { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
-.gateway-hero-footer { font-size: 11px; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; }
+.gateway-hero-title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.gateway-hero-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+.gateway-hero-footer {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  font-family: 'JetBrains Mono', monospace;
+}
 
 .auth-gateway-form-pane {
-  padding: 40px;
+  padding: 38px 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: stretch;
   position: relative;
-  background: #101016;
+  background: #111117;
+  text-align: left;
 }
 .gateway-close-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 18px;
+  right: 18px;
   background: rgba(255, 255, 255, 0.05);
   border: var(--border-ultra-thin);
   color: var(--text-tertiary);
@@ -1670,12 +1705,34 @@ body::before {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.gateway-close-btn:hover { background: rgba(255, 255, 255, 0.12); color: #FFFFFF; }
+.gateway-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}
 
-.gateway-form-card { display: flex; flex-direction: column; gap: 20px; }
-.gateway-form-header { display: flex; flex-direction: column; gap: 4px; }
-.gateway-title { font-family: 'Clash Display', sans-serif; font-size: 22px; font-weight: 700; color: #FFFFFF; }
-.gateway-subtitle { font-size: 12.5px; color: var(--text-tertiary); }
+.gateway-form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+}
+.gateway-form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.gateway-title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+.gateway-subtitle {
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  line-height: 1.35;
+}
 
 .btn-demo-instant {
   background: linear-gradient(135deg, #00F59B 0%, #00D284 100%);
@@ -1684,18 +1741,46 @@ body::before {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 13.5px;
   font-weight: 700;
-  padding: 14px 20px;
+  padding: 13px 18px;
   border-radius: var(--radius-md);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 10px 30px rgba(0, 245, 155, 0.35);
+  box-shadow: 0 10px 28px rgba(0, 245, 155, 0.35);
   transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+  width: 100%;
 }
-.btn-demo-instant:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(0, 245, 155, 0.45); }
-.gateway-footer-hint { font-size: 12px; color: var(--text-tertiary); display: flex; align-items: center; gap: 6px; }
+.btn-demo-instant:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0, 245, 155, 0.45);
+}
+.gateway-footer-hint {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: -6px;
+}
+
+@media (max-width: 800px) {
+  .auth-gateway-container {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    min-height: auto;
+  }
+  .auth-gateway-hero {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 28px;
+  }
+  .auth-gateway-form-pane {
+    padding: 28px;
+  }
+}
 
 /* ================= 5-STEP ONBOARDING WIZARD MODAL ================= */
 
