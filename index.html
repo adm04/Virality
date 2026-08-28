@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vantage — Elite Content Idea Library & Virality Scorer</title>
+  
+  <!-- Modern Font Pairing: Clash Display, Plus Jakarta Sans, JetBrains Mono, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Light Mesh Backdrop -->
+  <div class="ambient-glow glow-top-left"></div>
+  <div class="ambient-glow glow-top-right"></div>
+  <div class="ambient-glow glow-bottom-center"></div>
+
+  <div class="app-container">
+
+    <!-- ================= MINIMALIST COLLAPSED SIDEBAR ================= -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="#" class="brand-mark" title="Vantage Virality OS">
+          <span class="mark-letter">V</span>
+          <span class="mark-glow"></span>
+        </a>
+
+        <nav class="nav-stack" aria-label="Primary Navigation">
+          <button class="nav-item active" data-tooltip="Idea Library (⌘1)" id="nav-library">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/>
+              <rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/>
+            </svg>
+            <span class="nav-indicator"></span>
+          </button>
+
+          <button class="nav-item" data-tooltip="AI Virality Scorer (⌘2)" id="nav-scorer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+            </svg>
+          </button>
+
+          <button class="nav-item" data-tooltip="Retention Curves (⌘3)" id="nav-retention">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v18h18"/><path d="M7 16c3-8 5-11 9-11 3 0 4 6 4 6"/>
+            </svg>
+          </button>
+
+          <button class="nav-item" data-tooltip="Competitor Radar (⌘4)" id="nav-competitor">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/><circle cx="12" cy="12" r="2"/>
+            </svg>
+          </button>
+
+          <button class="nav-item" data-tooltip="Saved Swipe Files (⌘5)" id="nav-bookmarks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="nav-item" data-tooltip="Quick Settings" id="nav-settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        
+        <div class="user-profile-badge" title="Arka Mondal · Pro Creator Tier">
+          <span class="avatar-text">AM</span>
+          <span class="status-online"></span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ================= MAIN WORKSPACE ================= -->
+    <main class="main-viewport">
+
+      <!-- TOP COMMAND HEADER -->
+      <header class="topbar animate-fade">
+        <div class="topbar-left">
+          <div class="status-pill">
+            <span class="live-pulse"></span>
+            <span class="status-text">VIRALITY ENGINE ACTIVE &bull; <strong id="header-total-count">214</strong> HOOKS INDEXED</span>
+          </div>
+          <h1 class="hero-title">Good morning, <span class="gradient-text">Arka.</span></h1>
+          <p class="hero-subtitle">High-probability retention architectures & viral algorithm calibration.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="btn btn-secondary" id="btn-batch-import">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <span>Batch Scorer</span>
+          </button>
+          
+          <button class="btn btn-primary" id="btn-score-new">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+            <span>+ Score New Hook</span>
+            <span class="kbd-badge">N</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- FLOATING GLASS COMMAND SEARCH & FILTERS -->
+      <section class="command-search-shell animate-fade delay-1">
+        <div class="search-glass-card">
+          <div class="search-input-group">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input 
+              type="text" 
+              id="global-search-input" 
+              placeholder="Search hooks, psychological triggers, topics or paste a competitor URL to reverse-engineer…" 
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <div class="search-actions">
+              <button class="clear-search-btn" id="clear-search-btn" title="Clear search">×</button>
+              <div class="shortcut-pill" title="Press ⌘K or Ctrl+K to search">
+                <span class="key-symbol">⌘</span><span>K</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Filter Category Pills -->
+          <div class="filter-pills-row" id="filter-pills-container">
+            <button class="pill active" data-filter="all">
+              <span class="pill-label">All Ideas</span>
+              <span class="pill-count" id="count-all">214</span>
+            </button>
+            <button class="pill" data-filter="viral">
+              <span class="pill-icon">🔥</span>
+              <span class="pill-label">Viral Hits (90+)</span>
+              <span class="pill-count" id="count-viral">38</span>
+            </button>
+            <button class="pill" data-filter="youtube">
+              <svg class="pill-platform-icon yt" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9 1.7.2 7.2.2 7.2.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>
+              <span class="pill-label">YouTube Long-form</span>
+              <span class="pill-count" id="count-youtube">86</span>
+            </button>
+            <button class="pill" data-filter="shorts">
+              <svg class="pill-platform-icon shorts" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.86 1 1.1 1.7.24.66.4 1.4.46 2.5.05 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.5-.27.7-.6 1.2-1.1 1.7-.5.5-1 .86-1.7 1.1-.66.24-1.4.4-2.5.46-1.1.05-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.66-.4-1.4-.46-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.5.27-.7.6-1.2 1.1-1.7.5-.5 1-.86 1.7-1.1.66-.24 1.4-.4 2.5-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+              <span class="pill-label">Reels / Shorts / TikTok</span>
+              <span class="pill-count" id="count-shorts">94</span>
+            </button>
+            <button class="pill" data-filter="social">
+              <svg class="pill-platform-icon li" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57z"/></svg>
+              <span class="pill-label">X & LinkedIn</span>
+              <span class="pill-count" id="count-social">34</span>
+            </button>
+            <button class="pill" data-filter="saved">
+              <span class="pill-icon">★</span>
+              <span class="pill-label">Saved</span>
+              <span class="pill-count" id="count-saved">12</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXECUTIVE STAT STRIP (BENTO ROW) -->
+      <section class="stat-strip animate-fade delay-2">
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Avg. Virality Score</span>
+            <span class="stat-badge trend-up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              +4.8
+            </span>
+          </div>
+          <div class="stat-main">
+            <div class="stat-hero-number">78<span class="stat-unit">/100</span></div>
+            <div class="stat-subtext">Top 4% of indexed creator libraries</div>
+          </div>
+          <div class="stat-progress-track">
+            <div class="stat-progress-bar emerald" style="width: 78%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Viral Queue & Velocity</span>
+            <span class="stat-badge trend-up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              +14 today
+            </span>
+          </div>
+          <div class="stat-main">
+            <div class="stat-hero-number">214<span class="stat-unit">ideas</span></div>
+            <div class="stat-subtext">38 scored in 90+ breakout tier</div>
+          </div>
+          <div class="stat-progress-track">
+            <div class="stat-progress-bar amber" style="width: 62%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Predicted 30s Retention</span>
+            <span class="stat-badge trend-up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              92.4% hit
+            </span>
+          </div>
+          <div class="stat-main">
+            <div class="stat-hero-number">74.2<span class="stat-unit">%</span></div>
+            <div class="stat-subtext">+18.5% over YouTube niche baseline</div>
+          </div>
+          <div class="stat-progress-track">
+            <div class="stat-progress-bar violet" style="width: 74%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-title">Trend Decay Risk</span>
+            <span class="stat-badge trend-down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>
+              Low (3 exp)
+            </span>
+          </div>
+          <div class="stat-main">
+            <div class="stat-hero-number">LOW<span class="stat-unit">decay</span></div>
+            <div class="stat-subtext">Evergreen hook ratio: 89% optimal</div>
+          </div>
+          <div class="stat-progress-track">
+            <div class="stat-progress-bar emerald" style="width: 89%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION HEADING & CONTROLS -->
+      <section class="section-toolbar animate-fade delay-3">
+        <div class="section-title-group">
+          <h2 class="section-title">Curated Idea Matrix</h2>
+          <span class="section-badge" id="results-count-badge">Showing 10 of 214 high-conv ideas</span>
+        </div>
+
+        <div class="toolbar-controls">
+          <div class="sort-selector">
+            <span class="sort-label">Sort:</span>
+            <select id="sort-select" class="custom-select">
+              <option value="score-desc">Highest Virality Score</option>
+              <option value="retention-desc">Highest Retention Lift</option>
+              <option value="newest">Recently Calibrated</option>
+              <option value="alphabetical">Hook Name (A-Z)</option>
+            </select>
+          </div>
+          
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="bento" title="Bento Grid View">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </button>
+            <button class="view-btn" data-view="compact" title="Compact View">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- BENTO / MASONRY GRID OF IDEA CARDS -->
+      <section class="bento-grid" id="ideas-grid">
+        <!-- Dynamically rendered via JavaScript for complete interactivity & sorting -->
+      </section>
+
+      <!-- EMPTY STATE (HIDDEN BY DEFAULT) -->
+      <div class="empty-state" id="empty-state" style="display: none;">
+        <div class="empty-icon-ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>No matching ideas found</h3>
+        <p>Try refining your search keyword or clearing active platform filters.</p>
+        <button class="btn btn-secondary" id="reset-filters-btn">Reset All Filters</button>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ================= MODAL 1: AI VIRALITY SCORER & HOOK OPTIMIZER ================= -->
+  <div class="modal-overlay" id="scorer-modal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          </div>
+          <div>
+            <h3 class="modal-title">AI Virality Scorer & Hook Calibrator</h3>
+            <p class="modal-desc">Simulate algorithmic CTR, viewer drop-off probability, and psychological triggers.</p>
+          </div>
+        </div>
+        <button class="modal-close" id="close-scorer-modal" title="Close (Esc)">×</button>
+      </div>
+
+      <div class="modal-body scorer-modal-body">
+        <div class="scorer-inputs-col">
+          <div class="form-group">
+            <label for="hook-input-field" class="form-label">Hook / Opening Line / Title</label>
+            <textarea 
+              id="hook-input-field" 
+              class="form-textarea" 
+              rows="3" 
+              placeholder="e.g., I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model."
+            ></textarea>
+            <div class="textarea-footer">
+              <span class="char-counter" id="hook-char-count">0 characters &bull; Optimal length: 55-90 chars</span>
+              <button class="btn-text" id="paste-sample-hook">Try Sample Hook</button>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="platform-select-field" class="form-label">Target Platform</label>
+              <select id="platform-select-field" class="form-select">
+                <option value="youtube">YouTube Long-form (16:9)</option>
+                <option value="shorts">YouTube Shorts / TikTok (9:16)</option>
+                <option value="reels">Instagram Reels (9:16)</option>
+                <option value="x">X / Twitter Thread</option>
+                <option value="linkedin">LinkedIn Post</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="niche-select-field" class="form-label">Creator Niche</label>
+              <select id="niche-select-field" class="form-select">
+                <option value="tech-ai">Tech & AI Experiments</option>
+                <option value="business-money">Finance & Business</option>
+                <option value="design-ux">Design & SaaS Building</option>
+                <option value="productivity">Self-Development & Systems</option>
+                <option value="lifestyle">Storytelling & Documentary</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-full-width" id="btn-run-analysis">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+            <span>Calibrate & Run Virality Diagnostic</span>
+          </button>
+        </div>
+
+        <div class="scorer-results-col" id="scorer-results-panel">
+          <div class="dial-score-container">
+            <div class="score-glow-ring" id="result-score-ring">
+              <span class="result-number" id="result-score-num">--</span>
+              <span class="result-label" id="result-score-label">Awaiting Input</span>
+            </div>
+            <div class="score-sub-analysis">
+              <div class="trigger-bar">
+                <div class="trigger-meta"><span>Curiosity Gap</span><strong id="bar-curiosity">--%</strong></div>
+                <div class="trigger-track"><div class="trigger-fill" id="fill-curiosity" style="width: 0%;"></div></div>
+              </div>
+              <div class="trigger-bar">
+                <div class="trigger-meta"><span>High Stakes / Conflict</span><strong id="bar-stakes">--%</strong></div>
+                <div class="trigger-track"><div class="trigger-fill" id="fill-stakes" style="width: 0%;"></div></div>
+              </div>
+              <div class="trigger-bar">
+                <div class="trigger-meta"><span>Algorithmic Velocity Index</span><strong id="bar-velocity">--%</strong></div>
+                <div class="trigger-track"><div class="trigger-fill" id="fill-velocity" style="width: 0%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI High-Converting Rewrite Suggestions -->
+          <div class="ai-variations-box" id="ai-variations-box" style="display: none;">
+            <div class="variations-header">
+              <span class="sparkle-tag">✨ AI 90+ Score Variations</span>
+              <span class="ai-badge">Instant 1-Click Replace</span>
+            </div>
+            <div class="variations-list" id="variations-list">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancel-scorer-btn">Cancel</button>
+        <button class="btn btn-primary" id="save-to-library-btn" disabled>
+          <span>Save Idea to Library</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 2: BATCH IMPORT / COMPETITOR SCRAPER ================= -->
+  <div class="modal-overlay" id="batch-modal" aria-hidden="true">
+    <div class="modal-card modal-md">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 15 21 19 3 19 3 15"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </div>
+          <div>
+            <h3 class="modal-title">Batch Import & Reverse Engineer</h3>
+            <p class="modal-desc">Paste competitor URLs or multiple hook drafts (one per line).</p>
+          </div>
+        </div>
+        <button class="modal-close" id="close-batch-modal" title="Close (Esc)">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Hooks List or URLs (1 per line)</label>
+          <textarea 
+            id="batch-input-field" 
+            class="form-textarea" 
+            rows="6" 
+            placeholder="https://youtube.com/watch?v=...\nWhy 99% of creators fail before 10k subs\nI quit my $250k tech job for 7 days"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancel-batch-btn">Cancel</button>
+        <button class="btn btn-primary" id="confirm-batch-btn">
+          <span>Process & Auto-Score Batch</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SLIDE-OVER DRAWER: IDEA CARD DEEP DIVE ================= -->
+  <aside class="detail-drawer" id="detail-drawer" aria-hidden="true">
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-platform-tag" id="drawer-platform-tag">
+          <!-- Platform tag injected -->
+        </div>
+        <div class="drawer-actions">
+          <button class="drawer-btn-icon" id="drawer-bookmark-btn" title="Bookmark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </button>
+          <button class="drawer-btn-icon" id="drawer-copy-btn" title="Copy Hook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <button class="modal-close" id="close-drawer-btn" title="Close Drawer (Esc)">×</button>
+        </div>
+      </div>
+
+      <div class="drawer-body">
+        <div class="drawer-score-hero">
+          <div class="score-badge-large" id="drawer-score-badge">
+            <span class="score-num" id="drawer-score-num">98</span>
+            <span class="score-sub">VIRAL TIER</span>
+          </div>
+          <div class="drawer-score-details">
+            <h4 class="drawer-rating-headline" id="drawer-rating-headline">Algorithmic Outlier Potential</h4>
+            <p class="drawer-rating-desc" id="drawer-rating-desc">Extremely high Curiosity Gap + High Stakes narrative creates immediate viewer buy-in during the first 5 seconds.</p>
+          </div>
+        </div>
+
+        <div class="drawer-hook-quote" id="drawer-hook-text">
+          <!-- Hook Text -->
+        </div>
+
+        <!-- Simulated Retention Curve Graph -->
+        <div class="drawer-retention-section">
+          <div class="section-subhead">
+            <span>Projected 60s Viewer Retention Curve</span>
+            <span class="highlight-green" id="drawer-retention-stat">+340% vs Avg</span>
+          </div>
+          <div class="retention-chart-box">
+            <svg class="retention-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="retentionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(0, 245, 155, 0.35)"/>
+                  <stop offset="100%" stop-color="rgba(0, 245, 155, 0.00)"/>
+                </linearGradient>
+              </defs>
+              <!-- Grid lines -->
+              <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
+              <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
+              <line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
+              
+              <!-- Area & Path -->
+              <path id="drawer-retention-area" d="M0,15 Q100,20 200,32 T400,45 L400,120 L0,120 Z" fill="url(#retentionGradient)" />
+              <path id="drawer-retention-path" d="M0,15 Q100,20 200,32 T400,45" fill="none" stroke="#00F59B" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <div class="chart-labels">
+              <span>0s (Hook)</span>
+              <span>15s (Setup)</span>
+              <span>30s (Payoff 1)</span>
+              <span>60s (Retention Lock)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Psychological Pillars -->
+        <div class="drawer-psych-breakdown">
+          <div class="section-subhead">Psychological Levers & Triggers</div>
+          <div class="psych-grid" id="drawer-psych-tags">
+            <!-- Tags rendered -->
+          </div>
+        </div>
+
+        <!-- Recommended Thumbnail Concept -->
+        <div class="drawer-thumb-pairing">
+          <div class="section-subhead">Recommended Thumbnail Concept</div>
+          <div class="thumb-concept-card" id="drawer-thumb-concept">
+            Split screen: Left side showing red trading model crash graph; right side showing 3 AI terminals with green profit surge. Extreme contrast & curiosity.
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button class="btn btn-secondary" id="drawer-copy-btn-2">Copy Hook</button>
+        <button class="btn btn-primary" id="drawer-export-btn">Send to Script Studio</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- MAIN SCRIPT -->
+  <script src="app.js"></script>
+</body>
+</html>
