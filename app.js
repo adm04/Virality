@@ -1,7 +1,7 @@
 /**
- * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION (SHADCN/UI CHART & AUTH GATEWAY EDITION)
- * Ultra-Modern SaaS Dashboard Logic, shadcn/ui Canvas Visualizations,
- * Virality Simulation Diagnostics, and Zero-Backend Client Authentication System
+ * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION (TOPIC & NICHE SEARCH & AUTH EDITION)
+ * Ultra-Modern SaaS Dashboard Logic, Topic Search Engine, Multi-Niche Filtering,
+ * shadcn/ui Canvas Visualizations, and Zero-Backend Client Authentication System
  */
 
 (function () {
@@ -9,7 +9,6 @@
 
   // ================= 1. AUTHENTICATION & USER STATE =================
   const STORAGE_KEY_SESSION = 'vantage_user_session';
-  const STORAGE_KEY_IDEAS = 'vantage_ideas_data';
 
   const DEFAULT_USER = {
     id: 'user-arka-01',
@@ -53,12 +52,16 @@
     updateUIForAuth();
   }
 
-  // ================= 2. CORE DATASET (CURATED VIRAL HOOKS) =================
+  // ================= 2. CORE DATASET (WITH TOPIC & NICHE METADATA) =================
   const INITIAL_IDEAS = [
     {
       id: 'idea-1',
       platform: 'youtube',
       platformName: 'YouTube Long-form',
+      niche: 'tech-ai',
+      nicheName: 'Tech & AI',
+      topic: 'ai-agents',
+      topicName: 'AI & Autonomous Agents',
       score: 98,
       tier: 'tier-viral',
       hook: "I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model.",
@@ -84,6 +87,10 @@
       id: 'idea-2',
       platform: 'shorts',
       platformName: 'Instagram Reels',
+      niche: 'business-money',
+      nicheName: 'Finance & Business',
+      topic: 'freelance-career',
+      topicName: 'Freelance & Career',
       score: 91,
       tier: 'tier-viral',
       hook: "Nobody tells you this before your first $10k client project.",
@@ -108,6 +115,10 @@
       id: 'idea-3',
       platform: 'shorts',
       platformName: 'TikTok',
+      niche: 'design-ux',
+      nicheName: 'Design & SaaS',
+      topic: 'design-figma',
+      topicName: 'Figma & Design Systems',
       score: 74,
       tier: 'tier-high',
       hook: "POV: your design system finally has zero inconsistencies after 6 months of hell.",
@@ -131,6 +142,10 @@
       id: 'idea-4',
       platform: 'social',
       platformName: 'LinkedIn / X',
+      niche: 'design-ux',
+      nicheName: 'Design & SaaS',
+      topic: 'freelance-career',
+      topicName: 'Freelance & Career',
       score: 88,
       tier: 'tier-high',
       hook: "I audited 50 designer portfolios last month. Here is the single section that predicts callbacks with 90% accuracy.",
@@ -154,6 +169,10 @@
       id: 'idea-5',
       platform: 'youtube',
       platformName: 'YouTube Long-form',
+      niche: 'productivity',
+      nicheName: 'Productivity & Systems',
+      topic: 'productivity-ceos',
+      topicName: 'Productivity & Mythbusting',
       score: 95,
       tier: 'tier-viral',
       hook: "I tested the 7 'unbreakable' productivity rules of billion-dollar CEOs — 5 of them are completely fake.",
@@ -178,6 +197,10 @@
       id: 'idea-6',
       platform: 'shorts',
       platformName: 'Shorts & Reels',
+      niche: 'design-ux',
+      nicheName: 'Design & SaaS',
+      topic: 'design-figma',
+      topicName: 'Figma & Design Systems',
       score: 84,
       tier: 'tier-high',
       hook: "The 10-minute Figma trick that senior designers charge $150/hr for.",
@@ -201,6 +224,10 @@
       id: 'idea-7',
       platform: 'shorts',
       platformName: 'Instagram Reels',
+      niche: 'business-money',
+      nicheName: 'Finance & Business',
+      topic: 'freelance-career',
+      topicName: 'Freelance & Client Red Flags',
       score: 93,
       tier: 'tier-viral',
       hook: "Rating client red flags before the discovery call even ends.",
@@ -224,6 +251,10 @@
       id: 'idea-8',
       platform: 'social',
       platformName: 'X Thread / Substack',
+      niche: 'design-ux',
+      nicheName: 'Design & SaaS',
+      topic: 'saas-growth',
+      topicName: 'SaaS Growth & UX Audits',
       score: 79,
       tier: 'tier-high',
       hook: "I replaced my SaaS onboarding flow with 4 minimalist screens. Conversions jumped 312%.",
@@ -247,6 +278,10 @@
       id: 'idea-9',
       platform: 'youtube',
       platformName: 'YouTube Long-form',
+      niche: 'lifestyle',
+      nicheName: 'Storytelling & Documentary',
+      topic: 'finance-wealth',
+      topicName: 'Finance & High Stakes',
       score: 62,
       tier: 'tier-mid',
       hook: "A slow, transparent breakdown of my Q3 creator revenue — with zero sponsor fluff.",
@@ -270,6 +305,10 @@
       id: 'idea-10',
       platform: 'shorts',
       platformName: 'TikTok / Shorts',
+      niche: 'tech-ai',
+      nicheName: 'Tech & AI',
+      topic: 'devtools-coding',
+      topicName: 'DevTools, VS Code & Coding',
       score: 87,
       tier: 'tier-high',
       hook: "Delete these 3 VS Code extensions before they secretly slow down your build times.",
@@ -294,6 +333,8 @@
   // State Management
   let ideasState = [...INITIAL_IDEAS];
   let activeFilter = 'all';
+  let activeTopic = 'all';
+  let activeNiche = 'all';
   let searchQuery = '';
   let activeSort = 'score-desc';
   let activeView = 'bento';
@@ -312,6 +353,21 @@
   const resetFiltersBtn = document.getElementById('reset-filters-btn');
   const headerTotalCountEl = document.getElementById('header-total-count');
   const resultsCountBadgeEl = document.getElementById('results-count-badge');
+
+  // Topic & Niche Menu Elements
+  const btnTopicMenu = document.getElementById('btn-topic-menu');
+  const topicSearchDropdown = document.getElementById('topic-search-dropdown');
+  const topicMenuLabel = document.getElementById('topic-menu-label');
+  const topicFilterInput = document.getElementById('topic-filter-input');
+  const topicItemsContainer = document.getElementById('topic-items-container');
+
+  const btnNicheMenu = document.getElementById('btn-niche-menu');
+  const nicheSearchDropdown = document.getElementById('niche-search-dropdown');
+  const nicheMenuLabel = document.getElementById('niche-menu-label');
+
+  const activeFiltersBar = document.getElementById('active-filters-bar');
+  const activeChipsList = document.getElementById('active-chips-list');
+  const btnClearAllFilters = document.getElementById('btn-clear-all-filters');
 
   // Pill Count Elements
   const countAllEl = document.getElementById('count-all');
@@ -452,14 +508,11 @@
     initPlatformDonutChart();
   }
 
-  // shadcn chart-area-interactive: Velocity & Retention Area Chart
   function initVelocityAreaChart(range = '30d') {
     const ctx = document.getElementById('shadcn-velocity-area-chart');
     if (!ctx) return;
 
-    if (velocityAreaChart) {
-      velocityAreaChart.destroy();
-    }
+    if (velocityAreaChart) velocityAreaChart.destroy();
 
     let labels, dataReach, dataRetention;
 
@@ -475,7 +528,7 @@
       dataRetention = [76, 79, 83, 81, 87, 89, 92];
       legendReachVal.textContent = '+412%';
       legendRetVal.textContent = '86.5%';
-    } else { // 24h
+    } else {
       labels = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', 'Now'];
       dataReach = [120, 190, 340, 510, 620, 580, 640];
       dataRetention = [70, 74, 80, 88, 91, 89, 92];
@@ -529,10 +582,7 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        interaction: {
-          mode: 'index',
-          intersect: false
-        },
+        interaction: { mode: 'index', intersect: false },
         plugins: {
           legend: { display: false },
           tooltip: {
@@ -548,7 +598,6 @@
             displayColors: true,
             boxWidth: 8,
             boxHeight: 8,
-            boxPadding: 4,
             usePointStyle: true
           }
         },
@@ -566,14 +615,11 @@
     });
   }
 
-  // shadcn chart-pie-donut-text: Platform Donut Chart
   function initPlatformDonutChart() {
     const ctx = document.getElementById('shadcn-platform-donut-chart');
     if (!ctx) return;
 
-    if (platformDonutChart) {
-      platformDonutChart.destroy();
-    }
+    if (platformDonutChart) platformDonutChart.destroy();
 
     platformDonutChart = new Chart(ctx, {
       type: 'doughnut',
@@ -609,9 +655,7 @@
     });
   }
 
-  // Drawer Charts: 60s Retention Curve (shadcn Area Gradient) & Radar Chart
   function updateDrawerCharts(idea) {
-    // 1. Retention Curve Area Chart
     const retCtx = document.getElementById('shadcn-drawer-retention-chart');
     if (retCtx) {
       if (drawerRetentionChart) drawerRetentionChart.destroy();
@@ -660,9 +704,7 @@
               borderColor: 'rgba(0, 245, 155, 0.4)',
               borderWidth: 1,
               cornerRadius: 8,
-              padding: 10,
-              titleFont: { family: 'Plus Jakarta Sans', size: 11 },
-              bodyFont: { family: 'JetBrains Mono', size: 11 }
+              padding: 10
             }
           },
           scales: {
@@ -681,7 +723,6 @@
       });
     }
 
-    // 2. Psychological Radar Chart
     const radarCtx = document.getElementById('shadcn-drawer-radar-chart');
     if (radarCtx) {
       if (drawerRadarChart) drawerRadarChart.destroy();
@@ -723,9 +764,7 @@
               borderColor: 'rgba(139, 124, 246, 0.4)',
               borderWidth: 1,
               cornerRadius: 8,
-              padding: 10,
-              titleFont: { family: 'Plus Jakarta Sans', size: 11 },
-              bodyFont: { family: 'JetBrains Mono', size: 11 }
+              padding: 10
             }
           },
           scales: {
@@ -793,26 +832,34 @@
     return name.slice(0, 2).toUpperCase();
   }
 
-  // ================= 6. RENDERING & FILTERING =================
+  // ================= 6. RENDERING & FILTERING (MULTI-DIMENSIONAL) =================
   function getFilteredAndSortedIdeas() {
     let list = ideasState.filter(item => {
-      // Search Matching
+      // 1. Text Search Matching
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase().trim();
         const inHook = item.hook.toLowerCase().includes(q);
         const inPlatform = item.platformName.toLowerCase().includes(q);
+        const inNiche = item.nicheName && item.nicheName.toLowerCase().includes(q);
+        const inTopic = item.topicName && item.topicName.toLowerCase().includes(q);
         const inTags = item.tags.some(t => t.toLowerCase().includes(q));
         const inExplanation = item.explanation && item.explanation.toLowerCase().includes(q);
-        if (!inHook && !inPlatform && !inTags && !inExplanation) return false;
+        if (!inHook && !inPlatform && !inNiche && !inTopic && !inTags && !inExplanation) return false;
       }
 
-      // Filter Pill Matching
-      if (activeFilter === 'all') return true;
-      if (activeFilter === 'viral') return item.score >= 90;
-      if (activeFilter === 'youtube') return item.platform === 'youtube';
-      if (activeFilter === 'shorts') return item.platform === 'shorts';
-      if (activeFilter === 'social') return item.platform === 'social';
-      if (activeFilter === 'saved') return item.saved === true;
+      // 2. Format Pill Matching
+      if (activeFilter === 'viral' && item.score < 90) return false;
+      if (activeFilter === 'youtube' && item.platform !== 'youtube') return false;
+      if (activeFilter === 'shorts' && item.platform !== 'shorts') return false;
+      if (activeFilter === 'social' && item.platform !== 'social') return false;
+      if (activeFilter === 'saved' && !item.saved) return false;
+
+      // 3. Topic Matching
+      if (activeTopic !== 'all' && item.topic !== activeTopic) return false;
+
+      // 4. Niche Matching
+      if (activeNiche !== 'all' && item.niche !== activeNiche) return false;
+
       return true;
     });
 
@@ -832,6 +879,8 @@
     const list = getFilteredAndSortedIdeas();
     resultsCountBadgeEl.textContent = `Showing ${list.length} of ${ideasState.length} calibrated ideas`;
 
+    renderActiveFilterChips();
+
     if (list.length === 0) {
       ideasGridEl.innerHTML = '';
       ideasGridEl.style.display = 'none';
@@ -842,18 +891,14 @@
     emptyStateEl.style.display = 'none';
     ideasGridEl.style.display = 'grid';
 
-    // Build Cards HTML
     const cardsHtml = list.map((idea, index) => {
       const isSpan2 = (activeView === 'bento' && (idea.isHero || (index === 0 && list.length > 2)));
       const isRow2 = (activeView === 'bento' && idea.isHero);
 
       const spanClasses = `${isSpan2 ? 'span-2' : ''} ${isRow2 ? 'row-2' : ''}`.trim();
       const scoreTierClass = idea.tier;
-
-      // Platform Icon helper
       const platformIconHtml = getPlatformIcon(idea.platform);
 
-      // Hero wave graphic if applicable
       const heroVisualHtml = (isSpan2 && idea.isHero) ? `
         <div class="hero-visual-graphic" aria-hidden="true">
           <div class="hero-visual-grid"></div>
@@ -912,7 +957,6 @@
 
     ideasGridEl.innerHTML = cardsHtml;
 
-    // Attach card click handlers with Enter/Space keyboard access
     document.querySelectorAll('.idea-card').forEach(cardEl => {
       const id = cardEl.getAttribute('data-id');
       cardEl.addEventListener('click', () => openDetailDrawer(id));
@@ -924,7 +968,6 @@
       });
     });
 
-    // Attach copy & bookmark handlers
     document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -944,6 +987,61 @@
     refreshIcons();
   }
 
+  // Render Active Multi-Filter Chips Bar
+  function renderActiveFilterChips() {
+    const chips = [];
+
+    if (activeTopic !== 'all') {
+      const activeTopicItem = document.querySelector(`.topic-menu-item[data-topic="${activeTopic}"] .topic-item-name`);
+      const label = activeTopicItem ? activeTopicItem.textContent : activeTopic;
+      chips.push(`
+        <span class="active-chip-pill topic-chip">
+          <span>Topic: ${label}</span>
+          <button class="chip-remove-btn" data-remove="topic" title="Remove Topic Filter" aria-label="Remove Topic Filter">×</button>
+        </span>
+      `);
+    }
+
+    if (activeNiche !== 'all') {
+      const activeNicheItem = document.querySelector(`.niche-menu-item[data-niche="${activeNiche}"] .niche-name`);
+      const label = activeNicheItem ? activeNicheItem.textContent : activeNiche;
+      chips.push(`
+        <span class="active-chip-pill">
+          <span>Niche: ${label}</span>
+          <button class="chip-remove-btn" data-remove="niche" title="Remove Niche Filter" aria-label="Remove Niche Filter">×</button>
+        </span>
+      `);
+    }
+
+    if (activeFilter !== 'all') {
+      const activePill = document.querySelector(`.filter-pills-row .pill[data-filter="${activeFilter}"] .pill-label`);
+      const label = activePill ? activePill.textContent : activeFilter;
+      chips.push(`
+        <span class="active-chip-pill">
+          <span>Format: ${label}</span>
+          <button class="chip-remove-btn" data-remove="filter" title="Remove Format Filter" aria-label="Remove Format Filter">×</button>
+        </span>
+      `);
+    }
+
+    if (chips.length > 0) {
+      activeChipsList.innerHTML = chips.join('');
+      activeFiltersBar.style.display = 'flex';
+
+      activeChipsList.querySelectorAll('.chip-remove-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const type = btn.getAttribute('data-remove');
+          if (type === 'topic') selectTopic('all');
+          if (type === 'niche') selectNiche('all');
+          if (type === 'filter') setActiveFilterPill('all');
+        });
+      });
+    } else {
+      activeFiltersBar.style.display = 'none';
+      activeChipsList.innerHTML = '';
+    }
+  }
+
   function updatePillCounts() {
     const total = ideasState.length;
     const viral = ideasState.filter(i => i.score >= 90).length;
@@ -961,7 +1059,76 @@
     countSavedEl.textContent = saved;
   }
 
-  // ================= 7. VIRALITY SCORING DIAGNOSTIC =================
+  // ================= 7. TOPIC & NICHE SELECTOR LOGIC =================
+  function selectTopic(topicKey) {
+    activeTopic = topicKey;
+    document.querySelectorAll('.topic-menu-item').forEach(item => {
+      if (item.getAttribute('data-topic') === topicKey) {
+        item.classList.add('active');
+        topicMenuLabel.textContent = topicKey === 'all' ? 'Topics' : item.querySelector('.topic-item-name').textContent.split(' ')[1] || 'Topic';
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    closeTopicDropdown();
+    renderGrid();
+    if (topicKey !== 'all') showToast(`Filtered by Topic: ${topicMenuLabel.textContent}`);
+  }
+
+  function selectNiche(nicheKey) {
+    activeNiche = nicheKey;
+    document.querySelectorAll('.niche-menu-item').forEach(item => {
+      if (item.getAttribute('data-niche') === nicheKey) {
+        item.classList.add('active');
+        const name = item.querySelector('.niche-name').textContent.replace(/^[^\w\s]+/, '').trim();
+        nicheMenuLabel.textContent = nicheKey === 'all' ? 'Niche: All' : `Niche: ${name.split(' ')[0]}`;
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    closeNicheDropdown();
+    renderGrid();
+    if (nicheKey !== 'all') showToast(`Calibrated to ${nicheMenuLabel.textContent}`);
+  }
+
+  function toggleTopicDropdown() {
+    closeNicheDropdown();
+    const isShown = topicSearchDropdown.classList.contains('show');
+    if (isShown) closeTopicDropdown();
+    else {
+      topicSearchDropdown.classList.add('show');
+      btnTopicMenu.setAttribute('aria-expanded', 'true');
+      btnTopicMenu.classList.add('active');
+      setTimeout(() => topicFilterInput.focus(), 50);
+    }
+  }
+
+  function closeTopicDropdown() {
+    topicSearchDropdown.classList.remove('show');
+    btnTopicMenu.setAttribute('aria-expanded', 'false');
+    btnTopicMenu.classList.remove('active');
+  }
+
+  function toggleNicheDropdown() {
+    closeTopicDropdown();
+    const isShown = nicheSearchDropdown.classList.contains('show');
+    if (isShown) closeNicheDropdown();
+    else {
+      nicheSearchDropdown.classList.add('show');
+      btnNicheMenu.setAttribute('aria-expanded', 'true');
+      btnNicheMenu.classList.add('active');
+    }
+  }
+
+  function closeNicheDropdown() {
+    nicheSearchDropdown.classList.remove('show');
+    btnNicheMenu.setAttribute('aria-expanded', 'false');
+    btnNicheMenu.classList.remove('active');
+  }
+
+  // ================= 8. VIRALITY SCORING DIAGNOSTIC =================
   function calculateViralityScore(hookText, platform, niche) {
     if (!hookText || hookText.trim().length === 0) {
       return { score: 0, curiosity: 0, stakes: 0, velocity: 0, tier: 'tier-draft', variations: [] };
@@ -1134,6 +1301,7 @@
   function saveCurrentScoredIdea() {
     const text = hookInputField.value.trim();
     const platform = platformSelectField.value;
+    const niche = nicheSelectField.value;
     const platformNameMap = {
       'youtube': 'YouTube Long-form',
       'shorts': 'YouTube Shorts / Reels',
@@ -1142,12 +1310,16 @@
       'linkedin': 'LinkedIn Post'
     };
 
-    const result = calculateViralityScore(text, platform);
+    const result = calculateViralityScore(text, platform, niche);
 
     const newIdea = {
       id: 'idea-' + Date.now(),
       platform: (platform === 'reels' || platform === 'shorts') ? 'shorts' : (platform === 'x' || platform === 'linkedin' ? 'social' : 'youtube'),
       platformName: platformNameMap[platform] || 'YouTube Long-form',
+      niche: niche || 'tech-ai',
+      nicheName: niche === 'business-money' ? 'Finance & Business' : (niche === 'design-ux' ? 'Design & SaaS' : 'Tech & AI'),
+      topic: 'ai-agents',
+      topicName: 'AI & Autonomous Agents',
       score: result.score,
       tier: result.tier,
       hook: text,
@@ -1176,7 +1348,7 @@
     showToast(`"${text.slice(0, 32)}…" saved to Idea Library!`);
   }
 
-  // ================= 8. DETAIL DRAWER =================
+  // ================= 9. DETAIL DRAWER =================
   function openDetailDrawer(ideaId) {
     const idea = ideasState.find(i => i.id === ideaId);
     if (!idea) return;
@@ -1243,7 +1415,7 @@
     }
   }
 
-  // ================= 9. FULL AUTH GATEWAY & PROFILE HANDLERS =================
+  // ================= 10. AUTH & PROFILE HANDLERS =================
   function openAuthGateway(mode = 'signin') {
     authMode = mode;
     if (mode === 'signin') {
@@ -1377,7 +1549,7 @@
     openAuthGateway('signin');
   }
 
-  // ================= 10. EVENT LISTENERS =================
+  // ================= 11. EVENT LISTENERS =================
   function bindEventListeners() {
     // Search input
     searchInputEl.addEventListener('input', (e) => {
@@ -1392,6 +1564,71 @@
       clearSearchBtnEl.style.display = 'none';
       searchInputEl.focus();
       renderGrid();
+    });
+
+    // Topic Menu toggle & filter
+    btnTopicMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleTopicDropdown();
+    });
+
+    topicFilterInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.topic-menu-item').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(q) ? 'flex' : 'none';
+      });
+    });
+
+    document.querySelectorAll('.topic-menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const topic = item.getAttribute('data-topic');
+        selectTopic(topic);
+      });
+    });
+
+    // Niche Menu toggle & filter
+    btnNicheMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleNicheDropdown();
+    });
+
+    document.querySelectorAll('.niche-menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const niche = item.getAttribute('data-niche');
+        selectNiche(niche);
+      });
+    });
+
+    // Click outside to close dropdowns
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#topic-dropdown-anchor')) closeTopicDropdown();
+      if (!e.target.closest('#niche-dropdown-anchor')) closeNicheDropdown();
+    });
+
+    // Clear all filters button
+    btnClearAllFilters.addEventListener('click', () => {
+      activeTopic = 'all';
+      activeNiche = 'all';
+      activeFilter = 'all';
+      searchQuery = '';
+      searchInputEl.value = '';
+      clearSearchBtnEl.style.display = 'none';
+      topicMenuLabel.textContent = 'Topics';
+      nicheMenuLabel.textContent = 'Niche: All';
+
+      document.querySelectorAll('.topic-menu-item').forEach(i => {
+        if (i.getAttribute('data-topic') === 'all') i.classList.add('active');
+        else i.classList.remove('active');
+      });
+
+      document.querySelectorAll('.niche-menu-item').forEach(i => {
+        if (i.getAttribute('data-niche') === 'all') i.classList.add('active');
+        else i.classList.remove('active');
+      });
+
+      setActiveFilterPill('all');
+      showToast('All filters cleared.');
     });
 
     // Time-range tabs for Area Chart
@@ -1424,20 +1661,7 @@
 
     // Reset filters button in empty state
     resetFiltersBtn.addEventListener('click', () => {
-      searchInputEl.value = '';
-      searchQuery = '';
-      clearSearchBtnEl.style.display = 'none';
-      activeFilter = 'all';
-      filterPillsContainer.querySelectorAll('.pill').forEach(p => {
-        if (p.getAttribute('data-filter') === 'all') {
-          p.classList.add('active');
-          p.setAttribute('aria-selected', 'true');
-        } else {
-          p.classList.remove('active');
-          p.setAttribute('aria-selected', 'false');
-        }
-      });
-      renderGrid();
+      btnClearAllFilters.click();
     });
 
     // Sort select
@@ -1618,6 +1842,10 @@
           id: 'batch-' + Date.now() + '-' + idx,
           platform: idx % 2 === 0 ? 'youtube' : 'shorts',
           platformName: idx % 2 === 0 ? 'YouTube Long-form' : 'TikTok / Reels',
+          niche: 'tech-ai',
+          nicheName: 'Tech & AI',
+          topic: 'ai-agents',
+          topicName: 'AI & Autonomous Agents',
           score: scoreObj.score,
           tier: scoreObj.tier,
           hook: cleaned,
@@ -1672,44 +1900,41 @@
 
     // Keyboard Shortcuts (⌘K, ⌘L, N, Esc, 1-5)
     document.addEventListener('keydown', (e) => {
-      // ⌘K or Ctrl+K -> Focus Search
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         searchInputEl.focus();
         searchInputEl.select();
       }
 
-      // ⌘L or Ctrl+L -> Open Login Gateway
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'l') {
         e.preventDefault();
         openAuthGateway('signin');
       }
 
-      // 'N' -> Open Scorer Modal (when not typing in an input)
       if (e.key.toLowerCase() === 'n' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
         e.preventDefault();
         openModal(scorerModal);
       }
 
-      // Number keys 1-5 for fast tab navigation
       if (['1', '2', '3', '4', '5'].includes(e.key) && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         const map = { '1': 'all', '2': 'viral', '3': 'youtube', '4': 'shorts', '5': 'saved' };
         if (map[e.key]) setActiveFilterPill(map[e.key]);
       }
 
-      // Escape -> Close all modals/drawers/gateways
       if (e.key === 'Escape') {
         closeModal(scorerModal);
         closeModal(batchModal);
         closeModal(profileModal);
         closeDetailDrawer();
         closeAuthGateway();
+        closeTopicDropdown();
+        closeNicheDropdown();
       }
     });
   }
 
-  // ================= 11. HELPERS & ACCESSIBILITY =================
+  // ================= 12. HELPERS & ACCESSIBILITY =================
   function setActiveFilterPill(filterKey) {
     activeFilter = filterKey;
     filterPillsContainer.querySelectorAll('.pill').forEach(p => {
@@ -1806,7 +2031,6 @@
       .replace(/'/g, '&#039;');
   }
 
-  // Run on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

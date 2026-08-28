@@ -1,6 +1,6 @@
 /* ==========================================================================
    VANTAGE VIRALITY OS — LUXURY SAAS DESIGN SYSTEM & DASHBOARD STYLES
-   (shadcn/ui Chart Edition: WCAG 2.1 AA, Micro-Interactions & Dedicated Auth Gateway)
+   (shadcn/ui Chart Edition: Topic Search & Niche Explorer & Auth Gateway)
    ========================================================================== */
 
 :root {
@@ -107,7 +107,7 @@ body {
 }
 
 /* Tabular numbers for clean numeric layout */
-.stat-hero-number, .score-val, .result-number, .p-stat-num, .pill-count, .char-counter, .metric-pill, .donut-center-num {
+.stat-hero-number, .score-val, .result-number, .p-stat-num, .pill-count, .char-counter, .metric-pill, .donut-center-num, .topic-count {
   font-variant-numeric: tabular-nums;
 }
 
@@ -865,7 +865,7 @@ body::before {
   margin-left: 2px;
 }
 
-/* ================= FLOATING COMMAND SEARCH & FILTERS ================= */
+/* ================= FLOATING COMMAND SEARCH WITH TOPIC & NICHE MENUS ================= */
 .command-search-shell {
   margin-bottom: 32px;
 }
@@ -880,6 +880,7 @@ body::before {
     0 24px 64px -16px rgba(0, 0, 0, 0.7),
     0 1px 0 rgba(255, 255, 255, 0.06) inset;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
 }
 .search-glass-card:focus-within {
   border-color: rgba(139, 124, 246, 0.45);
@@ -892,7 +893,7 @@ body::before {
 .search-input-group {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   padding: 4px 6px 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -909,10 +910,11 @@ body::before {
   border: none;
   outline: none;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16.5px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--text-primary);
   letter-spacing: -0.01em;
+  min-width: 120px;
 }
 .search-input-group input::placeholder {
   color: var(--text-tertiary);
@@ -922,8 +924,268 @@ body::before {
 .search-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
+
+/* Dropdown Menu Anchors & Buttons */
+.dropdown-anchor {
+  position: relative;
+}
+.btn-menu-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: var(--border-light);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.btn-menu-pill:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.btn-menu-pill.active {
+  background: rgba(139, 124, 246, 0.18);
+  border-color: rgba(139, 124, 246, 0.45);
+  color: #FFFFFF;
+}
+.chevron-icon {
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+.btn-menu-pill[aria-expanded="true"] .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* ================= SHADCN DROPDOWN PANELS ================= */
+.shadcn-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #111117;
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: 
+    0 20px 48px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  z-index: 500;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: pop-in 0.2s var(--ease-spring);
+}
+.shadcn-dropdown-panel.show {
+  display: flex;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.topic-dropdown {
+  width: 340px;
+}
+.niche-dropdown {
+  width: 320px;
+}
+
+.dropdown-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dropdown-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  font-family: 'JetBrains Mono', monospace;
+}
+.dropdown-subtitle {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+.dropdown-subsearch {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: var(--border-ultra-thin);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: var(--text-primary);
+  font-size: 12px;
+  outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.dropdown-subsearch:focus {
+  border-color: var(--chart-1);
+}
+
+/* Topic Grid List */
+.topic-grid-list {
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.topic-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+.topic-menu-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+}
+.topic-menu-item.active {
+  background: rgba(0, 245, 155, 0.12);
+  color: var(--chart-1);
+  font-weight: 700;
+}
+.topic-count {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-tertiary);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Niche Menu List */
+.niche-menu-list {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.niche-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+.niche-menu-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.niche-menu-item.active {
+  background: rgba(139, 124, 246, 0.14);
+  border: 1px solid rgba(139, 124, 246, 0.35);
+}
+.niche-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.niche-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.niche-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.niche-badge-pill {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--chart-3);
+  background: rgba(139, 124, 246, 0.12);
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  flex-shrink: 0;
+}
+
+/* Active Multi-Filter Chips Bar */
+.active-filters-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  margin-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.active-chips-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.active-chip-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px 4px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(139, 124, 246, 0.16);
+  border: 1px solid rgba(139, 124, 246, 0.38);
+  color: #FFFFFF;
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.active-chip-pill.topic-chip {
+  background: rgba(0, 245, 155, 0.14);
+  border-color: rgba(0, 245, 155, 0.38);
+  color: var(--chart-1);
+}
+.chip-remove-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+}
+.chip-remove-btn:hover {
+  opacity: 1;
+}
+.btn-clear-all-filters {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.btn-clear-all-filters:hover {
+  color: var(--text-primary);
+}
+
 .clear-search-btn {
   background: rgba(255, 255, 255, 0.06);
   border: none;
@@ -1461,7 +1723,7 @@ body::before {
 
 /* Touch Device Target Expansion */
 @media (pointer: coarse) {
-  .action-btn-sm, .view-btn, .nav-item, .modal-close, .drawer-btn-icon {
+  .action-btn-sm, .view-btn, .nav-item, .modal-close, .drawer-btn-icon, .btn-menu-pill {
     min-width: 44px;
     min-height: 44px;
   }
@@ -2641,5 +2903,9 @@ body::before {
   }
   .auth-gateway-form-pane {
     padding: 28px 20px;
+  }
+  .topic-dropdown, .niche-dropdown {
+    right: -40px;
+    width: 280px;
   }
 }

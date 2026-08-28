@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vantage — Elite Content Idea Library & Virality Scorer</title>
-  <meta name="description" content="Elite creator intelligence dashboard and AI virality scorer with interactive shadcn/ui analytics and authentication gateway.">
+  <meta name="description" content="Elite creator intelligence dashboard, topic search engine, and AI virality scorer with interactive shadcn/ui analytics.">
   
   <!-- Modern Font Pairing: Clash Display, Plus Jakarta Sans, JetBrains Mono, Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,7 +86,7 @@
         <button class="nav-item" data-tooltip="Account Settings" id="nav-settings" aria-label="Open Account Settings">
           <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1 2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
           </svg>
         </button>
         
@@ -213,7 +213,7 @@
 
       </section>
 
-      <!-- FLOATING GLASS COMMAND SEARCH & FILTERS -->
+      <!-- ================= ENHANCED SEARCH SHELL WITH TOPIC & NICHE MENUS ================= -->
       <section class="command-search-shell animate-fade delay-2" aria-label="Search and Filter Commands">
         <div class="search-glass-card">
           <div class="search-input-group">
@@ -223,12 +223,125 @@
             <input 
               type="text" 
               id="global-search-input" 
-              placeholder="Search hooks, psychological triggers, topics or paste a competitor URL to reverse-engineer…" 
+              placeholder="Search hooks, topics, keywords or paste competitor URL…" 
               autocomplete="off"
               spellcheck="false"
               aria-label="Search content idea library"
             />
+            
             <div class="search-actions">
+              <!-- TOPIC SEARCH MENU TRIGGER -->
+              <div class="dropdown-anchor" id="topic-dropdown-anchor">
+                <button class="btn-menu-pill" id="btn-topic-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Open Topics Menu">
+                  <svg class="lucide lucide-tag" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r=".5" fill="currentColor"/></svg>
+                  <span id="topic-menu-label">Topics</span>
+                  <svg class="lucide lucide-chevron-down chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+
+                <!-- TOPIC POPOVER DROPDOWN -->
+                <div class="shadcn-dropdown-panel topic-dropdown" id="topic-search-dropdown" role="menu" aria-label="Content Topics">
+                  <div class="dropdown-header">
+                    <span class="dropdown-title">Filter by Topic</span>
+                    <input type="text" id="topic-filter-input" class="dropdown-subsearch" placeholder="Search topics (e.g. AI, Figma)…">
+                  </div>
+                  <div class="topic-grid-list" id="topic-items-container">
+                    <button class="topic-menu-item active" data-topic="all">
+                      <span class="topic-item-name">All Topics</span>
+                      <span class="topic-count">214</span>
+                    </button>
+                    <button class="topic-menu-item" data-topic="ai-agents">
+                      <span class="topic-item-name">🤖 AI & Autonomous Agents</span>
+                      <span class="topic-count">48</span>
+                    </button>
+                    <button class="topic-menu-item" data-topic="finance-wealth">
+                      <span class="topic-item-name">💰 Finance & High Stakes</span>
+                      <span class="topic-count">36</span>
+                    </button>
+                    <button class="topic-menu-item" data-topic="design-figma">
+                      <span class="topic-item-name">🎨 Figma & Design Systems</span>
+                      <span class="topic-count">29</span>
+                    </button>
+                    <button class="topic-menu-item" data-topic="freelance-career">
+                      <span class="topic-item-name">💼 Freelance & Client Red Flags</span>
+                      <span class="topic-count">32</span>
+                    </button>
+                    <button class="topic-menu-item" data-topic="devtools-coding">
+                      <span class="topic-item-name">🛠️ DevTools, VS Code & Coding</span>
+                      <span class="topic-count">26</span>
+                    </button>
+                    <button class="topic-menu-item" data-topic="productivity-ceos">
+                      <span class="topic-item-name">⚡ Productivity & Mythbusting</span>
+                      <span class="topic-count">24</span>
+                    </button>
+                    <button class="topic-menu-item" data-topic="saas-growth">
+                      <span class="topic-item-name">🚀 SaaS Growth & UX Audits</span>
+                      <span class="topic-count">19</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- NICHE SEARCH MENU TRIGGER -->
+              <div class="dropdown-anchor" id="niche-dropdown-anchor">
+                <button class="btn-menu-pill" id="btn-niche-menu" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Open Niche Menu">
+                  <svg class="lucide lucide-crosshair" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+                  <span id="niche-menu-label">Niche: All</span>
+                  <svg class="lucide lucide-chevron-down chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+
+                <!-- NICHE POPOVER DROPDOWN -->
+                <div class="shadcn-dropdown-panel niche-dropdown" id="niche-search-dropdown" role="menu" aria-label="Creator Niches">
+                  <div class="dropdown-header">
+                    <span class="dropdown-title">Creator Niche</span>
+                    <span class="dropdown-subtitle">Benchmark against your specific algorithm bucket</span>
+                  </div>
+                  <div class="niche-menu-list">
+                    <button class="niche-menu-item active" data-niche="all">
+                      <div class="niche-item-info">
+                        <span class="niche-name">All Niches</span>
+                        <span class="niche-meta">Broad audience cross-pollination</span>
+                      </div>
+                      <span class="niche-badge-pill">Global</span>
+                    </button>
+                    <button class="niche-menu-item" data-niche="tech-ai">
+                      <div class="niche-item-info">
+                        <span class="niche-name">💻 Tech & AI Experiments</span>
+                        <span class="niche-meta">High Curiosity Gap • 76% Median 30s</span>
+                      </div>
+                      <span class="niche-badge-pill">Tech</span>
+                    </button>
+                    <button class="niche-menu-item" data-niche="business-money">
+                      <div class="niche-item-info">
+                        <span class="niche-name">📈 Finance, Wealth & Business</span>
+                        <span class="niche-meta">High Stakes • 82% Median 30s</span>
+                      </div>
+                      <span class="niche-badge-pill">Finance</span>
+                    </button>
+                    <button class="niche-menu-item" data-niche="design-ux">
+                      <div class="niche-item-info">
+                        <span class="niche-name">🎨 Design, UI/UX & SaaS</span>
+                        <span class="niche-meta">Visual Payoff • 71% Median 30s</span>
+                      </div>
+                      <span class="niche-badge-pill">Design</span>
+                    </button>
+                    <button class="niche-menu-item" data-niche="productivity">
+                      <div class="niche-item-info">
+                        <span class="niche-name">🧠 Productivity & Systems</span>
+                        <span class="niche-meta">Contrarian Angles • 68% Median 30s</span>
+                      </div>
+                      <span class="niche-badge-pill">Systems</span>
+                    </button>
+                    <button class="niche-menu-item" data-niche="lifestyle">
+                      <div class="niche-item-info">
+                        <span class="niche-name">🎬 Storytelling & Documentary</span>
+                        <span class="niche-meta">Vulnerability & Tension • 84% Median 30s</span>
+                      </div>
+                      <span class="niche-badge-pill">Stories</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <button class="clear-search-btn" id="clear-search-btn" title="Clear search" aria-label="Clear search">×</button>
               <div class="shortcut-pill" title="Press ⌘K or Ctrl+K to search" aria-hidden="true">
                 <span class="key-symbol">⌘</span><span>K</span>
@@ -239,7 +352,7 @@
           <!-- Dynamic Filter Category Pills -->
           <div class="filter-pills-row" id="filter-pills-container" role="tablist" aria-label="Filter Ideas by Category">
             <button class="pill active" data-filter="all" role="tab" aria-selected="true">
-              <span class="pill-label">All Ideas</span>
+              <span class="pill-label">All Formats</span>
               <span class="pill-count" id="count-all">214</span>
             </button>
             <button class="pill" data-filter="viral" role="tab" aria-selected="false">
@@ -267,6 +380,12 @@
               <span class="pill-label">Saved</span>
               <span class="pill-count" id="count-saved">12</span>
             </button>
+          </div>
+
+          <!-- ACTIVE MULTI-FILTER CHIPS BAR (INJECTED DYNAMICALLY) -->
+          <div class="active-filters-bar" id="active-filters-bar" style="display: none;">
+            <div class="active-chips-list" id="active-chips-list"></div>
+            <button class="btn-clear-all-filters" id="btn-clear-all-filters" type="button">Clear All Filters</button>
           </div>
         </div>
       </section>
@@ -311,7 +430,7 @@
           <svg class="lucide lucide-search-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 8.5-5 5"/><path d="m8.5 8.5 5 5"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </div>
         <h3>No matching ideas found</h3>
-        <p>Try refining your search keyword or clearing active platform filters.</p>
+        <p>Try refining your search keyword or clearing active platform and topic filters.</p>
         <button class="btn btn-secondary" id="reset-filters-btn">Reset All Filters</button>
       </div>
 
