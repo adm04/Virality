@@ -281,7 +281,7 @@
       scoreTier: 'EXPLOSIVE',
       source: 'AI Autonomous Trading Agents',
       stage: 'filming',
-      stageName: '🎬 Filming',
+      stageName: 'Filming',
       createdAt: '2026-08-27'
     },
     {
@@ -294,7 +294,7 @@
       scoreTier: 'EXPLOSIVE',
       source: 'Solopreneur Micro-SaaS Playbook',
       stage: 'scripted',
-      stageName: '✍️ Scripted',
+      stageName: 'Scripted',
       createdAt: '2026-08-26'
     },
     {
@@ -307,7 +307,7 @@
       scoreTier: 'STRONG',
       source: 'VS Code Extensions Optimization',
       stage: 'idea',
-      stageName: '💡 Idea',
+      stageName: 'Ideas',
       createdAt: '2026-08-28'
     }
   ];
@@ -356,16 +356,6 @@
   }
 
   // ================= 4. MEASURABLE OPPORTUNITY SCORING FORMULA =================
-  /**
-   * EXACT SPECIFICATION FORMULA:
-   * Momentum: 25%
-   * Engagement: 20%
-   * Search Demand: 15%
-   * Outlier Performance: 15%
-   * Freshness: 10%
-   * Competition: 10%
-   * Creator Relevance: 5%
-   */
   function calculateOpportunityScore(trend, profile) {
     const m = trend.momentum || 80;
     const e = parseFloat(trend.engagementRate) * 7.5 || 80;
@@ -404,7 +394,7 @@
     const angleTemplates = [
       {
         angle: 'educational',
-        angleName: '📚 Educational',
+        angleName: 'Educational',
         title: `The Comprehensive Architecture of ${trend.topic}`,
         hook: `Everything engineers get wrong about ${trend.topic.toLowerCase()} explained in 4 minutes.`,
         format: 'YouTube Long-form (16:9)',
@@ -415,7 +405,7 @@
       },
       {
         angle: 'controversial',
-        angleName: '🔥 Controversial',
+        angleName: 'Controversial',
         title: `Why ${trend.topic} Is Actually a Disaster for 90% of Creators`,
         hook: `Nobody is willing to say this out loud about ${trend.topic.toLowerCase()}, but here is the truth.`,
         format: 'Instagram Reels / Shorts (9:16)',
@@ -426,7 +416,7 @@
       },
       {
         angle: 'storytelling',
-        angleName: '🎬 Storytelling',
+        angleName: 'Storytelling',
         title: `I Spent 30 Days Testing ${trend.topic} (Here Is What Happened)`,
         hook: `I poured 100 hours into testing ${trend.topic.toLowerCase()} — and it completely broke my assumptions.`,
         format: 'YouTube Long-form (16:9)',
@@ -437,7 +427,7 @@
       },
       {
         angle: 'beginner',
-        angleName: '🌱 Beginner Friendly',
+        angleName: 'Beginner Friendly',
         title: `${trend.topic} for Complete Beginners in 2026`,
         hook: `If you know literally zero about ${trend.topic.toLowerCase()}, start here.`,
         format: 'Shorts / TikTok (9:16)',
@@ -448,7 +438,7 @@
       },
       {
         angle: 'expert',
-        angleName: '🧠 Expert Deep Dive',
+        angleName: 'Expert Deep Dive',
         title: `Advanced ${trend.topic} Optimization Techniques`,
         hook: `The single section of ${trend.topic.toLowerCase()} that senior practitioners optimize first.`,
         format: 'Podcast / Long-form',
@@ -459,7 +449,7 @@
       },
       {
         angle: 'myth-busting',
-        angleName: '💥 Myth-Busting',
+        angleName: 'Myth-Busting',
         title: `3 Viral Myths About ${trend.topic} Debunked with Data`,
         hook: `Stop believing these 3 viral lies about ${trend.topic.toLowerCase()}.`,
         format: 'Instagram Reels (9:16)',
@@ -470,7 +460,7 @@
       },
       {
         angle: 'listicle',
-        angleName: '📋 Top Listicles',
+        angleName: 'Top Listicles',
         title: `Top 5 Tools for ${trend.topic} Ranked from Worst to Best`,
         hook: `I tested every major tool for ${trend.topic.toLowerCase()} — here are the top 5 ranked.`,
         format: 'Shorts / Reels (9:16)',
@@ -481,7 +471,7 @@
       },
       {
         angle: 'case-study',
-        angleName: '📊 Case Study',
+        angleName: 'Case Study',
         title: `How One Creator Made $45k with ${trend.topic}`,
         hook: `A transparent look at the exact numbers behind a $45k ${trend.topic.toLowerCase()} launch.`,
         format: 'YouTube Long-form (16:9)',
@@ -492,7 +482,7 @@
       },
       {
         angle: 'personal-story',
-        angleName: '👤 Personal Story',
+        angleName: 'Personal Story',
         title: `The Mistake with ${trend.topic} That Cost Me $10,000`,
         hook: `I lost $10,000 so that you do not have to make the same mistake with ${trend.topic.toLowerCase()}.`,
         format: 'Shorts / Video Essay',
@@ -503,7 +493,7 @@
       },
       {
         angle: 'hot-take',
-        angleName: '🌶️ Hot Take',
+        angleName: 'Hot Take',
         title: `Why ${trend.topic} Will Be Dead by 2027`,
         hook: `Hot take: in 12 months, nobody will be using ${trend.topic.toLowerCase()} the way they do today.`,
         format: 'X Thread / Short',
@@ -565,15 +555,15 @@
     }
 
     const nicheLabels = {
-      'ai': '🤖 AI & Tech',
-      'technology': '💻 DevTools',
-      'fitness': '💪 Fitness',
-      'finance': '💰 Finance',
-      'business': '📈 Business',
-      'marketing': '🚀 Marketing',
-      'design': '🎨 Design',
-      'photography': '📸 Photo',
-      'travel': '✈️ Travel'
+      'ai': 'AI & Tech',
+      'technology': 'DevTools',
+      'fitness': 'Fitness',
+      'finance': 'Finance',
+      'business': 'Business',
+      'marketing': 'Marketing',
+      'design': 'Design',
+      'photography': 'Photo',
+      'travel': 'Travel'
     };
 
     const nichesHtml = (creatorProfile.niches || ['ai', 'technology'])
@@ -582,12 +572,12 @@
 
     chipsEl.innerHTML = `
       ${nichesHtml}
-      <span class="persona-chip">🎯 Target: ${creatorProfile.age_range || '18-34'} &bull; ${creatorProfile.country || 'India'}</span>
-      <span class="persona-chip">🎯 Goal: ${creatorProfile.goals === 'views' ? 'Max Views' : 'Authority & Growth'}</span>
+      <span class="persona-chip">Target: ${creatorProfile.age_range || '18-34'} &bull; ${creatorProfile.country || 'India'}</span>
+      <span class="persona-chip">Goal: ${creatorProfile.goals === 'views' ? 'Max Views' : 'Authority & Growth'}</span>
     `;
   }
 
-  // ================= 8. SECTION 1: 🔥 TRENDING FOR YOU =================
+  // ================= 8. SECTION 1: TRENDING FOR YOU =================
   function renderTrendingSection() {
     const container = document.getElementById('trending-cards-container');
     if (!container) return;
@@ -601,7 +591,7 @@
       return true;
     });
 
-    if (trends.length === 0) trends = SEED_TRENDS; // Fallback to all if zero in niche
+    if (trends.length === 0) trends = SEED_TRENDS;
 
     if (!selectedTrendForIdeas && trends.length > 0) {
       selectedTrendForIdeas = trends[0];
@@ -651,7 +641,6 @@
       `;
     }).join('');
 
-    // Attach Event Listeners
     container.querySelectorAll('.btn-why-trending').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -677,7 +666,7 @@
     refreshLucideIcons();
   }
 
-  // ================= 9. SECTION 2: 💡 IDEAS FOR YOU (12-ANGLE STUDIO) =================
+  // ================= 9. SECTION 2: IDEAS FOR YOU (12-ANGLE STUDIO) =================
   function renderIdeasSection() {
     const container = document.getElementById('ideas-cards-container');
     const sourceBadgeName = document.getElementById('active-idea-source-name');
@@ -757,7 +746,7 @@
       scoreTier: idea.scoreTier || 'STRONG',
       source: idea.trendSource || 'Trend Intelligence',
       stage: 'idea',
-      stageName: '💡 Idea',
+      stageName: 'Ideas',
       createdAt: new Date().toISOString().split('T')[0]
     };
 
@@ -766,7 +755,7 @@
     showToast(`Saved "${idea.title.slice(0, 30)}…" to Library!`);
   }
 
-  // ================= 10. SECTION 3: 🔎 SEARCH CONTENT INTELLIGENCE =================
+  // ================= 10. SECTION 3: SEARCH CONTENT INTELLIGENCE =================
   function renderSearchSection() {
     const grid = document.getElementById('search-results-grid');
     const topicContainer = document.getElementById('topic-items-container');
@@ -777,17 +766,17 @@
     if (topicContainer) {
       topicContainer.innerHTML = `
         <button class="topic-menu-item ${activeTopicFilter === 'all' ? 'active' : ''}" data-topic="all"><span class="topic-item-name">All Topics</span><span class="topic-count">214</span></button>
-        <button class="topic-menu-item ${activeTopicFilter === 'ai-agents' ? 'active' : ''}" data-topic="ai-agents"><span class="topic-item-name">🤖 AI Autonomous Agents</span><span class="topic-count">48</span></button>
-        <button class="topic-menu-item ${activeTopicFilter === 'local-llm' ? 'active' : ''}" data-topic="local-llm"><span class="topic-item-name">💻 Local LLMs & Hardware</span><span class="topic-count">36</span></button>
-        <button class="topic-menu-item ${activeTopicFilter === 'zone-2' ? 'active' : ''}" data-topic="zone-2"><span class="topic-item-name">💪 Zone 2 Cardio & Health</span><span class="topic-count">29</span></button>
-        <button class="topic-menu-item ${activeTopicFilter === 'solopreneur' ? 'active' : ''}" data-topic="solopreneur"><span class="topic-item-name">📈 Solopreneur Micro-SaaS</span><span class="topic-count">32</span></button>
-        <button class="topic-menu-item ${activeTopicFilter === 'camera-gear' ? 'active' : ''}" data-topic="camera-gear"><span class="topic-item-name">📸 Photography & Lighting</span><span class="topic-count">22</span></button>
+        <button class="topic-menu-item ${activeTopicFilter === 'ai-agents' ? 'active' : ''}" data-topic="ai-agents"><span class="topic-item-name">AI Autonomous Agents</span><span class="topic-count">48</span></button>
+        <button class="topic-menu-item ${activeTopicFilter === 'local-llm' ? 'active' : ''}" data-topic="local-llm"><span class="topic-item-name">Local LLMs & Hardware</span><span class="topic-count">36</span></button>
+        <button class="topic-menu-item ${activeTopicFilter === 'zone-2' ? 'active' : ''}" data-topic="zone-2"><span class="topic-item-name">Zone 2 Cardio & Health</span><span class="topic-count">29</span></button>
+        <button class="topic-menu-item ${activeTopicFilter === 'solopreneur' ? 'active' : ''}" data-topic="solopreneur"><span class="topic-item-name">Solopreneur Micro-SaaS</span><span class="topic-count">32</span></button>
+        <button class="topic-menu-item ${activeTopicFilter === 'camera-gear' ? 'active' : ''}" data-topic="camera-gear"><span class="topic-item-name">Photography & Lighting</span><span class="topic-count">22</span></button>
       `;
 
       topicContainer.querySelectorAll('.topic-menu-item').forEach(item => {
         item.addEventListener('click', () => {
           activeTopicFilter = item.getAttribute('data-topic');
-          document.getElementById('topic-menu-label').textContent = activeTopicFilter === 'all' ? 'Topics' : item.querySelector('.topic-item-name').textContent.split(' ')[1];
+          document.getElementById('topic-menu-label').textContent = activeTopicFilter === 'all' ? 'Topics' : item.querySelector('.topic-item-name').textContent;
           document.getElementById('topic-search-dropdown').classList.remove('show');
           renderSearchSection();
         });
@@ -797,10 +786,10 @@
     if (nicheList) {
       nicheList.innerHTML = `
         <button class="niche-menu-item ${activeNicheFilter === 'all' ? 'active' : ''}" data-niche="all"><div class="niche-item-info"><span class="niche-name">All Niches</span><span class="niche-meta">Broad audience cross-pollination</span></div><span class="niche-badge-pill">Global</span></button>
-        <button class="niche-menu-item ${activeNicheFilter === 'ai' ? 'active' : ''}" data-niche="ai"><div class="niche-item-info"><span class="niche-name">🤖 AI & Autonomous Agents</span><span class="niche-meta">76% Median 30s Retention</span></div><span class="niche-badge-pill">AI</span></button>
-        <button class="niche-menu-item ${activeNicheFilter === 'technology' ? 'active' : ''}" data-niche="technology"><div class="niche-item-info"><span class="niche-name">💻 Tech & DevTools</span><span class="niche-meta">71% Median 30s Retention</span></div><span class="niche-badge-pill">Tech</span></button>
-        <button class="niche-menu-item ${activeNicheFilter === 'fitness' ? 'active' : ''}" data-niche="fitness"><div class="niche-item-info"><span class="niche-name">💪 Fitness & Longevity</span><span class="niche-meta">84% Median 30s Retention</span></div><span class="niche-badge-pill">Fitness</span></button>
-        <button class="niche-menu-item ${activeNicheFilter === 'business' ? 'active' : ''}" data-niche="business"><div class="niche-item-info"><span class="niche-name">📈 Business & Startups</span><span class="niche-meta">82% Median 30s Retention</span></div><span class="niche-badge-pill">Business</span></button>
+        <button class="niche-menu-item ${activeNicheFilter === 'ai' ? 'active' : ''}" data-niche="ai"><div class="niche-item-info"><span class="niche-name">AI & Autonomous Agents</span><span class="niche-meta">76% Median 30s Retention</span></div><span class="niche-badge-pill">AI</span></button>
+        <button class="niche-menu-item ${activeNicheFilter === 'technology' ? 'active' : ''}" data-niche="technology"><div class="niche-item-info"><span class="niche-name">Tech & DevTools</span><span class="niche-meta">71% Median 30s Retention</span></div><span class="niche-badge-pill">Tech</span></button>
+        <button class="niche-menu-item ${activeNicheFilter === 'fitness' ? 'active' : ''}" data-niche="fitness"><div class="niche-item-info"><span class="niche-name">Fitness & Longevity</span><span class="niche-meta">84% Median 30s Retention</span></div><span class="niche-badge-pill">Fitness</span></button>
+        <button class="niche-menu-item ${activeNicheFilter === 'business' ? 'active' : ''}" data-niche="business"><div class="niche-item-info"><span class="niche-name">Business & Startups</span><span class="niche-meta">82% Median 30s Retention</span></div><span class="niche-badge-pill">Business</span></button>
       `;
 
       nicheList.querySelectorAll('.niche-menu-item').forEach(item => {
@@ -866,7 +855,7 @@
     return escapeHtml(text).replace(new RegExp(`(${escaped})`, 'gi'), '<span style="color: #00F59B; text-decoration: underline; background: rgba(0,245,155,0.12); padding: 1px 4px; border-radius: 4px;">$1</span>');
   }
 
-  // ================= 11. SECTION 4: 📚 6-STAGE PRODUCTION KANBAN LIBRARY =================
+  // ================= 11. SECTION 4: 6-STAGE PRODUCTION KANBAN LIBRARY =================
   function renderLibrarySection() {
     const board = document.getElementById('library-kanban-board');
     const allCountEl = document.getElementById('lib-count-all');
@@ -875,12 +864,12 @@
     if (allCountEl) allCountEl.textContent = savedLibrary.length;
 
     const stages = [
-      { id: 'idea', name: '💡 Ideas', count: 0 },
-      { id: 'researching', name: '🔬 Researching', count: 0 },
-      { id: 'scripted', name: '✍️ Scripted', count: 0 },
-      { id: 'filming', name: '🎬 Filming', count: 0 },
-      { id: 'editing', name: '✂️ Editing', count: 0 },
-      { id: 'published', name: '🚀 Published', count: 0 }
+      { id: 'idea', name: 'Ideas', count: 0 },
+      { id: 'researching', name: 'Researching', count: 0 },
+      { id: 'scripted', name: 'Scripted', count: 0 },
+      { id: 'filming', name: 'Filming', count: 0 },
+      { id: 'editing', name: 'Editing', count: 0 },
+      { id: 'published', name: 'Published', count: 0 }
     ];
 
     stages.forEach(st => {
@@ -904,12 +893,12 @@
                 <div class="lib-card-meta">
                   <span class="lib-score">Score ${item.score}</span>
                   <select class="lib-stage-select" data-id="${item.id}">
-                    <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>💡 Idea</option>
-                    <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>🔬 Researching</option>
-                    <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>✍️ Scripted</option>
-                    <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>🎬 Filming</option>
-                    <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>✂️ Editing</option>
-                    <option value="published" ${item.stage === 'published' ? 'selected' : ''}>🚀 Published</option>
+                    <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>Ideas</option>
+                    <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>Researching</option>
+                    <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>Scripted</option>
+                    <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>Filming</option>
+                    <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
+                    <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
                   </select>
                 </div>
               </div>
@@ -979,7 +968,6 @@
       if (prevBtn) prevBtn.style.display = 'block';
       if (nextBtn) nextBtn.innerHTML = `<span>Show My Opportunities</span> <svg class="lucide lucide-sparkles" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`;
 
-      // Update Summary Cards
       updateOnboardingSummary();
     }
     refreshLucideIcons();
@@ -1042,7 +1030,7 @@
 
     document.getElementById('inspector-score-num').textContent = opp.score;
     document.getElementById('inspector-score-sub').textContent = opp.tier;
-    document.getElementById('inspector-outlier-pill').textContent = `🔥 ${trend.outlierText}`;
+    document.getElementById('inspector-outlier-pill').textContent = trend.outlierText;
     document.getElementById('inspector-topic-title').textContent = trend.topic;
     document.getElementById('inspector-topic-desc').textContent = `High-velocity trend in ${trend.nicheName} with ${trend.views} views and ${trend.engagementRate} engagement.`;
 
@@ -1131,7 +1119,7 @@
         if (currentOnboardStep < 5) {
           showOnboardingStep(currentOnboardStep + 1);
         } else if (currentOnboardStep === 5) {
-          showOnboardingStep(6); // Show complete screen
+          showOnboardingStep(6);
         } else {
           saveOnboardingData();
         }
@@ -1271,7 +1259,7 @@
           const btn = document.createElement('button');
           btn.className = 'onboard-tag-btn selected';
           btn.setAttribute('data-value', val.toLowerCase().replace(/\s+/g, '-'));
-          btn.textContent = `✨ ${val}`;
+          btn.textContent = val;
           btn.addEventListener('click', () => btn.classList.toggle('selected'));
           grid.prepend(btn);
           customNicheInput.value = '';
