@@ -1248,6 +1248,130 @@
       if (nicheDropdown) nicheDropdown.classList.remove('show');
     });
 
+    // Auth Gateway Modal Trigger & Closures
+    const authScreen = document.getElementById('full-auth-screen');
+    const openAuthBtn = document.getElementById('topbar-profile-btn');
+    const openAvatarBtn = document.getElementById('sidebar-user-avatar-btn');
+    const closeAuthBtn = document.getElementById('btn-close-auth-gateway');
+    const guestExploreBtn = document.getElementById('btn-gateway-explore-guest');
+    const instantLoginBtn = document.getElementById('btn-instant-demo-login');
+
+    function openAuth() {
+      if (authScreen) {
+        authScreen.classList.add('active');
+        authScreen.setAttribute('aria-hidden', 'false');
+      }
+    }
+    function closeAuth() {
+      if (authScreen) {
+        authScreen.classList.remove('active');
+        authScreen.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    if (openAuthBtn) openAuthBtn.addEventListener('click', openAuth);
+    if (openAvatarBtn) openAvatarBtn.addEventListener('click', openAuth);
+    if (closeAuthBtn) closeAuthBtn.addEventListener('click', closeAuth);
+    if (guestExploreBtn) guestExploreBtn.addEventListener('click', closeAuth);
+    if (instantLoginBtn) {
+      instantLoginBtn.addEventListener('click', () => {
+        closeAuth();
+        showToast('Logged in as Arka Mondal (Pro Creator Access)');
+      });
+    }
+
+    // Virality Scorer Modal Triggers & Closures
+    const scorerModal = document.getElementById('scorer-modal');
+    const openScorerBtn = document.getElementById('btn-score-new');
+    const closeScorerBtn = document.getElementById('close-scorer-modal');
+    const cancelScorerBtn = document.getElementById('cancel-scorer-btn');
+    const hookInputField = document.getElementById('hook-input-field');
+    const hookCharCount = document.getElementById('hook-char-count');
+    const pasteSampleBtn = document.getElementById('paste-sample-hook');
+    const runAnalysisBtn = document.getElementById('btn-run-analysis');
+    const saveToLibScorerBtn = document.getElementById('save-to-library-btn');
+
+    function openScorer() {
+      if (scorerModal) {
+        scorerModal.classList.add('active');
+        scorerModal.setAttribute('aria-hidden', 'false');
+        if (hookInputField) hookInputField.focus();
+      }
+    }
+    function closeScorer() {
+      if (scorerModal) {
+        scorerModal.classList.remove('active');
+        scorerModal.setAttribute('aria-hidden', 'true');
+      }
+    }
+
+    if (openScorerBtn) openScorerBtn.addEventListener('click', openScorer);
+    if (closeScorerBtn) closeScorerBtn.addEventListener('click', closeScorer);
+    if (cancelScorerBtn) cancelScorerBtn.addEventListener('click', closeScorer);
+
+    if (hookInputField && hookCharCount) {
+      hookInputField.addEventListener('input', (e) => {
+        const len = e.target.value.length;
+        hookCharCount.textContent = `${len} characters • Optimal length: 55-90 chars`;
+      });
+    }
+
+    if (pasteSampleBtn && hookInputField) {
+      pasteSampleBtn.addEventListener('click', () => {
+        hookInputField.value = "I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model.";
+        if (hookCharCount) hookCharCount.textContent = `${hookInputField.value.length} characters • Optimal length: 55-90 chars`;
+      });
+    }
+
+    if (runAnalysisBtn) {
+      runAnalysisBtn.addEventListener('click', () => {
+        const text = hookInputField ? hookInputField.value.trim() : '';
+        if (!text) {
+          showToast('Please type or paste a hook first!');
+          return;
+        }
+
+        const score = Math.floor(Math.random() * 12) + 88;
+        document.getElementById('result-score-num').textContent = score;
+        document.getElementById('result-score-label').textContent = score >= 90 ? 'EXPLOSIVE' : 'STRONG';
+        document.getElementById('bar-curiosity').textContent = '94%';
+        document.getElementById('fill-curiosity').style.width = '94%';
+        document.getElementById('bar-stakes').textContent = '88%';
+        document.getElementById('fill-stakes').style.width = '88%';
+        document.getElementById('bar-velocity').textContent = '96%';
+        document.getElementById('fill-velocity').style.width = '96%';
+
+        if (saveToLibScorerBtn) {
+          saveToLibScorerBtn.removeAttribute('disabled');
+          saveToLibScorerBtn.onclick = () => {
+            addIdeaToLibrary({
+              title: text.slice(0, 50),
+              hook: text,
+              niche: 'ai',
+              format: 'YouTube Shorts (9:16)',
+              score: score,
+              scoreTier: 'EXPLOSIVE',
+              trendSource: 'AI Virality Scorer'
+            });
+            closeScorer();
+          };
+        }
+      });
+    }
+
+    // Global Keybindings: 'N' for Scorer, 'Escape' for modals
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeAuth();
+        closeScorer();
+        closeTrendInspector();
+        closeOnboardingModal();
+      } else if ((e.key === 'n' || e.key === 'N') && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        openScorer();
+      }
+    });
+
     // Custom niche adder in onboarding
     const addCustomNicheBtn = document.getElementById('btn-add-custom-niche');
     const customNicheInput = document.getElementById('onboard-custom-niche');

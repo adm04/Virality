@@ -1466,11 +1466,11 @@ body::before {
 }
 .lib-stage-select option { background: #111116; color: #fff; }
 
-/* ================= 5-STEP ONBOARDING WIZARD MODAL ================= */
+/* ================= MODALS & FULL-SCREEN OVERLAYS ================= */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(7, 7, 10, 0.82);
+  background: rgba(7, 7, 10, 0.85);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   z-index: 5000;
@@ -1479,10 +1479,225 @@ body::before {
   justify-content: center;
   padding: 24px;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
-.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Scorer Modal Card */
+.modal-card {
+  background: #101016;
+  border: var(--border-light);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 620px;
+  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  animation: pop-in 0.25s var(--ease-spring);
+}
+.modal-card.modal-lg { max-width: 780px; }
+
+.modal-header {
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-title-wrap { display: flex; align-items: center; gap: 12px; }
+.modal-icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(0, 245, 155, 0.12);
+  border: 1px solid rgba(0, 245, 155, 0.3);
+  color: var(--chart-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.modal-title { font-family: 'Clash Display', sans-serif; font-size: 18px; font-weight: 700; color: #FFFFFF; }
+.modal-desc { font-size: 11.5px; color: var(--text-tertiary); }
+
+.modal-body { padding: 24px 28px; overflow-y: auto; }
+.modal-footer {
+  padding: 16px 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.scorer-modal-body {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+.scorer-inputs-col { display: flex; flex-direction: column; gap: 14px; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.textarea-footer { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-faint); margin-top: 4px; }
+
+.scorer-results-col {
+  background: rgba(255, 255, 255, 0.02);
+  border: var(--border-ultra-thin);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dial-score-container { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.score-glow-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 245, 155, 0.2) 0%, rgba(0, 245, 155, 0.02) 80%);
+  border: 2px solid rgba(0, 245, 155, 0.35);
+  box-shadow: 0 0 28px rgba(0, 245, 155, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.result-number { font-family: 'Clash Display', sans-serif; font-size: 34px; font-weight: 700; color: var(--chart-1); line-height: 1; }
+.result-label { font-size: 9px; font-weight: 800; text-transform: uppercase; color: var(--chart-1); font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
+
+.score-sub-analysis { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.trigger-bar { display: flex; flex-direction: column; gap: 4px; }
+.trigger-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; }
+.trigger-meta strong { color: var(--text-primary); }
+.trigger-track { width: 100%; height: 4px; background: rgba(255, 255, 255, 0.06); border-radius: 10px; overflow: hidden; }
+.trigger-fill { height: 100%; background: var(--chart-1); border-radius: 10px; transition: width 0.4s var(--ease-spring); }
+
+/* ================= FULL AUTH GATEWAY OVERLAY ================= */
+.full-auth-gateway-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 8, 0.94);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.full-auth-gateway-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.auth-gateway-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 880px;
+  min-height: 480px;
+  background: #101016;
+  border: var(--border-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.95);
+  position: relative;
+  animation: pop-in 0.25s var(--ease-spring);
+}
+
+.auth-gateway-hero {
+  background: radial-gradient(circle at top left, rgba(139, 124, 246, 0.25) 0%, rgba(0, 245, 155, 0.12) 60%, rgba(10, 10, 15, 0.9) 100%), #0D0D12;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.gateway-hero-header { display: flex; align-items: center; gap: 12px; }
+.gateway-brand-name { font-family: 'Clash Display', sans-serif; font-size: 16px; font-weight: 700; color: #FFFFFF; }
+.gateway-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 245, 155, 0.12);
+  border: 1px solid rgba(0, 245, 155, 0.35);
+  color: var(--chart-1);
+  font-size: 10px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 12px;
+}
+.gateway-hero-title { font-family: 'Clash Display', sans-serif; font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1.15; margin-bottom: 10px; }
+.gateway-hero-sub { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+.gateway-hero-footer { font-size: 11px; color: var(--text-tertiary); font-family: 'JetBrains Mono', monospace; }
+
+.auth-gateway-form-pane {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: #101016;
+}
+.gateway-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: var(--border-ultra-thin);
+  color: var(--text-tertiary);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.gateway-close-btn:hover { background: rgba(255, 255, 255, 0.12); color: #FFFFFF; }
+
+.gateway-form-card { display: flex; flex-direction: column; gap: 20px; }
+.gateway-form-header { display: flex; flex-direction: column; gap: 4px; }
+.gateway-title { font-family: 'Clash Display', sans-serif; font-size: 22px; font-weight: 700; color: #FFFFFF; }
+.gateway-subtitle { font-size: 12.5px; color: var(--text-tertiary); }
+
+.btn-demo-instant {
+  background: linear-gradient(135deg, #00F59B 0%, #00D284 100%);
+  color: #070709;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 10px 30px rgba(0, 245, 155, 0.35);
+  transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+}
+.btn-demo-instant:hover { transform: translateY(-2px); box-shadow: 0 14px 38px rgba(0, 245, 155, 0.45); }
+.gateway-footer-hint { font-size: 12px; color: var(--text-tertiary); display: flex; align-items: center; gap: 6px; }
+
+/* ================= 5-STEP ONBOARDING WIZARD MODAL ================= */
 
 .onboarding-card {
   background: #101016;
