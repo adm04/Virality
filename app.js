@@ -957,7 +957,7 @@
     });
 
     // Update active tab buttons in UI
-    document.querySelectorAll('#library-stage-tabs .stage-tab').forEach(tab => {
+    document.querySelectorAll('#library-stage-filters .stage-tab, #library-stage-tabs .stage-tab').forEach(tab => {
       const stageId = tab.getAttribute('data-stage');
       tab.classList.toggle('active', stageId === activeLibraryStage);
     });
@@ -1283,17 +1283,17 @@
       });
     });
 
-    // Library Stage Filter Tabs
-    document.querySelectorAll('#library-stage-tabs .stage-tab').forEach(tab => {
+    // Library Stage Filter Tabs (resilient selector)
+    document.querySelectorAll('#library-stage-filters .stage-tab, #library-stage-tabs .stage-tab').forEach(tab => {
       tab.addEventListener('click', () => {
-        activeLibraryStage = tab.getAttribute('data-stage');
+        activeLibraryStage = tab.getAttribute('data-stage') || 'all';
         renderLibrarySection();
       });
     });
 
-    // Library View Switcher (Kanban vs List)
-    const viewKanbanBtn = document.getElementById('view-kanban');
-    const viewListBtn = document.getElementById('view-list');
+    // Library View Switcher (Kanban vs List - handles both IDs)
+    const viewKanbanBtn = document.getElementById('btn-lib-kanban') || document.getElementById('view-kanban');
+    const viewListBtn = document.getElementById('btn-lib-list') || document.getElementById('view-list');
     if (viewKanbanBtn && viewListBtn) {
       viewKanbanBtn.addEventListener('click', () => {
         viewKanbanBtn.classList.add('active');
