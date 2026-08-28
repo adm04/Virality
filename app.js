@@ -1,5 +1,5 @@
 /**
- * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION (SHADCN/UI CHART EDITION)
+ * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION (SHADCN/UI CHART & AUTH GATEWAY EDITION)
  * Ultra-Modern SaaS Dashboard Logic, shadcn/ui Canvas Visualizations,
  * Virality Simulation Diagnostics, and Zero-Backend Client Authentication System
  */
@@ -326,25 +326,29 @@
   const sidebarAvatarInitials = document.getElementById('sidebar-avatar-initials');
   const sidebarUserAvatarBtn = document.getElementById('sidebar-user-avatar-btn');
   const topbarAuthContainer = document.getElementById('topbar-auth-container');
+  const btnHeaderLoginTrigger = document.getElementById('btn-header-login-trigger');
+  const navLoginBtn = document.getElementById('nav-login');
 
-  const authModal = document.getElementById('auth-modal');
-  const closeAuthModalBtn = document.getElementById('close-auth-modal');
-  const tabSignIn = document.getElementById('tab-sign-in');
-  const tabSignUp = document.getElementById('tab-sign-up');
-  const authModalTitle = document.getElementById('auth-modal-title');
-  const authModalSubtitle = document.getElementById('auth-modal-subtitle');
-  const groupAuthName = document.getElementById('group-auth-name');
-  const authInputName = document.getElementById('auth-input-name');
-  const authInputEmail = document.getElementById('auth-input-email');
-  const authInputPassword = document.getElementById('auth-input-password');
-  const authSubmitLabel = document.getElementById('auth-submit-label');
-  const btnAuthSubmit = document.getElementById('btn-auth-submit');
-  const btnAuthGoogle = document.getElementById('btn-auth-google');
-  const btnAuthGithub = document.getElementById('btn-auth-github');
-  const btnFillDemoAccount = document.getElementById('btn-fill-demo-account');
-  const btnTogglePassword = document.getElementById('btn-toggle-password');
-  const authForgotBtn = document.getElementById('auth-forgot-btn');
-  const authForm = document.getElementById('auth-form');
+  // Full-Screen Auth Gateway Elements
+  const fullAuthScreen = document.getElementById('full-auth-screen');
+  const btnCloseAuthGateway = document.getElementById('btn-close-auth-gateway');
+  const gatewayTitleText = document.getElementById('gateway-title-text');
+  const gatewaySubtitleText = document.getElementById('gateway-subtitle-text');
+  const btnInstantDemoLogin = document.getElementById('btn-instant-demo-login');
+  const gatewayTabSignin = document.getElementById('gateway-tab-signin');
+  const gatewayTabSignup = document.getElementById('gateway-tab-signup');
+  const btnGatewayGoogle = document.getElementById('btn-gateway-google');
+  const btnGatewayGithub = document.getElementById('btn-gateway-github');
+  const gatewayAuthForm = document.getElementById('gateway-auth-form');
+  const gatewayGroupName = document.getElementById('gateway-group-name');
+  const gatewayInputName = document.getElementById('gateway-input-name');
+  const gatewayInputEmail = document.getElementById('gateway-input-email');
+  const gatewayInputPassword = document.getElementById('gateway-input-password');
+  const gatewayTogglePass = document.getElementById('gateway-toggle-pass');
+  const gatewayForgotBtn = document.getElementById('gateway-forgot-btn');
+  const btnGatewaySubmit = document.getElementById('btn-gateway-submit');
+  const gatewaySubmitLabel = document.getElementById('gateway-submit-label');
+  const btnGatewayExploreGuest = document.getElementById('btn-gateway-explore-guest');
 
   // Profile Modal Elements
   const profileModal = document.getElementById('profile-modal');
@@ -360,7 +364,7 @@
   const btnSaveProfile = document.getElementById('btn-save-profile');
   const btnSignOut = document.getElementById('btn-sign-out');
 
-  // Modals & Drawers
+  // Scorer Modal & Batch Modal
   const scorerModal = document.getElementById('scorer-modal');
   const batchModal = document.getElementById('batch-modal');
   const detailDrawer = document.getElementById('detail-drawer');
@@ -431,7 +435,15 @@
     updatePillCounts();
     renderGrid();
     initShadcnCharts();
+    checkHashRoute();
     refreshIcons();
+  }
+
+  // Check URL Hash for #login
+  function checkHashRoute() {
+    if (window.location.hash === '#login') {
+      openAuthGateway('signin');
+    }
   }
 
   // ================= 4. SHADCN/UI CHART SUITE =================
@@ -754,19 +766,19 @@
         newTopbarProfileBtn.addEventListener('click', openProfileModal);
       }
     } else {
-      heroUserNameEl.textContent = 'Creator.';
+      heroUserNameEl.textContent = 'Guest.';
       sidebarAvatarInitials.textContent = '?';
       
       topbarAuthContainer.innerHTML = `
         <button class="btn btn-primary" id="topbar-login-btn" aria-label="Sign In / Join Pro">
           <svg class="lucide lucide-log-in" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-          <span>Sign In / Join Pro</span>
+          <span>Log In / Pro</span>
         </button>
       `;
 
       const topbarLoginBtn = document.getElementById('topbar-login-btn');
       if (topbarLoginBtn) {
-        topbarLoginBtn.addEventListener('click', () => openAuthModal('signin'));
+        topbarLoginBtn.addEventListener('click', () => openAuthGateway('signin'));
       }
     }
     refreshIcons();
@@ -958,12 +970,10 @@
     let rawScore = 60;
     const textLower = hookText.toLowerCase();
 
-    // Length analysis (sweet spot: 45 - 95 chars)
     const len = hookText.trim().length;
     if (len >= 45 && len <= 100) rawScore += 12;
     else if (len < 30) rawScore -= 8;
 
-    // Power Trigger Words
     const curiosityKeywords = ['how i', 'gave 3', 'broke my', 'nobody tells you', 'secret', 'predicted', 'tested 7', 'warning', 'delete these', 'single reason', 'why 99%', 'the truth about'];
     const stakesKeywords = ['$1,000', '$10k', '$250k', 'million', 'billion', 'hell', 'fired', 'zero to', 'quit', 'failed', 'crashed'];
     const contrastKeywords = ['vs', 'fake', 'before and after', 'replaced', 'jumped', 'instead of', 'predicts'];
@@ -993,18 +1003,15 @@
       }
     });
 
-    // Numbers present in hook?
     if (/\d+/.test(hookText)) {
       rawScore += 6;
       curiosityScore += 5;
       velocityScore += 6;
     }
 
-    // Platform bonus adjustments
     if (platform === 'youtube' && len > 50) rawScore += 4;
     if (platform === 'shorts' && (textLower.includes('pov') || textLower.includes('this') || textLower.includes('you'))) rawScore += 6;
 
-    // Clamp scores
     const finalScore = Math.min(99, Math.max(38, rawScore));
     curiosityScore = Math.min(99, Math.max(40, curiosityScore));
     stakesScore = Math.min(99, Math.max(35, stakesScore));
@@ -1015,7 +1022,6 @@
     else if (finalScore >= 70) tier = 'tier-high';
     else if (finalScore >= 50) tier = 'tier-mid';
 
-    // Generate 3 High-Scoring Variations
     const variations = [
       {
         text: `I tested ${hookText.replace(/^[I\s]+/, '').replace(/[\.\?!]+$/, '')} for 30 days — here is what nobody warns you about.`,
@@ -1062,11 +1068,9 @@
     setTimeout(() => {
       const result = calculateViralityScore(text, platform, niche);
 
-      // Render Results
       resultScoreNum.textContent = result.score;
       resultScoreLabel.textContent = result.score >= 90 ? 'VIRAL HIT' : (result.score >= 70 ? 'HIGH REACH' : 'CALIBRATED');
       
-      // Ring glow colors
       if (result.score >= 90) {
         resultScoreRing.style.borderColor = 'rgba(0, 245, 155, 0.6)';
         resultScoreRing.style.boxShadow = '0 0 32px rgba(0, 245, 155, 0.4)';
@@ -1081,7 +1085,6 @@
         resultScoreNum.style.color = '#8B7CF6';
       }
 
-      // Progress bars
       fillCuriosity.style.width = `${result.curiosity}%`;
       barCuriosity.textContent = `${result.curiosity}%`;
       fillStakes.style.width = `${result.stakes}%`;
@@ -1089,7 +1092,6 @@
       fillVelocity.style.width = `${result.velocity}%`;
       barVelocity.textContent = `${result.velocity}%`;
 
-      // Render AI Variations
       variationsList.innerHTML = result.variations.map(v => `
         <div class="variation-item" data-text="${escapeHtml(v.text)}" role="button" tabindex="0" title="Click to apply variation">
           <div class="variation-text">"${v.text}"</div>
@@ -1098,11 +1100,9 @@
       `).join('');
       aiVariationsBox.style.display = 'block';
 
-      // Increment user calibrations counter
       currentUser.calibrationsCount = (currentUser.calibrationsCount || 0) + 1;
       saveUserSession(currentUser);
 
-      // Attach variation click & keyboard access
       document.querySelectorAll('.variation-item').forEach(item => {
         const applyVariation = () => {
           const newText = item.getAttribute('data-text');
@@ -1120,7 +1120,6 @@
         });
       });
 
-      // Enable Save
       saveToLibraryBtn.disabled = false;
       btnRunAnalysis.removeAttribute('aria-busy');
       btnRunAnalysis.innerHTML = `
@@ -1170,7 +1169,6 @@
       explanation: 'Newly calibrated hook with high audience retention and curiosity triggers.'
     };
 
-    // Prepend to state
     ideasState.unshift(newIdea);
     updatePillCounts();
     renderGrid();
@@ -1211,7 +1209,6 @@
     drawerRetStat.textContent = idea.retentionLift;
     drawerThumbConcept.textContent = idea.thumbnailConcept;
 
-    // Set bookmark button state
     if (idea.saved) {
       drawerBookmarkBtn.classList.add('saved');
       drawerBookmarkBtn.innerHTML = '<svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
@@ -1223,7 +1220,6 @@
     detailDrawer.classList.add('active');
     detailDrawer.setAttribute('aria-hidden', 'false');
 
-    // Update Drawer shadcn Charts
     setTimeout(() => {
       updateDrawerCharts(idea);
     }, 150);
@@ -1247,52 +1243,65 @@
     }
   }
 
-  // ================= 9. AUTHENTICATION & PROFILE HANDLERS =================
-  function openAuthModal(mode = 'signin') {
+  // ================= 9. FULL AUTH GATEWAY & PROFILE HANDLERS =================
+  function openAuthGateway(mode = 'signin') {
     authMode = mode;
     if (mode === 'signin') {
-      tabSignIn.classList.add('active');
-      tabSignIn.setAttribute('aria-selected', 'true');
-      tabSignUp.classList.remove('active');
-      tabSignUp.setAttribute('aria-selected', 'false');
-      authModalTitle.textContent = 'Sign in to Vantage';
-      authModalSubtitle.textContent = 'Access your calibrated idea library & viral intelligence.';
-      groupAuthName.style.display = 'none';
-      authSubmitLabel.textContent = 'Sign In to Dashboard';
+      gatewayTabSignin.classList.add('active');
+      gatewayTabSignin.setAttribute('aria-selected', 'true');
+      gatewayTabSignup.classList.remove('active');
+      gatewayTabSignup.setAttribute('aria-selected', 'false');
+      gatewayTitleText.textContent = 'Welcome back';
+      gatewaySubtitleText.textContent = 'Enter your credentials to access your viral workspace.';
+      gatewayGroupName.style.display = 'none';
+      gatewaySubmitLabel.textContent = 'Sign In to Dashboard';
     } else {
-      tabSignUp.classList.add('active');
-      tabSignUp.setAttribute('aria-selected', 'true');
-      tabSignIn.classList.remove('active');
-      tabSignIn.setAttribute('aria-selected', 'false');
-      authModalTitle.textContent = 'Create Vantage Account';
-      authModalSubtitle.textContent = 'Unlock unlimited virality calibration & retention models.';
-      groupAuthName.style.display = 'flex';
-      authSubmitLabel.textContent = 'Create Pro Account';
+      gatewayTabSignup.classList.add('active');
+      gatewayTabSignup.setAttribute('aria-selected', 'true');
+      gatewayTabSignin.classList.remove('active');
+      gatewayTabSignin.setAttribute('aria-selected', 'false');
+      gatewayTitleText.textContent = 'Create Vantage Account';
+      gatewaySubtitleText.textContent = 'Unlock unlimited virality calibration & retention models.';
+      gatewayGroupName.style.display = 'flex';
+      gatewaySubmitLabel.textContent = 'Create Pro Account';
     }
-    openModal(authModal);
+
+    fullAuthScreen.classList.add('active');
+    fullAuthScreen.setAttribute('aria-hidden', 'false');
+    window.location.hash = 'login';
+    refreshIcons();
+
     setTimeout(() => {
-      if (mode === 'signup') authInputName.focus();
-      else authInputEmail.focus();
+      if (mode === 'signup') gatewayInputName.focus();
+      else gatewayInputEmail.focus();
     }, 100);
   }
 
-  function handleAuthSubmit(e) {
+  function closeAuthGateway() {
+    fullAuthScreen.classList.remove('active');
+    fullAuthScreen.setAttribute('aria-hidden', 'true');
+    if (window.location.hash === '#login') {
+      history.replaceState(null, null, ' ');
+    }
+  }
+
+  function handleGatewaySubmit(e) {
     if (e) e.preventDefault();
-    const email = authInputEmail.value.trim();
-    const password = authInputPassword.value.trim();
-    const name = (authMode === 'signup' && authInputName.value.trim()) ? authInputName.value.trim() : (email.split('@')[0] || 'Creator');
+    const email = gatewayInputEmail.value.trim();
+    const password = gatewayInputPassword.value.trim();
+    const name = (authMode === 'signup' && gatewayInputName.value.trim()) ? gatewayInputName.value.trim() : (email.split('@')[0] || 'Arka Mondal');
 
     if (!email || !password) {
       showToast('Please provide both email and password.');
       return;
     }
 
-    btnAuthSubmit.setAttribute('aria-busy', 'true');
-    btnAuthSubmit.innerHTML = `
+    btnGatewaySubmit.setAttribute('aria-busy', 'true');
+    btnGatewaySubmit.innerHTML = `
       <svg class="live-pulse" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
       <span>Authenticating Secure Session…</span>
     `;
-    btnAuthSubmit.disabled = true;
+    btnGatewaySubmit.disabled = true;
 
     setTimeout(() => {
       saveUserSession({
@@ -1308,12 +1317,21 @@
         isLoggedIn: true
       });
 
-      closeModal(authModal);
-      btnAuthSubmit.removeAttribute('aria-busy');
-      btnAuthSubmit.innerHTML = `<span id="auth-submit-label">${authMode === 'signup' ? 'Create Pro Account' : 'Sign In to Dashboard'}</span>`;
-      btnAuthSubmit.disabled = false;
-      showToast(`Welcome back, ${name}! Session authenticated.`);
+      closeAuthGateway();
+      btnGatewaySubmit.removeAttribute('aria-busy');
+      btnGatewaySubmit.innerHTML = `<span id="gateway-submit-label">${authMode === 'signup' ? 'Create Pro Account' : 'Sign In to Dashboard'}</span>`;
+      btnGatewaySubmit.disabled = false;
+      showToast(`Welcome back, ${name}! Logged in successfully.`);
     }, 500);
+  }
+
+  function handleInstantDemoLogin() {
+    showToast('⚡ Instant Demo Login Triggered…');
+    setTimeout(() => {
+      saveUserSession({ ...DEFAULT_USER });
+      closeAuthGateway();
+      showToast('Welcome, Arka Mondal! Authenticated with PRO Creator privileges.');
+    }, 350);
   }
 
   function openProfileModal() {
@@ -1356,6 +1374,7 @@
     });
     closeModal(profileModal);
     showToast('Signed out of Vantage session.');
+    openAuthGateway('signin');
   }
 
   // ================= 10. EVENT LISTENERS =================
@@ -1467,82 +1486,95 @@
     document.getElementById('nav-competitor').addEventListener('click', () => openModal(batchModal));
     document.getElementById('nav-settings').addEventListener('click', openProfileModal);
 
+    // Direct Login Triggers
+    if (btnHeaderLoginTrigger) {
+      btnHeaderLoginTrigger.addEventListener('click', () => openAuthGateway('signin'));
+    }
+    if (navLoginBtn) {
+      navLoginBtn.addEventListener('click', () => openAuthGateway('signin'));
+    }
+
     // Profile & Auth Triggers
     sidebarUserAvatarBtn.addEventListener('click', () => {
       if (currentUser.isLoggedIn) openProfileModal();
-      else openAuthModal('signin');
+      else openAuthGateway('signin');
     });
 
-    // Auth Modal tab switching
-    tabSignIn.addEventListener('click', () => openAuthModal('signin'));
-    tabSignUp.addEventListener('click', () => openAuthModal('signup'));
-    closeAuthModalBtn.addEventListener('click', () => closeModal(authModal));
-    if (authForm) authForm.addEventListener('submit', handleAuthSubmit);
+    // Full Auth Gateway Handlers
+    if (btnCloseAuthGateway) btnCloseAuthGateway.addEventListener('click', closeAuthGateway);
+    if (btnInstantDemoLogin) btnInstantDemoLogin.addEventListener('click', handleInstantDemoLogin);
+    if (btnGatewayExploreGuest) btnGatewayExploreGuest.addEventListener('click', closeAuthGateway);
 
-    // Social Auth 1-click simulations
-    btnAuthGoogle.addEventListener('click', () => {
-      showToast('Connecting via Google OAuth…');
-      setTimeout(() => {
-        saveUserSession({
-          id: 'user-google-' + Date.now(),
-          name: 'Arka Mondal',
-          email: 'arka.creator@gmail.com',
-          initials: 'AM',
-          tier: 'PRO CREATOR TIER',
-          tierShort: 'PRO',
-          niche: 'tech-ai',
-          calibrationsCount: 84,
-          savedCount: 12,
-          isLoggedIn: true
-        });
-        closeModal(authModal);
-        showToast('Signed in via Google successfully!');
-      }, 400);
-    });
+    if (gatewayTabSignin) gatewayTabSignin.addEventListener('click', () => openAuthGateway('signin'));
+    if (gatewayTabSignup) gatewayTabSignup.addEventListener('click', () => openAuthGateway('signup'));
 
-    btnAuthGithub.addEventListener('click', () => {
-      showToast('Connecting via GitHub OAuth…');
-      setTimeout(() => {
-        saveUserSession({
-          id: 'user-gh-' + Date.now(),
-          name: 'Arka Mondal',
-          email: 'arkadeb.mondal@example.com',
-          initials: 'AM',
-          tier: 'PRO CREATOR TIER',
-          tierShort: 'PRO',
-          niche: 'tech-ai',
-          calibrationsCount: 84,
-          savedCount: 12,
-          isLoggedIn: true
-        });
-        closeModal(authModal);
-        showToast('Signed in via GitHub successfully!');
-      }, 400);
-    });
+    if (gatewayAuthForm) gatewayAuthForm.addEventListener('submit', handleGatewaySubmit);
 
-    btnFillDemoAccount.addEventListener('click', () => {
-      authInputEmail.value = 'arkadeb.mondal@example.com';
-      authInputPassword.value = 'VantagePro2026!';
-      if (authMode === 'signup') authInputName.value = 'Arka Mondal';
-      showToast('Filled test creator credentials!');
-    });
+    // Social OAuth 1-Click Handlers
+    if (btnGatewayGoogle) {
+      btnGatewayGoogle.addEventListener('click', () => {
+        showToast('Connecting via Google OAuth…');
+        setTimeout(() => {
+          saveUserSession({
+            id: 'user-google-' + Date.now(),
+            name: 'Arka Mondal',
+            email: 'arka.creator@gmail.com',
+            initials: 'AM',
+            tier: 'PRO CREATOR TIER',
+            tierShort: 'PRO',
+            niche: 'tech-ai',
+            calibrationsCount: 84,
+            savedCount: 12,
+            isLoggedIn: true
+          });
+          closeAuthGateway();
+          showToast('Signed in via Google successfully!');
+        }, 400);
+      });
+    }
 
-    btnTogglePassword.addEventListener('click', () => {
-      const type = authInputPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-      authInputPassword.setAttribute('type', type);
-    });
+    if (btnGatewayGithub) {
+      btnGatewayGithub.addEventListener('click', () => {
+        showToast('Connecting via GitHub OAuth…');
+        setTimeout(() => {
+          saveUserSession({
+            id: 'user-gh-' + Date.now(),
+            name: 'Arka Mondal',
+            email: 'arkadeb.mondal@example.com',
+            initials: 'AM',
+            tier: 'PRO CREATOR TIER',
+            tierShort: 'PRO',
+            niche: 'tech-ai',
+            calibrationsCount: 84,
+            savedCount: 12,
+            isLoggedIn: true
+          });
+          closeAuthGateway();
+          showToast('Signed in via GitHub successfully!');
+        }, 400);
+      });
+    }
 
-    authForgotBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      showToast('Password reset link sent to registered email.');
-    });
+    if (gatewayTogglePass) {
+      gatewayTogglePass.addEventListener('click', () => {
+        const type = gatewayInputPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        gatewayInputPassword.setAttribute('type', type);
+      });
+    }
+
+    if (gatewayForgotBtn) {
+      gatewayForgotBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showToast('Password reset instructions dispatched.');
+      });
+    }
 
     // Profile Modal handlers
     closeProfileModalBtn.addEventListener('click', () => closeModal(profileModal));
     btnSaveProfile.addEventListener('click', handleSaveProfile);
     btnSignOut.addEventListener('click', handleSignOut);
 
-    // Modal Closures
+    // Scorer & Batch Closures
     closeScorerModalBtn.addEventListener('click', () => closeModal(scorerModal));
     cancelScorerBtn.addEventListener('click', () => closeModal(scorerModal));
     closeBatchModalBtn.addEventListener('click', () => closeModal(batchModal));
@@ -1635,7 +1667,10 @@
       }
     });
 
-    // Keyboard Shortcuts (⌘K, N, Esc, 1-5)
+    // Hashchange listener for #login
+    window.addEventListener('hashchange', checkHashRoute);
+
+    // Keyboard Shortcuts (⌘K, ⌘L, N, Esc, 1-5)
     document.addEventListener('keydown', (e) => {
       // ⌘K or Ctrl+K -> Focus Search
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -1644,26 +1679,32 @@
         searchInputEl.select();
       }
 
+      // ⌘L or Ctrl+L -> Open Login Gateway
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'l') {
+        e.preventDefault();
+        openAuthGateway('signin');
+      }
+
       // 'N' -> Open Scorer Modal (when not typing in an input)
       if (e.key.toLowerCase() === 'n' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
         e.preventDefault();
         openModal(scorerModal);
       }
 
-      // Number keys 1-5 for fast tab navigation (when not typing)
+      // Number keys 1-5 for fast tab navigation
       if (['1', '2', '3', '4', '5'].includes(e.key) && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         const map = { '1': 'all', '2': 'viral', '3': 'youtube', '4': 'shorts', '5': 'saved' };
         if (map[e.key]) setActiveFilterPill(map[e.key]);
       }
 
-      // Escape -> Close all modals/drawers
+      // Escape -> Close all modals/drawers/gateways
       if (e.key === 'Escape') {
         closeModal(scorerModal);
         closeModal(batchModal);
-        closeModal(authModal);
         closeModal(profileModal);
         closeDetailDrawer();
+        closeAuthGateway();
       }
     });
   }
