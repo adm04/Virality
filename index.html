@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vantage — Elite Content Idea Library & Virality Scorer</title>
-  <meta name="description" content="Elite creator intelligence dashboard, topic search engine, and AI virality scorer with interactive shadcn/ui analytics.">
+  <title>Vantage V2 — Creator Onboarding & Trend Intelligence OS</title>
+  <meta name="description" content="Personalized creator onboarding, continuous trend discovery engine, opportunity scoring, 12-angle AI idea generation, and content production library.">
   
   <!-- Modern Font Pairing: Clash Display, Plus Jakarta Sans, JetBrains Mono, Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,42 +41,34 @@
         </a>
 
         <nav class="nav-stack" aria-label="Primary Navigation">
-          <button class="nav-item active" data-tooltip="Idea Library (⌘1)" id="nav-library" aria-label="Idea Library View">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/>
-              <rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/>
+          <button class="nav-item active" data-tooltip="🔥 Trending For You (⌘1)" id="nav-trending" aria-label="Trending For You">
+            <svg class="lucide lucide-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
             </svg>
             <span class="nav-indicator" aria-hidden="true"></span>
           </button>
 
-          <button class="nav-item" data-tooltip="AI Virality Scorer (⌘2)" id="nav-scorer" aria-label="Open AI Virality Scorer">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+          <button class="nav-item" data-tooltip="💡 Ideas For You (⌘2)" id="nav-ideas" aria-label="AI Content Ideas">
+            <svg class="lucide lucide-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
             </svg>
           </button>
 
-          <button class="nav-item" data-tooltip="Retention Curves (⌘3)" id="nav-retention" aria-label="View Retention Outliers">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 3v18h18"/><path d="M7 16c3-8 5-11 9-11 3 0 4 6 4 6"/>
+          <button class="nav-item" data-tooltip="🔎 Content Search (⌘3)" id="nav-search" aria-label="Search Content Intelligence">
+            <svg class="lucide lucide-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
             </svg>
           </button>
 
-          <button class="nav-item" data-tooltip="Competitor Radar (⌘4)" id="nav-competitor" aria-label="Competitor Radar & Batch Scorer">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/><circle cx="12" cy="12" r="2"/>
+          <button class="nav-item" data-tooltip="📚 Content Library (⌘4)" id="nav-library" aria-label="Your Production Library">
+            <svg class="lucide lucide-folder-kanban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/>
             </svg>
           </button>
 
-          <button class="nav-item" data-tooltip="Saved Swipe Files (⌘5)" id="nav-bookmarks" aria-label="View Saved Swipe Files">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-            </svg>
-          </button>
-
-          <!-- Explicit Login Sidebar Item -->
-          <button class="nav-item" data-tooltip="Log In / Auth (⌘L)" id="nav-login" aria-label="Open Login Gateway">
-            <svg class="lucide lucide-key-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/>
+          <button class="nav-item" data-tooltip="🎯 Onboarding / Profile (⌘O)" id="nav-onboarding-trigger" aria-label="Creator Onboarding & Preferences">
+            <svg class="lucide lucide-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
             </svg>
           </button>
         </nav>
@@ -98,7 +90,7 @@
       </div>
     </aside>
 
-    <!-- ================= MAIN WORKSPACE ================= -->
+    <!-- ================= MAIN WORKSPACE VIEWPORT ================= -->
     <main class="main-viewport" id="main-content" tabindex="-1">
 
       <!-- TOP COMMAND HEADER -->
@@ -106,20 +98,23 @@
         <div class="topbar-left">
           <div class="status-pill" role="status">
             <span class="live-pulse" aria-hidden="true"></span>
-            <span class="status-text">VANTAGE VIRALITY ENGINE &bull; <strong id="header-total-count">214</strong> HOOKS INDEXED</span>
+            <span class="status-text">24/7 TREND RADAR ACTIVE &bull; <span class="badge-demo-tag">DEMO DATA</span> &bull; <strong id="header-radar-status">NEXT SYNC IN 1h 48m</strong></span>
           </div>
           <h1 class="hero-title">Good morning, <span class="gradient-text" id="hero-user-name">Arka.</span></h1>
-          <p class="hero-subtitle">High-probability retention architectures & viral algorithm calibration.</p>
+          <p class="hero-subtitle">Here's what's worth creating today across your personalized niches.</p>
+          
+          <!-- Creator Persona Badges -->
+          <div class="creator-persona-summary" id="creator-persona-chips">
+            <!-- Dynamically populated from creator_profiles -->
+          </div>
         </div>
 
         <div class="topbar-actions">
-          <button class="btn btn-secondary" id="btn-batch-import" aria-label="Open Batch Scorer">
-            <svg class="lucide lucide-upload-cloud" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/>
-            </svg>
-            <span>Batch Scorer</span>
+          <button class="btn btn-secondary" id="btn-edit-onboarding" title="Update Niche & Audience Preferences" aria-label="Edit Profile Preferences">
+            <svg class="lucide lucide-sliders-horizontal" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg>
+            <span>Edit Profile Preferences</span>
           </button>
-          
+
           <button class="btn btn-primary" id="btn-score-new" aria-label="Score New Hook">
             <svg class="lucide lucide-plus" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 5v14M5 12h14"/>
@@ -139,76 +134,100 @@
         </div>
       </header>
 
-      <!-- ================= SHADCN/UI EXECUTIVE ANALYTICS SECTION ================= -->
-      <section class="shadcn-analytics-grid animate-fade delay-1" aria-label="Executive Intelligence Analytics">
-        
-        <!-- shadcn chart-area-interactive: Virality Velocity & Retention Reach -->
-        <div class="shadcn-card chart-hero-card">
-          <div class="shadcn-card-header">
-            <div class="chart-header-left">
-              <h2 class="shadcn-card-title">Virality Velocity & Projected Reach</h2>
-              <p class="shadcn-card-description">Showing daily organic impressions lift vs 30s audience retention curve across all calibrated hooks.</p>
+      <!-- ================= SECTION 1: 🔥 TRENDING FOR YOU ================= -->
+      <section class="dashboard-section animate-fade delay-1" id="section-trending" aria-labelledby="heading-trending">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge flame-badge" aria-hidden="true">
+              <svg class="lucide lucide-flame" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
             </div>
-            <!-- Time range toggle (shadcn tabs) -->
-            <div class="shadcn-tabs-list" role="tablist" aria-label="Chart Time Range">
-              <button class="shadcn-tab-btn active" data-range="30d" role="tab" aria-selected="true">Last 30 Days</button>
-              <button class="shadcn-tab-btn" data-range="7d" role="tab" aria-selected="false">Last 7 Days</button>
-              <button class="shadcn-tab-btn" data-range="24h" role="tab" aria-selected="false">24 Hours</button>
+            <div>
+              <h2 class="section-heading" id="heading-trending">🔥 Trending For You</h2>
+              <p class="section-subtext">Unusually high-performing breakout topics filtered to your niche, audience, and platforms.</p>
             </div>
           </div>
 
-          <div class="shadcn-card-content">
-            <div class="chart-container-wrap">
-              <canvas id="shadcn-velocity-area-chart" height="240" aria-label="Virality Velocity Area Chart"></canvas>
+          <div class="section-actions-row">
+            <!-- Format Filter Pills -->
+            <div class="platform-filter-bar" id="trending-platform-filters" role="tablist" aria-label="Filter Trends by Platform">
+              <button class="format-pill active" data-platform="all">All Formats</button>
+              <button class="format-pill" data-platform="youtube">YouTube</button>
+              <button class="format-pill" data-platform="shorts">Shorts / Reels</button>
+              <button class="format-pill" data-platform="podcast">Podcast</button>
             </div>
-          </div>
-
-          <div class="shadcn-card-footer">
-            <div class="chart-legend-row">
-              <div class="legend-item">
-                <span class="legend-dot chart-1" aria-hidden="true"></span>
-                <span class="legend-text">Organic Reach Lift (<strong id="legend-reach-val">+340%</strong>)</span>
-              </div>
-              <div class="legend-item">
-                <span class="legend-dot chart-2" aria-hidden="true"></span>
-                <span class="legend-text">30s Benchmark Retention (<strong id="legend-ret-val">74.2%</strong>)</span>
-              </div>
-            </div>
-            <div class="chart-trend-badge">
-              <svg class="lucide lucide-trending-up" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-              <span>Trending up +5.2% this month</span>
-            </div>
+            
+            <button class="btn btn-secondary btn-sm" id="btn-sync-trends" title="Trigger 24/7 Trend Sync" aria-label="Sync Trends">
+              <svg class="lucide lucide-refresh-cw" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+              <span>Sync Signals</span>
+            </button>
           </div>
         </div>
 
-        <!-- shadcn chart-pie-donut-text: Platform Share Distribution -->
-        <div class="shadcn-card chart-donut-card">
-          <div class="shadcn-card-header">
-            <h2 class="shadcn-card-title">Platform Share</h2>
-            <p class="shadcn-card-description">Calibrated hooks distribution across social video platforms.</p>
-          </div>
-          <div class="shadcn-card-content donut-content-wrap">
-            <div class="donut-chart-container">
-              <canvas id="shadcn-platform-donut-chart" width="190" height="190" aria-label="Platform Share Donut Chart"></canvas>
-              <div class="donut-center-metric" aria-hidden="true">
-                <span class="donut-center-num">214</span>
-                <span class="donut-center-label">Total Hooks</span>
-              </div>
-            </div>
-          </div>
-          <div class="shadcn-card-footer donut-footer">
-            <div class="platform-mini-legend">
-              <div class="mini-legend-item"><span class="legend-dot yt-color"></span><span>YouTube: <strong>40%</strong></span></div>
-              <div class="mini-legend-item"><span class="legend-dot ig-color"></span><span>Shorts/Reels: <strong>44%</strong></span></div>
-              <div class="mini-legend-item"><span class="legend-dot li-color"></span><span>X / LinkedIn: <strong>16%</strong></span></div>
-            </div>
-          </div>
+        <!-- TRENDING OPPORTUNITY CARDS GRID -->
+        <div class="trend-cards-grid" id="trending-cards-container">
+          <!-- Dynamically populated from trend engine -->
         </div>
-
       </section>
 
-      <!-- ================= ENHANCED SEARCH SHELL WITH TOPIC & NICHE MENUS ================= -->
-      <section class="command-search-shell animate-fade delay-2" aria-label="Search and Filter Commands">
+      <!-- ================= SECTION 2: 💡 IDEAS FOR YOU (12 CREATIVE ANGLES) ================= -->
+      <section class="dashboard-section animate-fade delay-2" id="section-ideas" aria-labelledby="heading-ideas">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge idea-badge" aria-hidden="true">
+              <svg class="lucide lucide-sparkles" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            </div>
+            <div>
+              <h2 class="section-heading" id="heading-ideas">💡 Ideas For You</h2>
+              <p class="section-subtext">Original, personalized content concepts tailored to your profile goals & audience.</p>
+            </div>
+          </div>
+
+          <div class="trend-source-pill" id="active-idea-source-badge">
+            <span>Trend Source: </span>
+            <strong id="active-idea-source-name">AI Autonomous Agents</strong>
+          </div>
+        </div>
+
+        <!-- 12 Creative Angles Selector -->
+        <div class="creative-angles-shell">
+          <span class="angles-label">Select Creative Angle:</span>
+          <div class="angles-scroller" id="angles-container" role="tablist" aria-label="Creative Angle Selection">
+            <button class="angle-chip active" data-angle="all">⚡ All Angles</button>
+            <button class="angle-chip" data-angle="educational">📚 Educational</button>
+            <button class="angle-chip" data-angle="controversial">🔥 Controversial</button>
+            <button class="angle-chip" data-angle="storytelling">🎬 Storytelling</button>
+            <button class="angle-chip" data-angle="beginner">🌱 Beginner Friendly</button>
+            <button class="angle-chip" data-angle="expert">🧠 Expert Deep Dive</button>
+            <button class="angle-chip" data-angle="myth-busting">💥 Myth-Busting</button>
+            <button class="angle-chip" data-angle="listicle">📋 Top Listicles</button>
+            <button class="angle-chip" data-angle="case-study">📊 Case Study</button>
+            <button class="angle-chip" data-angle="personal-story">👤 Personal Story</button>
+            <button class="angle-chip" data-angle="hot-take">🌶️ Hot Take</button>
+            <button class="angle-chip" data-angle="tutorial">🛠️ Step-by-Step</button>
+            <button class="angle-chip" data-angle="news-reaction">📰 News Reaction</button>
+          </div>
+        </div>
+
+        <!-- AI CONTENT IDEAS GRID -->
+        <div class="ideas-cards-grid" id="ideas-cards-container">
+          <!-- Dynamically populated from AI Idea Generator -->
+        </div>
+      </section>
+
+      <!-- ================= SECTION 3: 🔎 SEARCH CONTENT INTELLIGENCE ================= -->
+      <section class="dashboard-section animate-fade delay-3" id="section-search" aria-labelledby="heading-search">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge search-badge" aria-hidden="true">
+              <svg class="lucide lucide-search" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <div>
+              <h2 class="section-heading" id="heading-search">🔎 Search Content Intelligence</h2>
+              <p class="section-subtext">Discover emerging topics, top-performing hooks, and competitor velocity signals.</p>
+            </div>
+          </div>
+        </div>
+
         <div class="search-glass-card">
           <div class="search-input-group">
             <svg class="search-icon lucide lucide-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -217,10 +236,10 @@
             <input 
               type="text" 
               id="global-search-input" 
-              placeholder="Search hooks, topics, keywords or paste competitor URL…" 
+              placeholder="Search any topic, trend or content idea (e.g., 'AI agents', 'fitness for beginners', 'photography tips')…" 
               autocomplete="off"
               spellcheck="false"
-              aria-label="Search content idea library"
+              aria-label="Search content intelligence"
             />
             
             <div class="search-actions">
@@ -239,38 +258,7 @@
                     <input type="text" id="topic-filter-input" class="dropdown-subsearch" placeholder="Search topics (e.g. AI, Figma)…">
                   </div>
                   <div class="topic-grid-list" id="topic-items-container">
-                    <button class="topic-menu-item active" data-topic="all">
-                      <span class="topic-item-name">All Topics</span>
-                      <span class="topic-count">214</span>
-                    </button>
-                    <button class="topic-menu-item" data-topic="ai-agents">
-                      <span class="topic-item-name">🤖 AI & Autonomous Agents</span>
-                      <span class="topic-count">48</span>
-                    </button>
-                    <button class="topic-menu-item" data-topic="finance-wealth">
-                      <span class="topic-item-name">💰 Finance & High Stakes</span>
-                      <span class="topic-count">36</span>
-                    </button>
-                    <button class="topic-menu-item" data-topic="design-figma">
-                      <span class="topic-item-name">🎨 Figma & Design Systems</span>
-                      <span class="topic-count">29</span>
-                    </button>
-                    <button class="topic-menu-item" data-topic="freelance-career">
-                      <span class="topic-item-name">💼 Freelance & Client Red Flags</span>
-                      <span class="topic-count">32</span>
-                    </button>
-                    <button class="topic-menu-item" data-topic="devtools-coding">
-                      <span class="topic-item-name">🛠️ DevTools, VS Code & Coding</span>
-                      <span class="topic-count">26</span>
-                    </button>
-                    <button class="topic-menu-item" data-topic="productivity-ceos">
-                      <span class="topic-item-name">⚡ Productivity & Mythbusting</span>
-                      <span class="topic-count">24</span>
-                    </button>
-                    <button class="topic-menu-item" data-topic="saas-growth">
-                      <span class="topic-item-name">🚀 SaaS Growth & UX Audits</span>
-                      <span class="topic-count">19</span>
-                    </button>
+                    <!-- Injected dynamically -->
                   </div>
                 </div>
               </div>
@@ -289,49 +277,8 @@
                     <span class="dropdown-title">Creator Niche</span>
                     <span class="dropdown-subtitle">Benchmark against your specific algorithm bucket</span>
                   </div>
-                  <div class="niche-menu-list">
-                    <button class="niche-menu-item active" data-niche="all">
-                      <div class="niche-item-info">
-                        <span class="niche-name">All Niches</span>
-                        <span class="niche-meta">Broad audience cross-pollination</span>
-                      </div>
-                      <span class="niche-badge-pill">Global</span>
-                    </button>
-                    <button class="niche-menu-item" data-niche="tech-ai">
-                      <div class="niche-item-info">
-                        <span class="niche-name">💻 Tech & AI Experiments</span>
-                        <span class="niche-meta">High Curiosity Gap • 76% Median 30s</span>
-                      </div>
-                      <span class="niche-badge-pill">Tech</span>
-                    </button>
-                    <button class="niche-menu-item" data-niche="business-money">
-                      <div class="niche-item-info">
-                        <span class="niche-name">📈 Finance, Wealth & Business</span>
-                        <span class="niche-meta">High Stakes • 82% Median 30s</span>
-                      </div>
-                      <span class="niche-badge-pill">Finance</span>
-                    </button>
-                    <button class="niche-menu-item" data-niche="design-ux">
-                      <div class="niche-item-info">
-                        <span class="niche-name">🎨 Design, UI/UX & SaaS</span>
-                        <span class="niche-meta">Visual Payoff • 71% Median 30s</span>
-                      </div>
-                      <span class="niche-badge-pill">Design</span>
-                    </button>
-                    <button class="niche-menu-item" data-niche="productivity">
-                      <div class="niche-item-info">
-                        <span class="niche-name">🧠 Productivity & Systems</span>
-                        <span class="niche-meta">Contrarian Angles • 68% Median 30s</span>
-                      </div>
-                      <span class="niche-badge-pill">Systems</span>
-                    </button>
-                    <button class="niche-menu-item" data-niche="lifestyle">
-                      <div class="niche-item-info">
-                        <span class="niche-name">🎬 Storytelling & Documentary</span>
-                        <span class="niche-meta">Vulnerability & Tension • 84% Median 30s</span>
-                      </div>
-                      <span class="niche-badge-pill">Stories</span>
-                    </button>
+                  <div class="niche-menu-list" id="niche-menu-list">
+                    <!-- Injected dynamically -->
                   </div>
                 </div>
               </div>
@@ -343,304 +290,432 @@
             </div>
           </div>
 
-          <!-- Dynamic Filter Category Pills -->
-          <div class="filter-pills-row" id="filter-pills-container" role="tablist" aria-label="Filter Ideas by Category">
-            <button class="pill active" data-filter="all" role="tab" aria-selected="true">
-              <span class="pill-label">All Formats</span>
-              <span class="pill-count" id="count-all">214</span>
-            </button>
-            <button class="pill" data-filter="viral" role="tab" aria-selected="false">
-              <svg class="pill-icon-svg lucide lucide-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-              <span class="pill-label">Viral Hits (90+)</span>
-              <span class="pill-count" id="count-viral">38</span>
-            </button>
-            <button class="pill" data-filter="youtube" role="tab" aria-selected="false">
-              <svg class="pill-platform-icon yt" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9 1.7.2 7.2.2 7.2.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>
-              <span class="pill-label">YouTube Long-form</span>
-              <span class="pill-count" id="count-youtube">86</span>
-            </button>
-            <button class="pill" data-filter="shorts" role="tab" aria-selected="false">
-              <svg class="pill-platform-icon shorts" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.86 1 1.1 1.7.24.66.4 1.4.46 2.5.05 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.5-.27.7-.6 1.2-1.1 1.7-.5.5-1 .86-1.7 1.1-.66.24-1.4.4-2.5.46-1.1.05-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.66-.4-1.4-.46-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.5.27-.7.6-1.2 1.1-1.7.5-.5 1-.86 1.7-1.1.66-.24 1.4-.4 2.5-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
-              <span class="pill-label">Reels / Shorts / TikTok</span>
-              <span class="pill-count" id="count-shorts">94</span>
-            </button>
-            <button class="pill" data-filter="social" role="tab" aria-selected="false">
-              <svg class="pill-platform-icon li" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57z"/></svg>
-              <span class="pill-label">X & LinkedIn</span>
-              <span class="pill-count" id="count-social">34</span>
-            </button>
-            <button class="pill" data-filter="saved" role="tab" aria-selected="false">
-              <svg class="pill-icon-svg lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
-              <span class="pill-label">Saved</span>
-              <span class="pill-count" id="count-saved">12</span>
-            </button>
-          </div>
-
-          <!-- ACTIVE MULTI-FILTER CHIPS BAR (INJECTED DYNAMICALLY) -->
+          <!-- Active Multi-Filter Chips Bar -->
           <div class="active-filters-bar" id="active-filters-bar" style="display: none;">
             <div class="active-chips-list" id="active-chips-list"></div>
             <button class="btn-clear-all-filters" id="btn-clear-all-filters" type="button">Clear All Filters</button>
           </div>
         </div>
+
+        <!-- SEARCH RESULTS MATRIX -->
+        <div class="bento-grid" id="search-results-grid">
+          <!-- Dynamically rendered -->
+        </div>
       </section>
 
-      <!-- SECTION HEADING & CONTROLS -->
-      <section class="section-toolbar animate-fade delay-3" aria-label="Dashboard Controls">
-        <div class="section-title-group">
-          <h2 class="section-title">Curated Idea Matrix</h2>
-          <span class="section-badge" id="results-count-badge" aria-live="polite">Showing 10 of 214 high-conv ideas</span>
-        </div>
-
-        <div class="toolbar-controls">
-          <div class="sort-selector">
-            <label for="sort-select" class="sort-label">Sort:</label>
-            <select id="sort-select" class="custom-select" aria-label="Sort Ideas">
-              <option value="score-desc">Highest Virality Score</option>
-              <option value="retention-desc">Highest Retention Lift</option>
-              <option value="newest">Recently Calibrated</option>
-              <option value="alphabetical">Hook Name (A-Z)</option>
-            </select>
+      <!-- ================= SECTION 4: 📚 YOUR CONTENT LIBRARY (6-STAGE PRODUCTION WORKFLOW) ================= -->
+      <section class="dashboard-section animate-fade delay-3" id="section-library" aria-labelledby="heading-library">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge library-badge" aria-hidden="true">
+              <svg class="lucide lucide-folder-kanban" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/></svg>
+            </div>
+            <div>
+              <h2 class="section-heading" id="heading-library">📚 Your Content Library</h2>
+              <p class="section-subtext">Track saved ideas across production stages: from brainstorm to published.</p>
+            </div>
           </div>
-          
-          <div class="view-toggle" role="group" aria-label="View Mode Toggle">
-            <button class="view-btn active" data-view="bento" title="Bento Grid View" aria-label="Bento Grid View" aria-pressed="true">
-              <svg class="lucide lucide-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-            </button>
-            <button class="view-btn" data-view="compact" title="Compact View" aria-label="Compact View" aria-pressed="false">
-              <svg class="lucide lucide-rows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
-            </button>
+
+          <div class="library-toolbar-actions">
+            <!-- Stage Status Filters -->
+            <div class="library-filter-tabs" id="library-stage-filters" role="tablist">
+              <button class="stage-tab active" data-stage="all">All Stages (<span id="lib-count-all">0</span>)</button>
+              <button class="stage-tab" data-stage="idea">💡 Ideas</button>
+              <button class="stage-tab" data-stage="researching">🔬 Researching</button>
+              <button class="stage-tab" data-stage="scripted">✍️ Scripted</button>
+              <button class="stage-tab" data-stage="filming">🎬 Filming</button>
+              <button class="stage-tab" data-stage="editing">✂️ Editing</button>
+              <button class="stage-tab" data-stage="published">🚀 Published</button>
+            </div>
+
+            <div class="library-view-switcher">
+              <button class="lib-view-btn active" id="btn-lib-kanban" title="Kanban Board View">
+                <svg class="lucide lucide-kanban" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 5v11"/><path d="M12 5v6"/><path d="M18 5v14"/></svg>
+              </button>
+              <button class="lib-view-btn" id="btn-lib-list" title="Compact List View">
+                <svg class="lucide lucide-list" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+              </button>
+            </div>
           </div>
         </div>
-      </section>
 
-      <!-- BENTO / MASONRY GRID OF IDEA CARDS -->
-      <section class="bento-grid" id="ideas-grid" aria-label="Idea Cards Grid">
-        <!-- Dynamically rendered via JavaScript for complete interactivity & sorting -->
-      </section>
-
-      <!-- EMPTY STATE (HIDDEN BY DEFAULT) -->
-      <div class="empty-state" id="empty-state" style="display: none;" role="region" aria-label="Empty State">
-        <div class="empty-icon-ring" aria-hidden="true">
-          <svg class="lucide lucide-search-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 8.5-5 5"/><path d="m8.5 8.5 5 5"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <!-- 6-STAGE PRODUCTION KANBAN / LIST CONTAINER -->
+        <div class="library-kanban-board" id="library-kanban-board">
+          <!-- Injected dynamically -->
         </div>
-        <h3>No matching ideas found</h3>
-        <p>Try refining your search keyword or clearing active platform and topic filters.</p>
-        <button class="btn btn-secondary" id="reset-filters-btn">Reset All Filters</button>
-      </div>
+      </section>
 
     </main>
   </div>
 
-  <!-- ================= FULL-SCREEN LUXURY LOGIN & REGISTRATION GATEWAY ================= -->
-  <div class="full-auth-gateway-overlay" id="full-auth-screen" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vantage Authentication Gateway">
-    <div class="auth-gateway-container">
+  <!-- ================= 5-STEP ONBOARDING WIZARD MODAL ================= -->
+  <div class="modal-overlay onboarding-modal-overlay" id="onboarding-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Creator Profile Onboarding">
+    <div class="onboarding-card">
       
-      <!-- Left Hero Showcase Pane -->
-      <div class="auth-gateway-hero">
-        <div class="gateway-hero-header">
-          <a href="#" class="brand-mark">
-            <span class="mark-letter">V</span>
-          </a>
-          <span class="gateway-brand-name">Vantage Virality OS</span>
+      <!-- Top Progress Bar -->
+      <div class="onboarding-header">
+        <div class="onboarding-progress-track">
+          <div class="onboarding-progress-fill" id="onboarding-progress-fill" style="width: 20%;"></div>
         </div>
-
-        <div class="gateway-hero-content">
-          <div class="gateway-pill">
-            <span class="live-pulse" aria-hidden="true"></span>
-            <span>PRO CREATOR ACCESS</span>
-          </div>
-          <h2 class="gateway-hero-title">Predict virality before hitting publish.</h2>
-          <p class="gateway-hero-sub">Calibrate high-retention video hooks, reverse-engineer algorithm trends, and scale reach across YouTube, TikTok, and Reels.</p>
-
-          <div class="gateway-quote-card">
-            <div class="quote-stars">
-              <svg width="14" height="14" fill="#00F59B" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="14" height="14" fill="#00F59B" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="14" height="14" fill="#00F59B" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="14" height="14" fill="#00F59B" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="14" height="14" fill="#00F59B" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <p class="quote-text">"Vantage predicted our breakout 3.4M view YouTube hook in 30 seconds. It is essential for serious creators."</p>
-            <div class="quote-author">
-              <span class="author-name">Arka Mondal</span>
-              <span class="author-handle">@arkadeb • 450k Creators</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="gateway-hero-footer">
-          <span>Trusted by 10,000+ top creators worldwide</span>
+        <div class="onboarding-step-indicator">
+          <span class="step-badge" id="onboarding-step-counter">STEP 1 OF 5</span>
+          <button class="btn-skip-onboarding" id="btn-skip-onboarding">Skip to Dashboard</button>
         </div>
       </div>
 
-      <!-- Right Form Pane -->
-      <div class="auth-gateway-form-pane">
-        <button class="gateway-close-btn" id="btn-close-auth-gateway" title="Back to Dashboard (Esc)" aria-label="Close Login Screen">
-          <svg class="lucide lucide-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-        </button>
+      <!-- STEP 1: CONTENT TYPES -->
+      <div class="onboarding-step-pane active" id="onboarding-step-1">
+        <div class="step-title-group">
+          <h2 class="step-heading">What type of content do you create?</h2>
+          <p class="step-desc">Select all formats you currently publish or want to scale.</p>
+        </div>
 
-        <div class="gateway-form-card">
-          <div class="gateway-form-header">
-            <h3 class="gateway-title" id="gateway-title-text">Welcome back</h3>
-            <p class="gateway-subtitle" id="gateway-subtitle-text">Enter your credentials to access your viral workspace.</p>
-          </div>
-
-          <!-- 1-Click Instant Pro Demo Login -->
-          <button class="btn-demo-instant" id="btn-instant-demo-login" type="button">
-            <svg class="lucide lucide-zap" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            <span>⚡ 1-Click Instant Demo Login (Arka Mondal)</span>
-          </button>
-
-          <!-- Auth Switcher Tabs -->
-          <div class="auth-tabs" role="tablist">
-            <button class="auth-tab active" id="gateway-tab-signin" role="tab" aria-selected="true">Sign In</button>
-            <button class="auth-tab" id="gateway-tab-signup" role="tab" aria-selected="false">Create Account</button>
-          </div>
-
-          <!-- Social OAuth Grid -->
-          <div class="social-auth-stack">
-            <button class="btn-social-auth" id="btn-gateway-google" type="button">
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.9C6.2 7.3 8.8 5 12 5z"/>
-                <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"/>
-                <path fill="#FBBC05" d="M5.3 14.7c-.2-.7-.4-1.5-.4-2.3 0-.8.2-1.6.4-2.3L1.6 7.2C.6 9.2 0 11.5 0 14s.6 4.8 1.6 6.8l3.7-2.9z"/>
-                <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.2 0-5.8-2.3-6.7-5.3L1.6 15.9C3.5 19.7 7.4 23 12 23z"/>
-              </svg>
-              <span>Continue with Google</span>
-            </button>
-            
-            <button class="btn-social-auth" id="btn-gateway-github" type="button">
-              <svg class="lucide lucide-github" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>
-              </svg>
-              <span>Continue with GitHub</span>
-            </button>
-          </div>
-
-          <div class="auth-divider">
-            <span>or continue with email</span>
-          </div>
-
-          <!-- Email & Password Form -->
-          <form id="gateway-auth-form">
-            <div class="form-group" id="gateway-group-name" style="display: none;">
-              <label for="gateway-input-name" class="form-label">Full Name</label>
-              <input type="text" id="gateway-input-name" class="form-input" placeholder="Arka Mondal">
-            </div>
-
-            <div class="form-group">
-              <label for="gateway-input-email" class="form-label">Email Address</label>
-              <input type="email" id="gateway-input-email" class="form-input" placeholder="arka@example.com" required>
-            </div>
-
-            <div class="form-group">
-              <div class="label-row">
-                <label for="gateway-input-password" class="form-label">Password</label>
-                <button type="button" class="forgot-link" id="gateway-forgot-btn">Forgot Password?</button>
-              </div>
-              <div class="password-input-wrap">
-                <input type="password" id="gateway-input-password" class="form-input" placeholder="••••••••••••" required>
-                <button type="button" class="btn-toggle-password" id="gateway-toggle-pass" title="Toggle password visibility" aria-label="Toggle password visibility">
-                  <svg class="lucide lucide-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-              </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-full-width auth-submit-btn" id="btn-gateway-submit">
-              <span id="gateway-submit-label">Sign In to Dashboard</span>
-            </button>
-          </form>
-
-          <div class="gateway-footer-hint">
-            <span>Just exploring?</span>
-            <button class="btn-text" id="btn-gateway-explore-guest" type="button">Explore as Guest</button>
-          </div>
+        <div class="options-tag-grid" id="grid-content-types">
+          <button class="onboard-tag-btn selected" data-value="reels">📱 Instagram Reels</button>
+          <button class="onboard-tag-btn selected" data-value="shorts">⚡ YouTube Shorts</button>
+          <button class="onboard-tag-btn selected" data-value="youtube">🎬 YouTube Videos (Long-form)</button>
+          <button class="onboard-tag-btn" data-value="podcasts">🎙️ Podcasts & Video Audio</button>
+          <button class="onboard-tag-btn" data-value="educational">📚 Educational</button>
+          <button class="onboard-tag-btn" data-value="tutorials">🛠️ Tutorials & How-To</button>
+          <button class="onboard-tag-btn" data-value="commentary">💬 Commentary & Video Essays</button>
+          <button class="onboard-tag-btn" data-value="personal-brand">🌟 Personal Brand</button>
+          <button class="onboard-tag-btn" data-value="gaming">🎮 Gaming & Streaming</button>
+          <button class="onboard-tag-btn" data-value="entertainment">🎭 Entertainment & Skits</button>
+          <button class="onboard-tag-btn" data-value="other">✨ Other Formats</button>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <!-- ================= MODAL: CREATOR PROFILE & SETTINGS ================= -->
-  <div class="modal-overlay" id="profile-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
-    <div class="modal-card modal-md">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-icon-badge" aria-hidden="true">
-            <svg class="lucide lucide-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div>
-            <h3 class="modal-title" id="profile-modal-title">Creator Profile & Quota</h3>
-            <p class="modal-desc">Manage workspace credentials, subscription tier, and API calibration quotas.</p>
-          </div>
+      <!-- STEP 2: CREATOR NICHES -->
+      <div class="onboarding-step-pane" id="onboarding-step-2">
+        <div class="step-title-group">
+          <h2 class="step-heading">What's your primary niche?</h2>
+          <p class="step-desc">Choose your focus areas to calibrate the trend intelligence radar.</p>
         </div>
-        <button class="modal-close" id="close-profile-modal" title="Close (Esc)" aria-label="Close Profile Modal">×</button>
+
+        <div class="niche-search-subbar">
+          <input type="text" id="onboard-niche-search" class="form-input" placeholder="Search niches (e.g., AI, Tech, Fitness, Finance)…">
+        </div>
+
+        <div class="options-tag-grid scrollable-tag-grid" id="grid-niches">
+          <button class="onboard-tag-btn selected" data-value="ai">🤖 AI & Artificial Intelligence</button>
+          <button class="onboard-tag-btn selected" data-value="technology">💻 Technology & DevTools</button>
+          <button class="onboard-tag-btn" data-value="fitness">💪 Fitness & Bodybuilding</button>
+          <button class="onboard-tag-btn" data-value="finance">💰 Finance & Crypto</button>
+          <button class="onboard-tag-btn" data-value="business">📈 Business & Startups</button>
+          <button class="onboard-tag-btn" data-value="marketing">🚀 Marketing & Growth</button>
+          <button class="onboard-tag-btn" data-value="design">🎨 Design & UI/UX</button>
+          <button class="onboard-tag-btn" data-value="photography">📸 Photography & Video</button>
+          <button class="onboard-tag-btn" data-value="travel">✈️ Travel & Adventure</button>
+          <button class="onboard-tag-btn" data-value="food">🍳 Food & Cooking</button>
+          <button class="onboard-tag-btn" data-value="fashion">👗 Fashion & Style</button>
+          <button class="onboard-tag-btn" data-value="beauty">💄 Beauty & Skincare</button>
+          <button class="onboard-tag-btn" data-value="gaming">🕹️ Gaming</button>
+          <button class="onboard-tag-btn" data-value="education">🎓 Education & Science</button>
+          <button class="onboard-tag-btn" data-value="motivation">🔥 Motivation & Mindset</button>
+          <button class="onboard-tag-btn" data-value="relationships">❤️ Relationships</button>
+          <button class="onboard-tag-btn" data-value="lifestyle">🌴 Lifestyle & Vlogs</button>
+          <button class="onboard-tag-btn" data-value="news">📰 News & Commentary</button>
+        </div>
+
+        <div class="custom-niche-row">
+          <input type="text" id="onboard-custom-niche" class="form-input form-input-sm" placeholder="+ Add custom niche…">
+          <button class="btn btn-secondary btn-sm" id="btn-add-custom-niche" type="button">Add</button>
+        </div>
       </div>
 
-      <div class="modal-body profile-modal-body">
-        <div class="profile-hero-card">
-          <div class="profile-avatar-large" id="modal-profile-avatar" aria-hidden="true">AM</div>
-          <div class="profile-meta-info">
-            <h4 class="profile-name" id="modal-profile-name">Arka Mondal</h4>
-            <p class="profile-email" id="modal-profile-email">arkadeb.mondal@example.com</p>
-            <div class="profile-tier-pill">
-              <svg class="lucide lucide-shield-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
-              <span id="modal-profile-tier">PRO CREATOR TIER &bull; ACTIVE</span>
-            </div>
-          </div>
+      <!-- STEP 3: AUDIENCE DEMOGRAPHICS -->
+      <div class="onboarding-step-pane" id="onboarding-step-3">
+        <div class="step-title-group">
+          <h2 class="step-heading">Who is your target audience?</h2>
+          <p class="step-desc">Calibrate hook psychology and language triggers to your viewer base.</p>
         </div>
 
-        <div class="profile-stats-grid">
-          <div class="profile-stat-box">
-            <span class="p-stat-num" id="p-stat-calibrations">84</span>
-            <span class="p-stat-label">Hooks Scored (This Month)</span>
-          </div>
-          <div class="profile-stat-box">
-            <span class="p-stat-num" id="p-stat-saved">12</span>
-            <span class="p-stat-label">Saved Swipe Files</span>
-          </div>
-          <div class="profile-stat-box">
-            <span class="p-stat-num">Unlimited</span>
-            <span class="p-stat-label">AI Rewrites</span>
-          </div>
-        </div>
-
-        <div class="profile-edit-section">
+        <div class="onboard-form-grid">
           <div class="form-group">
-            <label for="edit-profile-name" class="form-label">Display Name</label>
-            <input type="text" id="edit-profile-name" class="form-input" value="Arka Mondal">
-          </div>
-          <div class="form-group">
-            <label for="edit-profile-niche" class="form-label">Primary Content Niche</label>
-            <select id="edit-profile-niche" class="form-select">
-              <option value="tech-ai">Tech & AI Experiments</option>
-              <option value="business-money">Finance & Business</option>
-              <option value="design-ux">Design & SaaS Building</option>
-              <option value="productivity">Self-Development & Systems</option>
+            <label class="form-label" for="onboard-age-range">Target Age Range</label>
+            <select id="onboard-age-range" class="form-select">
+              <option value="18-24">18–24 (Gen Z / College)</option>
+              <option value="18-34" selected>18–34 (Young Professionals)</option>
+              <option value="25-44">25–44 (Working Professionals & Parents)</option>
+              <option value="35-54">35–54 (Established Adults / Execs)</option>
+              <option value="all">All Ages / Broad Demographic</option>
             </select>
           </div>
+
+          <div class="form-group">
+            <label class="form-label" for="onboard-country">Primary Country / Market</label>
+            <select id="onboard-country" class="form-select">
+              <option value="India" selected>India (IN)</option>
+              <option value="United States">United States (US)</option>
+              <option value="United Kingdom">United Kingdom (UK)</option>
+              <option value="Canada">Canada (CA)</option>
+              <option value="Australia">Australia (AU)</option>
+              <option value="Global">Global / Worldwide</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="onboard-language">Content Language</label>
+            <select id="onboard-language" class="form-select">
+              <option value="English" selected>English</option>
+              <option value="Hindi">Hindi / Hinglish</option>
+              <option value="Spanish">Spanish</option>
+              <option value="French">French</option>
+              <option value="German">German</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="onboard-audience-desc">Audience Persona Description</label>
+            <textarea id="onboard-audience-desc" class="form-textarea" rows="2" placeholder="e.g. Young professionals and founders interested in AI productivity and career leverage."></textarea>
+          </div>
         </div>
       </div>
 
-      <div class="modal-footer profile-modal-footer">
-        <button class="btn btn-danger-outline" id="btn-sign-out" type="button">
-          <svg class="lucide lucide-log-out" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          <span>Sign Out</span>
-        </button>
-        <button class="btn btn-primary" id="btn-save-profile" type="button">
-          <span>Save Changes</span>
+      <!-- STEP 4: PRIMARY GOALS -->
+      <div class="onboarding-step-pane" id="onboarding-step-4">
+        <div class="step-title-group">
+          <h2 class="step-heading">What is your primary content goal?</h2>
+          <p class="step-desc">We optimize recommendation algorithms for your exact growth milestone.</p>
+        </div>
+
+        <div class="goals-card-grid" id="grid-goals">
+          <button class="goal-card selected" data-value="views">
+            <div class="goal-icon">👁️</div>
+            <div class="goal-info">
+              <h4>Get More Views</h4>
+              <p>Maximize broad top-of-funnel reach & algorithmic velocity.</p>
+            </div>
+          </button>
+
+          <button class="goal-card" data-value="followers">
+            <div class="goal-icon">📈</div>
+            <div class="goal-info">
+              <h4>Grow Followers & Subscribers</h4>
+              <p>Optimize for viewer-to-subscriber conversion loops.</p>
+            </div>
+          </button>
+
+          <button class="goal-card" data-value="brand">
+            <div class="goal-icon">👑</div>
+            <div class="goal-info">
+              <h4>Build Personal Brand Authority</h4>
+              <p>High-credibility perspectives and thought leadership.</p>
+            </div>
+          </button>
+
+          <button class="goal-card" data-value="leads">
+            <div class="goal-icon">🎯</div>
+            <div class="goal-info">
+              <h4>Generate Leads & Clients</h4>
+              <p>B2B hooks and high-intent buyer attraction.</p>
+            </div>
+          </button>
+
+          <button class="goal-card" data-value="monetization">
+            <div class="goal-icon">💵</div>
+            <div class="goal-info">
+              <h4>Make Money & Sponsorships</h4>
+              <p>High-CPM advertiser friendly concepts.</p>
+            </div>
+          </button>
+
+          <button class="goal-card" data-value="community">
+            <div class="goal-info">
+              <div class="goal-icon">🤝</div>
+              <h4>Build an Engaged Community</h4>
+              <p>High comment velocity, debate, and loyal audience trust.</p>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 5: PREFERRED CONTENT ANGLES -->
+      <div class="onboarding-step-pane" id="onboarding-step-5">
+        <div class="step-title-group">
+          <h2 class="step-heading">What type of ideas do you want?</h2>
+          <p class="step-desc">Pick your creative styles. You can change these anytime in the studio.</p>
+        </div>
+
+        <div class="options-tag-grid" id="grid-idea-types">
+          <button class="onboard-tag-btn selected" data-value="trending">🔥 Trending Topics</button>
+          <button class="onboard-tag-btn selected" data-value="evergreen">🌲 Evergreen Authority</button>
+          <button class="onboard-tag-btn selected" data-value="educational">📚 Educational Breakdowns</button>
+          <button class="onboard-tag-btn selected" data-value="controversial">💥 Controversial / Debate</button>
+          <button class="onboard-tag-btn selected" data-value="storytelling">🎬 Narrative Storytelling</button>
+          <button class="onboard-tag-btn" data-value="tutorials">🛠️ Step-by-Step Tutorials</button>
+          <button class="onboard-tag-btn" data-value="news">📰 Breaking News Reactions</button>
+          <button class="onboard-tag-btn" data-value="case-studies">📊 Real Case Studies</button>
+          <button class="onboard-tag-btn" data-value="listicles">📋 Ranked Listicles</button>
+          <button class="onboard-tag-btn" data-value="hot-takes">🌶️ Contrarian Hot Takes</button>
+        </div>
+      </div>
+
+      <!-- COMPLETION SUMMARY SCREEN -->
+      <div class="onboarding-step-pane" id="onboarding-step-complete">
+        <div class="completion-hero">
+          <div class="completion-icon-ring">
+            <svg class="lucide lucide-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00F59B" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2 class="completion-heading">Your Content Intelligence Is Ready.</h2>
+          <p class="completion-sub">We calibrated 214 high-velocity opportunity models for your exact creator profile.</p>
+
+          <div class="creator-summary-card">
+            <div class="summary-item">
+              <span class="summary-label">Content Platforms:</span>
+              <strong id="sum-platforms">Instagram Reels, Shorts, YouTube Long-form</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Calibrated Niches:</span>
+              <strong id="sum-niches">AI, Technology & DevTools</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Target Audience:</span>
+              <strong id="sum-audience">18–34 &bull; India &bull; English</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Primary Goal:</span>
+              <strong id="sum-goal">Get More Views & Virality</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Preferred Styles:</span>
+              <strong id="sum-styles">Trending, Storytelling, Case Studies</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Onboarding Footer Actions -->
+      <div class="onboarding-footer">
+        <button class="btn btn-secondary" id="btn-onboard-prev" style="display: none;">Back</button>
+        <div style="flex: 1;"></div>
+        <button class="btn btn-primary" id="btn-onboard-next">
+          <span>Continue</span>
+          <svg class="lucide lucide-arrow-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
       </div>
+
     </div>
   </div>
 
-  <!-- ================= MODAL 1: AI VIRALITY SCORER & HOOK OPTIMIZER ================= -->
+  <!-- ================= WHY THIS IS TRENDING & OPPORTUNITY SCORE DRAWER ================= -->
+  <aside class="detail-drawer" id="trend-inspector-drawer" aria-hidden="true" role="dialog" aria-label="Trend Opportunity Inspector">
+    <div class="drawer-overlay" id="trend-drawer-overlay"></div>
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-platform-tag" id="inspector-platform-tag">
+          <!-- Platform tag injected -->
+        </div>
+        <div class="drawer-actions">
+          <button class="drawer-btn-icon" id="inspector-bookmark-btn" title="Save Opportunity" aria-label="Save Opportunity">
+            <svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </button>
+          <button class="modal-close" id="close-inspector-btn" title="Close Drawer (Esc)" aria-label="Close Inspector">×</button>
+        </div>
+      </div>
+
+      <div class="drawer-body">
+        
+        <!-- Score Hero -->
+        <div class="drawer-score-hero">
+          <div class="score-badge-large" id="inspector-score-badge">
+            <span class="score-num" id="inspector-score-num">94</span>
+            <span class="score-sub" id="inspector-score-sub">EXPLOSIVE</span>
+          </div>
+          <div class="drawer-score-details">
+            <div class="outlier-multiplier-pill" id="inspector-outlier-pill">🔥 9× above channel baseline</div>
+            <h4 class="drawer-rating-headline" id="inspector-topic-title">AI Autonomous Trading Agents</h4>
+            <p class="drawer-rating-desc" id="inspector-topic-desc">Unusually high view velocity combined with low competitor saturation makes this an outlier opportunity.</p>
+          </div>
+        </div>
+
+        <!-- Measurable Signals Breakdown Formula -->
+        <div class="shadcn-card formula-card">
+          <div class="shadcn-card-header card-header-sm">
+            <div>
+              <h3 class="shadcn-card-title text-sm">Measurable Opportunity Formula</h3>
+              <p class="shadcn-card-description">Weighted algorithmic signals normalized from 0–100.</p>
+            </div>
+          </div>
+          <div class="shadcn-card-content formula-signals-list">
+            <div class="formula-row">
+              <span class="signal-name">Momentum (25% weight)</span>
+              <div class="signal-bar-track"><div class="signal-bar-fill fill-green" id="sig-momentum" style="width: 96%;"></div></div>
+              <span class="signal-val" id="sig-val-momentum">96%</span>
+            </div>
+            <div class="formula-row">
+              <span class="signal-name">Engagement Rate (20% weight)</span>
+              <div class="signal-bar-track"><div class="signal-bar-fill fill-cyan" id="sig-engagement" style="width: 91%;"></div></div>
+              <span class="signal-val" id="sig-val-engagement">91%</span>
+            </div>
+            <div class="formula-row">
+              <span class="signal-name">Search Demand (15% weight)</span>
+              <div class="signal-bar-track"><div class="signal-bar-fill fill-purple" id="sig-search" style="width: 94%;"></div></div>
+              <span class="signal-val" id="sig-val-search">94%</span>
+            </div>
+            <div class="formula-row">
+              <span class="signal-name">Outlier Multiplier (15% weight)</span>
+              <div class="signal-bar-track"><div class="signal-bar-fill fill-amber" id="sig-outlier" style="width: 98%;"></div></div>
+              <span class="signal-val" id="sig-val-outlier">98%</span>
+            </div>
+            <div class="formula-row">
+              <span class="signal-name">Freshness Velocity (10% weight)</span>
+              <div class="signal-bar-track"><div class="signal-bar-fill fill-green" id="sig-freshness" style="width: 88%;"></div></div>
+              <span class="signal-val" id="sig-val-freshness">88%</span>
+            </div>
+            <div class="formula-row">
+              <span class="signal-name">Competition Index (10% weight)</span>
+              <div class="signal-bar-track"><div class="signal-bar-fill fill-cyan" id="sig-competition" style="width: 82%;"></div></div>
+              <span class="signal-val" id="sig-val-competition">82%</span>
+            </div>
+            <div class="formula-row">
+              <span class="signal-name">Creator Relevance (5% weight)</span>
+              <div class="signal-bar-track"><div class="signal-bar-fill fill-purple" id="sig-relevance" style="width: 95%;"></div></div>
+              <span class="signal-val" id="sig-val-relevance">95%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- WHY THIS IS TRENDING -->
+        <div class="why-trending-card">
+          <div class="why-header">
+            <svg class="lucide lucide-trending-up" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00F59B" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            <span>WHY THIS IS TRENDING</span>
+          </div>
+          <ul class="why-reasons-list" id="inspector-why-list">
+            <li>Search demand increased <strong>74%</strong> over the last 7 days</li>
+            <li>Recent niche videos are generating <strong>4.2× normal views</strong></li>
+            <li><strong>3 breakout creator uploads</strong> went viral this week</li>
+            <li>Engagement rate is <strong>48% above niche median</strong></li>
+            <li>Competition remains moderate with high supply deficit</li>
+          </ul>
+        </div>
+
+        <!-- Mandatory Virality Disclaimer -->
+        <div class="formula-disclaimer">
+          <svg class="lucide lucide-info" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span>Opportunity score is an estimate based on available performance and trend signals. It does not guarantee virality.</span>
+        </div>
+
+      </div>
+
+      <div class="drawer-footer">
+        <button class="btn btn-secondary" id="btn-inspector-close">Close</button>
+        <button class="btn btn-primary" id="btn-inspector-generate-ideas">
+          <svg class="lucide lucide-sparkles" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          <span>Generate 10 Creative Angles</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MODAL: VIRALITY SCORER & HOOK CALIBRATOR ================= -->
   <div class="modal-overlay" id="scorer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="scorer-modal-title">
     <div class="modal-card modal-lg">
       <div class="modal-header">
         <div class="modal-title-wrap">
           <div class="modal-icon-badge" aria-hidden="true">
-            <svg class="lucide lucide-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <svg class="lucide lucide-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <div>
             <h3 class="modal-title" id="scorer-modal-title">AI Virality Scorer & Hook Calibrator</h3>
@@ -674,25 +749,25 @@
                 <option value="youtube">YouTube Long-form (16:9)</option>
                 <option value="shorts">YouTube Shorts / TikTok (9:16)</option>
                 <option value="reels">Instagram Reels (9:16)</option>
-                <option value="x">X / Twitter Thread</option>
-                <option value="linkedin">LinkedIn Post</option>
+                <option value="podcast">Podcast Episode</option>
               </select>
             </div>
 
             <div class="form-group">
               <label for="niche-select-field" class="form-label">Creator Niche</label>
               <select id="niche-select-field" class="form-select">
-                <option value="tech-ai">Tech & AI Experiments</option>
-                <option value="business-money">Finance & Business</option>
-                <option value="design-ux">Design & SaaS Building</option>
-                <option value="productivity">Self-Development & Systems</option>
-                <option value="lifestyle">Storytelling & Documentary</option>
+                <option value="ai">AI & Autonomous Agents</option>
+                <option value="technology">Tech & DevTools</option>
+                <option value="finance">Finance & Crypto</option>
+                <option value="fitness">Fitness & Health</option>
+                <option value="business">Business & Startups</option>
+                <option value="photography">Photography & Video</option>
               </select>
             </div>
           </div>
 
           <button class="btn btn-primary btn-full-width" id="btn-run-analysis" type="button">
-            <svg class="lucide lucide-sparkles" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+            <svg class="lucide lucide-sparkles" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
             <span>Calibrate & Run Virality Diagnostic</span>
           </button>
         </div>
@@ -718,20 +793,6 @@
               </div>
             </div>
           </div>
-
-          <!-- AI High-Converting Rewrite Suggestions -->
-          <div class="ai-variations-box" id="ai-variations-box" style="display: none;">
-            <div class="variations-header">
-              <span class="sparkle-tag">
-                <svg class="lucide lucide-sparkles inline-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-                AI 90+ Score Variations
-              </span>
-              <span class="ai-badge">Instant 1-Click Replace</span>
-            </div>
-            <div class="variations-list" id="variations-list" role="list">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
         </div>
       </div>
 
@@ -744,127 +805,43 @@
     </div>
   </div>
 
-  <!-- ================= MODAL 2: BATCH IMPORT / COMPETITOR SCRAPER ================= -->
-  <div class="modal-overlay" id="batch-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="batch-modal-title">
-    <div class="modal-card modal-md">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-icon-badge" aria-hidden="true">
-            <svg class="lucide lucide-download-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/></svg>
-          </div>
-          <div>
-            <h3 class="modal-title" id="batch-modal-title">Batch Import & Reverse Engineer</h3>
-            <p class="modal-desc">Paste competitor URLs or multiple hook drafts (one per line).</p>
-          </div>
+  <!-- ================= FULL-SCREEN AUTH GATEWAY ================= -->
+  <div class="full-auth-gateway-overlay" id="full-auth-screen" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vantage Authentication Gateway">
+    <div class="auth-gateway-container">
+      <div class="auth-gateway-hero">
+        <div class="gateway-hero-header">
+          <a href="#" class="brand-mark"><span class="mark-letter">V</span></a>
+          <span class="gateway-brand-name">Vantage Virality OS</span>
         </div>
-        <button class="modal-close" id="close-batch-modal" title="Close (Esc)" aria-label="Close Batch Modal">×</button>
+        <div class="gateway-hero-content">
+          <div class="gateway-pill"><span class="live-pulse" aria-hidden="true"></span><span>PRO CREATOR ACCESS</span></div>
+          <h2 class="gateway-hero-title">Predict virality before hitting publish.</h2>
+          <p class="gateway-hero-sub">Calibrate high-retention video hooks, reverse-engineer algorithm trends, and scale reach across YouTube, TikTok, and Reels.</p>
+        </div>
+        <div class="gateway-hero-footer"><span>Trusted by 10,000+ top creators worldwide</span></div>
       </div>
 
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="batch-input-field" class="form-label">Hooks List or URLs (1 per line)</label>
-          <textarea 
-            id="batch-input-field" 
-            class="form-textarea" 
-            rows="6" 
-            placeholder="https://youtube.com/watch?v=...&#10;Why 99% of creators fail before 10k subs&#10;I quit my $250k tech job for 7 days"
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-secondary" id="cancel-batch-btn" type="button">Cancel</button>
-        <button class="btn btn-primary" id="confirm-batch-btn" type="button">
-          <span>Process & Auto-Score Batch</span>
+      <div class="auth-gateway-form-pane">
+        <button class="gateway-close-btn" id="btn-close-auth-gateway" title="Back to Dashboard (Esc)" aria-label="Close Login Screen">
+          <svg class="lucide lucide-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
+        <div class="gateway-form-card">
+          <div class="gateway-form-header">
+            <h3 class="gateway-title" id="gateway-title-text">Welcome back</h3>
+            <p class="gateway-subtitle" id="gateway-subtitle-text">Enter your credentials to access your viral workspace.</p>
+          </div>
+          <button class="btn-demo-instant" id="btn-instant-demo-login" type="button">
+            <svg class="lucide lucide-zap" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>⚡ 1-Click Instant Demo Login (Arka Mondal)</span>
+          </button>
+          <div class="gateway-footer-hint">
+            <span>Just exploring?</span>
+            <button class="btn-text" id="btn-gateway-explore-guest" type="button">Explore as Guest</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <!-- ================= SLIDE-OVER DRAWER: IDEA CARD DEEP DIVE WITH SHADCN CHARTS ================= -->
-  <aside class="detail-drawer" id="detail-drawer" aria-hidden="true" role="dialog" aria-label="Idea Details Inspector">
-    <div class="drawer-overlay" id="drawer-overlay"></div>
-    <div class="drawer-panel">
-      <div class="drawer-header">
-        <div class="drawer-platform-tag" id="drawer-platform-tag">
-          <!-- Platform tag injected -->
-        </div>
-        <div class="drawer-actions">
-          <button class="drawer-btn-icon" id="drawer-bookmark-btn" title="Bookmark" aria-label="Toggle Bookmark">
-            <svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-          </button>
-          <button class="drawer-btn-icon" id="drawer-copy-btn" title="Copy Hook" aria-label="Copy Hook">
-            <svg class="lucide lucide-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-          </button>
-          <button class="modal-close" id="close-drawer-btn" title="Close Drawer (Esc)" aria-label="Close Inspector Drawer">×</button>
-        </div>
-      </div>
-
-      <div class="drawer-body">
-        <div class="drawer-score-hero">
-          <div class="score-badge-large" id="drawer-score-badge">
-            <span class="score-num" id="drawer-score-num">98</span>
-            <span class="score-sub">VIRAL TIER</span>
-          </div>
-          <div class="drawer-score-details">
-            <h4 class="drawer-rating-headline" id="drawer-rating-headline">Algorithmic Outlier Potential</h4>
-            <p class="drawer-rating-desc" id="drawer-rating-desc">Extremely high Curiosity Gap + High Stakes narrative creates immediate viewer buy-in during the first 5 seconds.</p>
-          </div>
-        </div>
-
-        <div class="drawer-hook-quote" id="drawer-hook-text">
-          <!-- Hook Text -->
-        </div>
-
-        <!-- Interactive shadcn 60s Viewer Retention Milestone Curve (Canvas) -->
-        <div class="shadcn-card drawer-chart-card">
-          <div class="shadcn-card-header card-header-sm">
-            <div>
-              <h3 class="shadcn-card-title text-sm">60s Retention Curve (shadcn/ui Area Gradient)</h3>
-              <p class="shadcn-card-description">Live simulation vs YouTube Niche Median Retention.</p>
-            </div>
-            <span class="highlight-green" id="drawer-retention-stat">+340% vs Avg</span>
-          </div>
-          <div class="shadcn-card-content">
-            <div class="drawer-canvas-wrap">
-              <canvas id="shadcn-drawer-retention-chart" height="160" aria-label="60s Retention Curve Chart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- Psychological Levers Radar Chart -->
-        <div class="shadcn-card drawer-chart-card">
-          <div class="shadcn-card-header card-header-sm">
-            <div>
-              <h3 class="shadcn-card-title text-sm">Psychological Trigger Profile (Radar)</h3>
-              <p class="shadcn-card-description">Multi-axis index compared against top 1% outliers.</p>
-            </div>
-          </div>
-          <div class="shadcn-card-content radar-content-wrap">
-            <div class="radar-canvas-wrap">
-              <canvas id="shadcn-drawer-radar-chart" height="210" aria-label="Psychological Radar Chart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- Recommended Thumbnail Concept -->
-        <div class="drawer-thumb-pairing">
-          <div class="section-subhead">Recommended Thumbnail Concept</div>
-          <div class="thumb-concept-card" id="drawer-thumb-concept">
-            Split screen: Left side showing red trading model crash graph; right side showing 3 AI terminals with green profit surge. Extreme contrast & curiosity.
-          </div>
-        </div>
-      </div>
-
-      <div class="drawer-footer">
-        <button class="btn btn-secondary" id="drawer-copy-btn-2" type="button">Copy Hook</button>
-        <button class="btn btn-primary" id="drawer-export-btn" type="button">
-          <svg class="lucide lucide-rocket" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-          <span>Send to Script Studio</span>
-        </button>
-      </div>
-    </div>
-  </aside>
 
   <!-- TOAST NOTIFICATION CONTAINER -->
   <div class="toast-container" id="toast-container" aria-live="polite" role="status"></div>
