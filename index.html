@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vantage — Elite Content Idea Library & Virality Scorer</title>
+  <meta name="description" content="Elite creator intelligence dashboard and AI virality scorer for high-retention video hooks across YouTube, Reels, TikTok, and LinkedIn.">
   
   <!-- Modern Font Pairing: Clash Display, Plus Jakarta Sans, JetBrains Mono, Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,50 +19,53 @@
 </head>
 <body>
 
+  <!-- Accessible Skip Link for Screen Readers & Keyboard Navigation -->
+  <a href="#main-content" class="skip-link">Skip to Main Content</a>
+
   <!-- Ambient Light Mesh Backdrop -->
-  <div class="ambient-glow glow-top-left"></div>
-  <div class="ambient-glow glow-top-right"></div>
-  <div class="ambient-glow glow-bottom-center"></div>
+  <div class="ambient-glow glow-top-left" aria-hidden="true"></div>
+  <div class="ambient-glow glow-top-right" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom-center" aria-hidden="true"></div>
 
   <div class="app-container">
 
     <!-- ================= MINIMALIST COLLAPSED SIDEBAR ================= -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar Navigation">
       <div class="sidebar-top">
-        <a href="#" class="brand-mark" title="Vantage Virality OS">
+        <a href="#" class="brand-mark" title="Vantage Virality OS" aria-label="Vantage Home">
           <span class="mark-letter">V</span>
-          <span class="mark-glow"></span>
+          <span class="mark-glow" aria-hidden="true"></span>
         </a>
 
         <nav class="nav-stack" aria-label="Primary Navigation">
-          <button class="nav-item active" data-tooltip="Idea Library (⌘1)" id="nav-library">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <button class="nav-item active" data-tooltip="Idea Library (⌘1)" id="nav-library" aria-label="Idea Library View">
+            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/>
               <rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/>
             </svg>
-            <span class="nav-indicator"></span>
+            <span class="nav-indicator" aria-hidden="true"></span>
           </button>
 
-          <button class="nav-item" data-tooltip="AI Virality Scorer (⌘2)" id="nav-scorer">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <button class="nav-item" data-tooltip="AI Virality Scorer (⌘2)" id="nav-scorer" aria-label="Open AI Virality Scorer">
+            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
             </svg>
           </button>
 
-          <button class="nav-item" data-tooltip="Retention Curves (⌘3)" id="nav-retention">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <button class="nav-item" data-tooltip="Retention Curves (⌘3)" id="nav-retention" aria-label="View Retention Outliers">
+            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 3v18h18"/><path d="M7 16c3-8 5-11 9-11 3 0 4 6 4 6"/>
             </svg>
           </button>
 
-          <button class="nav-item" data-tooltip="Competitor Radar (⌘4)" id="nav-competitor">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <button class="nav-item" data-tooltip="Competitor Radar (⌘4)" id="nav-competitor" aria-label="Competitor Radar & Batch Scorer">
+            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/><circle cx="12" cy="12" r="2"/>
             </svg>
           </button>
 
-          <button class="nav-item" data-tooltip="Saved Swipe Files (⌘5)" id="nav-bookmarks">
-            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <button class="nav-item" data-tooltip="Saved Swipe Files (⌘5)" id="nav-bookmarks" aria-label="View Saved Swipe Files">
+            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
             </svg>
           </button>
@@ -69,29 +73,29 @@
       </div>
 
       <div class="sidebar-bottom">
-        <button class="nav-item" data-tooltip="Account Settings" id="nav-settings">
-          <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <button class="nav-item" data-tooltip="Account Settings" id="nav-settings" aria-label="Open Account Settings">
+          <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="3"/>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1 2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
           </svg>
         </button>
         
         <!-- Interactive Creator Avatar Profile Trigger -->
-        <div class="user-profile-badge" id="sidebar-user-avatar-btn" title="Creator Profile & Account">
+        <button class="user-profile-badge" id="sidebar-user-avatar-btn" title="Creator Profile & Account" aria-label="Open Creator Profile">
           <span class="avatar-text" id="sidebar-avatar-initials">AM</span>
-          <span class="status-online"></span>
-        </div>
+          <span class="status-online" aria-label="Online"></span>
+        </button>
       </div>
     </aside>
 
     <!-- ================= MAIN WORKSPACE ================= -->
-    <main class="main-viewport">
+    <main class="main-viewport" id="main-content" tabindex="-1">
 
       <!-- TOP COMMAND HEADER -->
       <header class="topbar animate-fade">
         <div class="topbar-left">
-          <div class="status-pill">
-            <span class="live-pulse"></span>
+          <div class="status-pill" role="status">
+            <span class="live-pulse" aria-hidden="true"></span>
             <span class="status-text">VIRALITY ENGINE ACTIVE &bull; <strong id="header-total-count">214</strong> HOOKS INDEXED</span>
           </div>
           <h1 class="hero-title">Good morning, <span class="gradient-text" id="hero-user-name">Arka.</span></h1>
@@ -99,24 +103,24 @@
         </div>
 
         <div class="topbar-actions">
-          <button class="btn btn-secondary" id="btn-batch-import">
-            <svg class="lucide lucide-upload-cloud" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="btn btn-secondary" id="btn-batch-import" aria-label="Open Batch Scorer">
+            <svg class="lucide lucide-upload-cloud" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/>
             </svg>
             <span>Batch Scorer</span>
           </button>
           
-          <button class="btn btn-primary" id="btn-score-new">
-            <svg class="lucide lucide-plus" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <button class="btn btn-primary" id="btn-score-new" aria-label="Score New Hook">
+            <svg class="lucide lucide-plus" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 5v14M5 12h14"/>
             </svg>
             <span>+ Score New Hook</span>
-            <span class="kbd-badge">N</span>
+            <span class="kbd-badge" aria-hidden="true">N</span>
           </button>
 
           <!-- Topbar Auth Action (Dynamic) -->
           <div class="topbar-auth-wrapper" id="topbar-auth-container">
-            <button class="btn-user-chip" id="topbar-profile-btn" title="View Account Profile">
+            <button class="btn-user-chip" id="topbar-profile-btn" title="View Account Profile" aria-label="View Account Profile">
               <div class="chip-avatar" id="topbar-avatar-initials">AM</div>
               <span class="chip-name" id="topbar-chip-name">Arka M.</span>
               <span class="chip-badge" id="topbar-tier-badge">PRO</span>
@@ -126,10 +130,10 @@
       </header>
 
       <!-- FLOATING GLASS COMMAND SEARCH & FILTERS -->
-      <section class="command-search-shell animate-fade delay-1">
+      <section class="command-search-shell animate-fade delay-1" aria-label="Search and Filter Commands">
         <div class="search-glass-card">
           <div class="search-input-group">
-            <svg class="search-icon lucide lucide-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="search-icon lucide lucide-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
             </svg>
             <input 
@@ -138,43 +142,44 @@
               placeholder="Search hooks, psychological triggers, topics or paste a competitor URL to reverse-engineer…" 
               autocomplete="off"
               spellcheck="false"
+              aria-label="Search content idea library"
             />
             <div class="search-actions">
-              <button class="clear-search-btn" id="clear-search-btn" title="Clear search">×</button>
-              <div class="shortcut-pill" title="Press ⌘K or Ctrl+K to search">
+              <button class="clear-search-btn" id="clear-search-btn" title="Clear search" aria-label="Clear search">×</button>
+              <div class="shortcut-pill" title="Press ⌘K or Ctrl+K to search" aria-hidden="true">
                 <span class="key-symbol">⌘</span><span>K</span>
               </div>
             </div>
           </div>
 
           <!-- Dynamic Filter Category Pills -->
-          <div class="filter-pills-row" id="filter-pills-container">
-            <button class="pill active" data-filter="all">
+          <div class="filter-pills-row" id="filter-pills-container" role="tablist" aria-label="Filter Ideas by Category">
+            <button class="pill active" data-filter="all" role="tab" aria-selected="true">
               <span class="pill-label">All Ideas</span>
               <span class="pill-count" id="count-all">214</span>
             </button>
-            <button class="pill" data-filter="viral">
-              <svg class="pill-icon-svg lucide lucide-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            <button class="pill" data-filter="viral" role="tab" aria-selected="false">
+              <svg class="pill-icon-svg lucide lucide-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
               <span class="pill-label">Viral Hits (90+)</span>
               <span class="pill-count" id="count-viral">38</span>
             </button>
-            <button class="pill" data-filter="youtube">
-              <svg class="pill-platform-icon yt" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9 1.7.2 7.2.2 7.2.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>
+            <button class="pill" data-filter="youtube" role="tab" aria-selected="false">
+              <svg class="pill-platform-icon yt" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9 1.7.2 7.2.2 7.2.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>
               <span class="pill-label">YouTube Long-form</span>
               <span class="pill-count" id="count-youtube">86</span>
             </button>
-            <button class="pill" data-filter="shorts">
-              <svg class="pill-platform-icon shorts" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.86 1 1.1 1.7.24.66.4 1.4.46 2.5.05 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.5-.27.7-.6 1.2-1.1 1.7-.5.5-1 .86-1.7 1.1-.66.24-1.4.4-2.5.46-1.1.05-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.66-.4-1.4-.46-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.5.27-.7.6-1.2 1.1-1.7.5-.5 1-.86 1.7-1.1.66-.24 1.4-.4 2.5-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+            <button class="pill" data-filter="shorts" role="tab" aria-selected="false">
+              <svg class="pill-platform-icon shorts" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.86 1 1.1 1.7.24.66.4 1.4.46 2.5.05 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.5-.27.7-.6 1.2-1.1 1.7-.5.5-1 .86-1.7 1.1-.66.24-1.4.4-2.5.46-1.1.05-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.66-.4-1.4-.46-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.5.27-.7.6-1.2 1.1-1.7.5-.5 1-.86 1.7-1.1.66-.24 1.4-.4 2.5-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
               <span class="pill-label">Reels / Shorts / TikTok</span>
               <span class="pill-count" id="count-shorts">94</span>
             </button>
-            <button class="pill" data-filter="social">
-              <svg class="pill-platform-icon li" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57z"/></svg>
+            <button class="pill" data-filter="social" role="tab" aria-selected="false">
+              <svg class="pill-platform-icon li" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57z"/></svg>
               <span class="pill-label">X & LinkedIn</span>
               <span class="pill-count" id="count-social">34</span>
             </button>
-            <button class="pill" data-filter="saved">
-              <svg class="pill-icon-svg lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+            <button class="pill" data-filter="saved" role="tab" aria-selected="false">
+              <svg class="pill-icon-svg lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
               <span class="pill-label">Saved</span>
               <span class="pill-count" id="count-saved">12</span>
             </button>
@@ -183,12 +188,12 @@
       </section>
 
       <!-- EXECUTIVE STAT STRIP (BENTO ROW) -->
-      <section class="stat-strip animate-fade delay-2">
+      <section class="stat-strip animate-fade delay-2" aria-label="Executive Metrics">
         <div class="stat-card">
           <div class="stat-header">
             <span class="stat-title">Avg. Virality Score</span>
             <span class="stat-badge trend-up">
-              <svg class="lucide lucide-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              <svg class="lucide lucide-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
               +4.8
             </span>
           </div>
@@ -197,7 +202,7 @@
             <div class="stat-subtext">Top 4% of indexed creator libraries</div>
           </div>
           <div class="stat-progress-track">
-            <div class="stat-progress-bar emerald" style="width: 78%;"></div>
+            <div class="stat-progress-bar emerald" style="width: 78%;" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
 
@@ -205,7 +210,7 @@
           <div class="stat-header">
             <span class="stat-title">Viral Queue & Velocity</span>
             <span class="stat-badge trend-up">
-              <svg class="lucide lucide-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <svg class="lucide lucide-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
               +14 today
             </span>
           </div>
@@ -214,7 +219,7 @@
             <div class="stat-subtext">38 scored in 90+ breakout tier</div>
           </div>
           <div class="stat-progress-track">
-            <div class="stat-progress-bar amber" style="width: 62%;"></div>
+            <div class="stat-progress-bar amber" style="width: 62%;" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
 
@@ -222,7 +227,7 @@
           <div class="stat-header">
             <span class="stat-title">Predicted 30s Retention</span>
             <span class="stat-badge trend-up">
-              <svg class="lucide lucide-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
+              <svg class="lucide lucide-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
               92.4% hit
             </span>
           </div>
@@ -231,7 +236,7 @@
             <div class="stat-subtext">+18.5% over YouTube niche baseline</div>
           </div>
           <div class="stat-progress-track">
-            <div class="stat-progress-bar violet" style="width: 74%;"></div>
+            <div class="stat-progress-bar violet" style="width: 74%;" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
 
@@ -239,7 +244,7 @@
           <div class="stat-header">
             <span class="stat-title">Trend Decay Risk</span>
             <span class="stat-badge trend-down">
-              <svg class="lucide lucide-shield-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+              <svg class="lucide lucide-shield-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
               Low (3 exp)
             </span>
           </div>
@@ -248,22 +253,22 @@
             <div class="stat-subtext">Evergreen hook ratio: 89% optimal</div>
           </div>
           <div class="stat-progress-track">
-            <div class="stat-progress-bar emerald" style="width: 89%;"></div>
+            <div class="stat-progress-bar emerald" style="width: 89%;" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
       </section>
 
       <!-- SECTION HEADING & CONTROLS -->
-      <section class="section-toolbar animate-fade delay-3">
+      <section class="section-toolbar animate-fade delay-3" aria-label="Dashboard Controls">
         <div class="section-title-group">
           <h2 class="section-title">Curated Idea Matrix</h2>
-          <span class="section-badge" id="results-count-badge">Showing 10 of 214 high-conv ideas</span>
+          <span class="section-badge" id="results-count-badge" aria-live="polite">Showing 10 of 214 high-conv ideas</span>
         </div>
 
         <div class="toolbar-controls">
           <div class="sort-selector">
-            <span class="sort-label">Sort:</span>
-            <select id="sort-select" class="custom-select">
+            <label for="sort-select" class="sort-label">Sort:</label>
+            <select id="sort-select" class="custom-select" aria-label="Sort Ideas">
               <option value="score-desc">Highest Virality Score</option>
               <option value="retention-desc">Highest Retention Lift</option>
               <option value="newest">Recently Calibrated</option>
@@ -271,25 +276,25 @@
             </select>
           </div>
           
-          <div class="view-toggle">
-            <button class="view-btn active" data-view="bento" title="Bento Grid View">
-              <svg class="lucide lucide-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+          <div class="view-toggle" role="group" aria-label="View Mode Toggle">
+            <button class="view-btn active" data-view="bento" title="Bento Grid View" aria-label="Bento Grid View" aria-pressed="true">
+              <svg class="lucide lucide-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
             </button>
-            <button class="view-btn" data-view="compact" title="Compact View">
-              <svg class="lucide lucide-rows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
+            <button class="view-btn" data-view="compact" title="Compact View" aria-label="Compact View" aria-pressed="false">
+              <svg class="lucide lucide-rows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
             </button>
           </div>
         </div>
       </section>
 
       <!-- BENTO / MASONRY GRID OF IDEA CARDS -->
-      <section class="bento-grid" id="ideas-grid">
+      <section class="bento-grid" id="ideas-grid" aria-label="Idea Cards Grid">
         <!-- Dynamically rendered via JavaScript for complete interactivity & sorting -->
       </section>
 
       <!-- EMPTY STATE (HIDDEN BY DEFAULT) -->
-      <div class="empty-state" id="empty-state" style="display: none;">
-        <div class="empty-icon-ring">
+      <div class="empty-state" id="empty-state" style="display: none;" role="region" aria-label="Empty State">
+        <div class="empty-icon-ring" aria-hidden="true">
           <svg class="lucide lucide-search-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 8.5-5 5"/><path d="m8.5 8.5 5 5"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         </div>
         <h3>No matching ideas found</h3>
@@ -301,11 +306,11 @@
   </div>
 
   <!-- ================= MODAL: AUTHENTICATION (SIGN IN & REGISTER) ================= -->
-  <div class="modal-overlay" id="auth-modal" aria-hidden="true">
+  <div class="modal-overlay" id="auth-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
     <div class="modal-card modal-auth">
       <div class="modal-header auth-modal-header">
         <div class="auth-header-brand">
-          <div class="brand-mark auth-logo">
+          <div class="brand-mark auth-logo" aria-hidden="true">
             <span class="mark-letter">V</span>
           </div>
           <div>
@@ -313,20 +318,20 @@
             <p class="modal-desc" id="auth-modal-subtitle">Access your calibrated idea library & viral intelligence.</p>
           </div>
         </div>
-        <button class="modal-close" id="close-auth-modal" title="Close (Esc)">×</button>
+        <button class="modal-close" id="close-auth-modal" title="Close (Esc)" aria-label="Close Authentication Modal">×</button>
       </div>
 
       <!-- Auth Tabs Switcher -->
-      <div class="auth-tabs">
-        <button class="auth-tab active" id="tab-sign-in" data-tab="signin">Sign In</button>
-        <button class="auth-tab" id="tab-sign-up" data-tab="signup">Create Account</button>
+      <div class="auth-tabs" role="tablist">
+        <button class="auth-tab active" id="tab-sign-in" data-tab="signin" role="tab" aria-selected="true">Sign In</button>
+        <button class="auth-tab" id="tab-sign-up" data-tab="signup" role="tab" aria-selected="false">Create Account</button>
       </div>
 
       <div class="modal-body auth-modal-body">
         <!-- 1-Click Social Auth Providers -->
         <div class="social-auth-stack">
-          <button class="btn-social-auth" id="btn-auth-google">
-            <svg width="18" height="18" viewBox="0 0 24 24">
+          <button class="btn-social-auth" id="btn-auth-google" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.9C6.2 7.3 8.8 5 12 5z"/>
               <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"/>
               <path fill="#FBBC05" d="M5.3 14.7c-.2-.7-.4-1.5-.4-2.3 0-.8.2-1.6.4-2.3L1.6 7.2C.6 9.2 0 11.5 0 14s.6 4.8 1.6 6.8l3.7-2.9z"/>
@@ -335,8 +340,8 @@
             <span>Continue with Google</span>
           </button>
           
-          <button class="btn-social-auth" id="btn-auth-github">
-            <svg class="lucide lucide-github" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="btn-social-auth" id="btn-auth-github" type="button">
+            <svg class="lucide lucide-github" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>
             </svg>
             <span>Continue with GitHub</span>
@@ -348,7 +353,7 @@
         </div>
 
         <!-- Auth Form -->
-        <form id="auth-form" onsubmit="event.preventDefault();">
+        <form id="auth-form">
           <div class="form-group" id="group-auth-name" style="display: none;">
             <label for="auth-input-name" class="form-label">Full Name / Creator Handle</label>
             <input type="text" id="auth-input-name" class="form-input" placeholder="e.g., Arka Mondal">
@@ -362,12 +367,12 @@
           <div class="form-group">
             <div class="label-row">
               <label for="auth-input-password" class="form-label">Password</label>
-              <a href="#" class="forgot-link" id="auth-forgot-btn">Forgot?</a>
+              <button type="button" class="forgot-link" id="auth-forgot-btn">Forgot?</button>
             </div>
             <div class="password-input-wrap">
               <input type="password" id="auth-input-password" class="form-input" placeholder="••••••••••••" required>
-              <button type="button" class="btn-toggle-password" id="btn-toggle-password" title="Toggle password visibility">
-                <svg class="lucide lucide-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+              <button type="button" class="btn-toggle-password" id="btn-toggle-password" title="Toggle password visibility" aria-label="Toggle password visibility">
+                <svg class="lucide lucide-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
           </div>
@@ -380,36 +385,36 @@
         <!-- Quick Demo Fill Helper -->
         <div class="demo-account-hint">
           <span>Want to test instantly?</span>
-          <button class="btn-text" id="btn-fill-demo-account">Fill Demo Creator Credentials</button>
+          <button class="btn-text" id="btn-fill-demo-account" type="button">Fill Demo Creator Credentials</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ================= MODAL: CREATOR PROFILE & SETTINGS ================= -->
-  <div class="modal-overlay" id="profile-modal" aria-hidden="true">
+  <div class="modal-overlay" id="profile-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
     <div class="modal-card modal-md">
       <div class="modal-header">
         <div class="modal-title-wrap">
-          <div class="modal-icon-badge">
+          <div class="modal-icon-badge" aria-hidden="true">
             <svg class="lucide lucide-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
           <div>
-            <h3 class="modal-title">Creator Profile & Quota</h3>
+            <h3 class="modal-title" id="profile-modal-title">Creator Profile & Quota</h3>
             <p class="modal-desc">Manage workspace credentials, subscription tier, and API calibration quotas.</p>
           </div>
         </div>
-        <button class="modal-close" id="close-profile-modal" title="Close (Esc)">×</button>
+        <button class="modal-close" id="close-profile-modal" title="Close (Esc)" aria-label="Close Profile Modal">×</button>
       </div>
 
       <div class="modal-body profile-modal-body">
         <div class="profile-hero-card">
-          <div class="profile-avatar-large" id="modal-profile-avatar">AM</div>
+          <div class="profile-avatar-large" id="modal-profile-avatar" aria-hidden="true">AM</div>
           <div class="profile-meta-info">
             <h4 class="profile-name" id="modal-profile-name">Arka Mondal</h4>
             <p class="profile-email" id="modal-profile-email">arkadeb.mondal@example.com</p>
             <div class="profile-tier-pill">
-              <svg class="lucide lucide-shield-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+              <svg class="lucide lucide-shield-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
               <span id="modal-profile-tier">PRO CREATOR TIER &bull; ACTIVE</span>
             </div>
           </div>
@@ -448,11 +453,11 @@
       </div>
 
       <div class="modal-footer profile-modal-footer">
-        <button class="btn btn-danger-outline" id="btn-sign-out">
-          <svg class="lucide lucide-log-out" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <button class="btn btn-danger-outline" id="btn-sign-out" type="button">
+          <svg class="lucide lucide-log-out" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           <span>Sign Out</span>
         </button>
-        <button class="btn btn-primary" id="btn-save-profile">
+        <button class="btn btn-primary" id="btn-save-profile" type="button">
           <span>Save Changes</span>
         </button>
       </div>
@@ -460,19 +465,19 @@
   </div>
 
   <!-- ================= MODAL 1: AI VIRALITY SCORER & HOOK OPTIMIZER ================= -->
-  <div class="modal-overlay" id="scorer-modal" aria-hidden="true">
+  <div class="modal-overlay" id="scorer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="scorer-modal-title">
     <div class="modal-card modal-lg">
       <div class="modal-header">
         <div class="modal-title-wrap">
-          <div class="modal-icon-badge">
+          <div class="modal-icon-badge" aria-hidden="true">
             <svg class="lucide lucide-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <div>
-            <h3 class="modal-title">AI Virality Scorer & Hook Calibrator</h3>
+            <h3 class="modal-title" id="scorer-modal-title">AI Virality Scorer & Hook Calibrator</h3>
             <p class="modal-desc">Simulate algorithmic CTR, viewer drop-off probability, and psychological triggers.</p>
           </div>
         </div>
-        <button class="modal-close" id="close-scorer-modal" title="Close (Esc)">×</button>
+        <button class="modal-close" id="close-scorer-modal" title="Close (Esc)" aria-label="Close Virality Scorer Modal">×</button>
       </div>
 
       <div class="modal-body scorer-modal-body">
@@ -484,10 +489,11 @@
               class="form-textarea" 
               rows="3" 
               placeholder="e.g., I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model."
+              aria-describedby="hook-char-count"
             ></textarea>
             <div class="textarea-footer">
               <span class="char-counter" id="hook-char-count">0 characters &bull; Optimal length: 55-90 chars</span>
-              <button class="btn-text" id="paste-sample-hook">Try Sample Hook</button>
+              <button class="btn-text" id="paste-sample-hook" type="button">Try Sample Hook</button>
             </div>
           </div>
 
@@ -515,13 +521,13 @@
             </div>
           </div>
 
-          <button class="btn btn-primary btn-full-width" id="btn-run-analysis">
-            <svg class="lucide lucide-sparkles" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          <button class="btn btn-primary btn-full-width" id="btn-run-analysis" type="button">
+            <svg class="lucide lucide-sparkles" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
             <span>Calibrate & Run Virality Diagnostic</span>
           </button>
         </div>
 
-        <div class="scorer-results-col" id="scorer-results-panel">
+        <div class="scorer-results-col" id="scorer-results-panel" aria-live="polite">
           <div class="dial-score-container">
             <div class="score-glow-ring" id="result-score-ring">
               <span class="result-number" id="result-score-num">--</span>
@@ -547,12 +553,12 @@
           <div class="ai-variations-box" id="ai-variations-box" style="display: none;">
             <div class="variations-header">
               <span class="sparkle-tag">
-                <svg class="lucide lucide-sparkles inline-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                <svg class="lucide lucide-sparkles inline-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                 AI 90+ Score Variations
               </span>
               <span class="ai-badge">Instant 1-Click Replace</span>
             </div>
-            <div class="variations-list" id="variations-list">
+            <div class="variations-list" id="variations-list" role="list">
               <!-- Dynamically populated -->
             </div>
           </div>
@@ -560,8 +566,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-secondary" id="cancel-scorer-btn">Cancel</button>
-        <button class="btn btn-primary" id="save-to-library-btn" disabled>
+        <button class="btn btn-secondary" id="cancel-scorer-btn" type="button">Cancel</button>
+        <button class="btn btn-primary" id="save-to-library-btn" type="button" disabled>
           <span>Save Idea to Library</span>
         </button>
       </div>
@@ -569,24 +575,24 @@
   </div>
 
   <!-- ================= MODAL 2: BATCH IMPORT / COMPETITOR SCRAPER ================= -->
-  <div class="modal-overlay" id="batch-modal" aria-hidden="true">
+  <div class="modal-overlay" id="batch-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="batch-modal-title">
     <div class="modal-card modal-md">
       <div class="modal-header">
         <div class="modal-title-wrap">
-          <div class="modal-icon-badge">
+          <div class="modal-icon-badge" aria-hidden="true">
             <svg class="lucide lucide-download-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m8 17 4 4 4-4"/></svg>
           </div>
           <div>
-            <h3 class="modal-title">Batch Import & Reverse Engineer</h3>
+            <h3 class="modal-title" id="batch-modal-title">Batch Import & Reverse Engineer</h3>
             <p class="modal-desc">Paste competitor URLs or multiple hook drafts (one per line).</p>
           </div>
         </div>
-        <button class="modal-close" id="close-batch-modal" title="Close (Esc)">×</button>
+        <button class="modal-close" id="close-batch-modal" title="Close (Esc)" aria-label="Close Batch Modal">×</button>
       </div>
 
       <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">Hooks List or URLs (1 per line)</label>
+          <label for="batch-input-field" class="form-label">Hooks List or URLs (1 per line)</label>
           <textarea 
             id="batch-input-field" 
             class="form-textarea" 
@@ -597,8 +603,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-secondary" id="cancel-batch-btn">Cancel</button>
-        <button class="btn btn-primary" id="confirm-batch-btn">
+        <button class="btn btn-secondary" id="cancel-batch-btn" type="button">Cancel</button>
+        <button class="btn btn-primary" id="confirm-batch-btn" type="button">
           <span>Process & Auto-Score Batch</span>
         </button>
       </div>
@@ -606,7 +612,7 @@
   </div>
 
   <!-- ================= SLIDE-OVER DRAWER: IDEA CARD DEEP DIVE ================= -->
-  <aside class="detail-drawer" id="detail-drawer" aria-hidden="true">
+  <aside class="detail-drawer" id="detail-drawer" aria-hidden="true" role="dialog" aria-label="Idea Details Inspector">
     <div class="drawer-overlay" id="drawer-overlay"></div>
     <div class="drawer-panel">
       <div class="drawer-header">
@@ -614,13 +620,13 @@
           <!-- Platform tag injected -->
         </div>
         <div class="drawer-actions">
-          <button class="drawer-btn-icon" id="drawer-bookmark-btn" title="Bookmark">
-            <svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          <button class="drawer-btn-icon" id="drawer-bookmark-btn" title="Bookmark" aria-label="Toggle Bookmark">
+            <svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
           </button>
-          <button class="drawer-btn-icon" id="drawer-copy-btn" title="Copy Hook">
-            <svg class="lucide lucide-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <button class="drawer-btn-icon" id="drawer-copy-btn" title="Copy Hook" aria-label="Copy Hook">
+            <svg class="lucide lucide-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
           </button>
-          <button class="modal-close" id="close-drawer-btn" title="Close Drawer (Esc)">×</button>
+          <button class="modal-close" id="close-drawer-btn" title="Close Drawer (Esc)" aria-label="Close Inspector Drawer">×</button>
         </div>
       </div>
 
@@ -640,14 +646,18 @@
           <!-- Hook Text -->
         </div>
 
-        <!-- Simulated Retention Curve Graph -->
+        <!-- Interactive Simulated Retention Curve Graph with Coordinate Hover Tooltip -->
         <div class="drawer-retention-section">
           <div class="section-subhead">
             <span>Projected 60s Viewer Retention Curve</span>
             <span class="highlight-green" id="drawer-retention-stat">+340% vs Avg</span>
           </div>
-          <div class="retention-chart-box">
-            <svg class="retention-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
+          <div class="retention-chart-box" id="retention-chart-interactive-box">
+            <div class="chart-hover-indicator" id="chart-hover-tooltip" style="display: none;">
+              <span class="chart-tooltip-time" id="chart-tooltip-time">15s</span>
+              <span class="chart-tooltip-val" id="chart-tooltip-val">88.4% Retention</span>
+            </div>
+            <svg class="retention-svg" id="interactive-retention-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="retentionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="rgba(0, 245, 155, 0.35)"/>
@@ -659,9 +669,13 @@
               <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
               <line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
               
-              <!-- Area & Path -->
+              <!-- Dynamic Area & Path -->
               <path id="drawer-retention-area" d="M0,15 Q100,20 200,32 T400,45 L400,120 L0,120 Z" fill="url(#retentionGradient)" />
               <path id="drawer-retention-path" d="M0,15 Q100,20 200,32 T400,45" fill="none" stroke="#00F59B" stroke-width="2.5" stroke-linecap="round"/>
+
+              <!-- Interactive Hover Crosshair Line and Marker Dot -->
+              <line id="chart-cursor-line" x1="0" y1="0" x2="0" y2="120" stroke="rgba(255,255,255,0.35)" stroke-dasharray="2,2" style="display: none;"/>
+              <circle id="chart-cursor-dot" cx="0" cy="0" r="5" fill="#00F59B" stroke="#FFFFFF" stroke-width="2" style="display: none;"/>
             </svg>
             <div class="chart-labels">
               <span>0s (Hook)</span>
@@ -690,9 +704,9 @@
       </div>
 
       <div class="drawer-footer">
-        <button class="btn btn-secondary" id="drawer-copy-btn-2">Copy Hook</button>
-        <button class="btn btn-primary" id="drawer-export-btn">
-          <svg class="lucide lucide-rocket" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+        <button class="btn btn-secondary" id="drawer-copy-btn-2" type="button">Copy Hook</button>
+        <button class="btn btn-primary" id="drawer-export-btn" type="button">
+          <svg class="lucide lucide-rocket" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
           <span>Send to Script Studio</span>
         </button>
       </div>
@@ -700,7 +714,7 @@
   </aside>
 
   <!-- TOAST NOTIFICATION CONTAINER -->
-  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+  <div class="toast-container" id="toast-container" aria-live="polite" role="status"></div>
 
   <!-- MAIN SCRIPT -->
   <script src="app.js"></script>

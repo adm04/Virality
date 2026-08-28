@@ -1,7 +1,7 @@
 /**
- * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION
- * Ultra-Modern SaaS Dashboard Logic, Virality Simulation Engine,
- * and Zero-Backend Client Authentication System
+ * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION (UI/UX PRO MAX EDITION)
+ * Ultra-Modern SaaS Dashboard Logic, Interactive Data-Dense Analytics,
+ * Virality Simulation Diagnostics, and Zero-Backend Client Authentication System
  */
 
 (function () {
@@ -25,6 +25,7 @@
   };
 
   let currentUser = loadUserSession();
+  let lastFocusedElement = null;
 
   function loadUserSession() {
     try {
@@ -281,7 +282,7 @@
   let activeSort = 'score-desc';
   let activeView = 'bento';
   let selectedIdeaForDrawer = null;
-  let authMode = 'signin'; // 'signin' or 'signup'
+  let authMode = 'signin';
 
   // DOM Elements Cache
   const ideasGridEl = document.getElementById('ideas-grid');
@@ -308,9 +309,6 @@
   const sidebarAvatarInitials = document.getElementById('sidebar-avatar-initials');
   const sidebarUserAvatarBtn = document.getElementById('sidebar-user-avatar-btn');
   const topbarProfileBtn = document.getElementById('topbar-profile-btn');
-  const topbarAvatarInitials = document.getElementById('topbar-avatar-initials');
-  const topbarChipName = document.getElementById('topbar-chip-name');
-  const topbarTierBadge = document.getElementById('topbar-tier-badge');
   const topbarAuthContainer = document.getElementById('topbar-auth-container');
 
   const authModal = document.getElementById('auth-modal');
@@ -330,6 +328,7 @@
   const btnFillDemoAccount = document.getElementById('btn-fill-demo-account');
   const btnTogglePassword = document.getElementById('btn-toggle-password');
   const authForgotBtn = document.getElementById('auth-forgot-btn');
+  const authForm = document.getElementById('auth-form');
 
   // Profile Modal Elements
   const profileModal = document.getElementById('profile-modal');
@@ -400,6 +399,14 @@
   const drawerCopyBtn2 = document.getElementById('drawer-copy-btn-2');
   const drawerExportBtn = document.getElementById('drawer-export-btn');
 
+  // Interactive Chart Elements
+  const interactiveSvg = document.getElementById('interactive-retention-svg');
+  const chartTooltip = document.getElementById('chart-hover-tooltip');
+  const chartTooltipTime = document.getElementById('chart-tooltip-time');
+  const chartTooltipVal = document.getElementById('chart-tooltip-val');
+  const chartCursorLine = document.getElementById('chart-cursor-line');
+  const chartCursorDot = document.getElementById('chart-cursor-dot');
+
   // Lucide Icons Render Trigger
   function refreshIcons() {
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
@@ -413,6 +420,7 @@
     updateUIForAuth();
     updatePillCounts();
     renderGrid();
+    setupInteractiveChart();
     refreshIcons();
   }
 
@@ -426,7 +434,7 @@
       sidebarAvatarInitials.textContent = initials;
       
       topbarAuthContainer.innerHTML = `
-        <button class="btn-user-chip" id="topbar-profile-btn" title="View Account Profile">
+        <button class="btn-user-chip" id="topbar-profile-btn" title="View Account Profile" aria-label="View Account Profile">
           <div class="chip-avatar">${initials}</div>
           <span class="chip-name">${currentUser.name}</span>
           <span class="chip-badge">${currentUser.tierShort || 'PRO'}</span>
@@ -442,7 +450,7 @@
       sidebarAvatarInitials.textContent = '?';
       
       topbarAuthContainer.innerHTML = `
-        <button class="btn btn-primary" id="topbar-login-btn">
+        <button class="btn btn-primary" id="topbar-login-btn" aria-label="Sign In / Join Pro">
           <svg class="lucide lucide-log-in" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
           <span>Sign In / Join Pro</span>
         </button>
@@ -453,6 +461,7 @@
         topbarLoginBtn.addEventListener('click', () => openAuthModal('signin'));
       }
     }
+    refreshIcons();
   }
 
   function getInitials(name) {
@@ -526,7 +535,7 @@
 
       // Hero wave graphic if applicable
       const heroVisualHtml = (isSpan2 && idea.isHero) ? `
-        <div class="hero-visual-graphic">
+        <div class="hero-visual-graphic" aria-hidden="true">
           <div class="hero-visual-grid"></div>
           <svg class="hero-retention-wave" viewBox="0 0 400 80" preserveAspectRatio="none">
             <path d="M0,15 Q100,18 200,32 T400,42 L400,80 L0,80 Z" fill="rgba(0, 245, 155, 0.12)" />
@@ -546,7 +555,7 @@
               ${platformIconHtml}
               <span>${idea.platformName}</span>
             </div>
-            <div class="score-badge ${scoreTierClass}">
+            <div class="score-badge ${scoreTierClass}" aria-label="Virality score ${idea.score} out of 100">
               <div class="score-val">${idea.score}</div>
               <div class="score-tag">${idea.score >= 90 ? 'VIRAL' : (idea.score >= 70 ? 'HIGH' : 'MID')}</div>
             </div>
@@ -569,10 +578,10 @@
             </div>
 
             <div class="card-action-icons" onclick="event.stopPropagation()">
-              <button class="action-btn-sm copy-btn" data-hook="${escapeHtml(idea.hook)}" title="Copy Hook to Clipboard">
+              <button class="action-btn-sm copy-btn" data-hook="${escapeHtml(idea.hook)}" title="Copy Hook to Clipboard" aria-label="Copy Hook">
                 <svg class="lucide lucide-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
               </button>
-              <button class="action-btn-sm save-btn ${idea.saved ? 'saved' : ''}" data-id="${idea.id}" title="${idea.saved ? 'Remove Bookmark' : 'Bookmark Idea'}">
+              <button class="action-btn-sm save-btn ${idea.saved ? 'saved' : ''}" data-id="${idea.id}" title="${idea.saved ? 'Remove Bookmark' : 'Bookmark Idea'}" aria-label="${idea.saved ? 'Remove Bookmark' : 'Bookmark Idea'}">
                 <svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="${idea.saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
               </button>
             </div>
@@ -583,11 +592,15 @@
 
     ideasGridEl.innerHTML = cardsHtml;
 
-    // Attach card click handlers
+    // Attach card click handlers with Enter/Space keyboard access
     document.querySelectorAll('.idea-card').forEach(cardEl => {
-      cardEl.addEventListener('click', () => {
-        const id = cardEl.getAttribute('data-id');
-        openDetailDrawer(id);
+      const id = cardEl.getAttribute('data-id');
+      cardEl.addEventListener('click', () => openDetailDrawer(id));
+      cardEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openDetailDrawer(id);
+        }
       });
     });
 
@@ -628,7 +641,43 @@
     countSavedEl.textContent = saved;
   }
 
-  // ================= 6. VIRALITY SCORING ENGINE =================
+  // ================= 6. INTERACTIVE RETENTION CURVE CHART =================
+  function setupInteractiveChart() {
+    if (!interactiveSvg) return;
+
+    interactiveSvg.addEventListener('mousemove', (e) => {
+      const rect = interactiveSvg.getBoundingClientRect();
+      const x = Math.max(0, Math.min(400, ((e.clientX - rect.left) / rect.width) * 400));
+      
+      // Calculate retention percentage along curve
+      // Baseline 0s is ~94%, decaying smoothly to ~72% at 60s
+      const timeSec = Math.round((x / 400) * 60);
+      const retentionPct = Math.max(45, (95 - (x / 400) * 26 + Math.sin(x / 30) * 3)).toFixed(1);
+      
+      // Calculate Y coordinate on path
+      const y = Math.min(110, Math.max(10, (100 - parseFloat(retentionPct)) * 1.8));
+
+      chartCursorLine.setAttribute('x1', x);
+      chartCursorLine.setAttribute('x2', x);
+      chartCursorLine.style.display = 'block';
+
+      chartCursorDot.setAttribute('cx', x);
+      chartCursorDot.setAttribute('cy', y);
+      chartCursorDot.style.display = 'block';
+
+      chartTooltipTime.textContent = `${timeSec}s:`;
+      chartTooltipVal.textContent = `${retentionPct}% Retention`;
+      chartTooltip.style.display = 'flex';
+    });
+
+    interactiveSvg.addEventListener('mouseleave', () => {
+      chartCursorLine.style.display = 'none';
+      chartCursorDot.style.display = 'none';
+      chartTooltip.style.display = 'none';
+    });
+  }
+
+  // ================= 7. VIRALITY SCORING ENGINE =================
   function calculateViralityScore(hookText, platform, niche) {
     if (!hookText || hookText.trim().length === 0) {
       return { score: 0, curiosity: 0, stakes: 0, velocity: 0, tier: 'tier-draft', variations: [] };
@@ -731,7 +780,8 @@
       return;
     }
 
-    // Button loading state
+    // Button loading state with accessible aria-busy
+    btnRunAnalysis.setAttribute('aria-busy', 'true');
     btnRunAnalysis.innerHTML = `
       <svg class="live-pulse" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
       <span>Analyzing Neural Virality Signals…</span>
@@ -770,7 +820,7 @@
 
       // Render AI Variations
       variationsList.innerHTML = result.variations.map(v => `
-        <div class="variation-item" data-text="${escapeHtml(v.text)}" title="Click to apply variation">
+        <div class="variation-item" data-text="${escapeHtml(v.text)}" role="button" tabindex="0" title="Click to apply variation">
           <div class="variation-text">"${v.text}"</div>
           <div class="variation-score-tag">Score ${v.score}</div>
         </div>
@@ -781,19 +831,27 @@
       currentUser.calibrationsCount = (currentUser.calibrationsCount || 0) + 1;
       saveUserSession(currentUser);
 
-      // Attach variation click
+      // Attach variation click & keyboard access
       document.querySelectorAll('.variation-item').forEach(item => {
-        item.addEventListener('click', () => {
+        const applyVariation = () => {
           const newText = item.getAttribute('data-text');
           hookInputField.value = newText;
           updateCharCount();
           runViralityDiagnostic();
           showToast('Applied AI variation! Score recalibrated.');
+        };
+        item.addEventListener('click', applyVariation);
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            applyVariation();
+          }
         });
       });
 
       // Enable Save
       saveToLibraryBtn.disabled = false;
+      btnRunAnalysis.removeAttribute('aria-busy');
       btnRunAnalysis.innerHTML = `
         <svg class="lucide lucide-sparkles" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
         <span>Recalibrate Diagnostics</span>
@@ -848,7 +906,7 @@
     showToast(`"${text.slice(0, 32)}…" saved to Idea Library!`);
   }
 
-  // ================= 7. DETAIL DRAWER =================
+  // ================= 8. DETAIL DRAWER =================
   function openDetailDrawer(ideaId) {
     const idea = ideasState.find(i => i.id === ideaId);
     if (!idea) return;
@@ -922,19 +980,23 @@
     }
   }
 
-  // ================= 8. AUTHENTICATION & PROFILE HANDLERS =================
+  // ================= 9. AUTHENTICATION & PROFILE HANDLERS =================
   function openAuthModal(mode = 'signin') {
     authMode = mode;
     if (mode === 'signin') {
       tabSignIn.classList.add('active');
+      tabSignIn.setAttribute('aria-selected', 'true');
       tabSignUp.classList.remove('active');
+      tabSignUp.setAttribute('aria-selected', 'false');
       authModalTitle.textContent = 'Sign in to Vantage';
       authModalSubtitle.textContent = 'Access your calibrated idea library & viral intelligence.';
       groupAuthName.style.display = 'none';
       authSubmitLabel.textContent = 'Sign In to Dashboard';
     } else {
       tabSignUp.classList.add('active');
+      tabSignUp.setAttribute('aria-selected', 'true');
       tabSignIn.classList.remove('active');
+      tabSignIn.setAttribute('aria-selected', 'false');
       authModalTitle.textContent = 'Create Vantage Account';
       authModalSubtitle.textContent = 'Unlock unlimited virality calibration & retention models.';
       groupAuthName.style.display = 'flex';
@@ -947,7 +1009,8 @@
     }, 100);
   }
 
-  function handleAuthSubmit() {
+  function handleAuthSubmit(e) {
+    if (e) e.preventDefault();
     const email = authInputEmail.value.trim();
     const password = authInputPassword.value.trim();
     const name = (authMode === 'signup' && authInputName.value.trim()) ? authInputName.value.trim() : (email.split('@')[0] || 'Creator');
@@ -957,6 +1020,7 @@
       return;
     }
 
+    btnAuthSubmit.setAttribute('aria-busy', 'true');
     btnAuthSubmit.innerHTML = `
       <svg class="live-pulse" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
       <span>Authenticating Secure Session…</span>
@@ -978,6 +1042,7 @@
       });
 
       closeModal(authModal);
+      btnAuthSubmit.removeAttribute('aria-busy');
       btnAuthSubmit.innerHTML = `<span id="auth-submit-label">${authMode === 'signup' ? 'Create Pro Account' : 'Sign In to Dashboard'}</span>`;
       btnAuthSubmit.disabled = false;
       showToast(`Welcome back, ${name}! Session authenticated.`);
@@ -1026,7 +1091,7 @@
     showToast('Signed out of Vantage session.');
   }
 
-  // ================= 9. EVENT LISTENERS =================
+  // ================= 10. EVENT LISTENERS =================
   function bindEventListeners() {
     // Search input
     searchInputEl.addEventListener('input', (e) => {
@@ -1046,8 +1111,12 @@
     // Filter pills
     filterPillsContainer.querySelectorAll('.pill').forEach(pill => {
       pill.addEventListener('click', () => {
-        filterPillsContainer.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        filterPillsContainer.querySelectorAll('.pill').forEach(p => {
+          p.classList.remove('active');
+          p.setAttribute('aria-selected', 'false');
+        });
         pill.classList.add('active');
+        pill.setAttribute('aria-selected', 'true');
         activeFilter = pill.getAttribute('data-filter');
         renderGrid();
       });
@@ -1060,8 +1129,13 @@
       clearSearchBtnEl.style.display = 'none';
       activeFilter = 'all';
       filterPillsContainer.querySelectorAll('.pill').forEach(p => {
-        if (p.getAttribute('data-filter') === 'all') p.classList.add('active');
-        else p.classList.remove('active');
+        if (p.getAttribute('data-filter') === 'all') {
+          p.classList.add('active');
+          p.setAttribute('aria-selected', 'true');
+        } else {
+          p.classList.remove('active');
+          p.setAttribute('aria-selected', 'false');
+        }
       });
       renderGrid();
     });
@@ -1075,8 +1149,12 @@
     // View toggle (Bento vs Compact)
     viewBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        viewBtns.forEach(b => b.classList.remove('active'));
+        viewBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         activeView = btn.getAttribute('data-view');
         if (activeView === 'compact') {
           ideasGridEl.classList.add('compact-view');
@@ -1118,7 +1196,7 @@
     tabSignIn.addEventListener('click', () => openAuthModal('signin'));
     tabSignUp.addEventListener('click', () => openAuthModal('signup'));
     closeAuthModalBtn.addEventListener('click', () => closeModal(authModal));
-    btnAuthSubmit.addEventListener('click', handleAuthSubmit);
+    if (authForm) authForm.addEventListener('submit', handleAuthSubmit);
 
     // Social Auth 1-click simulations
     btnAuthGoogle.addEventListener('click', () => {
@@ -1275,7 +1353,7 @@
       }
     });
 
-    // Keyboard Shortcuts
+    // Keyboard Shortcuts (⌘K, N, Esc, 1-5)
     document.addEventListener('keydown', (e) => {
       // ⌘K or Ctrl+K -> Focus Search
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -1290,6 +1368,13 @@
         openModal(scorerModal);
       }
 
+      // Number keys 1-5 for fast tab navigation (when not typing)
+      if (['1', '2', '3', '4', '5'].includes(e.key) && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        const map = { '1': 'all', '2': 'viral', '3': 'youtube', '4': 'shorts', '5': 'saved' };
+        if (map[e.key]) setActiveFilterPill(map[e.key]);
+      }
+
       // Escape -> Close all modals/drawers
       if (e.key === 'Escape') {
         closeModal(scorerModal);
@@ -1301,12 +1386,17 @@
     });
   }
 
-  // ================= 10. HELPERS =================
+  // ================= 11. HELPERS & ACCESSIBILITY =================
   function setActiveFilterPill(filterKey) {
     activeFilter = filterKey;
     filterPillsContainer.querySelectorAll('.pill').forEach(p => {
-      if (p.getAttribute('data-filter') === filterKey) p.classList.add('active');
-      else p.classList.remove('active');
+      if (p.getAttribute('data-filter') === filterKey) {
+        p.classList.add('active');
+        p.setAttribute('aria-selected', 'true');
+      } else {
+        p.classList.remove('active');
+        p.setAttribute('aria-selected', 'false');
+      }
     });
     renderGrid();
   }
@@ -1317,6 +1407,7 @@
   }
 
   function openModal(modalEl) {
+    lastFocusedElement = document.activeElement;
     modalEl.classList.add('active');
     modalEl.setAttribute('aria-hidden', 'false');
     if (modalEl === scorerModal) {
@@ -1328,6 +1419,9 @@
   function closeModal(modalEl) {
     modalEl.classList.remove('active');
     modalEl.setAttribute('aria-hidden', 'true');
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
   }
 
   function copyToClipboard(text, message = "Copied to clipboard!") {
@@ -1372,11 +1466,11 @@
 
   function getPlatformIcon(platform) {
     if (platform === 'youtube') {
-      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9 1.7.2 7.2.2 7.2.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>';
+      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9 1.7.2 7.2.2 7.2.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>';
     } else if (platform === 'shorts') {
-      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.86 1 1.1 1.7.24.66.4 1.4.46 2.5.05 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.5-.27.7-.6 1.2-1.1 1.7-.5.5-1 .86-1.7 1.1-.66.24-1.4.4-2.5.46-1.1.05-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.66-.4-1.4-.46-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.5.27-.7.6-1.2 1.1-1.7.5-.5 1-.86 1.7-1.1.66-.24 1.4-.4 2.5-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>';
+      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.86 1 1.1 1.7.24.66.4 1.4.46 2.5.05 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.5-.27.7-.6 1.2-1.1 1.7-.5.5-1 .86-1.7 1.1-.66.24-1.4.4-2.5.46-1.1.05-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.66-.4-1.4-.46-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.5.27-.7.6-1.2 1.1-1.7.5-.5 1-.86 1.7-1.1.66-.24 1.4-.4 2.5-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>';
     } else {
-      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57z"/></svg>';
+      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57z"/></svg>';
     }
   }
 
