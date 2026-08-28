@@ -544,11 +544,28 @@
     }
   }
 
-  // ================= 7. RENDER PERSONA CHIPS =================
+  function getTimeGreeting() {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      return 'Good morning';
+    } else if (hour >= 12 && hour < 17) {
+      return 'Good afternoon';
+    } else if (hour >= 17 && hour < 22) {
+      return 'Good evening';
+    } else {
+      return 'Good night';
+    }
+  }
+
+  // ================= 7. RENDER PERSONA CHIPS & HERO GREETING =================
   function updateCreatorPersonaChips() {
     const chipsEl = document.getElementById('creator-persona-chips');
     const heroNameEl = document.getElementById('hero-user-name');
-    if (!chipsEl) return;
+    const heroGreetingEl = document.getElementById('hero-greeting');
+
+    if (heroGreetingEl) {
+      heroGreetingEl.textContent = getTimeGreeting();
+    }
 
     if (heroNameEl) {
       heroNameEl.textContent = creatorProfile.name ? `${creatorProfile.name.split(' ')[0]}.` : 'Arka.';
