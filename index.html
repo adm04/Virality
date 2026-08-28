@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vantage — Elite Content Idea Library & Virality Scorer</title>
-  <meta name="description" content="Elite creator intelligence dashboard and AI virality scorer for high-retention video hooks across YouTube, Reels, TikTok, and LinkedIn.">
+  <meta name="description" content="Elite creator intelligence dashboard and AI virality scorer with interactive shadcn/ui analytics and retention curves.">
   
   <!-- Modern Font Pairing: Clash Display, Plus Jakarta Sans, JetBrains Mono, Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,9 @@
   
   <!-- Lucide Icons Official Script -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Chart.js for High-Performance shadcn/ui Interactive Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -96,7 +99,7 @@
         <div class="topbar-left">
           <div class="status-pill" role="status">
             <span class="live-pulse" aria-hidden="true"></span>
-            <span class="status-text">VIRALITY ENGINE ACTIVE &bull; <strong id="header-total-count">214</strong> HOOKS INDEXED</span>
+            <span class="status-text">SHADCN CHARTS ACTIVE &bull; <strong id="header-total-count">214</strong> HOOKS INDEXED</span>
           </div>
           <h1 class="hero-title">Good morning, <span class="gradient-text" id="hero-user-name">Arka.</span></h1>
           <p class="hero-subtitle">High-probability retention architectures & viral algorithm calibration.</p>
@@ -129,8 +132,76 @@
         </div>
       </header>
 
+      <!-- ================= SHADCN/UI EXECUTIVE ANALYTICS SECTION ================= -->
+      <section class="shadcn-analytics-grid animate-fade delay-1" aria-label="Executive Intelligence Analytics">
+        
+        <!-- shadcn chart-area-interactive: Virality Velocity & Retention Reach -->
+        <div class="shadcn-card chart-hero-card">
+          <div class="shadcn-card-header">
+            <div class="chart-header-left">
+              <h2 class="shadcn-card-title">Virality Velocity & Projected Reach</h2>
+              <p class="shadcn-card-description">Showing daily organic impressions lift vs 30s audience retention curve across all calibrated hooks.</p>
+            </div>
+            <!-- Time range toggle (shadcn tabs) -->
+            <div class="shadcn-tabs-list" role="tablist" aria-label="Chart Time Range">
+              <button class="shadcn-tab-btn active" data-range="30d" role="tab" aria-selected="true">Last 30 Days</button>
+              <button class="shadcn-tab-btn" data-range="7d" role="tab" aria-selected="false">Last 7 Days</button>
+              <button class="shadcn-tab-btn" data-range="24h" role="tab" aria-selected="false">24 Hours</button>
+            </div>
+          </div>
+
+          <div class="shadcn-card-content">
+            <div class="chart-container-wrap">
+              <canvas id="shadcn-velocity-area-chart" height="240" aria-label="Virality Velocity Area Chart"></canvas>
+            </div>
+          </div>
+
+          <div class="shadcn-card-footer">
+            <div class="chart-legend-row">
+              <div class="legend-item">
+                <span class="legend-dot chart-1" aria-hidden="true"></span>
+                <span class="legend-text">Organic Reach Lift (<strong id="legend-reach-val">+340%</strong>)</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot chart-2" aria-hidden="true"></span>
+                <span class="legend-text">30s Benchmark Retention (<strong id="legend-ret-val">74.2%</strong>)</span>
+              </div>
+            </div>
+            <div class="chart-trend-badge">
+              <svg class="lucide lucide-trending-up" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              <span>Trending up +5.2% this month</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- shadcn chart-pie-donut-text: Platform Share Distribution -->
+        <div class="shadcn-card chart-donut-card">
+          <div class="shadcn-card-header">
+            <h2 class="shadcn-card-title">Platform Share</h2>
+            <p class="shadcn-card-description">Calibrated hooks distribution across social video platforms.</p>
+          </div>
+          <div class="shadcn-card-content donut-content-wrap">
+            <div class="donut-chart-container">
+              <canvas id="shadcn-platform-donut-chart" width="190" height="190" aria-label="Platform Share Donut Chart"></canvas>
+              <div class="donut-center-metric" aria-hidden="true">
+                <span class="donut-center-num">214</span>
+                <span class="donut-center-label">Total Hooks</span>
+              </div>
+            </div>
+          </div>
+          <div class="shadcn-card-footer donut-footer">
+            <div class="platform-mini-legend">
+              <div class="mini-legend-item"><span class="legend-dot yt-color"></span><span>YouTube: <strong>40%</strong></span></div>
+              <div class="mini-legend-item"><span class="legend-dot ig-color"></span><span>Shorts/Reels: <strong>44%</strong></span></div>
+              <div class="mini-legend-item"><span class="legend-dot li-color"></span><span>X / LinkedIn: <strong>16%</strong></span></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
       <!-- FLOATING GLASS COMMAND SEARCH & FILTERS -->
-      <section class="command-search-shell animate-fade delay-1" aria-label="Search and Filter Commands">
+      <section class="command-search-shell animate-fade delay-2" aria-label="Search and Filter Commands">
         <div class="search-glass-card">
           <div class="search-input-group">
             <svg class="search-icon lucide lucide-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -183,77 +254,6 @@
               <span class="pill-label">Saved</span>
               <span class="pill-count" id="count-saved">12</span>
             </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- EXECUTIVE STAT STRIP (BENTO ROW) -->
-      <section class="stat-strip animate-fade delay-2" aria-label="Executive Metrics">
-        <div class="stat-card">
-          <div class="stat-header">
-            <span class="stat-title">Avg. Virality Score</span>
-            <span class="stat-badge trend-up">
-              <svg class="lucide lucide-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-              +4.8
-            </span>
-          </div>
-          <div class="stat-main">
-            <div class="stat-hero-number">78<span class="stat-unit">/100</span></div>
-            <div class="stat-subtext">Top 4% of indexed creator libraries</div>
-          </div>
-          <div class="stat-progress-track">
-            <div class="stat-progress-bar emerald" style="width: 78%;" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-header">
-            <span class="stat-title">Viral Queue & Velocity</span>
-            <span class="stat-badge trend-up">
-              <svg class="lucide lucide-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              +14 today
-            </span>
-          </div>
-          <div class="stat-main">
-            <div class="stat-hero-number">214<span class="stat-unit">ideas</span></div>
-            <div class="stat-subtext">38 scored in 90+ breakout tier</div>
-          </div>
-          <div class="stat-progress-track">
-            <div class="stat-progress-bar amber" style="width: 62%;" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-header">
-            <span class="stat-title">Predicted 30s Retention</span>
-            <span class="stat-badge trend-up">
-              <svg class="lucide lucide-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
-              92.4% hit
-            </span>
-          </div>
-          <div class="stat-main">
-            <div class="stat-hero-number">74.2<span class="stat-unit">%</span></div>
-            <div class="stat-subtext">+18.5% over YouTube niche baseline</div>
-          </div>
-          <div class="stat-progress-track">
-            <div class="stat-progress-bar violet" style="width: 74%;" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-header">
-            <span class="stat-title">Trend Decay Risk</span>
-            <span class="stat-badge trend-down">
-              <svg class="lucide lucide-shield-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-              Low (3 exp)
-            </span>
-          </div>
-          <div class="stat-main">
-            <div class="stat-hero-number">LOW<span class="stat-unit">decay</span></div>
-            <div class="stat-subtext">Evergreen hook ratio: 89% optimal</div>
-          </div>
-          <div class="stat-progress-track">
-            <div class="stat-progress-bar emerald" style="width: 89%;" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
       </section>
@@ -611,7 +611,7 @@
     </div>
   </div>
 
-  <!-- ================= SLIDE-OVER DRAWER: IDEA CARD DEEP DIVE ================= -->
+  <!-- ================= SLIDE-OVER DRAWER: IDEA CARD DEEP DIVE WITH SHADCN CHARTS ================= -->
   <aside class="detail-drawer" id="detail-drawer" aria-hidden="true" role="dialog" aria-label="Idea Details Inspector">
     <div class="drawer-overlay" id="drawer-overlay"></div>
     <div class="drawer-panel">
@@ -646,51 +646,34 @@
           <!-- Hook Text -->
         </div>
 
-        <!-- Interactive Simulated Retention Curve Graph with Coordinate Hover Tooltip -->
-        <div class="drawer-retention-section">
-          <div class="section-subhead">
-            <span>Projected 60s Viewer Retention Curve</span>
+        <!-- Interactive shadcn 60s Viewer Retention Milestone Curve (Canvas) -->
+        <div class="shadcn-card drawer-chart-card">
+          <div class="shadcn-card-header card-header-sm">
+            <div>
+              <h3 class="shadcn-card-title text-sm">60s Retention Curve (shadcn/ui Area Gradient)</h3>
+              <p class="shadcn-card-description">Live simulation vs YouTube Niche Median Retention.</p>
+            </div>
             <span class="highlight-green" id="drawer-retention-stat">+340% vs Avg</span>
           </div>
-          <div class="retention-chart-box" id="retention-chart-interactive-box">
-            <div class="chart-hover-indicator" id="chart-hover-tooltip" style="display: none;">
-              <span class="chart-tooltip-time" id="chart-tooltip-time">15s</span>
-              <span class="chart-tooltip-val" id="chart-tooltip-val">88.4% Retention</span>
-            </div>
-            <svg class="retention-svg" id="interactive-retention-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="retentionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="rgba(0, 245, 155, 0.35)"/>
-                  <stop offset="100%" stop-color="rgba(0, 245, 155, 0.00)"/>
-                </linearGradient>
-              </defs>
-              <!-- Grid lines -->
-              <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
-              <line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
-              <line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"/>
-              
-              <!-- Dynamic Area & Path -->
-              <path id="drawer-retention-area" d="M0,15 Q100,20 200,32 T400,45 L400,120 L0,120 Z" fill="url(#retentionGradient)" />
-              <path id="drawer-retention-path" d="M0,15 Q100,20 200,32 T400,45" fill="none" stroke="#00F59B" stroke-width="2.5" stroke-linecap="round"/>
-
-              <!-- Interactive Hover Crosshair Line and Marker Dot -->
-              <line id="chart-cursor-line" x1="0" y1="0" x2="0" y2="120" stroke="rgba(255,255,255,0.35)" stroke-dasharray="2,2" style="display: none;"/>
-              <circle id="chart-cursor-dot" cx="0" cy="0" r="5" fill="#00F59B" stroke="#FFFFFF" stroke-width="2" style="display: none;"/>
-            </svg>
-            <div class="chart-labels">
-              <span>0s (Hook)</span>
-              <span>15s (Setup)</span>
-              <span>30s (Payoff 1)</span>
-              <span>60s (Retention Lock)</span>
+          <div class="shadcn-card-content">
+            <div class="drawer-canvas-wrap">
+              <canvas id="shadcn-drawer-retention-chart" height="160" aria-label="60s Retention Curve Chart"></canvas>
             </div>
           </div>
         </div>
 
-        <!-- Psychological Pillars -->
-        <div class="drawer-psych-breakdown">
-          <div class="section-subhead">Psychological Levers & Triggers</div>
-          <div class="psych-grid" id="drawer-psych-tags">
-            <!-- Tags rendered -->
+        <!-- Psychological Levers Radar Chart -->
+        <div class="shadcn-card drawer-chart-card">
+          <div class="shadcn-card-header card-header-sm">
+            <div>
+              <h3 class="shadcn-card-title text-sm">Psychological Trigger Profile (Radar)</h3>
+              <p class="shadcn-card-description">Multi-axis index compared against top 1% outliers.</p>
+            </div>
+          </div>
+          <div class="shadcn-card-content radar-content-wrap">
+            <div class="radar-canvas-wrap">
+              <canvas id="shadcn-drawer-radar-chart" height="210" aria-label="Psychological Radar Chart"></canvas>
+            </div>
           </div>
         </div>
 

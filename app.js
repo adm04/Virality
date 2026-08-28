@@ -1,6 +1,6 @@
 /**
- * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION (UI/UX PRO MAX EDITION)
- * Ultra-Modern SaaS Dashboard Logic, Interactive Data-Dense Analytics,
+ * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION (SHADCN/UI CHART EDITION)
+ * Ultra-Modern SaaS Dashboard Logic, shadcn/ui Canvas Visualizations,
  * Virality Simulation Diagnostics, and Zero-Backend Client Authentication System
  */
 
@@ -26,6 +26,12 @@
 
   let currentUser = loadUserSession();
   let lastFocusedElement = null;
+
+  // Chart.js Instances
+  let velocityAreaChart = null;
+  let platformDonutChart = null;
+  let drawerRetentionChart = null;
+  let drawerRadarChart = null;
 
   function loadUserSession() {
     try {
@@ -63,6 +69,7 @@
       isHero: true,
       saved: true,
       createdDaysAgo: 1,
+      psychValues: [99, 95, 92, 98, 96],
       psychTriggers: [
         { name: 'Curiosity Gap', score: '99%' },
         { name: 'High Stakes / Capital', score: '95%' },
@@ -70,7 +77,7 @@
         { name: 'Novelty Bias', score: '98%' }
       ],
       thumbnailConcept: 'Split screen: Left side showing red trading model crash graph; right side showing 3 AI terminals with green profit surge.',
-      retentionPoints: 'M0,12 Q100,16 200,28 T400,38',
+      retentionCurve: [96, 92, 88, 85, 81, 78, 75],
       explanation: 'Unpredictable financial experiment combined with autonomous AI creates intense curiosity and tension in the first 5 seconds.'
     },
     {
@@ -87,13 +94,14 @@
       isHero: false,
       saved: false,
       createdDaysAgo: 2,
+      psychValues: [94, 89, 91, 84, 90],
       psychTriggers: [
         { name: 'Information Asymmetry', score: '94%' },
         { name: 'Fear of Regret', score: '89%' },
         { name: 'Specific Number anchor', score: '91%' }
       ],
       thumbnailConcept: 'Close-up grimacing reaction with a redacted Slack contract screenshot glowing in background.',
-      retentionPoints: 'M0,15 Q100,22 200,35 T400,48',
+      retentionCurve: [95, 89, 83, 79, 74, 71, 68],
       explanation: 'Gatekept knowledge framing triggers immediate FOMO and self-preservation instincts.'
     },
     {
@@ -110,12 +118,13 @@
       isHero: false,
       saved: true,
       createdDaysAgo: 3,
+      psychValues: [82, 70, 95, 78, 85],
       psychTriggers: [
         { name: 'Relatability / Catharsis', score: '88%' },
         { name: 'Community In-Joke', score: '84%' }
       ],
       thumbnailConcept: 'Satisfying 4k screen recording zooming into aligned Figma design components with smooth sound design.',
-      retentionPoints: 'M0,20 Q100,32 200,48 T400,62',
+      retentionCurve: [92, 82, 74, 68, 62, 59, 55],
       explanation: 'Relatable developer/designer suffering paired with a satisfying payoff drives massive share velocity.'
     },
     {
@@ -132,12 +141,13 @@
       isHero: false,
       saved: false,
       createdDaysAgo: 1,
+      psychValues: [93, 85, 88, 90, 89],
       psychTriggers: [
         { name: 'High Sample Size', score: '93%' },
         { name: 'Predictive Certainty', score: '90%' }
       ],
       thumbnailConcept: 'Carousel graphic comparing red rejected portfolio snippet vs glowing green callback layout.',
-      retentionPoints: 'M0,16 Q100,24 200,34 T400,44',
+      retentionCurve: [94, 88, 82, 78, 73, 69, 66],
       explanation: 'Credibility established in the first 4 words, followed by an actionable cheat code payoff.'
     },
     {
@@ -154,13 +164,14 @@
       isHero: false,
       saved: true,
       createdDaysAgo: 4,
+      psychValues: [97, 92, 86, 96, 94],
       psychTriggers: [
         { name: 'Contrarian Stance', score: '96%' },
         { name: 'Celebrity/Status Anchor', score: '92%' },
         { name: 'Pattern Interrupt', score: '97%' }
       ],
       thumbnailConcept: 'Split screen: Elon/Jobs routine checklist with massive red X stamps over morning routines.',
-      retentionPoints: 'M0,14 Q100,18 200,30 T400,40',
+      retentionCurve: [97, 93, 89, 84, 80, 77, 74],
       explanation: 'Attacks widely accepted internet gospel with empirical testing. High controversy drive.'
     },
     {
@@ -177,12 +188,13 @@
       isHero: false,
       saved: false,
       createdDaysAgo: 2,
+      psychValues: [91, 88, 85, 87, 82],
       psychTriggers: [
         { name: 'Economic Arbitrage', score: '91%' },
         { name: 'Low Effort / High Reward', score: '88%' }
       ],
       thumbnailConcept: 'Split macro view: simple keystroke shortcut generating full dynamic auto-layout grid instantly.',
-      retentionPoints: 'M0,18 Q100,28 200,42 T400,52',
+      retentionCurve: [93, 86, 80, 75, 70, 66, 62],
       explanation: 'Juxtaposing low time investment (10 min) with high economic value ($150/hr).'
     },
     {
@@ -199,12 +211,13 @@
       isHero: false,
       saved: false,
       createdDaysAgo: 3,
+      psychValues: [95, 91, 96, 89, 93],
       psychTriggers: [
         { name: 'Conflict / Gossip', score: '95%' },
         { name: 'Ego Validation', score: '91%' }
       ],
       thumbnailConcept: 'Facial expression of subtle disbelief while holding a muted iPhone on speaker.',
-      retentionPoints: 'M0,14 Q100,20 200,31 T400,42',
+      retentionCurve: [96, 91, 86, 81, 76, 73, 70],
       explanation: 'Validates painful shared creator/freelancer experiences, inspiring immediate debate in comments.'
     },
     {
@@ -221,12 +234,13 @@
       isHero: false,
       saved: true,
       createdDaysAgo: 5,
+      psychValues: [89, 86, 82, 84, 80],
       psychTriggers: [
         { name: 'Simplicity Bias', score: '89%' },
         { name: 'Quantifiable Proof', score: '86%' }
       ],
       thumbnailConcept: 'Before (14 cluttered fields) vs After (clean 4-step modal) flow chart with neon metrics.',
-      retentionPoints: 'M0,19 Q100,30 200,44 T400,56',
+      retentionCurve: [93, 85, 78, 72, 67, 63, 59],
       explanation: 'Clear contrast between complex convention and minimalist execution with verified metrics.'
     },
     {
@@ -243,12 +257,13 @@
       isHero: false,
       saved: false,
       createdDaysAgo: 6,
+      psychValues: [82, 78, 85, 70, 68],
       psychTriggers: [
         { name: 'Vulnerability / Trust', score: '82%' },
         { name: 'Voyeurism', score: '78%' }
       ],
       thumbnailConcept: 'Clean Stripe dashboard screenshot with blurred tax deductions and authentic ambient desk shot.',
-      retentionPoints: 'M0,25 Q100,40 200,58 T400,75',
+      retentionCurve: [88, 78, 69, 61, 55, 49, 44],
       explanation: 'Builds deep trust and high session duration with hardcore fans, though lower broad algorithm breakout.'
     },
     {
@@ -265,12 +280,13 @@
       isHero: false,
       saved: false,
       createdDaysAgo: 4,
+      psychValues: [94, 88, 85, 91, 92],
       psychTriggers: [
         { name: 'Urgency / Immediate Loss', score: '94%' },
         { name: 'Curiosity on Identity', score: '88%' }
       ],
       thumbnailConcept: 'Warning icon overlaying popular VS code marketplace logo badges with flame graphics.',
-      retentionPoints: 'M0,17 Q100,26 200,38 T400,49',
+      retentionCurve: [95, 88, 81, 76, 71, 67, 63],
       explanation: 'Loss aversion is twice as powerful as gain; developers immediately want to audit their machine.'
     }
   ];
@@ -283,6 +299,7 @@
   let activeView = 'bento';
   let selectedIdeaForDrawer = null;
   let authMode = 'signin';
+  let currentChartRange = '30d';
 
   // DOM Elements Cache
   const ideasGridEl = document.getElementById('ideas-grid');
@@ -308,7 +325,6 @@
   const heroUserNameEl = document.getElementById('hero-user-name');
   const sidebarAvatarInitials = document.getElementById('sidebar-avatar-initials');
   const sidebarUserAvatarBtn = document.getElementById('sidebar-user-avatar-btn');
-  const topbarProfileBtn = document.getElementById('topbar-profile-btn');
   const topbarAuthContainer = document.getElementById('topbar-auth-container');
 
   const authModal = document.getElementById('auth-modal');
@@ -390,22 +406,16 @@
   const drawerRatingDesc = document.getElementById('drawer-rating-desc');
   const drawerHookText = document.getElementById('drawer-hook-text');
   const drawerRetStat = document.getElementById('drawer-retention-stat');
-  const drawerRetArea = document.getElementById('drawer-retention-area');
-  const drawerRetPath = document.getElementById('drawer-retention-path');
-  const drawerPsychTags = document.getElementById('drawer-psych-tags');
   const drawerThumbConcept = document.getElementById('drawer-thumb-concept');
   const drawerBookmarkBtn = document.getElementById('drawer-bookmark-btn');
   const drawerCopyBtn = document.getElementById('drawer-copy-btn');
   const drawerCopyBtn2 = document.getElementById('drawer-copy-btn-2');
   const drawerExportBtn = document.getElementById('drawer-export-btn');
 
-  // Interactive Chart Elements
-  const interactiveSvg = document.getElementById('interactive-retention-svg');
-  const chartTooltip = document.getElementById('chart-hover-tooltip');
-  const chartTooltipTime = document.getElementById('chart-tooltip-time');
-  const chartTooltipVal = document.getElementById('chart-tooltip-val');
-  const chartCursorLine = document.getElementById('chart-cursor-line');
-  const chartCursorDot = document.getElementById('chart-cursor-dot');
+  // Chart Range Elements
+  const chartTabBtns = document.querySelectorAll('.shadcn-tab-btn');
+  const legendReachVal = document.getElementById('legend-reach-val');
+  const legendRetVal = document.getElementById('legend-ret-val');
 
   // Lucide Icons Render Trigger
   function refreshIcons() {
@@ -420,11 +430,309 @@
     updateUIForAuth();
     updatePillCounts();
     renderGrid();
-    setupInteractiveChart();
+    initShadcnCharts();
     refreshIcons();
   }
 
-  // ================= 4. AUTH UI ADAPTATION =================
+  // ================= 4. SHADCN/UI CHART SUITE =================
+  function initShadcnCharts() {
+    initVelocityAreaChart('30d');
+    initPlatformDonutChart();
+  }
+
+  // shadcn chart-area-interactive: Velocity & Retention Area Chart
+  function initVelocityAreaChart(range = '30d') {
+    const ctx = document.getElementById('shadcn-velocity-area-chart');
+    if (!ctx) return;
+
+    if (velocityAreaChart) {
+      velocityAreaChart.destroy();
+    }
+
+    let labels, dataReach, dataRetention;
+
+    if (range === '30d') {
+      labels = ['Apr 1', 'Apr 5', 'Apr 10', 'Apr 15', 'Apr 20', 'Apr 25', 'Apr 30', 'May 5', 'May 10', 'May 15', 'May 20', 'May 25', 'May 30'];
+      dataReach = [180, 220, 310, 290, 380, 420, 390, 480, 440, 520, 490, 580, 640];
+      dataRetention = [68, 71, 74, 72, 79, 81, 77, 84, 82, 86, 85, 89, 92];
+      legendReachVal.textContent = '+340%';
+      legendRetVal.textContent = '74.2%';
+    } else if (range === '7d') {
+      labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      dataReach = [410, 460, 520, 480, 560, 610, 640];
+      dataRetention = [76, 79, 83, 81, 87, 89, 92];
+      legendReachVal.textContent = '+412%';
+      legendRetVal.textContent = '86.5%';
+    } else { // 24h
+      labels = ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', 'Now'];
+      dataReach = [120, 190, 340, 510, 620, 580, 640];
+      dataRetention = [70, 74, 80, 88, 91, 89, 92];
+      legendReachVal.textContent = '+520%';
+      legendRetVal.textContent = '91.8%';
+    }
+
+    const gradient1 = ctx.getContext('2d').createLinearGradient(0, 0, 0, 220);
+    gradient1.addColorStop(0, 'rgba(0, 245, 155, 0.35)');
+    gradient1.addColorStop(1, 'rgba(0, 245, 155, 0.00)');
+
+    const gradient2 = ctx.getContext('2d').createLinearGradient(0, 0, 0, 220);
+    gradient2.addColorStop(0, 'rgba(0, 242, 254, 0.25)');
+    gradient2.addColorStop(1, 'rgba(0, 242, 254, 0.00)');
+
+    velocityAreaChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Organic Reach Lift (%)',
+            data: dataReach,
+            borderColor: '#00F59B',
+            backgroundColor: gradient1,
+            fill: true,
+            tension: 0.38,
+            borderWidth: 2.2,
+            pointBackgroundColor: '#00F59B',
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBorderColor: '#FFFFFF',
+            pointHoverBorderWidth: 2
+          },
+          {
+            label: '30s Retention Lift (%)',
+            data: dataRetention,
+            borderColor: '#00F2FE',
+            backgroundColor: gradient2,
+            fill: true,
+            tension: 0.38,
+            borderWidth: 2,
+            pointBackgroundColor: '#00F2FE',
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBorderColor: '#FFFFFF',
+            pointHoverBorderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#121218',
+            titleColor: '#FFFFFF',
+            bodyColor: 'rgba(255, 255, 255, 0.8)',
+            borderColor: 'rgba(255, 255, 255, 0.15)',
+            borderWidth: 1,
+            padding: 12,
+            cornerRadius: 10,
+            titleFont: { family: 'Plus Jakarta Sans', size: 12, weight: '700' },
+            bodyFont: { family: 'JetBrains Mono', size: 11.5 },
+            displayColors: true,
+            boxWidth: 8,
+            boxHeight: 8,
+            boxPadding: 4,
+            usePointStyle: true
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255, 255, 255, 0.04)', drawBorder: false },
+            ticks: { color: 'rgba(255, 255, 255, 0.45)', font: { family: 'JetBrains Mono', size: 10.5 } }
+          },
+          y: {
+            grid: { color: 'rgba(255, 255, 255, 0.04)', drawBorder: false },
+            ticks: { color: 'rgba(255, 255, 255, 0.45)', font: { family: 'JetBrains Mono', size: 10.5 } }
+          }
+        }
+      }
+    });
+  }
+
+  // shadcn chart-pie-donut-text: Platform Donut Chart
+  function initPlatformDonutChart() {
+    const ctx = document.getElementById('shadcn-platform-donut-chart');
+    if (!ctx) return;
+
+    if (platformDonutChart) {
+      platformDonutChart.destroy();
+    }
+
+    platformDonutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['YouTube Long-form', 'Shorts / TikTok / Reels', 'X & LinkedIn'],
+        datasets: [{
+          data: [86, 94, 34],
+          backgroundColor: ['#FF3B30', '#F43F5E', '#38BDF8'],
+          borderColor: '#0E0E14',
+          borderWidth: 3,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '74%',
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#121218',
+            titleColor: '#FFFFFF',
+            bodyColor: 'rgba(255, 255, 255, 0.85)',
+            borderColor: 'rgba(255, 255, 255, 0.15)',
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            titleFont: { family: 'Plus Jakarta Sans', size: 11.5, weight: '700' },
+            bodyFont: { family: 'JetBrains Mono', size: 11 }
+          }
+        }
+      }
+    });
+  }
+
+  // Drawer Charts: 60s Retention Curve (shadcn Area Gradient) & Radar Chart
+  function updateDrawerCharts(idea) {
+    // 1. Retention Curve Area Chart
+    const retCtx = document.getElementById('shadcn-drawer-retention-chart');
+    if (retCtx) {
+      if (drawerRetentionChart) drawerRetentionChart.destroy();
+
+      const grad = retCtx.getContext('2d').createLinearGradient(0, 0, 0, 160);
+      grad.addColorStop(0, 'rgba(0, 245, 155, 0.38)');
+      grad.addColorStop(1, 'rgba(0, 245, 155, 0.00)');
+
+      const curve = idea.retentionCurve || [96, 92, 87, 82, 78, 74, 71];
+
+      drawerRetentionChart = new Chart(retCtx, {
+        type: 'line',
+        data: {
+          labels: ['0s (Hook)', '10s', '20s', '30s (Payoff)', '40s', '50s', '60s'],
+          datasets: [
+            {
+              label: 'Predicted Retention (%)',
+              data: curve,
+              borderColor: '#00F59B',
+              backgroundColor: grad,
+              fill: true,
+              tension: 0.35,
+              borderWidth: 2.2,
+              pointBackgroundColor: '#00F59B',
+              pointRadius: 3,
+              pointHoverRadius: 6
+            },
+            {
+              label: 'Niche Median Baseline',
+              data: [85, 72, 60, 52, 45, 40, 36],
+              borderColor: 'rgba(255, 255, 255, 0.25)',
+              borderDash: [4, 4],
+              borderWidth: 1.5,
+              pointRadius: 0,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#121218',
+              borderColor: 'rgba(0, 245, 155, 0.4)',
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: 10,
+              titleFont: { family: 'Plus Jakarta Sans', size: 11 },
+              bodyFont: { family: 'JetBrains Mono', size: 11 }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.04)', drawBorder: false },
+              ticks: { color: 'rgba(255, 255, 255, 0.45)', font: { family: 'JetBrains Mono', size: 10 } }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.04)', drawBorder: false },
+              ticks: { color: 'rgba(255, 255, 255, 0.45)', font: { family: 'JetBrains Mono', size: 10 } },
+              min: 30,
+              max: 100
+            }
+          }
+        }
+      });
+    }
+
+    // 2. Psychological Radar Chart
+    const radarCtx = document.getElementById('shadcn-drawer-radar-chart');
+    if (radarCtx) {
+      if (drawerRadarChart) drawerRadarChart.destroy();
+
+      const psychData = idea.psychValues || [95, 90, 88, 92, 94];
+
+      drawerRadarChart = new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+          labels: ['Curiosity Gap', 'High Stakes', 'Relatability', 'Novelty Bias', 'Urgency Index'],
+          datasets: [
+            {
+              label: 'This Hook',
+              data: psychData,
+              backgroundColor: 'rgba(139, 124, 246, 0.28)',
+              borderColor: '#8B7CF6',
+              pointBackgroundColor: '#8B7CF6',
+              pointBorderColor: '#FFFFFF',
+              pointHoverRadius: 5,
+              borderWidth: 2
+            },
+            {
+              label: 'Top 1% Benchmark',
+              data: [90, 85, 80, 88, 85],
+              backgroundColor: 'rgba(0, 245, 155, 0.1)',
+              borderColor: 'rgba(0, 245, 155, 0.4)',
+              borderWidth: 1.5,
+              pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#121218',
+              borderColor: 'rgba(139, 124, 246, 0.4)',
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: 10,
+              titleFont: { family: 'Plus Jakarta Sans', size: 11 },
+              bodyFont: { family: 'JetBrains Mono', size: 11 }
+            }
+          },
+          scales: {
+            r: {
+              angleLines: { color: 'rgba(255, 255, 255, 0.08)' },
+              grid: { color: 'rgba(255, 255, 255, 0.08)' },
+              pointLabels: {
+                color: 'rgba(255, 255, 255, 0.65)',
+                font: { family: 'Plus Jakarta Sans', size: 10, weight: '600' }
+              },
+              ticks: { display: false, min: 40, max: 100 }
+            }
+          }
+        }
+      });
+    }
+  }
+
+  // ================= 5. AUTH UI ADAPTATION =================
   function updateUIForAuth() {
     const firstName = currentUser.name ? currentUser.name.split(' ')[0] : 'Creator';
     const initials = getInitials(currentUser.name);
@@ -473,7 +781,7 @@
     return name.slice(0, 2).toUpperCase();
   }
 
-  // ================= 5. RENDERING & FILTERING =================
+  // ================= 6. RENDERING & FILTERING =================
   function getFilteredAndSortedIdeas() {
     let list = ideasState.filter(item => {
       // Search Matching
@@ -641,43 +949,7 @@
     countSavedEl.textContent = saved;
   }
 
-  // ================= 6. INTERACTIVE RETENTION CURVE CHART =================
-  function setupInteractiveChart() {
-    if (!interactiveSvg) return;
-
-    interactiveSvg.addEventListener('mousemove', (e) => {
-      const rect = interactiveSvg.getBoundingClientRect();
-      const x = Math.max(0, Math.min(400, ((e.clientX - rect.left) / rect.width) * 400));
-      
-      // Calculate retention percentage along curve
-      // Baseline 0s is ~94%, decaying smoothly to ~72% at 60s
-      const timeSec = Math.round((x / 400) * 60);
-      const retentionPct = Math.max(45, (95 - (x / 400) * 26 + Math.sin(x / 30) * 3)).toFixed(1);
-      
-      // Calculate Y coordinate on path
-      const y = Math.min(110, Math.max(10, (100 - parseFloat(retentionPct)) * 1.8));
-
-      chartCursorLine.setAttribute('x1', x);
-      chartCursorLine.setAttribute('x2', x);
-      chartCursorLine.style.display = 'block';
-
-      chartCursorDot.setAttribute('cx', x);
-      chartCursorDot.setAttribute('cy', y);
-      chartCursorDot.style.display = 'block';
-
-      chartTooltipTime.textContent = `${timeSec}s:`;
-      chartTooltipVal.textContent = `${retentionPct}% Retention`;
-      chartTooltip.style.display = 'flex';
-    });
-
-    interactiveSvg.addEventListener('mouseleave', () => {
-      chartCursorLine.style.display = 'none';
-      chartCursorDot.style.display = 'none';
-      chartTooltip.style.display = 'none';
-    });
-  }
-
-  // ================= 7. VIRALITY SCORING ENGINE =================
+  // ================= 7. VIRALITY SCORING DIAGNOSTIC =================
   function calculateViralityScore(hookText, platform, niche) {
     if (!hookText || hookText.trim().length === 0) {
       return { score: 0, curiosity: 0, stakes: 0, velocity: 0, tier: 'tier-draft', variations: [] };
@@ -780,7 +1052,6 @@
       return;
     }
 
-    // Button loading state with accessible aria-busy
     btnRunAnalysis.setAttribute('aria-busy', 'true');
     btnRunAnalysis.innerHTML = `
       <svg class="live-pulse" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
@@ -888,13 +1159,14 @@
       isHero: false,
       saved: true,
       createdDaysAgo: 0,
+      psychValues: [result.curiosity, result.stakes, 85, result.velocity, 90],
       psychTriggers: [
         { name: 'Curiosity Gap', score: `${result.curiosity}%` },
         { name: 'Stakes Index', score: `${result.stakes}%` },
         { name: 'Velocity Index', score: `${result.velocity}%` }
       ],
       thumbnailConcept: 'High-contrast typography preview with neon alert badges & creator facial expression.',
-      retentionPoints: 'M0,15 Q100,22 200,34 T400,45',
+      retentionCurve: [95, 90, 85, 80, 75, 71, 68],
       explanation: 'Newly calibrated hook with high audience retention and curiosity triggers.'
     };
 
@@ -937,17 +1209,6 @@
 
     drawerHookText.textContent = `"${idea.hook}"`;
     drawerRetStat.textContent = idea.retentionLift;
-    drawerRetPath.setAttribute('d', idea.retentionPoints || 'M0,15 Q100,20 200,32 T400,45');
-    drawerRetArea.setAttribute('d', `${idea.retentionPoints || 'M0,15 Q100,20 200,32 T400,45'} L400,120 L0,120 Z`);
-
-    // Render Psych Triggers
-    drawerPsychTags.innerHTML = idea.psychTriggers.map(p => `
-      <div class="psych-card-tag">
-        <span>${p.name}:</span>
-        <strong>${p.score}</strong>
-      </div>
-    `).join('');
-
     drawerThumbConcept.textContent = idea.thumbnailConcept;
 
     // Set bookmark button state
@@ -961,6 +1222,12 @@
 
     detailDrawer.classList.add('active');
     detailDrawer.setAttribute('aria-hidden', 'false');
+
+    // Update Drawer shadcn Charts
+    setTimeout(() => {
+      updateDrawerCharts(idea);
+    }, 150);
+
     refreshIcons();
   }
 
@@ -1106,6 +1373,20 @@
       clearSearchBtnEl.style.display = 'none';
       searchInputEl.focus();
       renderGrid();
+    });
+
+    // Time-range tabs for Area Chart
+    chartTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        chartTabBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        currentChartRange = btn.getAttribute('data-range');
+        initVelocityAreaChart(currentChartRange);
+      });
     });
 
     // Filter pills
@@ -1315,12 +1596,13 @@
           isHero: false,
           saved: false,
           createdDaysAgo: 0,
+          psychValues: [scoreObj.curiosity, scoreObj.stakes, 80, scoreObj.velocity, 85],
           psychTriggers: [
             { name: 'Curiosity Gap', score: `${scoreObj.curiosity}%` },
             { name: 'Velocity', score: `${scoreObj.velocity}%` }
           ],
           thumbnailConcept: 'High-contrast split visual with competitor comparative analysis.',
-          retentionPoints: 'M0,16 Q100,24 200,36 T400,48',
+          retentionCurve: [94, 88, 80, 74, 69, 64, 60],
           explanation: 'Imported and calibrated via batch link analyzer.'
         });
       });
