@@ -1,7 +1,7 @@
 /**
  * VANTAGE VIRALITY OS V2 — CREATOR ONBOARDING & CONTINUOUS TREND INTELLIGENCE OS
- * Full client-side database, multi-step onboarding wizard, 7-signal opportunity scoring engine,
- * 12-angle AI content ideator, and 6-stage production library.
+ * 100% Functional Client-Side Database, 7-Signal Opportunity Engine, 12-Angle Studio,
+ * Dynamic Live Timing, 6-Stage Production Kanban & List System, Full Onboarding Wizard.
  */
 
 (function () {
@@ -10,7 +10,6 @@
   // ================= 1. CONSTANTS & STORAGE KEYS =================
   const STORAGE_KEY_PROFILE = 'vantage_creator_profile';
   const STORAGE_KEY_LIBRARY = 'vantage_saved_library';
-  const STORAGE_KEY_SESSION = 'vantage_user_session';
 
   // Default Creator Profile schema
   const DEFAULT_CREATOR_PROFILE = {
@@ -44,6 +43,15 @@
   let activeNicheFilter = 'all';
   let searchQuery = '';
   let currentOnboardStep = 1;
+  let sampleHookIndex = 0;
+
+  const SAMPLE_HOOKS = [
+    "I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model.",
+    "Delete these 3 VS Code extensions before they secretly slow down your build times.",
+    "Why 90% of creators fail at short-form video in 2026 (and the 3-second fix).",
+    "I tested every AI video editor so you don't have to — here is the brutal truth.",
+    "How one solopreneur scaled a micro-SaaS to $45k/mo with zero employees."
+  ];
 
   // ================= 2. SEED TREND DATASET (7 NICHES • DEMO DATA) =================
   const SEED_TRENDS = [
@@ -333,6 +341,7 @@
     updateCreatorPersonaChips();
     renderTrendingSection();
     renderIdeasSection();
+    renderSearchSection();
   }
 
   function loadSavedLibrary() {
@@ -364,8 +373,7 @@
     const f = trend.freshness || 80;
     const c = trend.competition || 70;
 
-    // Calculate Relevance based on profile niches
-    const isNicheMatch = profile.niches.includes(trend.niche);
+    const isNicheMatch = (profile.niches || []).includes(trend.niche);
     const r = isNicheMatch ? 98 : 65;
 
     const rawScore = (0.25 * m) + (0.20 * e) + (0.15 * s) + (0.15 * o) + (0.10 * f) + (0.10 * c) + (0.05 * r);
@@ -522,7 +530,7 @@
     });
   }
 
-  // ================= 6. INITIALIZATION =================
+  // ================= 6. INITIALIZATION & LIVE CLOCK =================
   function init() {
     bindEvents();
     updateLiveClockAndGreeting();
@@ -534,7 +542,6 @@
     renderLibrarySection();
     refreshLucideIcons();
 
-    // Trigger onboarding on first visit if not yet completed
     if (!creatorProfile.onboarding_completed) {
       openOnboardingModal();
     }
@@ -576,7 +583,7 @@
     }
   }
 
-  // ================= 7. RENDER PERSONA CHIPS & HERO GREETING =================
+  // ================= 7. RENDER PERSONA CHIPS =================
   function updateCreatorPersonaChips() {
     const chipsEl = document.getElementById('creator-persona-chips');
     const heroNameEl = document.getElementById('hero-user-name');
@@ -606,11 +613,13 @@
       .map(n => `<span class="persona-chip highlight">${nicheLabels[n] || n}</span>`)
       .join('');
 
-    chipsEl.innerHTML = `
-      ${nichesHtml}
-      <span class="persona-chip">Target: ${creatorProfile.age_range || '18-34'} &bull; ${creatorProfile.country || 'India'}</span>
-      <span class="persona-chip">Goal: ${creatorProfile.goals === 'views' ? 'Max Views' : 'Authority & Growth'}</span>
-    `;
+    if (chipsEl) {
+      chipsEl.innerHTML = `
+        ${nichesHtml}
+        <span class="persona-chip">Target: ${creatorProfile.age_range || '18-34'} &bull; ${creatorProfile.country || 'India'}</span>
+        <span class="persona-chip">Goal: ${creatorProfile.goals === 'views' ? 'Max Views' : 'Authority & Growth'}</span>
+      `;
+    }
   }
 
   // ================= 8. SECTION 1: TRENDING FOR YOU =================
@@ -620,7 +629,6 @@
 
     let trends = SEED_TRENDS.filter(t => {
       if (activeTrendingPlatform !== 'all' && t.platform !== activeTrendingPlatform) return false;
-      // Filter by creator's selected niches if any match
       if (creatorProfile.niches && creatorProfile.niches.length > 0) {
         return creatorProfile.niches.includes(t.niche);
       }
@@ -777,7 +785,7 @@
       title: idea.title,
       hook: idea.hook,
       niche: idea.niche || 'ai',
-      platform: idea.format.includes('YouTube') ? 'youtube' : 'shorts',
+      platform: idea.format && idea.format.includes('YouTube') ? 'youtube' : 'shorts',
       score: idea.score,
       scoreTier: idea.scoreTier || 'STRONG',
       source: idea.trendSource || 'Trend Intelligence',
@@ -788,7 +796,7 @@
 
     savedLibrary.unshift(newSaved);
     saveLibrary(savedLibrary);
-    showToast(`Saved "${idea.title.slice(0, 30)}…" to Library!`);
+    showToast(`Saved "${idea.title.slice(0, 30)}…" to Content Library!`);
   }
 
   // ================= 10. SECTION 3: SEARCH CONTENT INTELLIGENCE =================
@@ -796,9 +804,10 @@
     const grid = document.getElementById('search-results-grid');
     const topicContainer = document.getElementById('topic-items-container');
     const nicheList = document.getElementById('niche-menu-list');
+    const activeFiltersList = document.getElementById('active-filters-chips');
     if (!grid) return;
 
-    // Populate Dropdown Menus
+    // Populate Topic Dropdown Items
     if (topicContainer) {
       topicContainer.innerHTML = `
         <button class="topic-menu-item ${activeTopicFilter === 'all' ? 'active' : ''}" data-topic="all"><span class="topic-item-name">All Topics</span><span class="topic-count">214</span></button>
@@ -819,6 +828,7 @@
       });
     }
 
+    // Populate Niche Dropdown Items
     if (nicheList) {
       nicheList.innerHTML = `
         <button class="niche-menu-item ${activeNicheFilter === 'all' ? 'active' : ''}" data-niche="all"><div class="niche-item-info"><span class="niche-name">All Niches</span><span class="niche-meta">Broad audience cross-pollination</span></div><span class="niche-badge-pill">Global</span></button>
@@ -833,6 +843,40 @@
           activeNicheFilter = item.getAttribute('data-niche');
           document.getElementById('niche-menu-label').textContent = activeNicheFilter === 'all' ? 'Niche: All' : `Niche: ${activeNicheFilter.toUpperCase()}`;
           document.getElementById('niche-search-dropdown').classList.remove('show');
+          renderSearchSection();
+        });
+      });
+    }
+
+    // Update Active Filters Chips Bar
+    if (activeFiltersList) {
+      let chipsHtml = '';
+      if (searchQuery) {
+        chipsHtml += `<span class="active-chip-pill">Query: "${searchQuery}" <button type="button" class="btn-text remove-filter-chip" data-type="query">&times;</button></span>`;
+      }
+      if (activeTopicFilter !== 'all') {
+        chipsHtml += `<span class="active-chip-pill">Topic: ${activeTopicFilter} <button type="button" class="btn-text remove-filter-chip" data-type="topic">&times;</button></span>`;
+      }
+      if (activeNicheFilter !== 'all') {
+        chipsHtml += `<span class="active-chip-pill">Niche: ${activeNicheFilter.toUpperCase()} <button type="button" class="btn-text remove-filter-chip" data-type="niche">&times;</button></span>`;
+      }
+      activeFiltersList.innerHTML = chipsHtml;
+
+      activeFiltersList.querySelectorAll('.remove-filter-chip').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const t = btn.getAttribute('data-type');
+          if (t === 'query') {
+            searchQuery = '';
+            document.getElementById('global-search-input').value = '';
+            document.getElementById('clear-search-btn').style.display = 'none';
+          } else if (t === 'topic') {
+            activeTopicFilter = 'all';
+            document.getElementById('topic-menu-label').textContent = 'Topics';
+          } else if (t === 'niche') {
+            activeNicheFilter = 'all';
+            document.getElementById('niche-menu-label').textContent = 'Niche: All';
+          }
           renderSearchSection();
         });
       });
@@ -853,7 +897,7 @@
     grid.innerHTML = results.map(t => {
       const opp = calculateOpportunityScore(t, creatorProfile);
       return `
-        <article class="idea-card span-1" role="button" tabindex="0">
+        <article class="idea-card span-1" role="button" tabindex="0" onclick="window.vantageApp.openInspector('${t.id}')">
           <div class="card-top">
             <div class="platform-pill ${t.platform}">
               <svg class="lucide lucide-sparkles" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
@@ -876,7 +920,7 @@
               <svg class="lucide lucide-activity" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               <span>${t.outlierText}</span>
             </div>
-            <button class="btn btn-secondary btn-sm" onclick="window.vantageApp.openInspector('${t.id}')">Inspect</button>
+            <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); window.vantageApp.openInspector('${t.id}')">Inspect</button>
           </div>
         </article>
       `;
@@ -891,7 +935,7 @@
     return escapeHtml(text).replace(new RegExp(`(${escaped})`, 'gi'), '<span style="color: #059669; text-decoration: underline; background: rgba(5,150,105,0.12); padding: 1px 4px; border-radius: 4px; font-weight: 700;">$1</span>');
   }
 
-  // ================= 11. SECTION 4: 6-STAGE PRODUCTION KANBAN LIBRARY =================
+  // ================= 11. SECTION 4: 6-STAGE PRODUCTION KANBAN & LIST SYSTEM =================
   function renderLibrarySection() {
     const board = document.getElementById('library-kanban-board');
     const allCountEl = document.getElementById('lib-count-all');
@@ -912,38 +956,103 @@
       st.count = savedLibrary.filter(i => (i.stage || 'idea') === st.id).length;
     });
 
-    board.innerHTML = stages.map(st => {
-      const cardsInStage = savedLibrary.filter(i => (i.stage || 'idea') === st.id);
-      return `
-        <div class="kanban-col" data-stage="${st.id}">
-          <div class="kanban-col-header">
-            <span class="col-title">${st.name}</span>
-            <span class="col-badge">${cardsInStage.length}</span>
-          </div>
+    // Update active tab buttons in UI
+    document.querySelectorAll('#library-stage-tabs .stage-tab').forEach(tab => {
+      const stageId = tab.getAttribute('data-stage');
+      tab.classList.toggle('active', stageId === activeLibraryStage);
+    });
 
-          <div class="kanban-cards-stack">
-            ${cardsInStage.map(item => `
-              <div class="lib-saved-card" data-id="${item.id}">
-                <div class="lib-card-hook">"${item.hook || item.title}"</div>
-                
-                <div class="lib-card-meta">
-                  <span class="lib-score">Score ${item.score}</span>
-                  <select class="lib-stage-select" data-id="${item.id}">
-                    <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>Ideas</option>
-                    <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>Researching</option>
-                    <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>Scripted</option>
-                    <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>Filming</option>
-                    <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
-                    <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
-                  </select>
-                </div>
-              </div>
+    if (activeLibraryView === 'list') {
+      // Render Detailed List Table View
+      let filteredItems = savedLibrary;
+      if (activeLibraryStage !== 'all') {
+        filteredItems = savedLibrary.filter(i => (i.stage || 'idea') === activeLibraryStage);
+      }
+
+      board.innerHTML = `
+        <table class="library-list-table">
+          <thead>
+            <tr>
+              <th>Idea Hook & Title</th>
+              <th>Score</th>
+              <th>Platform</th>
+              <th>Stage</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filteredItems.length === 0 ? `<tr><td colspan="6" style="text-align: center; color: var(--text-tertiary); padding: 24px;">No ideas in this stage yet. Click "Generate Ideas" or "Score New Hook" to add!</td></tr>` : ''}
+            ${filteredItems.map(item => `
+              <tr>
+                <td><strong>"${item.hook || item.title}"</strong></td>
+                <td><span class="opp-score-badge tier-explosive" style="width: 38px; height: 38px;"><span class="opp-score-num" style="font-size: 16px;">${item.score}</span></span></td>
+                <td><span class="platform-pill ${item.platform}">${item.platform.toUpperCase()}</span></td>
+                <td><span class="lib-stage-badge">${item.stageName || item.stage}</span></td>
+                <td><span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">${item.createdAt || 'Today'}</span></td>
+                <td>
+                  <div class="lib-card-actions">
+                    <select class="lib-stage-select" data-id="${item.id}">
+                      <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>Ideas</option>
+                      <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>Researching</option>
+                      <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>Scripted</option>
+                      <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>Filming</option>
+                      <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
+                      <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
+                    </select>
+                    <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea">
+                      <svg class="lucide lucide-trash-2" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
             `).join('')}
-          </div>
-        </div>
+          </tbody>
+        </table>
       `;
-    }).join('');
+    } else {
+      // Render 6-Stage Kanban Board Columns
+      board.innerHTML = stages.map(st => {
+        if (activeLibraryStage !== 'all' && activeLibraryStage !== st.id) return '';
+        const cardsInStage = savedLibrary.filter(i => (i.stage || 'idea') === st.id);
+        return `
+          <div class="kanban-col" data-stage="${st.id}">
+            <div class="kanban-col-header">
+              <span class="col-title">${st.name}</span>
+              <span class="col-badge">${cardsInStage.length}</span>
+            </div>
 
+            <div class="kanban-cards-stack">
+              ${cardsInStage.length === 0 ? `<div style="font-size: 11.5px; color: var(--text-faint); padding: 14px; text-align: center;">No ideas yet</div>` : ''}
+              ${cardsInStage.map(item => `
+                <div class="lib-saved-card" data-id="${item.id}">
+                  <div class="lib-card-hook">"${item.hook || item.title}"</div>
+                  
+                  <div class="lib-card-meta">
+                    <span class="lib-score">Score ${item.score}</span>
+                    <div class="lib-card-actions">
+                      <select class="lib-stage-select" data-id="${item.id}">
+                        <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>Ideas</option>
+                        <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>Researching</option>
+                        <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>Scripted</option>
+                        <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>Filming</option>
+                        <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
+                        <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
+                      </select>
+                      <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea">
+                        <svg class="lucide lucide-trash-2" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Attach listeners for stage transitions
     board.querySelectorAll('.lib-stage-select').forEach(sel => {
       sel.addEventListener('change', (e) => {
         const id = sel.getAttribute('data-id');
@@ -951,9 +1060,21 @@
         const target = savedLibrary.find(i => i.id === id);
         if (target) {
           target.stage = newStage;
+          target.stageName = newStage.charAt(0).toUpperCase() + newStage.slice(1);
           saveLibrary(savedLibrary);
-          showToast(`Moved to ${newStage.toUpperCase()} stage!`);
+          showToast(`Moved idea to ${target.stageName} stage!`);
         }
+      });
+    });
+
+    // Attach listeners for idea deletion
+    board.querySelectorAll('.btn-lib-del').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-id');
+        savedLibrary = savedLibrary.filter(i => i.id !== id);
+        saveLibrary(savedLibrary);
+        showToast('Idea removed from Content Library.');
       });
     });
 
@@ -964,11 +1085,44 @@
   function openOnboardingModal() {
     currentOnboardStep = 1;
     showOnboardingStep(1);
+    prefillOnboardingForm();
     const modal = document.getElementById('onboarding-modal');
     if (modal) {
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
     }
+  }
+
+  function prefillOnboardingForm() {
+    // Prefill tags in Step 1
+    document.querySelectorAll('#grid-content-types .onboard-tag-btn').forEach(b => {
+      const val = b.getAttribute('data-value');
+      b.classList.toggle('selected', (creatorProfile.content_types || []).includes(val));
+    });
+
+    // Prefill niches in Step 2
+    document.querySelectorAll('#grid-niches .onboard-tag-btn').forEach(b => {
+      const val = b.getAttribute('data-value');
+      b.classList.toggle('selected', (creatorProfile.niches || []).includes(val));
+    });
+
+    // Prefill audience in Step 3
+    if (document.getElementById('onboard-age-range')) document.getElementById('onboard-age-range').value = creatorProfile.age_range || '18-34';
+    if (document.getElementById('onboard-country')) document.getElementById('onboard-country').value = creatorProfile.country || 'India';
+    if (document.getElementById('onboard-language')) document.getElementById('onboard-language').value = creatorProfile.language || 'English';
+    if (document.getElementById('onboard-audience-desc')) document.getElementById('onboard-audience-desc').value = creatorProfile.audience_description || '';
+
+    // Prefill goals in Step 4
+    document.querySelectorAll('#grid-goals .goal-card').forEach(c => {
+      const val = c.getAttribute('data-value');
+      c.classList.toggle('selected', (creatorProfile.goals || 'views') === val);
+    });
+
+    // Prefill styles in Step 5
+    document.querySelectorAll('#grid-idea-types .onboard-tag-btn').forEach(b => {
+      const val = b.getAttribute('data-value');
+      b.classList.toggle('selected', (creatorProfile.preferred_formats || []).includes(val));
+    });
   }
 
   function closeOnboardingModal() {
@@ -996,7 +1150,6 @@
       if (prevBtn) prevBtn.style.display = step === 1 ? 'none' : 'block';
       if (nextBtn) nextBtn.innerHTML = `<span>Continue</span> <svg class="lucide lucide-arrow-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
     } else {
-      // Step Complete
       const completePane = document.getElementById('onboarding-step-complete');
       if (completePane) completePane.classList.add('active');
       if (progressFill) progressFill.style.width = '100%';
@@ -1018,9 +1171,9 @@
 
     const selPlatforms = Array.from(document.querySelectorAll('#grid-content-types .onboard-tag-btn.selected')).map(b => b.textContent.trim());
     const selNiches = Array.from(document.querySelectorAll('#grid-niches .onboard-tag-btn.selected')).map(b => b.textContent.trim());
-    const age = document.getElementById('onboard-age-range').value;
-    const country = document.getElementById('onboard-country').value;
-    const lang = document.getElementById('onboard-language').value;
+    const age = document.getElementById('onboard-age-range')?.value || '18-34';
+    const country = document.getElementById('onboard-country')?.value || 'India';
+    const lang = document.getElementById('onboard-language')?.value || 'English';
     const selGoal = document.querySelector('#grid-goals .goal-card.selected h4');
     const selStyles = Array.from(document.querySelectorAll('#grid-idea-types .onboard-tag-btn.selected')).map(b => b.textContent.trim());
 
@@ -1041,10 +1194,10 @@
       ...creatorProfile,
       content_types: selContentTypes.length > 0 ? selContentTypes : ['reels', 'shorts', 'youtube'],
       niches: selNiches.length > 0 ? selNiches : ['ai', 'technology'],
-      age_range: document.getElementById('onboard-age-range').value,
-      country: document.getElementById('onboard-country').value,
-      language: document.getElementById('onboard-language').value,
-      audience_description: document.getElementById('onboard-audience-desc').value || 'Young creators and developers',
+      age_range: document.getElementById('onboard-age-range')?.value || '18-34',
+      country: document.getElementById('onboard-country')?.value || 'India',
+      language: document.getElementById('onboard-language')?.value || 'English',
+      audience_description: document.getElementById('onboard-audience-desc')?.value || 'Young creators and developers',
       goals: selGoal,
       preferred_formats: selStyles,
       onboarding_completed: true,
@@ -1120,7 +1273,7 @@
       });
     });
 
-    // Angle Chips
+    // Angle Chips in Studio
     document.querySelectorAll('#angles-container .angle-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         document.querySelectorAll('#angles-container .angle-chip').forEach(c => c.classList.remove('active'));
@@ -1129,6 +1282,32 @@
         renderIdeasSection();
       });
     });
+
+    // Library Stage Filter Tabs
+    document.querySelectorAll('#library-stage-tabs .stage-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        activeLibraryStage = tab.getAttribute('data-stage');
+        renderLibrarySection();
+      });
+    });
+
+    // Library View Switcher (Kanban vs List)
+    const viewKanbanBtn = document.getElementById('view-kanban');
+    const viewListBtn = document.getElementById('view-list');
+    if (viewKanbanBtn && viewListBtn) {
+      viewKanbanBtn.addEventListener('click', () => {
+        viewKanbanBtn.classList.add('active');
+        viewListBtn.classList.remove('active');
+        activeLibraryView = 'kanban';
+        renderLibrarySection();
+      });
+      viewListBtn.addEventListener('click', () => {
+        viewListBtn.classList.add('active');
+        viewKanbanBtn.classList.remove('active');
+        activeLibraryView = 'list';
+        renderLibrarySection();
+      });
+    }
 
     // Onboarding Tag Toggles
     document.querySelectorAll('.onboard-tag-btn').forEach(btn => {
@@ -1144,6 +1323,18 @@
         card.classList.add('selected');
       });
     });
+
+    // Onboarding Live Niche Search Filter
+    const nicheSearchInput = document.getElementById('onboard-niche-search');
+    if (nicheSearchInput) {
+      nicheSearchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('#grid-niches .onboard-tag-btn').forEach(btn => {
+          const txt = btn.textContent.toLowerCase();
+          btn.style.display = !query || txt.includes(query) ? 'inline-flex' : 'none';
+        });
+      });
+    }
 
     // Onboarding Navigation
     const nextBtn = document.getElementById('btn-onboard-next');
@@ -1188,14 +1379,14 @@
       navOnboardingBtn.addEventListener('click', openOnboardingModal);
     }
 
-    // Sync button simulation
+    // Live Sync Signals Simulation
     const syncBtn = document.getElementById('btn-sync-trends');
     if (syncBtn) {
       syncBtn.addEventListener('click', () => {
         syncBtn.setAttribute('aria-busy', 'true');
         syncBtn.innerHTML = `
           <svg class="live-pulse" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-          <span>Querying Providers…</span>
+          <span>Querying Signals…</span>
         `;
         setTimeout(() => {
           syncBtn.removeAttribute('aria-busy');
@@ -1203,7 +1394,13 @@
             <svg class="lucide lucide-refresh-cw" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
             <span>Sync Signals</span>
           `;
-          showToast('24/7 Trend Radar refreshed! 8 signals updated.');
+          // Jiggle momentum slightly to simulate live telemetry
+          SEED_TRENDS.forEach(t => {
+            t.momentum = Math.min(99, Math.max(70, t.momentum + Math.floor(Math.random() * 5) - 2));
+          });
+          renderTrendingSection();
+          renderIdeasSection();
+          showToast('24/7 Trend Radar refreshed! 8 signals synchronized with live telemetry.');
           refreshLucideIcons();
         }, 600);
       });
@@ -1246,6 +1443,21 @@
         searchQuery = '';
         clearSearchBtn.style.display = 'none';
         renderSearchSection();
+      });
+    }
+
+    const clearAllFiltersBtn = document.getElementById('btn-clear-all-filters');
+    if (clearAllFiltersBtn) {
+      clearAllFiltersBtn.addEventListener('click', () => {
+        searchQuery = '';
+        activeTopicFilter = 'all';
+        activeNicheFilter = 'all';
+        if (searchInput) searchInput.value = '';
+        if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+        document.getElementById('topic-menu-label').textContent = 'Topics';
+        document.getElementById('niche-menu-label').textContent = 'Niche: All';
+        renderSearchSection();
+        showToast('All search filters reset.');
       });
     }
 
@@ -1354,7 +1566,8 @@
 
     if (pasteSampleBtn && hookInputField) {
       pasteSampleBtn.addEventListener('click', () => {
-        hookInputField.value = "I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model.";
+        hookInputField.value = SAMPLE_HOOKS[sampleHookIndex % SAMPLE_HOOKS.length];
+        sampleHookIndex++;
         if (hookCharCount) hookCharCount.textContent = `${hookInputField.value.length} characters • Optimal length: 55-90 chars`;
       });
     }
@@ -1383,28 +1596,43 @@
             addIdeaToLibrary({
               title: text.slice(0, 50),
               hook: text,
-              niche: 'ai',
-              format: 'YouTube Shorts (9:16)',
+              niche: document.getElementById('niche-select-field')?.value || 'ai',
+              format: document.getElementById('platform-select-field')?.options[document.getElementById('platform-select-field').selectedIndex].text || 'YouTube Shorts',
               score: score,
-              scoreTier: 'EXPLOSIVE',
+              scoreTier: score >= 90 ? 'EXPLOSIVE' : 'STRONG',
               trendSource: 'AI Virality Scorer'
             });
             closeScorer();
+            document.getElementById('section-library').scrollIntoView({ behavior: 'smooth' });
           };
         }
       });
     }
 
-    // Global Keybindings: 'N' for Scorer, 'Escape' for modals
+    // Global Keybindings:
+    // '⌘K' or 'Ctrl+K' or '/' for Search, 'N' for Scorer, 'S' for Sync, 'Escape' for modals
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeAuth();
         closeScorer();
         closeTrendInspector();
         closeOnboardingModal();
-      } else if ((e.key === 'n' || e.key === 'N') && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      } else if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        openScorer();
+        document.getElementById('section-search').scrollIntoView({ behavior: 'smooth' });
+        if (searchInput) searchInput.focus();
+      } else if (!['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        if (e.key === 'n' || e.key === 'N') {
+          e.preventDefault();
+          openScorer();
+        } else if (e.key === 's' || e.key === 'S') {
+          e.preventDefault();
+          syncBtn?.click();
+        } else if (e.key === '/') {
+          e.preventDefault();
+          document.getElementById('section-search').scrollIntoView({ behavior: 'smooth' });
+          if (searchInput) searchInput.focus();
+        }
       }
     });
 
