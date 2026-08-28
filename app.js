@@ -1,6 +1,7 @@
 /**
  * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION
  * Ultra-Modern SaaS Dashboard Logic & Virality Simulation Engine
+ * Fully Powered by Lucide Icons
  */
 
 (function () {
@@ -317,11 +318,19 @@
   const drawerCopyBtn2 = document.getElementById('drawer-copy-btn-2');
   const drawerExportBtn = document.getElementById('drawer-export-btn');
 
+  // Lucide Icons Render Trigger
+  function refreshIcons() {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  }
+
   // ================= 2. INITIALIZATION =================
   function init() {
     bindEventListeners();
     updatePillCounts();
     renderGrid();
+    refreshIcons();
   }
 
   // ================= 3. RENDERING & FILTERING =================
@@ -393,7 +402,7 @@
             <path d="M0,15 Q100,18 200,32 T400,42" fill="none" stroke="#00F59B" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
           <div class="hero-spark-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            <svg class="lucide lucide-trending-up" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
             ${idea.retentionLift}
           </div>
         </div>
@@ -423,17 +432,17 @@
           <div class="card-meta-footer">
             <div class="card-metrics-group">
               <div class="metric-pill positive">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                <svg class="lucide lucide-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.48 12H2"/></svg>
                 <span>${idea.velocity}</span>
               </div>
             </div>
 
             <div class="card-action-icons" onclick="event.stopPropagation()">
               <button class="action-btn-sm copy-btn" data-hook="${escapeHtml(idea.hook)}" title="Copy Hook to Clipboard">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <svg class="lucide lucide-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
               </button>
               <button class="action-btn-sm save-btn ${idea.saved ? 'saved' : ''}" data-id="${idea.id}" title="${idea.saved ? 'Remove Bookmark' : 'Bookmark Idea'}">
-                <svg viewBox="0 0 24 24" fill="${idea.saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                <svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="${idea.saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
               </button>
             </div>
           </div>
@@ -467,6 +476,8 @@
         toggleSaveIdea(id);
       });
     });
+
+    refreshIcons();
   }
 
   function updatePillCounts() {
@@ -601,7 +612,7 @@
 
       // Render Results
       resultScoreNum.textContent = result.score;
-      resultScoreLabel.textContent = result.score >= 90 ? '🔥 VIRAL HIT' : (result.score >= 70 ? '⚡ HIGH REACH' : 'CALIBRATED');
+      resultScoreLabel.textContent = result.score >= 90 ? 'VIRAL HIT' : (result.score >= 70 ? 'HIGH REACH' : 'CALIBRATED');
       
       // Ring glow colors
       if (result.score >= 90) {
@@ -649,10 +660,11 @@
       // Enable Save
       saveToLibraryBtn.disabled = false;
       btnRunAnalysis.innerHTML = `
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        <svg class="lucide lucide-sparkles" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
         <span>Recalibrate Diagnostics</span>
       `;
       btnRunAnalysis.disabled = false;
+      refreshIcons();
     }, 450);
   }
 
@@ -698,7 +710,7 @@
     updatePillCounts();
     renderGrid();
     closeModal(scorerModal);
-    showToast(`"${text.slice(0, 32)}…" saved to Idea Library! 🔥`);
+    showToast(`"${text.slice(0, 32)}…" saved to Idea Library!`);
   }
 
   // ================= 5. DETAIL DRAWER =================
@@ -748,14 +760,15 @@
     // Set bookmark button state
     if (idea.saved) {
       drawerBookmarkBtn.classList.add('saved');
-      drawerBookmarkBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+      drawerBookmarkBtn.innerHTML = '<svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>';
     } else {
       drawerBookmarkBtn.classList.remove('saved');
-      drawerBookmarkBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+      drawerBookmarkBtn.innerHTML = '<svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>';
     }
 
     detailDrawer.classList.add('active');
     detailDrawer.setAttribute('aria-hidden', 'false');
+    refreshIcons();
   }
 
   function closeDetailDrawer() {
@@ -770,7 +783,7 @@
       item.saved = !item.saved;
       updatePillCounts();
       renderGrid();
-      showToast(item.saved ? 'Added to Saved Swipe Files ★' : 'Removed from Saved Swipe Files');
+      showToast(item.saved ? 'Added to Saved Swipe Files' : 'Removed from Saved Swipe Files');
     }
   }
 
@@ -926,7 +939,7 @@
       renderGrid();
       closeModal(batchModal);
       batchInputField.value = '';
-      showToast(`Successfully processed & scored ${lines.length} ideas! 🚀`);
+      showToast(`Successfully processed & scored ${lines.length} ideas!`);
     });
 
     // Drawer Actions
@@ -946,7 +959,7 @@
     drawerExportBtn.addEventListener('click', () => {
       if (selectedIdeaForDrawer) {
         copyToClipboard(selectedIdeaForDrawer.hook);
-        showToast('🚀 Exported to Script Studio workspace!');
+        showToast('Exported to Script Studio workspace!');
       }
     });
 
@@ -995,6 +1008,7 @@
     if (modalEl === scorerModal) {
       setTimeout(() => hookInputField.focus(), 100);
     }
+    refreshIcons();
   }
 
   function closeModal(modalEl) {
@@ -1020,7 +1034,7 @@
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = `
-      <svg class="toast-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <svg class="toast-icon lucide lucide-check-circle-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
       <span>${escapeHtml(msg)}</span>
     `;
     toastContainer.appendChild(toast);
@@ -1044,11 +1058,11 @@
 
   function getPlatformIcon(platform) {
     if (platform === 'youtube') {
-      return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9 1.7.2 7.2.2 7.2.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>';
+      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.1c.8.8 1.9.8 2.3.9 1.7.2 7.2.2 7.2.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>';
     } else if (platform === 'shorts') {
-      return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.86 1 1.1 1.7.24.66.4 1.4.46 2.5.05 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.5-.27.7-.6 1.2-1.1 1.7-.5.5-1 .86-1.7 1.1-.66.24-1.4.4-2.5.46-1.1.05-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.46a4.6 4.6 0 0 1-1.1-1.7 4.6 4.6 0 0 1-1.1-1.7c-.24-.66-.4-1.4-.46-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.5.27-.7.6-1.2 1.1-1.7.5-.5 1-.86 1.7-1.1.66-.24 1.4-.4 2.5-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>';
+      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.86 1 1.1 1.7.24.66.4 1.4.46 2.5.05 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.5-.27.7-.6 1.2-1.1 1.7-.5.5-1 .86-1.7 1.1-.66.24-1.4.4-2.5.46-1.1.05-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.66-.4-1.4-.46-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.46-2.5.27-.7.6-1.2 1.1-1.7.5-.5 1-.86 1.7-1.1.66-.24 1.4-.4 2.5-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.4-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>';
     } else {
-      return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57z"/></svg>';
+      return '<svg class="lucide" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57z"/></svg>';
     }
   }
 
