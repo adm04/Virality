@@ -229,9 +229,18 @@ body::before {
   width: 100%;
 }
 
+/* ================= GLOBAL LUCIDE & SVG CONSTRAINTS ================= */
+.lucide {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.8;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 .nav-item {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-md);
   background: transparent;
   border: 1px solid transparent;
@@ -243,10 +252,28 @@ body::before {
   position: relative;
   transition: all var(--duration-base) var(--ease-smooth);
 }
+.nav-item svg,
+.sidebar .nav-item svg,
+.sidebar .nav-item .lucide {
+  width: 19px !important;
+  height: 19px !important;
+  max-width: 19px !important;
+  max-height: 19px !important;
+  stroke-width: 1.8;
+  display: block;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, stroke 0.2s ease;
+}
 .nav-item:hover {
   color: var(--text-primary);
   background: rgba(255, 255, 255, 0.045);
   border-color: rgba(255, 255, 255, 0.08);
+}
+.nav-item:hover svg,
+.sidebar .nav-item:hover svg,
+.sidebar .nav-item:hover .lucide {
+  transform: scale(1.1);
+  color: var(--text-primary);
 }
 .nav-item.active {
   color: var(--chart-1);
