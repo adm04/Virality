@@ -1,13 +1,52 @@
 /**
  * VANTAGE VIRALITY OS — INTERACTIVE CLIENT APPLICATION
- * Ultra-Modern SaaS Dashboard Logic & Virality Simulation Engine
- * Fully Powered by Lucide Icons
+ * Ultra-Modern SaaS Dashboard Logic, Virality Simulation Engine,
+ * and Zero-Backend Client Authentication System
  */
 
 (function () {
   'use strict';
 
-  // ================= 1. CORE DATASET (CURATED VIRAL HOOKS) =================
+  // ================= 1. AUTHENTICATION & USER STATE =================
+  const STORAGE_KEY_SESSION = 'vantage_user_session';
+  const STORAGE_KEY_IDEAS = 'vantage_ideas_data';
+
+  const DEFAULT_USER = {
+    id: 'user-arka-01',
+    name: 'Arka Mondal',
+    email: 'arkadeb.mondal@example.com',
+    initials: 'AM',
+    tier: 'PRO CREATOR TIER',
+    tierShort: 'PRO',
+    niche: 'tech-ai',
+    calibrationsCount: 84,
+    savedCount: 12,
+    isLoggedIn: true
+  };
+
+  let currentUser = loadUserSession();
+
+  function loadUserSession() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_SESSION);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.warn('LocalStorage error:', e);
+    }
+    return { ...DEFAULT_USER };
+  }
+
+  function saveUserSession(user) {
+    currentUser = user;
+    try {
+      localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(user));
+    } catch (e) {
+      console.warn('LocalStorage error:', e);
+    }
+    updateUIForAuth();
+  }
+
+  // ================= 2. CORE DATASET (CURATED VIRAL HOOKS) =================
   const INITIAL_IDEAS = [
     {
       id: 'idea-1',
@@ -242,6 +281,7 @@
   let activeSort = 'score-desc';
   let activeView = 'bento';
   let selectedIdeaForDrawer = null;
+  let authMode = 'signin'; // 'signin' or 'signup'
 
   // DOM Elements Cache
   const ideasGridEl = document.getElementById('ideas-grid');
@@ -262,6 +302,48 @@
   const countShortsEl = document.getElementById('count-shorts');
   const countSocialEl = document.getElementById('count-social');
   const countSavedEl = document.getElementById('count-saved');
+
+  // Auth & Profile Elements
+  const heroUserNameEl = document.getElementById('hero-user-name');
+  const sidebarAvatarInitials = document.getElementById('sidebar-avatar-initials');
+  const sidebarUserAvatarBtn = document.getElementById('sidebar-user-avatar-btn');
+  const topbarProfileBtn = document.getElementById('topbar-profile-btn');
+  const topbarAvatarInitials = document.getElementById('topbar-avatar-initials');
+  const topbarChipName = document.getElementById('topbar-chip-name');
+  const topbarTierBadge = document.getElementById('topbar-tier-badge');
+  const topbarAuthContainer = document.getElementById('topbar-auth-container');
+
+  const authModal = document.getElementById('auth-modal');
+  const closeAuthModalBtn = document.getElementById('close-auth-modal');
+  const tabSignIn = document.getElementById('tab-sign-in');
+  const tabSignUp = document.getElementById('tab-sign-up');
+  const authModalTitle = document.getElementById('auth-modal-title');
+  const authModalSubtitle = document.getElementById('auth-modal-subtitle');
+  const groupAuthName = document.getElementById('group-auth-name');
+  const authInputName = document.getElementById('auth-input-name');
+  const authInputEmail = document.getElementById('auth-input-email');
+  const authInputPassword = document.getElementById('auth-input-password');
+  const authSubmitLabel = document.getElementById('auth-submit-label');
+  const btnAuthSubmit = document.getElementById('btn-auth-submit');
+  const btnAuthGoogle = document.getElementById('btn-auth-google');
+  const btnAuthGithub = document.getElementById('btn-auth-github');
+  const btnFillDemoAccount = document.getElementById('btn-fill-demo-account');
+  const btnTogglePassword = document.getElementById('btn-toggle-password');
+  const authForgotBtn = document.getElementById('auth-forgot-btn');
+
+  // Profile Modal Elements
+  const profileModal = document.getElementById('profile-modal');
+  const closeProfileModalBtn = document.getElementById('close-profile-modal');
+  const modalProfileAvatar = document.getElementById('modal-profile-avatar');
+  const modalProfileName = document.getElementById('modal-profile-name');
+  const modalProfileEmail = document.getElementById('modal-profile-email');
+  const modalProfileTier = document.getElementById('modal-profile-tier');
+  const pStatCalibrations = document.getElementById('p-stat-calibrations');
+  const pStatSaved = document.getElementById('p-stat-saved');
+  const editProfileName = document.getElementById('edit-profile-name');
+  const editProfileNiche = document.getElementById('edit-profile-niche');
+  const btnSaveProfile = document.getElementById('btn-save-profile');
+  const btnSignOut = document.getElementById('btn-sign-out');
 
   // Modals & Drawers
   const scorerModal = document.getElementById('scorer-modal');
@@ -325,15 +407,64 @@
     }
   }
 
-  // ================= 2. INITIALIZATION =================
+  // ================= 3. INITIALIZATION =================
   function init() {
     bindEventListeners();
+    updateUIForAuth();
     updatePillCounts();
     renderGrid();
     refreshIcons();
   }
 
-  // ================= 3. RENDERING & FILTERING =================
+  // ================= 4. AUTH UI ADAPTATION =================
+  function updateUIForAuth() {
+    const firstName = currentUser.name ? currentUser.name.split(' ')[0] : 'Creator';
+    const initials = getInitials(currentUser.name);
+
+    if (currentUser.isLoggedIn) {
+      heroUserNameEl.textContent = `${firstName}.`;
+      sidebarAvatarInitials.textContent = initials;
+      
+      topbarAuthContainer.innerHTML = `
+        <button class="btn-user-chip" id="topbar-profile-btn" title="View Account Profile">
+          <div class="chip-avatar">${initials}</div>
+          <span class="chip-name">${currentUser.name}</span>
+          <span class="chip-badge">${currentUser.tierShort || 'PRO'}</span>
+        </button>
+      `;
+
+      const newTopbarProfileBtn = document.getElementById('topbar-profile-btn');
+      if (newTopbarProfileBtn) {
+        newTopbarProfileBtn.addEventListener('click', openProfileModal);
+      }
+    } else {
+      heroUserNameEl.textContent = 'Creator.';
+      sidebarAvatarInitials.textContent = '?';
+      
+      topbarAuthContainer.innerHTML = `
+        <button class="btn btn-primary" id="topbar-login-btn">
+          <svg class="lucide lucide-log-in" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In / Join Pro</span>
+        </button>
+      `;
+
+      const topbarLoginBtn = document.getElementById('topbar-login-btn');
+      if (topbarLoginBtn) {
+        topbarLoginBtn.addEventListener('click', () => openAuthModal('signin'));
+      }
+    }
+  }
+
+  function getInitials(name) {
+    if (!name) return 'CR';
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+    return name.slice(0, 2).toUpperCase();
+  }
+
+  // ================= 5. RENDERING & FILTERING =================
   function getFilteredAndSortedIdeas() {
     let list = ideasState.filter(item => {
       // Search Matching
@@ -442,7 +573,7 @@
                 <svg class="lucide lucide-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
               </button>
               <button class="action-btn-sm save-btn ${idea.saved ? 'saved' : ''}" data-id="${idea.id}" title="${idea.saved ? 'Remove Bookmark' : 'Bookmark Idea'}">
-                <svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="${idea.saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+                <svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="${idea.saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
               </button>
             </div>
           </div>
@@ -497,7 +628,7 @@
     countSavedEl.textContent = saved;
   }
 
-  // ================= 4. VIRALITY SCORING ALGORITHM SIMULATOR =================
+  // ================= 6. VIRALITY SCORING ENGINE =================
   function calculateViralityScore(hookText, platform, niche) {
     if (!hookText || hookText.trim().length === 0) {
       return { score: 0, curiosity: 0, stakes: 0, velocity: 0, tier: 'tier-draft', variations: [] };
@@ -646,6 +777,10 @@
       `).join('');
       aiVariationsBox.style.display = 'block';
 
+      // Increment user calibrations counter
+      currentUser.calibrationsCount = (currentUser.calibrationsCount || 0) + 1;
+      saveUserSession(currentUser);
+
       // Attach variation click
       document.querySelectorAll('.variation-item').forEach(item => {
         item.addEventListener('click', () => {
@@ -713,7 +848,7 @@
     showToast(`"${text.slice(0, 32)}…" saved to Idea Library!`);
   }
 
-  // ================= 5. DETAIL DRAWER =================
+  // ================= 7. DETAIL DRAWER =================
   function openDetailDrawer(ideaId) {
     const idea = ideasState.find(i => i.id === ideaId);
     if (!idea) return;
@@ -760,10 +895,10 @@
     // Set bookmark button state
     if (idea.saved) {
       drawerBookmarkBtn.classList.add('saved');
-      drawerBookmarkBtn.innerHTML = '<svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>';
+      drawerBookmarkBtn.innerHTML = '<svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
     } else {
       drawerBookmarkBtn.classList.remove('saved');
-      drawerBookmarkBtn.innerHTML = '<svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>';
+      drawerBookmarkBtn.innerHTML = '<svg class="lucide lucide-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
     }
 
     detailDrawer.classList.add('active');
@@ -787,7 +922,111 @@
     }
   }
 
-  // ================= 6. EVENT LISTENERS =================
+  // ================= 8. AUTHENTICATION & PROFILE HANDLERS =================
+  function openAuthModal(mode = 'signin') {
+    authMode = mode;
+    if (mode === 'signin') {
+      tabSignIn.classList.add('active');
+      tabSignUp.classList.remove('active');
+      authModalTitle.textContent = 'Sign in to Vantage';
+      authModalSubtitle.textContent = 'Access your calibrated idea library & viral intelligence.';
+      groupAuthName.style.display = 'none';
+      authSubmitLabel.textContent = 'Sign In to Dashboard';
+    } else {
+      tabSignUp.classList.add('active');
+      tabSignIn.classList.remove('active');
+      authModalTitle.textContent = 'Create Vantage Account';
+      authModalSubtitle.textContent = 'Unlock unlimited virality calibration & retention models.';
+      groupAuthName.style.display = 'flex';
+      authSubmitLabel.textContent = 'Create Pro Account';
+    }
+    openModal(authModal);
+    setTimeout(() => {
+      if (mode === 'signup') authInputName.focus();
+      else authInputEmail.focus();
+    }, 100);
+  }
+
+  function handleAuthSubmit() {
+    const email = authInputEmail.value.trim();
+    const password = authInputPassword.value.trim();
+    const name = (authMode === 'signup' && authInputName.value.trim()) ? authInputName.value.trim() : (email.split('@')[0] || 'Creator');
+
+    if (!email || !password) {
+      showToast('Please provide both email and password.');
+      return;
+    }
+
+    btnAuthSubmit.innerHTML = `
+      <svg class="live-pulse" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+      <span>Authenticating Secure Session…</span>
+    `;
+    btnAuthSubmit.disabled = true;
+
+    setTimeout(() => {
+      saveUserSession({
+        id: 'user-' + Date.now(),
+        name: name,
+        email: email,
+        initials: getInitials(name),
+        tier: 'PRO CREATOR TIER',
+        tierShort: 'PRO',
+        niche: 'tech-ai',
+        calibrationsCount: 84,
+        savedCount: 12,
+        isLoggedIn: true
+      });
+
+      closeModal(authModal);
+      btnAuthSubmit.innerHTML = `<span id="auth-submit-label">${authMode === 'signup' ? 'Create Pro Account' : 'Sign In to Dashboard'}</span>`;
+      btnAuthSubmit.disabled = false;
+      showToast(`Welcome back, ${name}! Session authenticated.`);
+    }, 500);
+  }
+
+  function openProfileModal() {
+    modalProfileName.textContent = currentUser.name;
+    modalProfileEmail.textContent = currentUser.email;
+    modalProfileAvatar.textContent = getInitials(currentUser.name);
+    modalProfileTier.textContent = `${currentUser.tier || 'PRO CREATOR TIER'} • ACTIVE`;
+    pStatCalibrations.textContent = currentUser.calibrationsCount || 84;
+    pStatSaved.textContent = ideasState.filter(i => i.saved).length;
+    editProfileName.value = currentUser.name;
+    editProfileNiche.value = currentUser.niche || 'tech-ai';
+    openModal(profileModal);
+  }
+
+  function handleSaveProfile() {
+    const newName = editProfileName.value.trim();
+    const newNiche = editProfileNiche.value;
+    if (!newName) {
+      showToast('Please enter a display name.');
+      return;
+    }
+
+    currentUser.name = newName;
+    currentUser.niche = newNiche;
+    currentUser.initials = getInitials(newName);
+    saveUserSession(currentUser);
+    closeModal(profileModal);
+    showToast('Creator profile updated successfully!');
+  }
+
+  function handleSignOut() {
+    saveUserSession({
+      id: 'guest',
+      name: 'Guest',
+      email: '',
+      initials: '?',
+      tier: 'FREE TIER',
+      tierShort: 'FREE',
+      isLoggedIn: false
+    });
+    closeModal(profileModal);
+    showToast('Signed out of Vantage session.');
+  }
+
+  // ================= 9. EVENT LISTENERS =================
   function bindEventListeners() {
     // Search input
     searchInputEl.addEventListener('input', (e) => {
@@ -867,9 +1106,82 @@
       showToast('Showing Saved Swipe Files');
     });
     document.getElementById('nav-competitor').addEventListener('click', () => openModal(batchModal));
-    document.getElementById('nav-settings').addEventListener('click', () => {
-      showToast('Creator Engine Settings: High Precision AI Model Calibrated');
+    document.getElementById('nav-settings').addEventListener('click', openProfileModal);
+
+    // Profile & Auth Triggers
+    sidebarUserAvatarBtn.addEventListener('click', () => {
+      if (currentUser.isLoggedIn) openProfileModal();
+      else openAuthModal('signin');
     });
+
+    // Auth Modal tab switching
+    tabSignIn.addEventListener('click', () => openAuthModal('signin'));
+    tabSignUp.addEventListener('click', () => openAuthModal('signup'));
+    closeAuthModalBtn.addEventListener('click', () => closeModal(authModal));
+    btnAuthSubmit.addEventListener('click', handleAuthSubmit);
+
+    // Social Auth 1-click simulations
+    btnAuthGoogle.addEventListener('click', () => {
+      showToast('Connecting via Google OAuth…');
+      setTimeout(() => {
+        saveUserSession({
+          id: 'user-google-' + Date.now(),
+          name: 'Arka Mondal',
+          email: 'arka.creator@gmail.com',
+          initials: 'AM',
+          tier: 'PRO CREATOR TIER',
+          tierShort: 'PRO',
+          niche: 'tech-ai',
+          calibrationsCount: 84,
+          savedCount: 12,
+          isLoggedIn: true
+        });
+        closeModal(authModal);
+        showToast('Signed in via Google successfully!');
+      }, 400);
+    });
+
+    btnAuthGithub.addEventListener('click', () => {
+      showToast('Connecting via GitHub OAuth…');
+      setTimeout(() => {
+        saveUserSession({
+          id: 'user-gh-' + Date.now(),
+          name: 'Arka Mondal',
+          email: 'arkadeb.mondal@example.com',
+          initials: 'AM',
+          tier: 'PRO CREATOR TIER',
+          tierShort: 'PRO',
+          niche: 'tech-ai',
+          calibrationsCount: 84,
+          savedCount: 12,
+          isLoggedIn: true
+        });
+        closeModal(authModal);
+        showToast('Signed in via GitHub successfully!');
+      }, 400);
+    });
+
+    btnFillDemoAccount.addEventListener('click', () => {
+      authInputEmail.value = 'arkadeb.mondal@example.com';
+      authInputPassword.value = 'VantagePro2026!';
+      if (authMode === 'signup') authInputName.value = 'Arka Mondal';
+      showToast('Filled test creator credentials!');
+    });
+
+    btnTogglePassword.addEventListener('click', () => {
+      const type = authInputPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+      authInputPassword.setAttribute('type', type);
+    });
+
+    authForgotBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showToast('Password reset link sent to registered email.');
+    });
+
+    // Profile Modal handlers
+    closeProfileModalBtn.addEventListener('click', () => closeModal(profileModal));
+    btnSaveProfile.addEventListener('click', handleSaveProfile);
+    btnSignOut.addEventListener('click', handleSignOut);
 
     // Modal Closures
     closeScorerModalBtn.addEventListener('click', () => closeModal(scorerModal));
@@ -982,12 +1294,14 @@
       if (e.key === 'Escape') {
         closeModal(scorerModal);
         closeModal(batchModal);
+        closeModal(authModal);
+        closeModal(profileModal);
         closeDetailDrawer();
       }
     });
   }
 
-  // ================= 7. HELPERS =================
+  // ================= 10. HELPERS =================
   function setActiveFilterPill(filterKey) {
     activeFilter = filterKey;
     filterPillsContainer.querySelectorAll('.pill').forEach(p => {
