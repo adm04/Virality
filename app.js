@@ -852,7 +852,7 @@
   function highlightQuery(text, query) {
     if (!query || !query.trim()) return escapeHtml(text);
     const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    return escapeHtml(text).replace(new RegExp(`(${escaped})`, 'gi'), '<span style="color: #00F59B; text-decoration: underline; background: rgba(0,245,155,0.12); padding: 1px 4px; border-radius: 4px;">$1</span>');
+    return escapeHtml(text).replace(new RegExp(`(${escaped})`, 'gi'), '<span style="color: #059669; text-decoration: underline; background: rgba(5,150,105,0.12); padding: 1px 4px; border-radius: 4px; font-weight: 700;">$1</span>');
   }
 
   // ================= 11. SECTION 4: 6-STAGE PRODUCTION KANBAN LIBRARY =================
