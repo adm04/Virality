@@ -525,6 +525,8 @@
   // ================= 6. INITIALIZATION =================
   function init() {
     bindEvents();
+    updateLiveClockAndGreeting();
+    setInterval(updateLiveClockAndGreeting, 1000);
     updateCreatorPersonaChips();
     renderTrendingSection();
     renderIdeasSection();
@@ -544,8 +546,8 @@
     }
   }
 
-  function getTimeGreeting() {
-    const hour = new Date().getHours();
+  function getTimeGreeting(now = new Date()) {
+    const hour = now.getHours();
     if (hour >= 5 && hour < 12) {
       return 'Good morning';
     } else if (hour >= 12 && hour < 17) {
@@ -554,6 +556,23 @@
       return 'Good evening';
     } else {
       return 'Good night';
+    }
+  }
+
+  function updateLiveClockAndGreeting() {
+    const now = new Date();
+    const greeting = getTimeGreeting(now);
+    const heroGreetingEl = document.getElementById('hero-greeting');
+    if (heroGreetingEl && heroGreetingEl.textContent !== greeting) {
+      heroGreetingEl.textContent = greeting;
+    }
+
+    const radarStatusEl = document.getElementById('header-radar-status');
+    if (radarStatusEl) {
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const minsLeft = 59 - (now.getMinutes() % 60);
+      const secsLeft = 59 - now.getSeconds();
+      radarStatusEl.textContent = `SYNCED • ${timeStr} • NEXT CYCLE IN ${minsLeft}m ${secsLeft}s`;
     }
   }
 
