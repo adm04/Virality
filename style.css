@@ -176,7 +176,7 @@ body::before {
 }
 
 .sidebar {
-  width: 76px;
+  width: 60px;
   flex-shrink: 0;
   background: var(--bg-sidebar);
   border-right: var(--border-ultra-thin);
@@ -184,7 +184,7 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 0;
+  padding: 16px 0;
   position: sticky;
   top: 0;
   height: 100vh;
@@ -197,27 +197,27 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
   width: 100%;
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   background: linear-gradient(145deg, #00F59B, #8B7CF6);
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  box-shadow: 0 0 28px rgba(0, 245, 155, 0.35);
+  box-shadow: 0 0 20px rgba(0, 245, 155, 0.3);
   transition: transform 0.3s var(--ease-spring);
 }
 .brand-mark:hover { transform: scale(1.06) rotate(-2deg); }
 .mark-letter {
   font-family: 'Clash Display', sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
   color: #070709;
 }
 
@@ -225,23 +225,23 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   width: 100%;
 }
 
 /* ================= GLOBAL LUCIDE & SVG CONSTRAINTS ================= */
 .lucide {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   stroke-width: 1.8;
   vertical-align: middle;
   flex-shrink: 0;
 }
 
 .nav-item {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   background: transparent;
   border: 1px solid transparent;
   color: var(--text-tertiary);
@@ -254,20 +254,24 @@ body::before {
 }
 .nav-item svg,
 .sidebar .nav-item svg,
-.sidebar .nav-item .lucide {
-  width: 19px !important;
-  height: 19px !important;
-  max-width: 19px !important;
-  max-height: 19px !important;
-  stroke-width: 1.8;
+.sidebar .nav-item .lucide,
+.sidebar .nav-item i {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  stroke-width: 1.75;
   display: block;
   flex-shrink: 0;
+  margin: auto;
   transition: transform 0.2s ease, stroke 0.2s ease;
 }
 .nav-item:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.045);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 .nav-item:hover svg,
 .sidebar .nav-item:hover svg,
@@ -286,29 +290,29 @@ body::before {
 .nav-item.active .nav-indicator {
   display: block;
   position: absolute;
-  left: -15px;
+  left: -12px;
   top: 50%;
   transform: translateY(-50%);
-  width: 4px;
-  height: 20px;
+  width: 3px;
+  height: 16px;
   background: var(--chart-1);
-  border-radius: 4px;
-  box-shadow: 0 0 14px var(--chart-1);
+  border-radius: 3px;
+  box-shadow: 0 0 12px var(--chart-1);
 }
 
 .nav-item[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: calc(100% + 14px);
+  left: calc(100% + 12px);
   top: 50%;
   transform: translateY(-50%) scale(0.95);
   background: #171720;
   border: var(--border-light);
   color: var(--text-primary);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 5px 10px;
+  border-radius: 6px;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -326,13 +330,13 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
 }
 
 .user-profile-badge {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: linear-gradient(145deg, #1C1C24, #121217);
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -348,7 +352,7 @@ body::before {
   transform: scale(1.05);
 }
 .avatar-text {
-  font-size: 12.5px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--text-secondary);
   font-family: 'JetBrains Mono', monospace;
@@ -357,21 +361,21 @@ body::before {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 9px;
-  height: 9px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--chart-1);
-  border: 2px solid var(--bg-sidebar);
-  box-shadow: 0 0 8px var(--chart-1);
+  border: 1.5px solid var(--bg-sidebar);
+  box-shadow: 0 0 6px var(--chart-1);
 }
 
 /* ================= MAIN VIEWPORT ================= */
 .main-viewport {
   flex: 1;
-  padding: 40px 56px 90px;
+  padding: 36px 48px 90px;
   max-width: 1560px;
   margin: 0 auto;
-  width: calc(100% - 76px);
+  width: calc(100% - 60px);
 }
 
 /* TOPBAR HEADER */
