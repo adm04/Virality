@@ -908,10 +908,38 @@
             <h3 class="gateway-title" id="gateway-title-text">Welcome back</h3>
             <p class="gateway-subtitle" id="gateway-subtitle-text">Enter your credentials to access your viral workspace.</p>
           </div>
+
+          <form id="auth-login-form" onsubmit="event.preventDefault(); window.vantageApp.handleLoginSubmit();" style="display: flex; flex-direction: column; gap: 14px;">
+            <div class="form-group" style="text-align: left;">
+              <label class="form-label" for="auth-email-input">Creator Email</label>
+              <input type="email" id="auth-email-input" class="form-input" placeholder="arka@vantage.ai" value="arka@vantage.ai" required>
+            </div>
+
+            <div class="form-group" style="text-align: left;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label class="form-label" for="auth-password-input">Password</label>
+                <span style="font-size: 11px; color: var(--chart-1); font-weight: 600;">Test: vantage2026</span>
+              </div>
+              <input type="password" id="auth-password-input" class="form-input" placeholder="••••••••••••" value="vantage2026" required>
+            </div>
+
+            <button class="btn btn-primary" id="btn-auth-submit" type="submit" style="width: 100%; padding: 12px; font-weight: 700; justify-content: center; font-size: 13.5px;">
+              <span>Sign In to Workspace</span>
+              <svg class="lucide lucide-arrow-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </form>
+
+          <div style="display: flex; align-items: center; gap: 10px; margin: 4px 0;">
+            <div style="flex: 1; height: 1px; background: rgba(0,0,0,0.08);"></div>
+            <span style="font-size: 11px; color: var(--text-tertiary); font-weight: 600;">OR</span>
+            <div style="flex: 1; height: 1px; background: rgba(0,0,0,0.08);"></div>
+          </div>
+
           <button class="btn-demo-instant" id="btn-instant-demo-login" type="button">
             <svg class="lucide lucide-zap" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             <span>1-Click Instant Demo Login (Arka Mondal)</span>
           </button>
+
           <div class="gateway-footer-hint">
             <span>Just exploring?</span>
             <button class="btn-text" id="btn-gateway-explore-guest" type="button">Explore as Guest</button>

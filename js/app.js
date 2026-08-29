@@ -1150,6 +1150,44 @@
     }
   }
 
+  function handleLoginSubmit() {
+    const emailInp = document.getElementById('auth-email-input');
+    const passInp = document.getElementById('auth-password-input');
+    const email = (emailInp?.value || 'arka@vantage.ai').trim();
+    const pass = (passInp?.value || '').trim();
+
+    if (!email) {
+      showToast('Please enter your creator email.');
+      return;
+    }
+
+    let name = 'Arka Mondal';
+    if (email.toLowerCase().includes('arka')) {
+      name = 'Arka Mondal';
+    } else {
+      const userPart = email.split('@')[0];
+      name = userPart.charAt(0).toUpperCase() + userPart.slice(1);
+    }
+
+    creatorProfile = {
+      ...creatorProfile,
+      name: name,
+      email: email,
+      updated_at: new Date().toISOString()
+    };
+
+    VantageAPI.saveProfile(creatorProfile);
+    updateCreatorPersonaChips();
+    updateLiveClockAndGreeting();
+    closeAuthScreen();
+    showToast(`Logged in as ${name} (Pro Creator Access)`);
+
+    // Immediately open the 5-Step Niche Calibration Wizard so user can select their niches!
+    setTimeout(() => {
+      openOnboardingModal();
+    }, 350);
+  }
+
   // ================= 8. DATA ACTIONS & HELPERS =================
   function addIdeaToLibrary(idea) {
     const newEntry = {
@@ -1385,8 +1423,7 @@
     document.getElementById('btn-close-auth-gateway')?.addEventListener('click', closeAuthScreen);
     document.getElementById('btn-gateway-explore-guest')?.addEventListener('click', closeAuthScreen);
     document.getElementById('btn-instant-demo-login')?.addEventListener('click', () => {
-      closeAuthScreen();
-      showToast('Logged in as Arka Mondal (Pro Creator)');
+      handleLoginSubmit();
     });
 
     // 8. Virality Scorer Analysis
@@ -1507,9 +1544,11 @@
     openOnboarding: openOnboardingModal,
     openSettings: openSettingsModal,
     openScorer: openScorerModal,
+    openAuth: openAuthScreen,
     addIdea: addIdeaToLibrary,
     copyHook: copyToClipboard,
-    showToast: showToast
+    showToast: showToast,
+    handleLoginSubmit: handleLoginSubmit
   };
 
   if (document.readyState === 'loading') {
