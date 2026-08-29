@@ -668,8 +668,8 @@ body {
 /* ================= SECTION 1: TRENDING CARDS ================= */
 .trend-cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 22px;
 }
 
 .trend-card {
@@ -895,8 +895,8 @@ body {
 
 .ideas-cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 22px;
 }
 
 .idea-concept-card {
