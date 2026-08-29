@@ -87,13 +87,15 @@ const server = http.createServer((req, res) => {
   fs.createReadStream(filePath).pipe(res);
 });
 
-server.listen(PORT, () => {
-  console.log(`==========================================================`);
-  console.log(`  VANTAGE VIRALITY OS V2 - NODE.JS BACKEND RUNNING        `);
-  console.log(`  URL: http://localhost:${PORT}/                            `);
-  console.log(`  API: http://localhost:${PORT}/api/health                  `);
-  console.log(`  Press Ctrl+C to stop the server                         `);
-  console.log(`==========================================================`);
-});
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log(`==========================================================`);
+    console.log(`  VANTAGE VIRALITY OS V2 - NODE.JS BACKEND RUNNING        `);
+    console.log(`  URL: http://localhost:${PORT}/                            `);
+    console.log(`  API: http://localhost:${PORT}/api/health                  `);
+    console.log(`  Press Ctrl+C to stop the server                         `);
+    console.log(`==========================================================`);
+  });
+}
 
 module.exports = server;
