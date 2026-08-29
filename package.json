@@ -1,20 +1,8 @@
 {
   "name": "vantage-virality-os",
   "version": "2.0.0",
-  "description": "Content Idea Library & Virality Scorer for Creators",
-  "scripts": {
-    "dev": "node server/server.js",
-    "serve": "node server/server.js"
-  },
-  "keywords": [
-    "virality",
-    "creator-economy",
-    "youtube",
-    "reels",
-    "shorts",
-    "saas",
-    "dashboard"
-  ],
+  "description": "Creator Onboarding & Trend Intelligence OS",
+  "private": true,
   "author": "Arka Mondal",
   "license": "MIT"
 }
