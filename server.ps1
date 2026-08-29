@@ -1,198 +1,114 @@
-# Vantage Virality OS V2 — Local Backend Server (PowerShell / .NET Native)
-# Runs a full HTTP REST API and static web server on http://localhost:3000 without requiring Node/Python.
+# Vantage Virality OS - Native TcpListener HTTP Server on Port 3000
+# Zero-permission, pure .NET socket server that works without admin rights on Windows.
 
 $port = 3000
 $root = $PSScriptRoot
 
-$listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add("http://localhost:$port/")
+$listener = New-Object System.Net.Sockets.TcpListener([System.Net.IPAddress]::Loopback, $port)
+$listener.Start()
 
-try {
-    $listener.Start()
-    Write-Host "==========================================================" -ForegroundColor Green
-    Write-Host "  VANTAGE VIRALITY OS V2 - LOCAL BACKEND SERVER RUNNING   " -ForegroundColor Cyan
-    Write-Host "  URL: http://localhost:$port/                            " -ForegroundColor Yellow
-    Write-Host "  API: http://localhost:$port/api/health                  " -ForegroundColor Yellow
-    Write-Host "  Press Ctrl+C in this terminal to stop the server        " -ForegroundColor Gray
-    Write-Host "==========================================================" -ForegroundColor Green
+Write-Host "==========================================================" -ForegroundColor Green
+Write-Host "  VANTAGE VIRALITY OS - LOCAL HTTP SERVER ACTIVE          " -ForegroundColor Cyan
+Write-Host "  URL: http://localhost:$port/                            " -ForegroundColor Yellow
+Write-Host "  API: http://localhost:$port/api/health                  " -ForegroundColor Yellow
+Write-Host "  Press Ctrl+C in this window to stop the server          " -ForegroundColor Gray
+Write-Host "==========================================================" -ForegroundColor Green
 
-    # Data file paths
-    $dataPath = Join-Path $root "data"
-    if (!(Test-Path $dataPath)) { New-Item -ItemType Directory -Path $dataPath | Out-Null }
-    $profileFile = Join-Path $dataPath "creator_profile.json"
-    $libraryFile = Join-Path $dataPath "content_library.json"
+$mimeMap = @{
+    ".html" = "text/html; charset=utf-8"
+    ".css"  = "text/css; charset=utf-8"
+    ".js"   = "application/javascript; charset=utf-8"
+    ".json" = "application/json; charset=utf-8"
+    ".svg"  = "image/svg+xml"
+    ".png"  = "image/png"
+    ".jpg"  = "image/jpeg"
+}
 
-    while ($listener.IsListening) {
-        $context = $listener.GetContext()
-        $request = $context.Request
-        $response = $context.Response
+while ($true) {
+    try {
+        $client = $listener.AcceptTcpClient()
+        $stream = $client.GetStream()
+        $reader = New-Object System.IO.StreamReader($stream, [System.Text.Encoding]::UTF8)
 
-        $urlPath = $request.Url.AbsolutePath
-        $method = $request.HttpMethod
+        $requestLine = $reader.ReadLine()
+        if ([string]::IsNullOrEmpty($requestLine)) {
+            $client.Close()
+            continue
+        }
 
-        # CORS Headers
-        $response.Headers.Add("Access-Control-Allow-Origin", "*")
-        $response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
-        $response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+        $parts = $requestLine.Split(' ')
+        $method = $parts[0]
+        $rawPath = if ($parts.Length -gt 1) { $parts[1] } else { "/" }
+        $urlPath = $rawPath.Split('?')[0]
 
+        # Read remaining headers
+        $contentLength = 0
+        while ($true) {
+            $line = $reader.ReadLine()
+            if ([string]::IsNullOrEmpty($line)) { break }
+            if ($line.ToLower().StartsWith("content-length:")) {
+                $contentLength = [int]($line.Substring(15).Trim())
+            }
+        }
+
+        # Read body if present
+        $body = ""
+        if ($contentLength -gt 0) {
+            $buffer = New-Object char[] $contentLength
+            $read = $reader.ReadBlock($buffer, 0, $contentLength)
+            $body = New-Object string ($buffer, 0, $read)
+        }
+
+        # CORS preflight
         if ($method -eq "OPTIONS") {
-            $response.StatusCode = 204
-            $response.Close()
+            $headerStr = "HTTP/1.1 204 No Content`r`nAccess-Control-Allow-Origin: *`r`nAccess-Control-Allow-Methods: GET, POST, OPTIONS`r`nAccess-Control-Allow-Headers: *`r`nConnection: close`r`n`r`n"
+            $hBytes = [System.Text.Encoding]::UTF8.GetBytes($headerStr)
+            $stream.Write($hBytes, 0, $hBytes.Length)
+            $client.Close()
             continue
         }
 
-        # API ROUTES
-        if ($urlPath.StartsWith("/api/")) {
-            $response.ContentType = "application/json; charset=utf-8"
-
-            if ($urlPath -eq "/api/health") {
-                $payload = @{
-                    status = "online"
-                    service = "Vantage Virality Intelligence Backend"
-                    version = "2.0.0"
-                    server_time = (Get-Date).ToString("o")
-                    timestamp = [DateTimeOffset]::Now.ToUnixTimeSeconds()
-                } | ConvertTo-Json
-                $buffer = [System.Text.Encoding]::UTF8.GetBytes($payload)
-                $response.StatusCode = 200
-                $response.OutputStream.Write($buffer, 0, $buffer.Length)
-                $response.Close()
-                continue
-            }
-
-            if ($urlPath -eq "/api/profile") {
-                if ($method -eq "GET") {
-                    if (Test-Path $profileFile) {
-                        $content = Get-Content -Path $profileFile -Raw
-                    } else {
-                        $content = '{"name":"Arka Mondal","content_types":["reels","shorts","youtube"],"niches":["ai","technology"],"age_range":"18-34","country":"India","goals":"views"}'
-                    }
-                    $buffer = [System.Text.Encoding]::UTF8.GetBytes($content)
-                    $response.StatusCode = 200
-                    $response.OutputStream.Write($buffer, 0, $buffer.Length)
-                    $response.Close()
-                    continue
-                }
-                elseif ($method -eq "POST") {
-                    $reader = New-Object System.IO.StreamReader($request.InputStream, $request.ContentEncoding)
-                    $body = $reader.ReadToEnd()
-                    $body | Set-Content -Path $profileFile -Force
-                    $resJson = '{"success":true,"message":"Profile updated"}'
-                    $buffer = [System.Text.Encoding]::UTF8.GetBytes($resJson)
-                    $response.StatusCode = 200
-                    $response.OutputStream.Write($buffer, 0, $buffer.Length)
-                    $response.Close()
-                    continue
-                }
-            }
-
-            if ($urlPath -eq "/api/library") {
-                if ($method -eq "GET") {
-                    if (Test-Path $libraryFile) {
-                        $content = Get-Content -Path $libraryFile -Raw
-                    } else {
-                        $content = '[]'
-                    }
-                    $buffer = [System.Text.Encoding]::UTF8.GetBytes($content)
-                    $response.StatusCode = 200
-                    $response.OutputStream.Write($buffer, 0, $buffer.Length)
-                    $response.Close()
-                    continue
-                }
-                elseif ($method -eq "POST") {
-                    $reader = New-Object System.IO.StreamReader($request.InputStream, $request.ContentEncoding)
-                    $body = $reader.ReadToEnd()
-                    $body | Set-Content -Path $libraryFile -Force
-                    $resJson = '{"success":true,"message":"Library synced"}'
-                    $buffer = [System.Text.Encoding]::UTF8.GetBytes($resJson)
-                    $response.StatusCode = 200
-                    $response.OutputStream.Write($buffer, 0, $buffer.Length)
-                    $response.Close()
-                    continue
-                }
-            }
-
-            if ($urlPath -eq "/api/score") {
-                if ($method -eq "POST") {
-                    $reader = New-Object System.IO.StreamReader($request.InputStream, $request.ContentEncoding)
-                    $body = $reader.ReadToEnd()
-                    $parsed = $body | ConvertFrom-Json
-                    $text = if ($parsed.hook) { $parsed.hook } else { $parsed.title }
-                    $len = if ($text) { $text.Length } else { 0 }
-                    
-                    $hasNum = if ($text -match '\d+') { $true } else { $false }
-                    $hasQ = if ($text -match '\?') { $true } else { $false }
-                    $hasLoss = if ($text -match '(?i)delete|stop|never|worst|mistake|regret|fail|lies|disaster|broken') { $true } else { $false }
-                    $hasPower = if ($text -match '(?i)secret|tested|truth|insane|brutal|proof|architecture|scaled') { $true } else { $false }
-
-                    $curiosity = [Math]::Min(99, 78 + $(if($hasQ){8}else{0}) + $(if($hasPower){8}else{0}) + $(if($len -gt 30){4}else{0}))
-                    $stakes = [Math]::Min(99, 75 + $(if($hasLoss){14}else{0}) + $(if($hasNum){6}else{0}))
-                    $velocity = [Math]::Min(99, 80 + $(if($len -ge 45 -and $len -le 95){12}else{4}) + $(if($hasNum){5}else{0}))
-                    $overall = [Math]::Round(($curiosity * 0.35) + ($stakes * 0.35) + ($velocity * 0.30))
-
-                    $resObj = @{
-                        success = $true
-                        hook = $text
-                        overall_score = $overall
-                        tier = if ($overall -ge 90) { "EXPLOSIVE" } elseif ($overall -ge 75) { "STRONG" } else { "CALIBRATED" }
-                        signals = @{
-                            curiosity_gap = $curiosity
-                            stakes_conflict = $stakes
-                            algorithmic_velocity = $velocity
-                        }
-                    } | ConvertTo-Json
-                    $buffer = [System.Text.Encoding]::UTF8.GetBytes($resObj)
-                    $response.StatusCode = 200
-                    $response.OutputStream.Write($buffer, 0, $buffer.Length)
-                    $response.Close()
-                    continue
-                }
-            }
-
-            # Fallback 404 API
-            $res404 = '{"error":"Not Found"}'
-            $buffer = [System.Text.Encoding]::UTF8.GetBytes($res404)
-            $response.StatusCode = 404
-            $response.OutputStream.Write($buffer, 0, $buffer.Length)
-            $response.Close()
+        # Handle API Routes
+        if ($urlPath -eq "/api/health" -or $urlPath -eq "/health") {
+            $json = '{"status":"online","service":"Vantage Virality OS","version":"2.0.0"}'
+            $bBytes = [System.Text.Encoding]::UTF8.GetBytes($json)
+            $headerStr = "HTTP/1.1 200 OK`r`nContent-Type: application/json; charset=utf-8`r`nAccess-Control-Allow-Origin: *`r`nContent-Length: $($bBytes.Length)`r`nConnection: close`r`n`r`n"
+            $hBytes = [System.Text.Encoding]::UTF8.GetBytes($headerStr)
+            $stream.Write($hBytes, 0, $hBytes.Length)
+            $stream.Write($bBytes, 0, $bBytes.Length)
+            $client.Close()
             continue
         }
 
-        # STATIC FILE SERVING
-        $cleanPath = $urlPath.TrimStart('/')
-        if ([string]::IsNullOrWhiteSpace($cleanPath)) { $cleanPath = "index.html" }
-        $filePath = Join-Path $root $cleanPath
+        # Static File Serving
+        $relPath = $urlPath.TrimStart('/')
+        if ([string]::IsNullOrWhiteSpace($relPath)) { $relPath = "index.html" }
+        $filePath = Join-Path $root $relPath
 
-        if (Test-Path $filePath -PathType Leaf) {
+        if (!(Test-Path $filePath) -or (Get-Item $filePath).PSIsContainer) {
+            $filePath = Join-Path $root "index.html"
+        }
+
+        if (Test-Path $filePath) {
             $ext = [System.IO.Path]::GetExtension($filePath).ToLower()
-            $mime = "text/plain"
-            switch ($ext) {
-                ".html" { $mime = "text/html; charset=utf-8" }
-                ".css"  { $mime = "text/css; charset=utf-8" }
-                ".js"   { $mime = "application/javascript; charset=utf-8" }
-                ".json" { $mime = "application/json; charset=utf-8" }
-                ".png"  { $mime = "image/png" }
-                ".jpg"  { $mime = "image/jpeg" }
-                ".svg"  { $mime = "image/svg+xml" }
-                ".ico"  { $mime = "image/x-icon" }
-            }
-            $response.ContentType = $mime
-            $response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate")
+            $contentType = if ($mimeMap.ContainsKey($ext)) { $mimeMap[$ext] } else { "application/octet-stream" }
             $fileBytes = [System.IO.File]::ReadAllBytes($filePath)
-            $response.ContentLength64 = $fileBytes.Length
-            $response.StatusCode = 200
-            $response.OutputStream.Write($fileBytes, 0, $fileBytes.Length)
+
+            $headerStr = "HTTP/1.1 200 OK`r`nContent-Type: $contentType`r`nAccess-Control-Allow-Origin: *`r`nContent-Length: $($fileBytes.Length)`r`nConnection: close`r`n`r`n"
+            $hBytes = [System.Text.Encoding]::UTF8.GetBytes($headerStr)
+            $stream.Write($hBytes, 0, $hBytes.Length)
+            $stream.Write($fileBytes, 0, $fileBytes.Length)
         } else {
-            $response.StatusCode = 404
-            $notFound = [System.Text.Encoding]::UTF8.GetBytes("404 - File Not Found: $cleanPath")
-            $response.OutputStream.Write($notFound, 0, $notFound.Length)
+            $notFound = "404 Not Found"
+            $nBytes = [System.Text.Encoding]::UTF8.GetBytes($notFound)
+            $headerStr = "HTTP/1.1 404 Not Found`r`nContent-Type: text/plain`r`nContent-Length: $($nBytes.Length)`r`nConnection: close`r`n`r`n"
+            $hBytes = [System.Text.Encoding]::UTF8.GetBytes($headerStr)
+            $stream.Write($hBytes, 0, $hBytes.Length)
+            $stream.Write($nBytes, 0, $nBytes.Length)
         }
-        $response.Close()
+
+        $client.Close()
+    } catch {
+        # ignore transient socket disconnects
     }
-}
-catch {
-    Write-Host "Server error: $_" -ForegroundColor Red
-}
-finally {
-    $listener.Stop()
 }
