@@ -3,9 +3,8 @@
   "version": "2.0.0",
   "description": "Content Idea Library & Virality Scorer for Creators",
   "scripts": {
-    "start": "node server/server.js",
     "dev": "node server/server.js",
-    "server": "node server/server.js"
+    "serve": "node server/server.js"
   },
   "keywords": [
     "virality",
