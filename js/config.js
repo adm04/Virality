@@ -5,7 +5,9 @@
 const VantageConfig = {
   STORAGE_KEY_PROFILE: 'vantage_creator_profile',
   STORAGE_KEY_LIBRARY: 'vantage_saved_library',
-  API_BASE: 'http://localhost:3000/api',
+  API_BASE: (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:')
+    ? 'http://localhost:3000/api'
+    : '/api',
 
   DEFAULT_CREATOR_PROFILE: {
     id: 'profile-arka-01',
