@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1420" />
+      <stop offset="100%" stop-color="#070A10" />
+    </linearGradient>
+
+    <!-- Neon Cyan Glow Filter -->
+    <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur1" />
+      <feGaussianBlur stdDeviation="28" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Glowing Teal Gradient for Primary Arrow -->
+    <linearGradient id="arrowGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0D9488" />
+      <stop offset="40%" stop-color="#14B8A6" />
+      <stop offset="80%" stop-color="#2DD4BF" />
+      <stop offset="100%" stop-color="#5EEAD4" />
+    </linearGradient>
+
+    <!-- Left Leg Gradient -->
+    <linearGradient id="leftLegGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6" />
+      <stop offset="100%" stop-color="#0F766E" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark Rounded Squircle Base -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Subtle Rim Highlight -->
+  <rect width="506" height="506" x="3" y="3" rx="110" fill="none" stroke="rgba(45, 212, 191, 0.18)" stroke-width="2.5" />
+
+  <!-- Logo Graphics with Vibrant Neon Glow -->
+  <g filter="url(#neonGlow)">
+    <!-- Left Leg of V -->
+    <path d="M 140 180 L 200 180 L 290 400 L 230 400 Z" fill="url(#leftLegGrad)" opacity="0.92" />
+
+    <!-- Right Rising Stem -->
+    <path d="M 205 385 L 322 160 L 372 182 L 255 407 Z" fill="url(#arrowGrad)" />
+
+    <!-- Upward Virality Arrow Head -->
+    <polygon points="320,150 385,120 385,190" fill="#5EEAD4" />
+  </g>
+</svg>
