@@ -112,6 +112,43 @@ try {
                 }
             }
 
+            if ($urlPath -eq "/api/score") {
+                if ($method -eq "POST") {
+                    $reader = New-Object System.IO.StreamReader($request.InputStream, $request.ContentEncoding)
+                    $body = $reader.ReadToEnd()
+                    $parsed = $body | ConvertFrom-Json
+                    $text = if ($parsed.hook) { $parsed.hook } else { $parsed.title }
+                    $len = if ($text) { $text.Length } else { 0 }
+                    
+                    $hasNum = if ($text -match '\d+') { $true } else { $false }
+                    $hasQ = if ($text -match '\?') { $true } else { $false }
+                    $hasLoss = if ($text -match '(?i)delete|stop|never|worst|mistake|regret|fail|lies|disaster|broken') { $true } else { $false }
+                    $hasPower = if ($text -match '(?i)secret|tested|truth|insane|brutal|proof|architecture|scaled') { $true } else { $false }
+
+                    $curiosity = [Math]::Min(99, 78 + $(if($hasQ){8}else{0}) + $(if($hasPower){8}else{0}) + $(if($len -gt 30){4}else{0}))
+                    $stakes = [Math]::Min(99, 75 + $(if($hasLoss){14}else{0}) + $(if($hasNum){6}else{0}))
+                    $velocity = [Math]::Min(99, 80 + $(if($len -ge 45 -and $len -le 95){12}else{4}) + $(if($hasNum){5}else{0}))
+                    $overall = [Math]::Round(($curiosity * 0.35) + ($stakes * 0.35) + ($velocity * 0.30))
+
+                    $resObj = @{
+                        success = $true
+                        hook = $text
+                        overall_score = $overall
+                        tier = if ($overall -ge 90) { "EXPLOSIVE" } elseif ($overall -ge 75) { "STRONG" } else { "CALIBRATED" }
+                        signals = @{
+                            curiosity_gap = $curiosity
+                            stakes_conflict = $stakes
+                            algorithmic_velocity = $velocity
+                        }
+                    } | ConvertTo-Json
+                    $buffer = [System.Text.Encoding]::UTF8.GetBytes($resObj)
+                    $response.StatusCode = 200
+                    $response.OutputStream.Write($buffer, 0, $buffer.Length)
+                    $response.Close()
+                    continue
+                }
+            }
+
             # Fallback 404 API
             $res404 = '{"error":"Not Found"}'
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($res404)
