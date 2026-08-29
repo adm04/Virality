@@ -39,10 +39,6 @@
         updateBackendStatusUI(!!data, data ? `Connected to ${data.service || 'Backend'} (Port 3000)` : 'Client-Side Offline Mode (LocalStorage Active)');
       });
     }
-
-    if (!creatorProfile.onboarding_completed) {
-      openOnboardingModal();
-    }
   }
 
   function refreshLucideIcons() {
