@@ -1,13 +1,9 @@
 /**
  * Content Library Route Handler
+ * Vercel Serverless & Node.js Native Compatible
  */
 const fs = require('fs');
 const path = require('path');
-
-const DATA_DIR = path.join(__dirname, '..', 'data');
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-
-const LIBRARY_FILE = path.join(DATA_DIR, 'content_library.json');
 
 const DEFAULT_LIBRARY = [
   {
@@ -51,23 +47,75 @@ const DEFAULT_LIBRARY = [
   }
 ];
 
-function readLibrary() {
-  if (fs.existsSync(LIBRARY_FILE)) {
+let inMemoryLibrary = [...DEFAULT_LIBRARY];
+
+function getLibraryFile() {
+  try {
+    const localDir = path.join(__dirname, '..', 'data');
+    if (!fs.existsSync(localDir)) fs.mkdirSync(localDir, { recursive: true });
+    return path.join(localDir, 'content_library.json');
+  } catch (e) {
+    // Read-only filesystem fallback (Vercel Serverless)
     try {
-      const content = fs.readFileSync(LIBRARY_FILE, 'utf8');
-      return JSON.parse(content);
-    } catch (e) {
-      console.error('Error parsing library file:', e);
+      const tmpDir = path.join('/tmp', 'vantage_data');
+      if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+      return path.join(tmpDir, 'content_library.json');
+    } catch (err) {
+      return null;
     }
   }
-  return [...DEFAULT_LIBRARY];
+}
+
+function parseBody(req) {
+  return new Promise((resolve) => {
+    if (req.body !== undefined && req.body !== null) {
+      if (typeof req.body === 'object') return resolve(req.body);
+      try {
+        return resolve(JSON.parse(req.body));
+      } catch (e) {
+        return resolve({});
+      }
+    }
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        resolve(JSON.parse(body || '{}'));
+      } catch (e) {
+        resolve({});
+      }
+    });
+    req.on('error', () => resolve({}));
+  });
+}
+
+function readLibrary() {
+  const file = getLibraryFile();
+  if (file && fs.existsSync(file)) {
+    try {
+      const content = fs.readFileSync(file, 'utf8');
+      inMemoryLibrary = JSON.parse(content);
+      return inMemoryLibrary;
+    } catch (e) {
+      console.warn('Library read warning:', e.message);
+    }
+  }
+  return inMemoryLibrary;
 }
 
 function writeLibrary(data) {
-  fs.writeFileSync(LIBRARY_FILE, JSON.stringify(data, null, 2), 'utf8');
+  inMemoryLibrary = data;
+  const file = getLibraryFile();
+  if (file) {
+    try {
+      fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
+    } catch (e) {
+      console.warn('Library write warning (using memory):', e.message);
+    }
+  }
 }
 
-function handleLibrary(req, res) {
+async function handleLibrary(req, res) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
   if (req.method === 'GET') {
@@ -78,33 +126,28 @@ function handleLibrary(req, res) {
   }
 
   if (req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', () => {
-      try {
-        const payload = JSON.parse(body);
-        let items = readLibrary();
+    try {
+      const payload = await parseBody(req);
+      let items = readLibrary();
 
-        if (Array.isArray(payload)) {
-          // Bulk replacement
-          items = payload;
-        } else if (payload && payload.id) {
-          // Single item add / upsert
-          const existingIdx = items.findIndex(i => i.id === payload.id);
-          if (existingIdx >= 0) {
-            items[existingIdx] = { ...items[existingIdx], ...payload };
-          } else {
-            items.unshift(payload);
-          }
+      if (Array.isArray(payload)) {
+        items = payload;
+      } else if (payload && payload.id) {
+        const existingIdx = items.findIndex(i => i.id === payload.id);
+        if (existingIdx >= 0) {
+          items[existingIdx] = { ...items[existingIdx], ...payload };
+        } else {
+          items.unshift(payload);
         }
-        writeLibrary(items);
-        res.writeHead(200);
-        res.end(JSON.stringify({ success: true, message: 'Library saved', count: items.length }));
-      } catch (err) {
-        res.writeHead(400);
-        res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
       }
-    });
+
+      writeLibrary(items);
+      res.writeHead(200);
+      res.end(JSON.stringify({ success: true, message: 'Library saved', count: items.length }));
+    } catch (err) {
+      res.writeHead(400);
+      res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
+    }
     return;
   }
 

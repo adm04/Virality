@@ -1,13 +1,9 @@
 /**
  * Creator Profile Route Handler
+ * Vercel Serverless & Node.js Native Compatible
  */
 const fs = require('fs');
 const path = require('path');
-
-const DATA_DIR = path.join(__dirname, '..', 'data');
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-
-const PROFILE_FILE = path.join(DATA_DIR, 'creator_profile.json');
 
 const DEFAULT_PROFILE = {
   id: 'profile-arka-01',
@@ -27,40 +23,89 @@ const DEFAULT_PROFILE = {
   onboarding_completed: true
 };
 
-function handleProfile(req, res) {
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+let inMemoryProfile = { ...DEFAULT_PROFILE };
 
-  if (req.method === 'GET') {
-    if (fs.existsSync(PROFILE_FILE)) {
+function getProfileFile() {
+  try {
+    const localDir = path.join(__dirname, '..', 'data');
+    if (!fs.existsSync(localDir)) fs.mkdirSync(localDir, { recursive: true });
+    return path.join(localDir, 'creator_profile.json');
+  } catch (e) {
+    // Read-only filesystem fallback (Vercel Serverless)
+    try {
+      const tmpDir = path.join('/tmp', 'vantage_data');
+      if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+      return path.join(tmpDir, 'creator_profile.json');
+    } catch (err) {
+      return null;
+    }
+  }
+}
+
+function parseBody(req) {
+  return new Promise((resolve) => {
+    if (req.body !== undefined && req.body !== null) {
+      if (typeof req.body === 'object') return resolve(req.body);
       try {
-        const content = fs.readFileSync(PROFILE_FILE, 'utf8');
-        res.writeHead(200);
-        res.end(content);
-        return;
+        return resolve(JSON.parse(req.body));
       } catch (e) {
-        console.error('Error reading profile file:', e);
+        return resolve({});
       }
     }
-    res.writeHead(200);
-    res.end(JSON.stringify(DEFAULT_PROFILE, null, 2));
-    return;
-  }
-
-  if (req.method === 'POST') {
     let body = '';
     req.on('data', chunk => { body += chunk; });
     req.on('end', () => {
       try {
-        const parsed = JSON.parse(body);
-        parsed.updated_at = new Date().toISOString();
-        fs.writeFileSync(PROFILE_FILE, JSON.stringify(parsed, null, 2), 'utf8');
-        res.writeHead(200);
-        res.end(JSON.stringify({ success: true, message: 'Creator profile saved successfully', profile: parsed }));
-      } catch (err) {
-        res.writeHead(400);
-        res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
+        resolve(JSON.parse(body || '{}'));
+      } catch (e) {
+        resolve({});
       }
     });
+    req.on('error', () => resolve({}));
+  });
+}
+
+async function handleProfile(req, res) {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+
+  const file = getProfileFile();
+
+  if (req.method === 'GET') {
+    if (file && fs.existsSync(file)) {
+      try {
+        const content = fs.readFileSync(file, 'utf8');
+        res.writeHead(200);
+        res.end(content);
+        return;
+      } catch (e) {
+        console.warn('File read warning:', e.message);
+      }
+    }
+    res.writeHead(200);
+    res.end(JSON.stringify(inMemoryProfile, null, 2));
+    return;
+  }
+
+  if (req.method === 'POST') {
+    try {
+      const parsed = await parseBody(req);
+      parsed.updated_at = new Date().toISOString();
+      inMemoryProfile = { ...inMemoryProfile, ...parsed };
+
+      if (file) {
+        try {
+          fs.writeFileSync(file, JSON.stringify(inMemoryProfile, null, 2), 'utf8');
+        } catch (e) {
+          console.warn('File write warning (using memory):', e.message);
+        }
+      }
+
+      res.writeHead(200);
+      res.end(JSON.stringify({ success: true, message: 'Creator profile saved successfully', profile: inMemoryProfile }));
+    } catch (err) {
+      res.writeHead(400);
+      res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
+    }
     return;
   }
 
