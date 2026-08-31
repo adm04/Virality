@@ -529,9 +529,21 @@
   // ================= 6. UI RENDERERS =================
 
   // --- Clock & Greeting ---
+  function getTimeGreeting(date = new Date()) {
+    const hour = date.getHours();
+    if (hour >= 5 && hour < 12) {
+      return 'Good morning';
+    } else if (hour >= 12 && hour < 17) {
+      return 'Good afternoon';
+    } else {
+      return 'Good evening';
+    }
+  }
+
   function updateLiveClockAndGreeting() {
     const clockEl = document.getElementById('live-time-display');
-    const greetingEl = document.getElementById('hero-greeting-text');
+    const greetingEl = document.getElementById('hero-greeting') || document.getElementById('hero-greeting-text');
+    const userNameEl = document.getElementById('hero-user-name');
     const now = new Date();
 
     if (clockEl) {
@@ -543,25 +555,34 @@
       });
     }
 
+    const greeting = getTimeGreeting(now);
+
     if (greetingEl) {
-      const hour = now.getHours();
-      let greeting = 'Good morning';
-      if (hour >= 12 && hour < 17) greeting = 'Good afternoon';
-      else if (hour >= 17 || hour < 5) greeting = 'Good evening';
-      greetingEl.textContent = `${greeting}, ${creatorProfile.name || 'Creator'}`;
+      greetingEl.textContent = greeting;
+    }
+
+    if (userNameEl) {
+      const rawName = (creatorProfile && creatorProfile.name) ? creatorProfile.name.trim() : 'Arka';
+      const firstName = rawName.split(' ')[0] || 'Arka';
+      userNameEl.textContent = `${firstName}.`;
     }
   }
 
   function updateCreatorPersonaChips() {
-    const list = document.getElementById('hero-persona-chips');
+    const list = document.getElementById('creator-persona-chips') || document.getElementById('hero-persona-chips');
     const sidebarInitials = document.getElementById('sidebar-avatar-initials');
     const topbarInitials = document.getElementById('topbar-avatar-initials');
+    const topbarChipName = document.getElementById('topbar-chip-name');
 
-    const name = creatorProfile.name || 'Arka Mondal';
+    const name = (creatorProfile && creatorProfile.name) ? creatorProfile.name : 'Arka Mondal';
     const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'AM';
 
     if (sidebarInitials) sidebarInitials.textContent = initials;
     if (topbarInitials) topbarInitials.textContent = initials;
+    if (topbarChipName) {
+      const parts = name.split(' ');
+      topbarChipName.textContent = parts.length > 1 ? `${parts[0]} ${parts[1][0]}.` : parts[0];
+    }
 
     if (!list) return;
 
@@ -1287,6 +1308,7 @@
     document.getElementById('sidebar-user-avatar-btn')?.addEventListener('click', openAuthScreen);
     document.getElementById('topbar-profile-btn')?.addEventListener('click', openAuthScreen);
     document.getElementById('btn-hero-calibrate')?.addEventListener('click', openOnboardingModal);
+    document.getElementById('btn-edit-onboarding')?.addEventListener('click', openOnboardingModal);
     document.getElementById('btn-score-new')?.addEventListener('click', openScorerModal);
 
     // 2. Trending format filters
