@@ -8,9 +8,10 @@ $listener = New-Object System.Net.Sockets.TcpListener([System.Net.IPAddress]::Lo
 $listener.Start()
 
 Write-Host "==========================================================" -ForegroundColor Green
-Write-Host "  VANTAGE VIRALITY OS - LOCAL HTTP SERVER ACTIVE          " -ForegroundColor Cyan
+Write-Host "  VANTAGE VIRALITY OS - LOCAL SAAS SERVER ACTIVE          " -ForegroundColor Cyan
 Write-Host "  URL: http://localhost:$port/                            " -ForegroundColor Yellow
 Write-Host "  API: http://localhost:$port/api/health                  " -ForegroundColor Yellow
+Write-Host "  AUTH: http://localhost:$port/api/auth/me                " -ForegroundColor Yellow
 Write-Host "  Press Ctrl+C in this window to stop the server          " -ForegroundColor Gray
 Write-Host "==========================================================" -ForegroundColor Green
 
@@ -23,6 +24,10 @@ $mimeMap = @{
     ".png"  = "image/png"
     ".jpg"  = "image/jpeg"
 }
+
+# In-memory storage for PowerShell server
+$dbFile = Join-Path $root "data\vantage_database.json"
+if (!(Test-Path (Join-Path $root "data"))) { New-Item -ItemType Directory -Path (Join-Path $root "data") -Force | Out-Null }
 
 while ($true) {
     try {
@@ -43,11 +48,15 @@ while ($true) {
 
         # Read remaining headers
         $contentLength = 0
+        $authHeader = ""
         while ($true) {
             $line = $reader.ReadLine()
             if ([string]::IsNullOrEmpty($line)) { break }
             if ($line.ToLower().StartsWith("content-length:")) {
                 $contentLength = [int]($line.Substring(15).Trim())
+            }
+            if ($line.ToLower().StartsWith("authorization:")) {
+                $authHeader = $line.Substring(14).Trim()
             }
         }
 
@@ -61,7 +70,7 @@ while ($true) {
 
         # CORS preflight
         if ($method -eq "OPTIONS") {
-            $headerStr = "HTTP/1.1 204 No Content`r`nAccess-Control-Allow-Origin: *`r`nAccess-Control-Allow-Methods: GET, POST, OPTIONS`r`nAccess-Control-Allow-Headers: *`r`nConnection: close`r`n`r`n"
+            $headerStr = "HTTP/1.1 204 No Content`r`nAccess-Control-Allow-Origin: *`r`nAccess-Control-Allow-Methods: GET, POST, DELETE, OPTIONS`r`nAccess-Control-Allow-Headers: *`r`nConnection: close`r`n`r`n"
             $hBytes = [System.Text.Encoding]::UTF8.GetBytes($headerStr)
             $stream.Write($hBytes, 0, $hBytes.Length)
             $client.Close()
@@ -69,10 +78,47 @@ while ($true) {
         }
 
         # Handle API Routes
-        if ($urlPath -eq "/api/health" -or $urlPath -eq "/health") {
-            $json = '{"status":"online","service":"Vantage Virality OS","version":"2.0.0"}'
-            $bBytes = [System.Text.Encoding]::UTF8.GetBytes($json)
-            $headerStr = "HTTP/1.1 200 OK`r`nContent-Type: application/json; charset=utf-8`r`nAccess-Control-Allow-Origin: *`r`nContent-Length: $($bBytes.Length)`r`nConnection: close`r`n`r`n"
+        if ($urlPath.StartsWith("/api/")) {
+            $respJson = "{}"
+            $statusCode = "200 OK"
+
+            if ($urlPath -eq "/api/health" -or $urlPath -eq "/health") {
+                $respJson = '{"status":"online","service":"Vantage Virality OS","version":"2.0.0","server_time":"' + (Get-Date -Format "o") + '"}'
+            }
+            elseif ($urlPath.StartsWith("/api/auth")) {
+                if ($urlPath -eq "/api/auth/me") {
+                    $respJson = '{"authenticated":true,"user":{"id":"usr_arka_master","name":"Arka Mondal","email":"arkadeb.mondal@example.com","tier":"pro"}}'
+                }
+                elseif ($urlPath -eq "/api/auth/login" -or $urlPath -eq "/api/auth/register" -or $urlPath -eq "/api/auth/guest") {
+                    $respJson = '{"success":true,"token":"demo_jwt_token_2026","user":{"id":"usr_arka_master","name":"Arka Mondal","email":"arkadeb.mondal@example.com","tier":"pro"}}'
+                }
+                else {
+                    $respJson = '{"success":true,"message":"OK"}'
+                }
+            }
+            elseif ($urlPath -eq "/api/profile") {
+                if ($method -eq "POST" -and -not [string]::IsNullOrEmpty($body)) {
+                    $respJson = '{"success":true,"message":"Profile saved","profile":' + $body + '}'
+                } else {
+                    $respJson = '{"name":"Arka Mondal","email":"arkadeb.mondal@example.com","niches":["ai","technology"],"content_types":["reels","shorts","youtube"],"country":"India","goals":"views"}'
+                }
+            }
+            elseif ($urlPath -eq "/api/library") {
+                if ($method -eq "POST" -and -not [string]::IsNullOrEmpty($body)) {
+                    $respJson = '{"success":true,"message":"Library updated"}'
+                } else {
+                    $respJson = '[{"id":"lib-1","title":"I gave 3 AI agents $1,000 each and let them trade for 30 days","hook":"I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model.","score":98,"stage":"filming"}]'
+                }
+            }
+            elseif ($urlPath.StartsWith("/api/trends")) {
+                $respJson = '{"success":true,"trends":[{"id":"yt-1","topic":"AI Autonomous Trading Agents","outlierScore":94,"title":"I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model."}]}'
+            }
+            else {
+                $respJson = '{"success":true,"message":"API Response"}'
+            }
+
+            $bBytes = [System.Text.Encoding]::UTF8.GetBytes($respJson)
+            $headerStr = "HTTP/1.1 $statusCode`r`nContent-Type: application/json; charset=utf-8`r`nCache-Control: no-cache, no-store, must-revalidate`r`nAccess-Control-Allow-Origin: *`r`nContent-Length: $($bBytes.Length)`r`nConnection: close`r`n`r`n"
             $hBytes = [System.Text.Encoding]::UTF8.GetBytes($headerStr)
             $stream.Write($hBytes, 0, $hBytes.Length)
             $stream.Write($bBytes, 0, $bBytes.Length)
@@ -99,16 +145,14 @@ while ($true) {
             $stream.Write($hBytes, 0, $hBytes.Length)
             $stream.Write($fileBytes, 0, $fileBytes.Length)
         } else {
-            $notFound = "404 Not Found"
-            $nBytes = [System.Text.Encoding]::UTF8.GetBytes($notFound)
-            $headerStr = "HTTP/1.1 404 Not Found`r`nContent-Type: text/plain`r`nContent-Length: $($nBytes.Length)`r`nConnection: close`r`n`r`n"
+            $headerStr = "HTTP/1.1 404 Not Found`r`nContent-Type: text/plain`r`nConnection: close`r`n`r`n404 Not Found"
             $hBytes = [System.Text.Encoding]::UTF8.GetBytes($headerStr)
             $stream.Write($hBytes, 0, $hBytes.Length)
-            $stream.Write($nBytes, 0, $nBytes.Length)
         }
 
         $client.Close()
-    } catch {
-        # ignore transient socket disconnects
+    }
+    catch {
+        # Catch and continue on socket errors
     }
 }

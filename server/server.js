@@ -11,7 +11,9 @@ const path = require('path');
 const { handleHealth } = require('./routes/health');
 const { handleProfile } = require('./routes/profile');
 const { handleLibrary } = require('./routes/library');
-const { handleScore } = require('./routes/trends');
+const { handleAuth } = require('./routes/auth');
+const { handleAI } = require('./routes/ai');
+const { handleTrends } = require('./routes/trends');
 
 const PORT = process.env.PORT || 3000;
 const ROOT_DIR = path.join(__dirname, '..');
@@ -46,6 +48,18 @@ const server = http.createServer((req, res) => {
 
   // REST API Route Dispatcher
   if (url.pathname.startsWith('/api/')) {
+    if (url.pathname.startsWith('/api/auth')) {
+      const sub = url.pathname.replace(/^\/api\/auth\/?/, '');
+      return handleAuth(req, res, sub);
+    }
+    if (url.pathname.startsWith('/api/ai')) {
+      const sub = url.pathname.replace(/^\/api\/ai\/?/, '');
+      return handleAI(req, res, sub);
+    }
+    if (url.pathname.startsWith('/api/trends')) {
+      const sub = url.pathname.replace(/^\/api\/trends\/?/, '');
+      return handleTrends(req, res, sub);
+    }
     if (url.pathname === '/api/health') {
       return handleHealth(req, res);
     }
@@ -56,7 +70,7 @@ const server = http.createServer((req, res) => {
       return handleLibrary(req, res);
     }
     if (url.pathname === '/api/score') {
-      return handleScore(req, res);
+      return handleAI(req, res, 'score-hook');
     }
 
     res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
@@ -90,10 +104,11 @@ const server = http.createServer((req, res) => {
 if (require.main === module) {
   server.listen(PORT, () => {
     console.log(`==========================================================`);
-    console.log(`  VANTAGE VIRALITY OS V2 - NODE.JS BACKEND RUNNING        `);
+    console.log(`  VANTAGE VIRALITY OS V2 - NODE.JS SAAS BACKEND ACTIVE    `);
     console.log(`  URL: http://localhost:${PORT}/                            `);
     console.log(`  API: http://localhost:${PORT}/api/health                  `);
-    console.log(`  Press Ctrl+C to stop the server                         `);
+    console.log(`  AUTH: http://localhost:${PORT}/api/auth/me                `);
+    console.log(`  AI: http://localhost:${PORT}/api/ai/generate-angles       `);
     console.log(`==========================================================`);
   });
 }
