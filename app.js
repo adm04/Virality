@@ -190,8 +190,8 @@
         id: 'trend-fin-05',
         topic: 'Algorithmic Index Fund DCA',
         niche: 'finance',
-        platform: 'tiktok',
-        platformName: 'TikTok',
+        platform: 'shorts',
+        platformName: 'Shorts & Reels',
         outlierScore: 88,
         outlierText: '6.9× Outlier',
         title: 'The exact automated investing rule that turned $200/month into financial freedom.',
@@ -205,180 +205,251 @@
           'Strong comment section discussion on broker automation settings'
         ],
         tags: ['#PersonalFinance', '#InvestingTips', '#PassiveIncome', '#Wealth']
+      },
+      {
+        id: 'trend-pod-06',
+        topic: 'The 2026 AI Agent Economic Shift',
+        niche: 'technology',
+        platform: 'podcast',
+        platformName: 'Podcast Deep Dive',
+        outlierScore: 95,
+        outlierText: '10.4× Outlier',
+        title: 'Why AI agents are changing software pricing forever (and how founders survive).',
+        views: '540K',
+        baseline: '52K',
+        growth: '+310%',
+        signals: { momentum: 97, engagement: 95, searchDemand: 90, saturation: 20, competition: 25, freshFactor: 96, monetization: 94 },
+        whyTrending: [
+          'Founders rethinking seat-based SaaS models in favor of outcome-based agent pricing',
+          'Long-form audio format achieves 85%+ completion rates on Spotify & Apple Podcasts',
+          'High quote-tweet volume on LinkedIn and X/Twitter'
+        ],
+        tags: ['#Podcast', '#TechTrends', '#AIRevolution', '#SaaS', '#Economy']
+      },
+      {
+        id: 'trend-fit-07',
+        topic: 'Cortisol & Workout Timing Science',
+        niche: 'fitness',
+        platform: 'shorts',
+        platformName: 'YouTube Shorts',
+        outlierScore: 91,
+        outlierText: '8.2× Outlier',
+        title: 'Why working out at 6 AM might secretly stall your fat loss (the cortisol window).',
+        views: '780K',
+        baseline: '95K',
+        growth: '+230%',
+        signals: { momentum: 92, engagement: 91, searchDemand: 89, saturation: 33, competition: 38, freshFactor: 88, monetization: 85 },
+        whyTrending: [
+          'Counter-intuitive health science triggers high debate and comment section retention',
+          'Appeals to busy working professionals looking for optimal workout efficiency',
+          'Saves/shares are 3.4x higher than standard gym routine videos'
+        ],
+        tags: ['#FitnessTips', '#FatLoss', '#HealthScience', '#Biohacking']
+      },
+      {
+        id: 'trend-mkt-08',
+        topic: 'Zero-Budget Organic TikTok Funnels',
+        niche: 'marketing',
+        platform: 'reels',
+        platformName: 'Instagram Reels',
+        outlierScore: 93,
+        outlierText: '9.1× Outlier',
+        title: 'How this creator gained 100K followers in 45 days with zero ad spend using 3-second visual loops.',
+        views: '1.1M',
+        baseline: '140K',
+        growth: '+275%',
+        signals: { momentum: 94, engagement: 95, searchDemand: 88, saturation: 28, competition: 30, freshFactor: 92, monetization: 96 },
+        whyTrending: [
+          'Algorithmic preference for seamless loop videos on short-form platforms',
+          'Actionable framework that viewers can test on their next upload immediately',
+          'High conversion to newsletter and creator community signups'
+        ],
+        tags: ['#GrowthHacking', '#TikTokAlgorithm', '#ContentStrategy', '#ViralHooks']
       }
     ],
 
-    CREATIVE_ANGLES: [
-      { id: 'all', name: 'All Angles (12)', icon: 'sparkles' },
-      { id: 'contrarian', name: 'Contrarian / Debate', icon: 'zap' },
-      { id: 'case-study', name: 'Case Study Blueprint', icon: 'book-open' },
-      { id: 'breakdown', name: 'Step-by-Step Breakdown', icon: 'layers' },
-      { id: 'tutorial', name: 'Actionable Tutorial', icon: 'terminal' },
-      { id: 'metaphor', name: 'Analogy & Metaphor', icon: 'lightbulb' },
-      { id: 'data', name: 'Data & Benchmark Test', icon: 'bar-chart-2' },
-      { id: 'challenge', name: '30-Day Challenge', icon: 'flame' },
-      { id: 'reaction', name: 'Industry Reaction', icon: 'message-square' },
-      { id: 'behind-scenes', name: 'Behind the Scenes', icon: 'eye' },
-      { id: 'future', name: 'Future Prediction', icon: 'trending-up' },
-      { id: 'secret', name: 'Secret Framework', icon: 'key' },
-      { id: 'mistakes', name: 'Costly Mistakes', icon: 'alert-triangle' }
+    CURATED_TOPICS: [
+      { id: 'all', name: 'All Topics', count: 8 },
+      { id: 'ai-agents', name: 'AI Autonomous Agents', count: 3, niche: 'ai' },
+      { id: 'vscode', name: 'VS Code & Tooling Optimization', count: 2, niche: 'technology' },
+      { id: 'indie-saas', name: 'Solopreneur Micro-SaaS', count: 2, niche: 'business' },
+      { id: 'local-llm', name: 'Local LLMs & DeepSeek R1', count: 3, niche: 'ai' },
+      { id: 'investing', name: 'Automated Investing & Wealth', count: 2, niche: 'finance' },
+      { id: 'podcast-tech', name: 'AI Agent Economic Shift', count: 1, niche: 'technology' },
+      { id: 'fitness-timing', name: 'Cortisol & Workout Science', count: 1, niche: 'fitness' },
+      { id: 'viral-loops', name: 'Zero-Budget Growth Funnels', count: 2, niche: 'marketing' }
+    ],
+
+    CURATED_NICHES: [
+      { id: 'all', name: 'All Creator Niches' },
+      { id: 'ai', name: 'AI & Machine Learning' },
+      { id: 'technology', name: 'Technology & DevTools' },
+      { id: 'business', name: 'Business & Startups' },
+      { id: 'finance', name: 'Finance & Crypto' },
+      { id: 'fitness', name: 'Fitness & Health' },
+      { id: 'marketing', name: 'Marketing & Growth' },
+      { id: 'design', name: 'Design & UI/UX' },
+      { id: 'gaming', name: 'Gaming & Streaming' },
+      { id: 'education', name: 'Education & Science' },
+      { id: 'lifestyle', name: 'Lifestyle & Vlogs' }
     ],
 
     generateIdeasForTrend(trend, angleId = 'all', profile = {}) {
       const topic = trend.topic || 'AI & Tech Trends';
-      const niche = trend.niche || 'Technology';
+      const niche = (trend.niche || 'Technology').toUpperCase();
       const platform = trend.platformName || 'Shorts & YouTube';
+      const audTarget = `${profile.country || 'Global'} (${profile.age_range || '18-34'})`;
 
-      const angleTemplates = [
+      const allTemplates = [
         {
-          angleId: 'contrarian',
-          angleName: 'Contrarian Debate',
-          title: `Why most creators are wrong about ${topic}`,
-          hook: `Everyone is telling you to use ${topic} in 2026. Here is why doing that might actually ruin your workflow.`,
+          angleId: 'educational',
+          angleName: 'Educational Breakdown',
+          title: `The 5-Minute Architecture Behind ${topic}`,
+          hook: `I spent 40 hours tearing apart the architecture of ${topic} so you can understand it in 60 seconds.`,
           format: platform,
-          audience: `${profile.age_range || '18-34'} Tech Creators & Builders`,
-          whyWorks: 'Challenges common belief, creating instant curiosity and driving high comment engagement.',
+          audience: `${audTarget} Developers & Builders`,
+          whyWorks: 'Time compression ("40 hours in 60 seconds") offers disproportionate perceived value and high save rates.',
+          structure: '1. The Complexity Myth -> 2. Core Component 1 -> 3. Component 2 -> 4. Final Assembled Flow',
+          cta: 'Subscribe for weekly 60-second deep dives into emerging tech stacks.',
+          score: 95
+        },
+        {
+          angleId: 'controversial',
+          angleName: 'Controversial Debate',
+          title: `Why Most Creators Are Completely Wrong About ${topic}`,
+          hook: `Everyone is telling you to adopt ${topic} in 2026. Here is why doing that might actually break your workflow.`,
+          format: platform,
+          audience: `${audTarget} Practitioners & Opinion Leaders`,
+          whyWorks: 'Challenges common dogma, triggering immediate curiosity and high debate in the comment section.',
           structure: '1. Shocking Contrarian Statement -> 2. The Hidden Flaw -> 3. Empirical Test -> 4. The Real Solution',
-          cta: 'Comment your take below: Do you agree or are you sticking with the old way?',
+          cta: 'Comment your take below: Do you agree or are you sticking with the mainstream way?',
           score: 96
+        },
+        {
+          angleId: 'storytelling',
+          angleName: 'Narrative Storytelling',
+          title: `The Day ${topic} Changed Everything for My Workflow`,
+          hook: `Three weeks ago, I almost gave up on my setup — until a late-night breakthrough with ${topic} changed everything.`,
+          format: platform,
+          audience: `${audTarget} Aspirational Creators`,
+          whyWorks: 'Hero journey narrative hooks emotional empathy and drives viewer watch-time to the final payoff.',
+          structure: '1. The Frustrating Obstacle -> 2. The Turning Point -> 3. The Climax -> 4. The Lasting Lesson',
+          cta: 'Drop a like if you have ever hit a wall right before a breakthrough!',
+          score: 92
+        },
+        {
+          angleId: 'beginner',
+          angleName: 'Beginner Friendly',
+          title: `${topic} Explained in Plain English (No Jargon)`,
+          hook: `Think ${topic} is too complicated? Imagine your brain is a kitchen and this system is your personal master chef.`,
+          format: platform,
+          audience: `${audTarget} Beginners & Explorers`,
+          whyWorks: 'Removes cognitive friction, allowing casual viewers to grasp advanced topics instantly.',
+          structure: '1. The Everyday Analogy -> 2. Mapping to Reality -> 3. Quick Real Example -> 4. Simple Summary',
+          cta: 'Follow for tech and creator concepts explained without the gatekeeping jargon.',
+          score: 91
+        },
+        {
+          angleId: 'expert',
+          angleName: 'Expert Deep Dive',
+          title: `Production Benchmark: Stress-Testing ${topic}`,
+          hook: `We ran 1,000 automated stress tests on ${topic} in production. The performance telemetry shocked our team.`,
+          format: platform,
+          audience: `${audTarget} Senior Engineers & Power Users`,
+          whyWorks: 'Objective empirical numbers build unquestioned technical authority and heavy bookmarking.',
+          structure: '1. Test Parameters -> 2. Latency & Cost Breakdown -> 3. Bottleneck Analysis -> 4. Winner',
+          cta: 'Check the description for the raw benchmark dataset and reproduction scripts.',
+          score: 97
+        },
+        {
+          angleId: 'myth-busting',
+          angleName: 'Myth-Busting',
+          title: `3 Costly Lies You Were Told About ${topic}`,
+          hook: `If you are using ${topic}, check your settings right now. These 3 common myths could be costing you hours.`,
+          format: platform,
+          audience: `${audTarget} Active Users`,
+          whyWorks: 'Loss aversion ("costing you hours") creates an immediate impulse to audit personal setups.',
+          structure: '1. Myth #1 (Most Common) -> 2. Myth #2 (Most Expensive) -> 3. Myth #3 -> 4. The 30-Second Fix',
+          cta: 'Save this video to audit your setup before your next project.',
+          score: 94
+        },
+        {
+          angleId: 'listicle',
+          angleName: 'Ranked Top Listicles',
+          title: `Top 5 Game-Changing Tools for ${topic} in 2026`,
+          hook: `I tested 24 tools for ${topic} so you don't have to. Here are the ONLY 5 worth your time this year.`,
+          format: platform,
+          audience: `${audTarget} Productivity Seekers`,
+          whyWorks: 'Curated ranking creates high retention as viewers stay to see which tool claimed the #1 spot.',
+          structure: '1. Rapid Fire 5 to 3 -> 2. Runner Up (#2) -> 3. The Uncontested Winner (#1) -> 4. Summary',
+          cta: 'Which of these 5 are in your daily stack? Vote in the comments.',
+          score: 93
         },
         {
           angleId: 'case-study',
           angleName: 'Case Study Blueprint',
-          title: `How a solo builder mastered ${topic}`,
-          hook: `How this unknown developer leveraged ${topic} to scale to $10,000/month with zero outside funding.`,
+          title: `How a Solo Creator Scaled With ${topic}`,
+          hook: `How this unknown solo builder leveraged ${topic} to scale to $10,000/month with zero outside funding.`,
           format: platform,
-          audience: 'Founders & Aspiring Entrepreneurs',
-          whyWorks: 'Social proof combined with specific dollar figures triggers massive save/bookmark rates.',
-          structure: '1. The Staggering Result -> 2. The Starting Point -> 3. The 3-Step System -> 4. Key Takeaways',
-          cta: 'Bookmark this blueprint so you can reference the stack when building your own setup.',
-          score: 94
+          audience: `${audTarget} Founders & Indie Hackers`,
+          whyWorks: 'Specific revenue milestones and social proof trigger massive bookmarking and shareability.',
+          structure: '1. The Staggering Result -> 2. The Humble Start -> 3. The 3-Step Framework -> 4. Replicable Rules',
+          cta: 'Bookmark this blueprint to reference when planning your next content monetization push.',
+          score: 98
         },
         {
-          angleId: 'breakdown',
-          angleName: 'Step-by-Step Breakdown',
-          title: `The 5-Minute architecture behind ${topic}`,
-          hook: `I spent 40 hours tearing apart the architecture of ${topic} so you can understand it in 60 seconds.`,
+          angleId: 'personal-story',
+          angleName: 'Personal Story',
+          title: `I Tested ${topic} for 30 Days: Here Is What Happened`,
+          hook: `I replaced my entire standard routine with ${topic} for 30 consecutive days. Here is the unfiltered truth.`,
           format: platform,
-          audience: 'Developers & Knowledge Workers',
-          whyWorks: 'Time compression ("40 hours in 60 seconds") offers disproportionate perceived value.',
-          structure: '1. The Complexity Myth -> 2. Component 1 -> 3. Component 2 -> 4. Final Assembled Flow',
-          cta: 'Subscribe for weekly deep-dives into emerging tech stacks.',
-          score: 93
-        },
-        {
-          angleId: 'tutorial',
-          angleName: 'Actionable Tutorial',
-          title: `Build your first ${topic} system today`,
-          hook: `Do NOT start with complex setups: here is the exact 4-step tutorial to configure ${topic} right now.`,
-          format: platform,
-          audience: 'Hands-on Makers & Students',
-          whyWorks: 'Clear, friction-free guidance reduces overwhelm and drives high completion rate.',
-          structure: '1. Prerequisites -> 2. Initial Setup -> 3. Core Logic -> 4. Live Verification',
-          cta: 'Save this video and run through step 2 before your next build.',
-          score: 91
-        },
-        {
-          angleId: 'data',
-          angleName: 'Data & Benchmark Test',
-          title: `We benchmarked ${topic} against 10 alternatives`,
-          hook: `We ran 1,000 automated benchmark tests on ${topic}. The numbers completely surprised our team.`,
-          format: platform,
-          audience: 'Analytical Buyers & Engineers',
-          whyWorks: 'Objective empirical data builds unmatched authority and trust.',
-          structure: '1. The Experiment Parameters -> 2. Speed Test -> 3. Cost Analysis -> 4. Clear Winner',
-          cta: 'Check the link in bio for the raw benchmark spreadsheet.',
-          score: 95
-        },
-        {
-          angleId: 'challenge',
-          angleName: '30-Day Challenge',
-          title: `I used ${topic} every day for 30 days`,
-          hook: `I replaced my entire standard routine with ${topic} for 30 consecutive days. Here is what happened.`,
-          format: platform,
-          audience: 'Curious General Audience',
-          whyWorks: 'Narrative storytelling with anticipation keeps viewers hooked until the day-30 reveal.',
-          structure: '1. Day 1 Struggles -> 2. Day 10 Breakthrough -> 3. Day 20 Unexpected Pitfall -> 4. Final Verdict',
-          cta: 'Would you try this challenge for 30 days? Drop a comment.',
-          score: 92
-        },
-        {
-          angleId: 'secret',
-          angleName: 'Secret Framework',
-          title: `The hidden framework top 1% use for ${topic}`,
-          hook: `Top 1% pros don't use ${topic} like everyone else. They use this 3-part framework to get 10x output.`,
-          format: platform,
-          audience: 'High-Performers & Power Users',
-          whyWorks: 'Exclusivity ("top 1%") taps into aspirational status and self-improvement desire.',
-          structure: '1. The Amateur Mistake -> 2. The Pro Mental Model -> 3. The 3 Levers -> 4. Implementation',
-          cta: 'Share this with a fellow creator who needs to level up their stack.',
-          score: 94
-        },
-        {
-          angleId: 'mistakes',
-          angleName: 'Costly Mistakes',
-          title: `3 Costly mistakes people make with ${topic}`,
-          hook: `If you are using ${topic}, check your settings right now. These 3 mistakes could cost you hours.`,
-          format: platform,
-          audience: 'Current Practitioners',
-          whyWorks: 'Loss aversion urgency creates an immediate impulse to watch and audit own setup.',
-          structure: '1. Mistake #1 (Most Common) -> 2. Mistake #2 (Most Expensive) -> 3. Mistake #3 -> 4. Quick Fix',
-          cta: 'Double tap if you were guilty of mistake number 2!',
-          score: 89
-        },
-        {
-          angleId: 'metaphor',
-          angleName: 'Analogy & Metaphor',
-          title: `Explaining ${topic} like you are 5 years old`,
-          hook: `Think ${topic} is too complicated? Imagine your brain is a kitchen and this tool is your master chef.`,
-          format: platform,
-          audience: 'Beginners & Non-Technical Explorers',
-          whyWorks: 'Extreme simplification removes cognitive load, turning complex ideas into viral soundbites.',
-          structure: '1. The Simple Analogy -> 2. Mapping to Tech -> 3. Practical Everyday Example -> 4. Summary',
-          cta: 'Follow for tech explained without the jargon.',
+          audience: `${audTarget} Curious General Audience`,
+          whyWorks: 'Personal stakes and empirical experience create a natural bingeable narrative arc.',
+          structure: '1. Day 1 Friction -> 2. Day 10 Breakthrough -> 3. Day 20 Pitfall -> 4. Final Verdict',
+          cta: 'Would you try this 30-day experiment? Let me know in the comments.',
           score: 90
         },
         {
-          angleId: 'reaction',
-          angleName: 'Industry Reaction',
-          title: `My honest reaction to the latest ${topic} update`,
-          hook: `The latest breakthrough in ${topic} just changed the entire roadmap. Here is what they didn't tell you.`,
+          angleId: 'hot-take',
+          angleName: 'Contrarian Hot Take',
+          title: `Why ${topic} Will Be Unrecognizable in 18 Months`,
+          hook: `Stop building for today: by late 2027, ${topic} will look completely obsolete. Here is what is replacing it.`,
           format: platform,
-          audience: 'Industry Watchers & News Junkies',
-          whyWorks: 'Timely news commentary captures high algorithmic search surge momentum.',
-          structure: '1. The Big Announcement -> 2. What It Means -> 3. Winners vs Losers -> 4. Strategic Advice',
-          cta: 'What do you think of this update? Let me know below.',
+          audience: `${audTarget} Forward-Thinking Strategists`,
+          whyWorks: 'Foresight and boldness generate high conversation velocity among industry decision-makers.',
+          structure: '1. The Dying Paradigm -> 2. The 2 Emerging Signals -> 3. How the 1% Prepare -> 4. Action Plan',
+          cta: 'Save this prediction and check back in 18 months to see if I was right!',
+          score: 94
+        },
+        {
+          angleId: 'tutorial',
+          angleName: 'Actionable Step-by-Step',
+          title: `Build Your First ${topic} System in 4 Steps`,
+          hook: `Do NOT overcomplicate it: here is the exact 4-step tutorial to configure ${topic} right now from scratch.`,
+          format: platform,
+          audience: `${audTarget} Hands-on Makers`,
+          whyWorks: 'Friction-free clarity removes hesitation and drives massive completions and replays.',
+          structure: '1. Prerequisites -> 2. Initial Setup -> 3. Core Engine Logic -> 4. Live Verification',
+          cta: 'Double-tap if this saved you time, and save the post for your next build.',
           score: 92
         },
         {
-          angleId: 'behind-scenes',
-          angleName: 'Behind the Scenes',
-          title: `Behind the scenes: Real production with ${topic}`,
-          hook: `Here is the unfiltered behind-the-scenes look at how we actually deploy ${topic} in production.`,
+          angleId: 'news-reaction',
+          angleName: 'Industry News Reaction',
+          title: `My Honest Reaction to the Latest ${topic} Breakthrough`,
+          hook: `The latest breakthrough in ${topic} just changed the entire roadmap. Here is what the headlines missed.`,
           format: platform,
-          audience: 'Practitioners & Community Members',
-          whyWorks: 'Authenticity and transparency build deep community loyalty and trust.',
-          structure: '1. The Workspace -> 2. Real Raw Bug Encounter -> 3. The Debugging Fix -> 4. Production Release',
-          cta: 'Join our creator discord community in the description.',
-          score: 88
-        },
-        {
-          angleId: 'future',
-          angleName: 'Future Prediction',
-          title: `Where ${topic} will be in 24 months`,
-          hook: `By 2028, ${topic} will look completely unrecognizable. Here are 3 predictions backed by current data.`,
-          format: platform,
-          audience: 'Forward-Thinking Strategists',
-          whyWorks: 'Thought leadership and foresight generate heavy sharing among decision-makers.',
-          structure: '1. Current Trajectory -> 2. Prediction 1 -> 3. Prediction 2 -> 4. How to Prepare Today',
-          cta: 'Save this to see if my predictions come true in 2 years!',
+          audience: `${audTarget} News Junkies & Industry Watchers`,
+          whyWorks: 'Timely analysis of trending developments captures high search momentum and algorithm surges.',
+          structure: '1. The Big Headline -> 2. What It Really Means -> 3. Winners vs Losers -> 4. What You Should Do',
+          cta: 'What is your reaction to this announcement? Drop your thoughts below.',
           score: 93
         }
       ];
 
-      if (angleId === 'all') return angleTemplates;
-      const matched = angleTemplates.filter(a => a.angleId === angleId);
-      return matched.length > 0 ? matched : angleTemplates;
+      if (angleId === 'all') return allTemplates;
+      const matched = allTemplates.filter(a => a.angleId === angleId);
+      return matched.length > 0 ? matched : allTemplates;
     }
   };
 
@@ -395,7 +466,6 @@
         monetization: 85
       };
 
-      // Formula: (Momentum*0.25) + (Engagement*0.20) + (Search*0.15) + ((100-Saturation)*0.15) + (FreshFactor*0.15) + (Monetization*0.10)
       const momentumWeight = (s.momentum || 85) * 0.25;
       const engagementWeight = (s.engagement || 88) * 0.20;
       const searchWeight = (s.searchDemand || 80) * 0.15;
@@ -405,7 +475,6 @@
 
       let score = Math.round(momentumWeight + engagementWeight + searchWeight + saturationWeight + freshWeight + monetWeight);
 
-      // Personalized alignment bonus
       if (profile.niches && profile.niches.includes(trend.niche)) score += 3;
       if (profile.content_types && profile.content_types.includes(trend.platform)) score += 2;
       score = Math.min(99, Math.max(50, score));
@@ -417,19 +486,19 @@
       return { score, tier, signals: s };
     },
 
-    evaluateLiveHook(hookText) {
+    evaluateLiveHook(hookText, platform = 'shorts', niche = 'ai') {
       const text = (hookText || '').trim();
       if (!text) return null;
 
       const hasNumber = /\d+/.test(text);
       const hasQuestion = text.includes('?');
-      const hasLossAversion = /delete|stop|never|worst|mistake|regret|fail|lies|disaster|broken|ruin/i.test(text);
-      const hasPowerWord = /secret|tested|truth|insane|brutal|proof|architecture|scaled|formula|blueprint|unknown|revealed/i.test(text);
+      const hasLossAversion = /delete|stop|never|worst|mistake|regret|fail|lies|disaster|broken|ruin|costly|danger/i.test(text);
+      const hasPowerWord = /secret|tested|truth|insane|brutal|proof|architecture|scaled|formula|blueprint|unknown|revealed|cheat|hacks/i.test(text);
       const len = text.length;
 
-      let curiosity = 78 + (hasQuestion ? 8 : 0) + (hasPowerWord ? 8 : 0) + (len > 30 ? 4 : 0);
-      let stakes = 75 + (hasLossAversion ? 14 : 0) + (hasNumber ? 6 : 0);
-      let velocity = 80 + (len >= 45 && len <= 95 ? 12 : 4) + (hasNumber ? 5 : 0);
+      let curiosity = 76 + (hasQuestion ? 8 : 0) + (hasPowerWord ? 9 : 0) + (len > 35 ? 5 : 0);
+      let stakes = 74 + (hasLossAversion ? 14 : 0) + (hasNumber ? 6 : 0);
+      let velocity = 78 + (len >= 45 && len <= 95 ? 13 : 4) + (hasNumber ? 5 : 0);
 
       curiosity = Math.min(99, curiosity);
       stakes = Math.min(99, stakes);
@@ -439,7 +508,7 @@
 
       return {
         score: overall,
-        tier: overall >= 90 ? 'EXPLOSIVE' : (overall >= 75 ? 'STRONG' : 'CALIBRATED'),
+        tier: overall >= 90 ? 'EXPLOSIVE' : (overall >= 78 ? 'STRONG' : 'CALIBRATED'),
         curiosity,
         stakes,
         velocity,
@@ -448,13 +517,15 @@
           hasQuestion,
           hasLossAversion,
           hasPowerWord,
-          length: len
+          length: len,
+          platform,
+          niche
         }
       };
     }
   };
 
-  // ================= 4. API & LOCAL STORAGE SYNC CLIENT =================
+  // ================= 4. DATA PERSISTENCE & API CLIENT =================
   const VantageAPI = {
     loadProfile() {
       try {
@@ -471,7 +542,6 @@
         localStorage.setItem(VantageConfig.STORAGE_KEY_PROFILE, JSON.stringify(profile));
       } catch (e) {}
 
-      // Background REST API sync
       fetch(`${VantageConfig.API_BASE}/profile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -494,7 +564,6 @@
         localStorage.setItem(VantageConfig.STORAGE_KEY_LIBRARY, JSON.stringify(items));
       } catch (e) {}
 
-      // Background REST API sync
       fetch(`${VantageConfig.API_BASE}/library`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -520,15 +589,16 @@
   let activeLibraryView = 'kanban';
   let selectedTrendForIdeas = null;
   let selectedTrendForInspector = null;
+  let searchQuery = '';
   let activeTopicFilter = 'all';
   let activeNicheFilter = 'all';
-  let searchQuery = '';
   let currentOnboardStep = 1;
   let sampleHookIndex = 0;
+  let radarSecondsRemaining = 6480; // 1h 48m countdown
 
   // ================= 6. UI RENDERERS =================
 
-  // --- Clock & Greeting ---
+  // --- Clock, Dynamic Greeting & Radar Countdown ---
   function getTimeGreeting(date = new Date()) {
     const hour = date.getHours();
     if (hour >= 5 && hour < 12) {
@@ -565,6 +635,21 @@
       const rawName = (creatorProfile && creatorProfile.name) ? creatorProfile.name.trim() : 'Arka';
       const firstName = rawName.split(' ')[0] || 'Arka';
       userNameEl.textContent = `${firstName}.`;
+    }
+  }
+
+  function updateLiveRadarCountdown() {
+    radarSecondsRemaining = Math.max(0, radarSecondsRemaining - 1);
+    const hrs = Math.floor(radarSecondsRemaining / 3600);
+    const mins = Math.floor((radarSecondsRemaining % 3600) / 60);
+    const secs = radarSecondsRemaining % 60;
+    const radarEl = document.getElementById('header-radar-status');
+    if (radarEl) {
+      if (hrs > 0) {
+        radarEl.textContent = `NEXT SYNC IN ${hrs}h ${mins}m ${secs < 10 ? '0' : ''}${secs}s`;
+      } else {
+        radarEl.textContent = `NEXT SYNC IN ${mins}m ${secs < 10 ? '0' : ''}${secs}s`;
+      }
     }
   }
 
@@ -608,7 +693,11 @@
 
     let trends = VantageTrendsData.SEED_TRENDS;
     if (activeTrendingPlatform !== 'all') {
-      trends = trends.filter(t => t.platform === activeTrendingPlatform);
+      if (activeTrendingPlatform === 'shorts') {
+        trends = trends.filter(t => t.platform === 'shorts' || t.platform === 'reels' || t.platform === 'tiktok');
+      } else {
+        trends = trends.filter(t => t.platform === activeTrendingPlatform);
+      }
     }
 
     container.innerHTML = trends.map(t => {
@@ -685,7 +774,7 @@
     refreshLucideIcons();
   }
 
-  // --- Section 2: Ideas For You ---
+  // --- Section 2: Ideas For You (12 Creative Angles) ---
   function renderIdeasSection() {
     const container = document.getElementById('ideas-cards-container');
     const sourceBadgeName = document.getElementById('active-idea-source-name');
@@ -763,7 +852,8 @@
   // --- Section 3: Content Intelligence Search ---
   function renderSearchSection() {
     const grid = document.getElementById('search-results-grid');
-    const countEl = document.getElementById('search-match-count');
+    const activeFiltersBar = document.getElementById('active-filters-bar');
+    const activeChipsList = document.getElementById('active-chips-list');
     if (!grid) return;
 
     let results = VantageTrendsData.SEED_TRENDS;
@@ -778,17 +868,91 @@
       );
     }
 
+    if (activeTopicFilter !== 'all') {
+      const topicObj = VantageTrendsData.CURATED_TOPICS.find(tp => tp.id === activeTopicFilter);
+      if (topicObj) {
+        results = results.filter(t => t.topic.toLowerCase().includes(topicObj.name.toLowerCase().split(' ')[0]) || t.niche === topicObj.niche);
+      }
+    }
+
     if (activeNicheFilter !== 'all') {
       results = results.filter(t => t.niche === activeNicheFilter);
     }
 
-    if (countEl) countEl.textContent = `${results.length} trend signal${results.length === 1 ? '' : 's'} matching`;
+    // Render Active Filters Bar
+    const hasActiveFilters = searchQuery.trim() || activeTopicFilter !== 'all' || activeNicheFilter !== 'all';
+    if (activeFiltersBar && activeChipsList) {
+      if (hasActiveFilters) {
+        activeFiltersBar.style.display = 'flex';
+        let chipsHtml = '';
+
+        if (searchQuery.trim()) {
+          chipsHtml += `
+            <span class="filter-chip-item">
+              <span>Query: "${escapeHtml(searchQuery.trim())}"</span>
+              <button class="chip-remove-btn" id="chip-remove-query" aria-label="Remove search query filter">✕</button>
+            </span>
+          `;
+        }
+
+        if (activeTopicFilter !== 'all') {
+          const tObj = VantageTrendsData.CURATED_TOPICS.find(tp => tp.id === activeTopicFilter);
+          chipsHtml += `
+            <span class="filter-chip-item">
+              <span>Topic: ${escapeHtml(tObj ? tObj.name : activeTopicFilter)}</span>
+              <button class="chip-remove-btn" id="chip-remove-topic" aria-label="Remove topic filter">✕</button>
+            </span>
+          `;
+        }
+
+        if (activeNicheFilter !== 'all') {
+          const nObj = VantageTrendsData.CURATED_NICHES.find(np => np.id === activeNicheFilter);
+          chipsHtml += `
+            <span class="filter-chip-item">
+              <span>Niche: ${escapeHtml(nObj ? nObj.name : activeNicheFilter.toUpperCase())}</span>
+              <button class="chip-remove-btn" id="chip-remove-niche" aria-label="Remove niche filter">✕</button>
+            </span>
+          `;
+        }
+
+        activeChipsList.innerHTML = chipsHtml;
+
+        document.getElementById('chip-remove-query')?.addEventListener('click', () => {
+          searchQuery = '';
+          const inp = document.getElementById('global-search-input');
+          if (inp) inp.value = '';
+          const clrBtn = document.getElementById('clear-search-btn');
+          if (clrBtn) clrBtn.style.display = 'none';
+          renderSearchSection();
+        });
+
+        document.getElementById('chip-remove-topic')?.addEventListener('click', () => {
+          activeTopicFilter = 'all';
+          const lbl = document.getElementById('topic-menu-label');
+          if (lbl) lbl.textContent = 'Topics';
+          renderTopicDropdownList();
+          renderSearchSection();
+        });
+
+        document.getElementById('chip-remove-niche')?.addEventListener('click', () => {
+          activeNicheFilter = 'all';
+          const lbl = document.getElementById('niche-menu-label');
+          if (lbl) lbl.textContent = 'Niche: All';
+          renderNicheDropdownList();
+          renderSearchSection();
+        });
+
+      } else {
+        activeFiltersBar.style.display = 'none';
+        activeChipsList.innerHTML = '';
+      }
+    }
 
     if (results.length === 0) {
       grid.innerHTML = `
         <div style="grid-column: 1 / -1; padding: 48px 24px; text-align: center; color: var(--text-tertiary);">
           <p style="font-size: 15px; margin-bottom: 12px; font-weight: 600;">No trend signals matched your search criteria.</p>
-          <button class="btn btn-secondary btn-sm" id="btn-reset-search-empty" type="button">Clear Filters</button>
+          <button class="btn btn-secondary btn-sm" id="btn-reset-search-empty" type="button">Clear All Filters</button>
         </div>
       `;
       document.getElementById('btn-reset-search-empty')?.addEventListener('click', () => {
@@ -797,6 +961,12 @@
         activeTopicFilter = 'all';
         const inp = document.getElementById('global-search-input');
         if (inp) inp.value = '';
+        const clrBtn = document.getElementById('clear-search-btn');
+        if (clrBtn) clrBtn.style.display = 'none';
+        document.getElementById('topic-menu-label').textContent = 'Topics';
+        document.getElementById('niche-menu-label').textContent = 'Niche: All';
+        renderTopicDropdownList();
+        renderNicheDropdownList();
         renderSearchSection();
       });
       return;
@@ -843,6 +1013,66 @@
     refreshLucideIcons();
   }
 
+  function renderTopicDropdownList(filterQuery = '') {
+    const container = document.getElementById('topic-items-container');
+    if (!container) return;
+
+    let list = VantageTrendsData.CURATED_TOPICS;
+    if (filterQuery.trim()) {
+      const q = filterQuery.toLowerCase().trim();
+      list = list.filter(item => item.name.toLowerCase().includes(q));
+    }
+
+    container.innerHTML = list.map(item => `
+      <button class="topic-item-btn ${item.id === activeTopicFilter ? 'selected' : ''}" data-topic="${item.id}" type="button">
+        <span>${escapeHtml(item.name)}</span>
+        <span style="font-size: 10.5px; opacity: 0.7;">${item.count ? `${item.count} trends` : ''}</span>
+      </button>
+    `).join('');
+
+    container.querySelectorAll('.topic-item-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeTopicFilter = btn.getAttribute('data-topic');
+        const selectedObj = VantageTrendsData.CURATED_TOPICS.find(tp => tp.id === activeTopicFilter);
+        const label = document.getElementById('topic-menu-label');
+        if (label) {
+          label.textContent = (selectedObj && selectedObj.id !== 'all') ? selectedObj.name.split(' ')[0] : 'Topics';
+        }
+        document.getElementById('topic-search-dropdown')?.classList.remove('show');
+        document.getElementById('btn-topic-menu')?.classList.remove('active');
+        renderTopicDropdownList();
+        renderSearchSection();
+      });
+    });
+  }
+
+  function renderNicheDropdownList() {
+    const container = document.getElementById('niche-menu-list');
+    if (!container) return;
+
+    container.innerHTML = VantageTrendsData.CURATED_NICHES.map(item => `
+      <button class="niche-item-btn ${item.id === activeNicheFilter ? 'selected' : ''}" data-niche="${item.id}" type="button">
+        <span>${escapeHtml(item.name)}</span>
+        ${item.id === activeNicheFilter ? '<span>✓</span>' : ''}
+      </button>
+    `).join('');
+
+    container.querySelectorAll('.niche-item-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeNicheFilter = btn.getAttribute('data-niche');
+        const selectedObj = VantageTrendsData.CURATED_NICHES.find(np => np.id === activeNicheFilter);
+        const label = document.getElementById('niche-menu-label');
+        if (label) {
+          label.textContent = (selectedObj && selectedObj.id !== 'all') ? `Niche: ${selectedObj.name.split(' ')[0]}` : 'Niche: All';
+        }
+        document.getElementById('niche-search-dropdown')?.classList.remove('show');
+        document.getElementById('btn-niche-menu')?.classList.remove('active');
+        renderNicheDropdownList();
+        renderSearchSection();
+      });
+    });
+  }
+
   // --- Section 4: Content Production Library ---
   function renderLibrarySection() {
     const board = document.getElementById('library-kanban-board');
@@ -864,7 +1094,7 @@
       st.count = savedLibrary.filter(i => (i.stage || 'idea') === st.id).length;
     });
 
-    document.querySelectorAll('#library-stage-filters .stage-tab, #library-stage-tabs .stage-tab').forEach(tab => {
+    document.querySelectorAll('#library-stage-filters .stage-tab').forEach(tab => {
       const stageId = tab.getAttribute('data-stage');
       tab.classList.toggle('active', stageId === activeLibraryStage);
     });
@@ -979,13 +1209,14 @@
 
     // Attach delete listener
     board.querySelectorAll('.btn-lib-del').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
+      btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-id');
-        savedLibrary = savedLibrary.filter(i => i.id !== id);
-        VantageAPI.saveLibrary(savedLibrary);
-        renderLibrarySection();
-        showToast('Idea removed from Content Library.');
+        if (confirm('Delete this concept from your Content Library?')) {
+          savedLibrary = savedLibrary.filter(i => i.id !== id);
+          VantageAPI.saveLibrary(savedLibrary);
+          renderLibrarySection();
+          showToast('Idea removed from library');
+        }
       });
     });
 
@@ -993,81 +1224,6 @@
   }
 
   // ================= 7. MODALS & DRAWERS CONTROLLERS =================
-
-  // --- Onboarding Modal ---
-  function openOnboardingModal() {
-    currentOnboardStep = 1;
-    showOnboardingStep(1);
-    const modal = document.getElementById('onboarding-modal');
-    if (modal) {
-      modal.classList.add('active');
-      modal.setAttribute('aria-hidden', 'false');
-    }
-  }
-
-  function closeOnboardingModal() {
-    const modal = document.getElementById('onboarding-modal');
-    if (modal) {
-      modal.classList.remove('active');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-  }
-
-  function showOnboardingStep(step) {
-    currentOnboardStep = step;
-    const progressFill = document.getElementById('onboarding-progress-fill');
-    const stepCounter = document.getElementById('onboarding-step-counter');
-    const prevBtn = document.getElementById('btn-onboard-prev');
-    const nextBtn = document.getElementById('btn-onboard-next');
-
-    document.querySelectorAll('.onboarding-step-pane').forEach(p => p.classList.remove('active'));
-
-    if (step <= 5) {
-      document.getElementById(`onboarding-step-${step}`)?.classList.add('active');
-      if (progressFill) progressFill.style.width = `${step * 20}%`;
-      if (stepCounter) stepCounter.textContent = `STEP ${step} OF 5`;
-      if (prevBtn) prevBtn.style.display = step === 1 ? 'none' : 'block';
-      if (nextBtn) nextBtn.innerHTML = `<span>Continue</span> <svg class="lucide lucide-arrow-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
-    } else {
-      document.getElementById('onboarding-step-complete')?.classList.add('active');
-      if (progressFill) progressFill.style.width = '100%';
-      if (stepCounter) stepCounter.textContent = `CALIBRATION COMPLETE`;
-      if (prevBtn) prevBtn.style.display = 'block';
-      if (nextBtn) nextBtn.innerHTML = `<span>Show My Opportunities</span> <svg class="lucide lucide-sparkles" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`;
-
-      const selPlatforms = Array.from(document.querySelectorAll('#grid-content-types .onboard-tag-btn.selected')).map(b => b.textContent.trim());
-      const selNiches = Array.from(document.querySelectorAll('#grid-niches .onboard-tag-btn.selected')).map(b => b.textContent.trim());
-      document.getElementById('sum-platforms').textContent = selPlatforms.join(', ') || 'YouTube & Shorts';
-      document.getElementById('sum-niches').textContent = selNiches.join(', ') || 'AI & Technology';
-    }
-    refreshLucideIcons();
-  }
-
-  function saveOnboardingData() {
-    const selContentTypes = Array.from(document.querySelectorAll('#grid-content-types .onboard-tag-btn.selected')).map(b => b.getAttribute('data-value'));
-    const selNiches = Array.from(document.querySelectorAll('#grid-niches .onboard-tag-btn.selected')).map(b => b.getAttribute('data-value'));
-    const selGoal = document.querySelector('#grid-goals .goal-card.selected')?.getAttribute('data-value') || 'views';
-
-    creatorProfile = {
-      ...creatorProfile,
-      content_types: selContentTypes.length > 0 ? selContentTypes : ['reels', 'shorts', 'youtube'],
-      niches: selNiches.length > 0 ? selNiches : ['ai', 'technology'],
-      age_range: document.getElementById('onboard-age-range')?.value || '18-34',
-      country: document.getElementById('onboard-country')?.value || 'India',
-      language: document.getElementById('onboard-language')?.value || 'English',
-      audience_description: document.getElementById('onboard-audience-desc')?.value || '',
-      goals: selGoal,
-      onboarding_completed: true,
-      updated_at: new Date().toISOString()
-    };
-
-    VantageAPI.saveProfile(creatorProfile);
-    updateCreatorPersonaChips();
-    renderTrendingSection();
-    renderIdeasSection();
-    renderSearchSection();
-    showToast('Creator persona successfully calibrated!');
-  }
 
   // --- Trend Inspector Drawer ---
   function openTrendInspector(trendId) {
@@ -1078,12 +1234,16 @@
     const drawer = document.getElementById('trend-inspector-drawer');
     if (!drawer) return;
 
+    const tagEl = document.getElementById('inspector-platform-tag');
+    if (tagEl) {
+      tagEl.innerHTML = `<span class="platform-pill ${trend.platform}">${escapeHtml(trend.platformName)}</span>`;
+    }
+
     document.getElementById('inspector-score-num').textContent = opp.score;
     document.getElementById('inspector-score-sub').textContent = opp.tier;
     document.getElementById('inspector-outlier-pill').textContent = trend.outlierText;
     document.getElementById('inspector-topic-title').textContent = trend.topic;
     document.getElementById('inspector-topic-desc').textContent = trend.title;
-    document.getElementById('inspector-hook-text').textContent = `"${trend.title}"`;
 
     const sigs = trend.signals || {};
     const setBar = (id, val) => {
@@ -1096,10 +1256,10 @@
     setBar('momentum', sigs.momentum || 92);
     setBar('engagement', sigs.engagement || 90);
     setBar('search', sigs.searchDemand || 88);
-    setBar('saturation', 100 - (sigs.saturation || 30));
-    setBar('competition', 100 - (sigs.competition || 30));
+    setBar('outlier', Math.min(99, Math.round((trend.outlierScore || 90))));
     setBar('freshness', sigs.freshFactor || 94);
-    setBar('monetization', sigs.monetization || 90);
+    setBar('competition', 100 - (sigs.competition || 30));
+    setBar('relevance', Math.min(99, 85 + (creatorProfile.niches?.includes(trend.niche) ? 12 : 2)));
 
     const whyList = document.getElementById('inspector-why-list');
     if (whyList) {
@@ -1140,10 +1300,23 @@
   // --- Settings Modal ---
   function openSettingsModal() {
     const modal = document.getElementById('settings-modal');
-    if (modal) {
-      modal.classList.add('active');
-      modal.setAttribute('aria-hidden', 'false');
-    }
+    if (!modal) return;
+
+    // Populate current profile into fields
+    const nameInp = document.getElementById('settings-user-name');
+    const emailInp = document.getElementById('settings-user-email');
+    const bioInp = document.getElementById('settings-audience-bio');
+
+    if (nameInp) nameInp.value = creatorProfile.name || 'Arka Mondal';
+    if (emailInp) emailInp.value = creatorProfile.email || 'arkadeb.mondal@example.com';
+    if (bioInp) bioInp.value = creatorProfile.audience_description || '';
+
+    // Set first tab active
+    document.querySelectorAll('.settings-tab-btn').forEach((b, idx) => b.classList.toggle('active', idx === 0));
+    document.querySelectorAll('.settings-pane').forEach((p, idx) => p.classList.toggle('active', idx === 0));
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
   }
 
   function closeSettingsModal() {
@@ -1173,14 +1346,7 @@
 
   function handleLoginSubmit() {
     const emailInp = document.getElementById('auth-email-input');
-    const passInp = document.getElementById('auth-password-input');
     const email = (emailInp?.value || 'arka@vantage.ai').trim();
-    const pass = (passInp?.value || '').trim();
-
-    if (!email) {
-      showToast('Please enter your creator email.');
-      return;
-    }
 
     let name = 'Arka Mondal';
     if (email.toLowerCase().includes('arka')) {
@@ -1203,10 +1369,94 @@
     closeAuthScreen();
     showToast(`Logged in as ${name} (Pro Creator Access)`);
 
-    // Immediately open the 5-Step Niche Calibration Wizard so user can select their niches!
     setTimeout(() => {
       openOnboardingModal();
     }, 350);
+  }
+
+  // --- 5-Step Onboarding Wizard ---
+  function openOnboardingModal() {
+    showOnboardingStep(1);
+    const modal = document.getElementById('onboarding-modal');
+    if (modal) {
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function closeOnboardingModal() {
+    const modal = document.getElementById('onboarding-modal');
+    if (modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function showOnboardingStep(step) {
+    currentOnboardStep = step;
+    const progressFill = document.getElementById('onboarding-progress-fill');
+    const stepCounter = document.getElementById('onboarding-step-counter');
+    const prevBtn = document.getElementById('btn-onboard-prev');
+    const nextBtn = document.getElementById('btn-onboard-next');
+
+    document.querySelectorAll('.onboarding-step-pane').forEach(p => p.classList.remove('active'));
+
+    if (step <= 5) {
+      document.getElementById(`onboarding-step-${step}`)?.classList.add('active');
+      if (progressFill) progressFill.style.width = `${step * 20}%`;
+      if (stepCounter) stepCounter.textContent = `STEP ${step} OF 5`;
+      if (prevBtn) prevBtn.style.display = step === 1 ? 'none' : 'block';
+      if (nextBtn) nextBtn.innerHTML = `<span>Continue</span> <svg class="lucide lucide-arrow-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+    } else {
+      document.getElementById('onboarding-step-complete')?.classList.add('active');
+      if (progressFill) progressFill.style.width = '100%';
+      if (stepCounter) stepCounter.textContent = `CALIBRATION COMPLETE`;
+      if (prevBtn) prevBtn.style.display = 'block';
+      if (nextBtn) nextBtn.innerHTML = `<span>Show My Opportunities</span> <svg class="lucide lucide-sparkles" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`;
+
+      const selPlatforms = Array.from(document.querySelectorAll('#grid-content-types .onboard-tag-btn.selected')).map(b => b.textContent.trim());
+      const selNiches = Array.from(document.querySelectorAll('#grid-niches .onboard-tag-btn.selected')).map(b => b.textContent.trim());
+      const selGoal = document.querySelector('#grid-goals .goal-card.selected h4')?.textContent.trim() || 'Get More Views';
+      const selStyles = Array.from(document.querySelectorAll('#grid-idea-types .onboard-tag-btn.selected')).map(b => b.textContent.trim());
+
+      const age = document.getElementById('onboard-age-range')?.value || '18-34';
+      const country = document.getElementById('onboard-country')?.value || 'India';
+      const lang = document.getElementById('onboard-language')?.value || 'English';
+
+      if (document.getElementById('sum-platforms')) document.getElementById('sum-platforms').textContent = selPlatforms.join(', ') || 'Instagram Reels, Shorts, YouTube';
+      if (document.getElementById('sum-niches')) document.getElementById('sum-niches').textContent = selNiches.join(', ') || 'AI, Technology & DevTools';
+      if (document.getElementById('sum-audience')) document.getElementById('sum-audience').textContent = `${age} • ${country} • ${lang}`;
+      if (document.getElementById('sum-goal')) document.getElementById('sum-goal').textContent = selGoal;
+      if (document.getElementById('sum-styles')) document.getElementById('sum-styles').textContent = selStyles.slice(0, 4).join(', ') || 'Trending, Storytelling, Case Studies';
+    }
+    refreshLucideIcons();
+  }
+
+  function saveOnboardingData() {
+    const selContentTypes = Array.from(document.querySelectorAll('#grid-content-types .onboard-tag-btn.selected')).map(b => b.getAttribute('data-value')).filter(Boolean);
+    const selNiches = Array.from(document.querySelectorAll('#grid-niches .onboard-tag-btn.selected')).map(b => b.getAttribute('data-value')).filter(Boolean);
+    const selGoal = document.querySelector('#grid-goals .goal-card.selected')?.getAttribute('data-value') || 'views';
+
+    creatorProfile = {
+      ...creatorProfile,
+      content_types: selContentTypes.length > 0 ? selContentTypes : ['reels', 'shorts', 'youtube'],
+      niches: selNiches.length > 0 ? selNiches : ['ai', 'technology'],
+      age_range: document.getElementById('onboard-age-range')?.value || '18-34',
+      country: document.getElementById('onboard-country')?.value || 'India',
+      language: document.getElementById('onboard-language')?.value || 'English',
+      audience_description: document.getElementById('onboard-audience-desc')?.value || '',
+      goals: selGoal,
+      onboarding_completed: true,
+      updated_at: new Date().toISOString()
+    };
+
+    VantageAPI.saveProfile(creatorProfile);
+    updateCreatorPersonaChips();
+    updateLiveClockAndGreeting();
+    renderTrendingSection();
+    renderIdeasSection();
+    renderSearchSection();
+    showToast('Creator persona successfully calibrated!');
   }
 
   // ================= 8. DATA ACTIONS & HELPERS =================
@@ -1236,7 +1486,7 @@
     if (!container) return;
 
     const toast = document.createElement('div');
-    toast.className = 'toast';
+    toast.className = 'toast-bubble';
     toast.innerHTML = `
       <svg class="toast-icon lucide lucide-check-circle-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
       <span>${escapeHtml(msg)}</span>
@@ -1299,10 +1549,33 @@
   // ================= 9. EVENT ATTACHMENTS =================
   function bindAllEvents() {
     // 1. Sidebar Nav
-    document.getElementById('nav-trending')?.addEventListener('click', () => document.getElementById('section-trending')?.scrollIntoView({ behavior: 'smooth' }));
-    document.getElementById('nav-ideas')?.addEventListener('click', () => document.getElementById('section-ideas')?.scrollIntoView({ behavior: 'smooth' }));
-    document.getElementById('nav-search')?.addEventListener('click', () => document.getElementById('section-search')?.scrollIntoView({ behavior: 'smooth' }));
-    document.getElementById('nav-library')?.addEventListener('click', () => document.getElementById('section-library')?.scrollIntoView({ behavior: 'smooth' }));
+    const navTrending = document.getElementById('nav-trending');
+    const navIdeas = document.getElementById('nav-ideas');
+    const navSearch = document.getElementById('nav-search');
+    const navLibrary = document.getElementById('nav-library');
+
+    const setNavActive = (activeEl) => {
+      document.querySelectorAll('.sidebar .nav-item').forEach(btn => btn.classList.remove('active'));
+      activeEl?.classList.add('active');
+    };
+
+    navTrending?.addEventListener('click', () => {
+      setNavActive(navTrending);
+      document.getElementById('section-trending')?.scrollIntoView({ behavior: 'smooth' });
+    });
+    navIdeas?.addEventListener('click', () => {
+      setNavActive(navIdeas);
+      document.getElementById('section-ideas')?.scrollIntoView({ behavior: 'smooth' });
+    });
+    navSearch?.addEventListener('click', () => {
+      setNavActive(navSearch);
+      document.getElementById('section-search')?.scrollIntoView({ behavior: 'smooth' });
+    });
+    navLibrary?.addEventListener('click', () => {
+      setNavActive(navLibrary);
+      document.getElementById('section-library')?.scrollIntoView({ behavior: 'smooth' });
+    });
+
     document.getElementById('nav-onboarding-trigger')?.addEventListener('click', openOnboardingModal);
     document.getElementById('nav-settings')?.addEventListener('click', openSettingsModal);
     document.getElementById('sidebar-user-avatar-btn')?.addEventListener('click', openAuthScreen);
@@ -1322,8 +1595,16 @@
     });
 
     document.getElementById('btn-sync-trends')?.addEventListener('click', () => {
+      // Simulate live jitter updates on signals
+      VantageTrendsData.SEED_TRENDS.forEach(t => {
+        if (t.signals) {
+          t.signals.momentum = Math.min(99, Math.max(80, t.signals.momentum + (Math.random() > 0.5 ? 1 : -1)));
+          t.signals.engagement = Math.min(99, Math.max(80, t.signals.engagement + (Math.random() > 0.5 ? 1 : -1)));
+        }
+      });
       renderTrendingSection();
-      showToast('Synchronized live signals across YouTube, Shorts, Reels & TikTok.');
+      renderSearchSection();
+      showToast('Synchronized live algorithmic signals across YouTube, Shorts, Reels & TikTok.');
     });
 
     // 3. Creative Angles chips
@@ -1351,7 +1632,7 @@
       renderLibrarySection();
     });
 
-    document.querySelectorAll('#library-stage-filters .stage-tab, #library-stage-tabs .stage-tab').forEach(tab => {
+    document.querySelectorAll('#library-stage-filters .stage-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         activeLibraryStage = tab.getAttribute('data-stage');
         renderLibrarySection();
@@ -1373,7 +1654,7 @@
       }
     });
 
-    // 5. Global Search Input
+    // 5. Global Search Input & Dropdowns
     const searchInp = document.getElementById('global-search-input');
     const clearSearchBtn = document.getElementById('clear-search-btn');
     if (searchInp) {
@@ -1392,6 +1673,66 @@
       });
     }
 
+    // Search Topic Dropdown
+    const topicMenuBtn = document.getElementById('btn-topic-menu');
+    const topicDropdown = document.getElementById('topic-search-dropdown');
+    const nicheMenuBtn = document.getElementById('btn-niche-menu');
+    const nicheDropdown = document.getElementById('niche-search-dropdown');
+
+    topicMenuBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nicheDropdown?.classList.remove('show');
+      nicheMenuBtn?.classList.remove('active');
+      
+      const isShowing = topicDropdown?.classList.toggle('show');
+      topicMenuBtn?.classList.toggle('active', isShowing);
+      if (isShowing) {
+        document.getElementById('topic-filter-input')?.focus();
+      }
+    });
+
+    nicheMenuBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      topicDropdown?.classList.remove('show');
+      topicMenuBtn?.classList.remove('active');
+      
+      const isShowing = nicheDropdown?.classList.toggle('show');
+      nicheMenuBtn?.classList.toggle('active', isShowing);
+    });
+
+    document.getElementById('topic-filter-input')?.addEventListener('input', (e) => {
+      renderTopicDropdownList(e.target.value);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#topic-dropdown-anchor')) {
+        topicDropdown?.classList.remove('show');
+        topicMenuBtn?.classList.remove('active');
+      }
+      if (!e.target.closest('#niche-dropdown-anchor')) {
+        nicheDropdown?.classList.remove('show');
+        nicheMenuBtn?.classList.remove('active');
+      }
+    });
+
+    document.getElementById('btn-clear-all-filters')?.addEventListener('click', () => {
+      searchQuery = '';
+      activeTopicFilter = 'all';
+      activeNicheFilter = 'all';
+      if (searchInp) searchInp.value = '';
+      if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+      
+      const topicLbl = document.getElementById('topic-menu-label');
+      if (topicLbl) topicLbl.textContent = 'Topics';
+      const nicheLbl = document.getElementById('niche-menu-label');
+      if (nicheLbl) nicheLbl.textContent = 'Niche: All';
+
+      renderTopicDropdownList();
+      renderNicheDropdownList();
+      renderSearchSection();
+      showToast('Cleared all search and category filters');
+    });
+
     // 6. Onboarding Wizard
     document.querySelectorAll('#grid-content-types .onboard-tag-btn, #grid-niches .onboard-tag-btn, #grid-idea-types .onboard-tag-btn').forEach(btn => {
       btn.addEventListener('click', () => btn.classList.toggle('selected'));
@@ -1402,6 +1743,35 @@
         document.querySelectorAll('#grid-goals .goal-card').forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
       });
+    });
+
+    // Search niches in Step 2
+    document.getElementById('onboard-niche-search')?.addEventListener('input', (e) => {
+      const q = (e.target.value || '').toLowerCase().trim();
+      document.querySelectorAll('#grid-niches .onboard-tag-btn').forEach(btn => {
+        const text = btn.textContent.toLowerCase();
+        btn.style.display = (!q || text.includes(q)) ? 'inline-flex' : 'none';
+      });
+    });
+
+    // Add custom niche in Step 2
+    document.getElementById('btn-add-custom-niche')?.addEventListener('click', () => {
+      const input = document.getElementById('onboard-custom-niche');
+      const val = (input?.value || '').trim();
+      if (!val) return;
+
+      const slug = val.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      const grid = document.getElementById('grid-niches');
+      if (grid) {
+        const newBtn = document.createElement('button');
+        newBtn.className = 'onboard-tag-btn selected';
+        newBtn.setAttribute('data-value', slug);
+        newBtn.textContent = val;
+        newBtn.addEventListener('click', () => newBtn.classList.toggle('selected'));
+        grid.appendChild(newBtn);
+      }
+      if (input) input.value = '';
+      showToast(`Added custom niche "${val}"`);
     });
 
     document.getElementById('btn-skip-onboarding')?.addEventListener('click', closeOnboardingModal);
@@ -1438,6 +1808,31 @@
     document.getElementById('btn-inspector-close')?.addEventListener('click', closeTrendInspector);
     document.getElementById('trend-drawer-overlay')?.addEventListener('click', closeTrendInspector);
 
+    // Inspector Action Buttons
+    document.getElementById('inspector-bookmark-btn')?.addEventListener('click', () => {
+      if (selectedTrendForInspector) {
+        addIdeaToLibrary({
+          title: selectedTrendForInspector.title,
+          hook: selectedTrendForInspector.title,
+          niche: selectedTrendForInspector.niche,
+          format: selectedTrendForInspector.platformName,
+          score: selectedTrendForInspector.outlierScore || 94,
+          scoreTier: 'EXPLOSIVE',
+          trendSource: selectedTrendForInspector.topic
+        });
+      }
+    });
+
+    document.getElementById('btn-inspector-generate-ideas')?.addEventListener('click', () => {
+      if (selectedTrendForInspector) {
+        selectedTrendForIdeas = selectedTrendForInspector;
+        renderIdeasSection();
+        closeTrendInspector();
+        document.getElementById('section-ideas')?.scrollIntoView({ behavior: 'smooth' });
+        showToast(`Generated 12 creative angles for "${selectedTrendForInspector.topic}"`);
+      }
+    });
+
     document.getElementById('close-scorer-modal')?.addEventListener('click', closeScorerModal);
     document.getElementById('cancel-scorer-btn')?.addEventListener('click', closeScorerModal);
     document.getElementById('close-settings-modal')?.addEventListener('click', closeSettingsModal);
@@ -1453,7 +1848,8 @@
       "I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model.",
       "Delete these 3 VS Code extensions before they secretly slow down your build times.",
       "Why 90% of solo creators fail at monetization in month 3 (and the 1% fix).",
-      "Stop paying OpenAI: Run DeepSeek-R1 locally on consumer hardware in 4 minutes."
+      "Stop paying OpenAI: Run DeepSeek-R1 locally on consumer hardware in 4 minutes.",
+      "Why working out at 6 AM might secretly stall your fat loss (the cortisol window)."
     ];
 
     document.getElementById('paste-sample-hook')?.addEventListener('click', () => {
@@ -1467,48 +1863,154 @@
 
     document.getElementById('hook-input-field')?.addEventListener('input', (e) => {
       const charEl = document.getElementById('hook-char-count');
-      if (charEl) charEl.textContent = `${e.target.value.length}/140 chars`;
+      if (charEl) charEl.textContent = `${e.target.value.length} characters • Optimal length: 55-90 chars`;
     });
 
     document.getElementById('btn-run-analysis')?.addEventListener('click', () => {
       const text = document.getElementById('hook-input-field')?.value || '';
-      const result = VantageScorer.evaluateLiveHook(text);
+      const platform = document.getElementById('platform-select-field')?.value || 'shorts';
+      const niche = document.getElementById('niche-select-field')?.value || 'ai';
+      
+      const result = VantageScorer.evaluateLiveHook(text, platform, niche);
       if (!result) {
-        showToast('Please type or paste a hook headline first.');
+        showToast('Please enter a hook headline to analyze.');
         return;
       }
 
-      document.getElementById('result-score-num').textContent = result.score;
-      document.getElementById('result-score-badge').textContent = result.tier;
-      document.getElementById('result-curiosity').textContent = `${result.curiosity}%`;
-      document.getElementById('result-stakes').textContent = `${result.stakes}%`;
-      document.getElementById('result-velocity').textContent = `${result.velocity}%`;
-      showToast(`Hook virality analyzed: Score ${result.score}`);
+      const scoreNum = document.getElementById('result-score-num');
+      const scoreLabel = document.getElementById('result-score-label');
+      const barCuriosity = document.getElementById('bar-curiosity');
+      const fillCuriosity = document.getElementById('fill-curiosity');
+      const barStakes = document.getElementById('bar-stakes');
+      const fillStakes = document.getElementById('fill-stakes');
+      const barVelocity = document.getElementById('bar-velocity');
+      const fillVelocity = document.getElementById('fill-velocity');
+      const saveBtn = document.getElementById('save-to-library-btn');
+      const scoreRing = document.getElementById('result-score-ring');
+
+      if (scoreNum) scoreNum.textContent = result.score;
+      if (scoreLabel) scoreLabel.textContent = `${result.tier} VIRALITY`;
+      
+      if (barCuriosity) barCuriosity.textContent = `${result.curiosity}%`;
+      if (fillCuriosity) fillCuriosity.style.width = `${result.curiosity}%`;
+      
+      if (barStakes) barStakes.textContent = `${result.stakes}%`;
+      if (fillStakes) fillStakes.style.width = `${result.stakes}%`;
+      
+      if (barVelocity) barVelocity.textContent = `${result.velocity}%`;
+      if (fillVelocity) fillVelocity.style.width = `${result.velocity}%`;
+
+      if (scoreRing) {
+        scoreRing.classList.remove('tier-explosive', 'tier-strong', 'tier-calibrated');
+        if (result.score >= 90) scoreRing.classList.add('tier-explosive');
+        else if (result.score >= 78) scoreRing.classList.add('tier-strong');
+        else scoreRing.classList.add('tier-calibrated');
+      }
+
+      if (saveBtn) {
+        saveBtn.removeAttribute('disabled');
+      }
+
+      showToast(`Analyzed hook virality: Score ${result.score}/100 (${result.tier})`);
     });
 
     document.getElementById('save-to-library-btn')?.addEventListener('click', () => {
       const text = document.getElementById('hook-input-field')?.value || '';
-      const result = VantageScorer.evaluateLiveHook(text);
-      if (!text) {
+      const platform = document.getElementById('platform-select-field')?.value || 'shorts';
+      const niche = document.getElementById('niche-select-field')?.value || creatorProfile.niches?.[0] || 'ai';
+      const result = VantageScorer.evaluateLiveHook(text, platform, niche);
+      if (!text.trim()) {
         showToast('Enter a hook before saving.');
         return;
       }
       addIdeaToLibrary({
-        title: text,
-        hook: text,
-        niche: creatorProfile.niches?.[0] || 'ai',
-        format: 'Shorts & Reels',
+        title: text.trim(),
+        hook: text.trim(),
+        niche: niche,
+        format: platform.toLowerCase().includes('youtube') ? 'YouTube (16:9)' : 'Shorts & Reels (9:16)',
         score: result ? result.score : 90,
         scoreTier: result ? result.tier : 'EXPLOSIVE',
-        trendSource: 'Scorer Engine'
+        trendSource: 'AI Virality Scorer'
       });
       closeScorerModal();
     });
 
-    // 9. Settings Actions
-    document.getElementById('btn-reopen-onboarding')?.addEventListener('click', () => {
+    // 9. Settings Modal Tabs & Actions
+    document.querySelectorAll('.settings-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.settings-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.settings-pane').forEach(p => p.classList.remove('active'));
+        
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        const targetPane = document.getElementById(`settings-pane-${tabId}`);
+        if (targetPane) targetPane.classList.add('active');
+      });
+    });
+
+    document.getElementById('btn-save-settings-profile')?.addEventListener('click', () => {
+      const nameInp = document.getElementById('settings-user-name');
+      const emailInp = document.getElementById('settings-user-email');
+      const bioInp = document.getElementById('settings-audience-bio');
+
+      const name = (nameInp?.value || creatorProfile.name || 'Arka Mondal').trim();
+      const email = (emailInp?.value || creatorProfile.email || 'arka@vantage.ai').trim();
+      const bio = (bioInp?.value || creatorProfile.audience_description || '').trim();
+
+      creatorProfile = {
+        ...creatorProfile,
+        name: name,
+        email: email,
+        audience_description: bio,
+        updated_at: new Date().toISOString()
+      };
+
+      VantageAPI.saveProfile(creatorProfile);
+      updateCreatorPersonaChips();
+      updateLiveClockAndGreeting();
       closeSettingsModal();
-      openOnboardingModal();
+      showToast('Profile settings updated and saved!');
+    });
+
+    document.getElementById('btn-test-backend-connection')?.addEventListener('click', async () => {
+      const statusBox = document.getElementById('settings-backend-status-box');
+      if (statusBox) statusBox.innerHTML = `<span><span class="live-pulse"></span> Testing connection to server...</span>`;
+      
+      const startTime = performance.now();
+      const health = await VantageAPI.checkHealth();
+      const latency = Math.round(performance.now() - startTime);
+
+      if (health) {
+        if (statusBox) {
+          statusBox.innerHTML = `
+            <div style="color: var(--chart-1); font-weight: 600;">
+              ✓ Connected to Live Backend (${health.status || 'OK'}) &bull; Latency: ${latency}ms
+            </div>
+            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
+              Server: ${VantageConfig.API_BASE} &bull; Timestamp: ${new Date().toLocaleTimeString()}
+            </div>
+          `;
+        }
+        showToast(`Backend connection successful (${latency}ms)`);
+      } else {
+        if (statusBox) {
+          statusBox.innerHTML = `
+            <div style="color: var(--chart-1); font-weight: 600;">
+              ⚡ Autonomous Client Engine Active (Local Persistence)
+            </div>
+            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
+              100% full offline parity enabled. (Optional backend: run 'server.ps1' or 'node server/server.js' for REST sync)
+            </div>
+          `;
+        }
+        showToast('Autonomous Client Engine active with local persistence');
+      }
+    });
+
+    document.getElementById('btn-sync-all-data')?.addEventListener('click', () => {
+      VantageAPI.saveProfile(creatorProfile);
+      VantageAPI.saveLibrary(savedLibrary);
+      showToast('Pushed all profile settings and library concepts to backend storage!');
     });
 
     document.getElementById('btn-export-library-json')?.addEventListener('click', () => {
@@ -1519,11 +2021,40 @@
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
-      showToast('Library exported successfully!');
+      showToast('Content Library exported as JSON backup!');
+    });
+
+    document.getElementById('btn-import-library-json')?.addEventListener('click', () => {
+      document.getElementById('import-json-file-input')?.click();
+    });
+
+    document.getElementById('import-json-file-input')?.addEventListener('change', (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const imported = JSON.parse(event.target.result);
+          if (Array.isArray(imported)) {
+            savedLibrary = imported;
+            VantageAPI.saveLibrary(savedLibrary);
+            renderLibrarySection();
+            closeSettingsModal();
+            showToast(`Imported ${imported.length} ideas into your Content Library!`);
+          } else {
+            showToast('Invalid JSON file format (expected an array of ideas).');
+          }
+        } catch (err) {
+          showToast('Error parsing JSON file. Please check file structure.');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
     });
 
     document.getElementById('btn-reset-all-data')?.addEventListener('click', () => {
-      if (confirm('Are you sure you want to reset all profile settings and library back to original defaults?')) {
+      if (confirm('Are you sure you want to reset all profile settings and library back to original demo defaults?')) {
         localStorage.clear();
         creatorProfile = { ...VantageConfig.DEFAULT_CREATOR_PROFILE };
         savedLibrary = [...VantageConfig.DEFAULT_LIBRARY_IDEAS];
@@ -1535,7 +2066,7 @@
       }
     });
 
-    // ESC key closes all modals & drawers
+    // 10. Global Keyboard Shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeOnboardingModal();
@@ -1543,6 +2074,48 @@
         closeScorerModal();
         closeSettingsModal();
         closeAuthScreen();
+        topicDropdown?.classList.remove('show');
+        topicMenuBtn?.classList.remove('active');
+        nicheDropdown?.classList.remove('show');
+        nicheMenuBtn?.classList.remove('active');
+      }
+
+      // Cmd+K or Ctrl+K for Search
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('global-search-input');
+        if (searchInput) {
+          searchInput.focus();
+          document.getElementById('section-search')?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      // 'N' hotkey for Scorer (if not typing in input)
+      if (e.key.toLowerCase() === 'n' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        openScorerModal();
+      }
+
+      // Cmd+1/2/3/4 navigation
+      if ((e.metaKey || e.ctrlKey) && e.key === '1') {
+        e.preventDefault();
+        navTrending?.click();
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === '2') {
+        e.preventDefault();
+        navIdeas?.click();
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === '3') {
+        e.preventDefault();
+        navSearch?.click();
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === '4') {
+        e.preventDefault();
+        navLibrary?.click();
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'o') {
+        e.preventDefault();
+        openOnboardingModal();
       }
     });
   }
@@ -1552,9 +2125,12 @@
     bindAllEvents();
     updateLiveClockAndGreeting();
     setInterval(updateLiveClockAndGreeting, 1000);
+    setInterval(updateLiveRadarCountdown, 1000);
     updateCreatorPersonaChips();
     renderTrendingSection();
     renderIdeasSection();
+    renderTopicDropdownList();
+    renderNicheDropdownList();
     renderSearchSection();
     renderLibrarySection();
     refreshLucideIcons();
@@ -1570,7 +2146,9 @@
     addIdea: addIdeaToLibrary,
     copyHook: copyToClipboard,
     showToast: showToast,
-    handleLoginSubmit: handleLoginSubmit
+    handleLoginSubmit: handleLoginSubmit,
+    renderSearch: renderSearchSection,
+    renderLibrary: renderLibrarySection
   };
 
   if (document.readyState === 'loading') {

@@ -1058,8 +1058,129 @@ body {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.topic-dropdown { width: 340px; }
-.niche-dropdown { width: 320px; }
+.topic-dropdown { width: 340px; max-height: 380px; }
+.niche-dropdown { width: 320px; max-height: 380px; }
+
+.dropdown-header {
+  padding: 12px 14px;
+  background: #F8FAFC;
+  border-bottom: var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dropdown-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.dropdown-subtitle {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.dropdown-subsearch {
+  width: 100%;
+  padding: 6px 10px;
+  background: #FFFFFF;
+  border: var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  outline: none;
+}
+.dropdown-subsearch:focus {
+  border-color: var(--chart-3);
+}
+
+.topic-grid-list, .niche-menu-list {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  max-height: 260px;
+}
+
+.topic-item-btn, .niche-item-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+.topic-item-btn:hover, .niche-item-btn:hover {
+  background: #F1F5F9;
+  color: var(--text-primary);
+}
+.topic-item-btn.selected, .niche-item-btn.selected {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--chart-3);
+  font-weight: 700;
+}
+
+.active-filters-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+.active-chips-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.filter-chip-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: #F1F5F9;
+  border: var(--border-light);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.filter-chip-item .chip-remove-btn {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+}
+.filter-chip-item .chip-remove-btn:hover {
+  color: #EF4444;
+}
+.btn-clear-all-filters {
+  background: none;
+  border: none;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--chart-1);
+  cursor: pointer;
+  padding: 2px 6px;
+}
+.btn-clear-all-filters:hover {
+  text-decoration: underline;
+}
 
 .bento-grid {
   display: grid;
