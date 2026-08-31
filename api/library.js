@@ -76,13 +76,13 @@ module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
   if (req.method === 'OPTIONS') {
-    res.writeHead(204);
+    res.statusCode = 204;
     res.end();
     return;
   }
 
   if (req.method === 'GET') {
-    res.writeHead(200);
+    res.statusCode = 200;
     res.end(JSON.stringify(inMemoryLibrary, null, 2));
     return;
   }
@@ -100,15 +100,15 @@ module.exports = async (req, res) => {
           inMemoryLibrary.unshift(payload);
         }
       }
-      res.writeHead(200);
+      res.statusCode = 200;
       res.end(JSON.stringify({ success: true, message: 'Library saved', count: inMemoryLibrary.length }, null, 2));
     } catch (err) {
-      res.writeHead(400);
+      res.statusCode = 400;
       res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
     }
     return;
   }
 
-  res.writeHead(405);
+  res.statusCode = 405;
   res.end(JSON.stringify({ error: 'Method Not Allowed' }));
 };

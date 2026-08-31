@@ -32,13 +32,13 @@ module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
   if (req.method === 'OPTIONS') {
-    res.writeHead(204);
+    res.statusCode = 204;
     res.end();
     return;
   }
 
   if (req.method !== 'POST') {
-    res.writeHead(405);
+    res.statusCode = 405;
     res.end(JSON.stringify({ error: 'Method Not Allowed' }));
     return;
   }
@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
     const text = (data.hook || data.title || '').trim();
 
     if (!text) {
-      res.writeHead(400);
+      res.statusCode = 400;
       res.end(JSON.stringify({ error: 'Hook text is required' }));
       return;
     }
@@ -69,7 +69,7 @@ module.exports = async (req, res) => {
 
     const overallScore = Math.round((curiosity * 0.35) + (stakes * 0.35) + (velocity * 0.30));
 
-    res.writeHead(200);
+    res.statusCode = 200;
     res.end(JSON.stringify({
       success: true,
       hook: text,
@@ -82,7 +82,7 @@ module.exports = async (req, res) => {
       }
     }, null, 2));
   } catch (err) {
-    res.writeHead(400);
+    res.statusCode = 400;
     res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
   }
 };
