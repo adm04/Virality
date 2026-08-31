@@ -94,7 +94,7 @@ while ($true) {
             $contentType = if ($mimeMap.ContainsKey($ext)) { $mimeMap[$ext] } else { "application/octet-stream" }
             $fileBytes = [System.IO.File]::ReadAllBytes($filePath)
 
-            $headerStr = "HTTP/1.1 200 OK`r`nContent-Type: $contentType`r`nAccess-Control-Allow-Origin: *`r`nContent-Length: $($fileBytes.Length)`r`nConnection: close`r`n`r`n"
+            $headerStr = "HTTP/1.1 200 OK`r`nContent-Type: $contentType`r`nCache-Control: no-cache, no-store, must-revalidate`r`nAccess-Control-Allow-Origin: *`r`nContent-Length: $($fileBytes.Length)`r`nConnection: close`r`n`r`n"
             $hBytes = [System.Text.Encoding]::UTF8.GetBytes($headerStr)
             $stream.Write($hBytes, 0, $hBytes.Length)
             $stream.Write($fileBytes, 0, $fileBytes.Length)

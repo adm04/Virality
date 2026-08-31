@@ -599,8 +599,10 @@
   // ================= 6. UI RENDERERS =================
 
   // --- Clock, Dynamic Greeting & Radar Countdown ---
+  let simulatedHour = null;
+
   function getTimeGreeting(date = new Date()) {
-    const hour = date.getHours();
+    const hour = (simulatedHour !== null) ? simulatedHour : date.getHours();
     if (hour >= 5 && hour < 12) {
       return 'Good morning';
     } else if (hour >= 12 && hour < 17) {
@@ -2148,7 +2150,23 @@
     showToast: showToast,
     handleLoginSubmit: handleLoginSubmit,
     renderSearch: renderSearchSection,
-    renderLibrary: renderLibrarySection
+    renderLibrary: renderLibrarySection,
+    simulateTime(hour) {
+      if (hour === null || hour === undefined || hour === 'auto') {
+        simulatedHour = null;
+        showToast('Greeting re-synchronized with live local time');
+      } else {
+        simulatedHour = parseInt(hour, 10);
+        showToast(`Simulated time set to ${simulatedHour}:00 (${getTimeGreeting()})`);
+      }
+      updateLiveClockAndGreeting();
+    },
+    setTimeOfDay(mode) {
+      if (mode === 'morning') this.simulateTime(9);
+      else if (mode === 'afternoon') this.simulateTime(14);
+      else if (mode === 'evening') this.simulateTime(19);
+      else this.simulateTime(null);
+    }
   };
 
   if (document.readyState === 'loading') {
