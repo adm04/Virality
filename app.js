@@ -932,45 +932,47 @@
       }
 
       board.innerHTML = `
-        <table class="library-list-table">
-          <thead>
-            <tr>
-              <th>Idea Hook & Title</th>
-              <th>Score</th>
-              <th>Platform</th>
-              <th>Stage</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${filtered.length === 0 ? `<tr><td colspan="5" style="text-align: center; color: var(--text-tertiary); padding: 32px 16px;">No ideas in this stage yet. Click "New Idea" or generate angles!</td></tr>` : ''}
-            ${filtered.map(item => `
+        <div class="table-responsive-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%;">
+          <table class="library-list-table">
+            <thead>
               <tr>
-                <td>
-                  <strong style="display: block; font-size: 13.5px; margin-bottom: 2px;">"${escapeHtml(item.hook || item.title)}"</strong>
-                  <span style="font-size: 11px; color: var(--text-tertiary);">${escapeHtml(item.source || 'Idea')} &bull; Niche: ${escapeHtml((item.niche || 'AI').toUpperCase())}</span>
-                </td>
-                <td><span class="opp-score-badge tier-explosive"><span class="opp-score-num">${item.score || 92}</span></span></td>
-                <td><span class="platform-pill ${item.platform}">${escapeHtml((item.platform || 'SHORTS').toUpperCase())}</span></td>
-                <td><span class="lib-stage-badge">${escapeHtml(item.stageName || 'Ideas')}</span></td>
-                <td>
-                  <div class="lib-card-actions" style="display: flex; align-items: center; gap: 6px;">
-                    <button class="btn btn-secondary btn-sm btn-open-script-studio" data-json="${escapeHtml(JSON.stringify(item))}" type="button">Script</button>
-                    <select class="lib-stage-select" data-id="${item.id}" aria-label="Change Stage">
-                      <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>Ideas</option>
-                      <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>Researching</option>
-                      <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>Scripted</option>
-                      <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>Filming</option>
-                      <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
-                      <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
-                    </select>
-                    <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea" type="button">✕</button>
-                  </div>
-                </td>
+                <th>Idea Hook & Title</th>
+                <th>Score</th>
+                <th>Platform</th>
+                <th>Stage</th>
+                <th>Actions</th>
               </tr>
-            `).join('')}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              ${filtered.length === 0 ? `<tr><td colspan="5" style="text-align: center; color: var(--text-tertiary); padding: 32px 16px;">No ideas in this stage yet. Click "New Idea" or generate angles!</td></tr>` : ''}
+              ${filtered.map(item => `
+                <tr>
+                  <td>
+                    <strong style="display: block; font-size: 13.5px; margin-bottom: 2px;">"${escapeHtml(item.hook || item.title)}"</strong>
+                    <span style="font-size: 11px; color: var(--text-tertiary);">${escapeHtml(item.source || 'Idea')} &bull; Niche: ${escapeHtml((item.niche || 'AI').toUpperCase())}</span>
+                  </td>
+                  <td><span class="opp-score-badge tier-explosive"><span class="opp-score-num">${item.score || 92}</span></span></td>
+                  <td><span class="platform-pill ${item.platform}">${escapeHtml((item.platform || 'SHORTS').toUpperCase())}</span></td>
+                  <td><span class="lib-stage-badge">${escapeHtml(item.stageName || 'Ideas')}</span></td>
+                  <td>
+                    <div class="lib-card-actions" style="display: flex; align-items: center; gap: 6px;">
+                      <button class="btn btn-secondary btn-sm btn-open-script-studio" data-json="${escapeHtml(JSON.stringify(item))}" type="button">Script</button>
+                      <select class="lib-stage-select" data-id="${item.id}" aria-label="Change Stage">
+                        <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>Ideas</option>
+                        <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>Researching</option>
+                        <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>Scripted</option>
+                        <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>Filming</option>
+                        <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
+                        <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
+                      </select>
+                      <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea" type="button">✕</button>
+                    </div>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
       `;
     } else {
       board.classList.remove('list-view-mode');
