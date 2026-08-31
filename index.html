@@ -105,7 +105,17 @@
             <span class="live-pulse" aria-hidden="true"></span>
             <span class="status-text">24/7 TREND RADAR ACTIVE &bull; <span class="badge-demo-tag">DEMO DATA</span> &bull; <strong id="header-radar-status">NEXT SYNC IN 1h 48m</strong></span>
           </div>
-          <h1 class="hero-title"><span id="hero-greeting">Good evening</span>, <span class="gradient-text" id="hero-user-name">Arka.</span></h1>
+          <h1 class="hero-title"><span id="hero-greeting">Good day</span>, <span class="gradient-text" id="hero-user-name">Arka.</span></h1>
+          <script>
+            (function() {
+              try {
+                var h = new Date().getHours();
+                var g = (h >= 5 && h < 12) ? 'Good morning' : (h >= 12 && h < 17) ? 'Good afternoon' : 'Good evening';
+                var el = document.getElementById('hero-greeting');
+                if (el) el.textContent = g;
+              } catch (e) {}
+            })();
+          </script>
           <p class="hero-subtitle">Here's what's worth creating today across your personalized niches.</p>
           
           <!-- Creator Persona Badges -->
