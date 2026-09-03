@@ -302,11 +302,52 @@
           'Immediate actionable protocol increases viewer retention'
         ],
         tags: ['#Neuroscience', '#StudyHacks', '#Learning', '#Productivity']
+      },
+      {
+        id: 'trend-fmcg-12',
+        topic: 'Clean Snacking & Indian Makhana Export Wave',
+        niche: 'fmcg',
+        platform: 'shorts',
+        platformName: 'Shorts & Reels',
+        outlierScore: 97,
+        outlierText: '12.4× Outlier',
+        title: 'Why Indian Makhana is quietly replacing popcorn in US & European gyms (the 0-cholesterol secret).',
+        views: '2.1M',
+        baseline: '140K',
+        growth: '+480%',
+        signals: { momentum: 98, engagement: 97, searchDemand: 95, saturation: 16, competition: 20, freshFactor: 98, monetization: 99 },
+        whyTrending: [
+          'D2C healthy snacking boom: consumers actively looking for alternatives to ultra-processed chips',
+          'Extreme contrast visuals (crispy Makhana crunch test vs greasy fried potato chips)',
+          'Massive organic buyer intent: viewers immediately ask "Where can I order this?" in comments'
+        ],
+        tags: ['#Makhana', '#HealthySnacks', '#CleanEating', '#D2CIndia', '#FMCGBusiness']
+      },
+      {
+        id: 'trend-fmcg-13',
+        topic: 'Factory Roast ASMR & Farmer Sourcing',
+        niche: 'fmcg',
+        platform: 'reels',
+        platformName: 'Instagram Reels',
+        outlierScore: 94,
+        outlierText: '9.6× Outlier',
+        title: 'The brutal mud-pond harvesting process behind Makhana that explains why premium roasted packs cost ₹299.',
+        views: '1.4M',
+        baseline: '110K',
+        growth: '+340%',
+        signals: { momentum: 95, engagement: 96, searchDemand: 89, saturation: 22, competition: 24, freshFactor: 94, monetization: 96 },
+        whyTrending: [
+          'Behind-the-scenes factory & farming transparency builds instant brand credibility',
+          'Curiosity hook justifies premium product price point effortlessly',
+          'ASMR popping & roasting sounds capture 85%+ video completion rate'
+        ],
+        tags: ['#FMCGMarketing', '#BehindTheScenes', '#MakhanaRoasting', '#D2CBrand']
       }
     ],
 
     CURATED_TOPICS: [
-      { id: 'all', name: 'All Topics', count: 7 },
+      { id: 'all', name: 'All Topics', count: 9 },
+      { id: 'makhana-snack', name: 'Makhana & Clean Snacking D2C', count: 2, niche: 'fmcg' },
       { id: 'ai-agents', name: 'AI Autonomous Agents', count: 3, niche: 'ai' },
       { id: 'vscode', name: 'VS Code & Tooling Optimization', count: 2, niche: 'technology' },
       { id: 'indie-saas', name: 'Solopreneur Micro-SaaS', count: 2, niche: 'business' },
@@ -318,6 +359,7 @@
 
     CURATED_NICHES: [
       { id: 'all', name: 'All Creator Niches' },
+      { id: 'fmcg', name: 'FMCG & D2C Brands' },
       { id: 'ai', name: 'AI & Machine Learning' },
       { id: 'technology', name: 'Technology & DevTools' },
       { id: 'business', name: 'Business & Startups' },
@@ -719,8 +761,60 @@
     const aiRes = await VantageAPI.generateAngles(currentTrend.topic, currentTrend.niche, currentTrend.platformName, creatorProfile);
     if (aiRes && aiRes.angles) {
       ideas = aiRes.angles;
+    } else if (currentTrend.niche === 'fmcg') {
+      // FMCG & D2C Physical Product Angles (e.g. Makhana, Clean Snacking)
+      ideas = [
+        {
+          angleId: 'educational',
+          angleName: 'Nutrition & Calorie Swap',
+          title: `100 Calories of Chips vs Roasted Makhana: Visual Breakdown`,
+          hook: `I put a bag of ordinary potato chips and roasted Makhana side-by-side under a nutrition microscope — the sodium shocker made me switch permanently.`,
+          format: currentTrend.platformName,
+          audience: 'Health-Conscious Eaters & Gym Goers',
+          whyWorks: 'Extreme visual comparison ("This vs That") triggers immediate pattern interruption and high saves/shares.',
+          structure: '1. Visual Plate Comparison -> 2. The Palm Oil & Sodium Secret -> 3. The 0-Cholesterol Macro Win -> 4. Taste Reality',
+          cta: 'Comment "SNACK" to get our free clean label shopping checklist!',
+          score: 97
+        },
+        {
+          angleId: 'controversial',
+          angleName: 'Exposing "Fake Healthy" Snacks',
+          title: `Why Most "Diet Snacks" in India Are Secretly 60% Palm Oil`,
+          hook: `Stop buying snacks with green leaves on the box until you read ingredient number 3. Here is the dirty secret of modern FMCG packaging.`,
+          format: currentTrend.platformName,
+          audience: 'Skeptical Consumers & Parents',
+          whyWorks: 'Exposing hidden food industry tricks sparks moral outrage, comment debate, and massive organic shares on WhatsApp.',
+          structure: '1. The Front-of-Pack Deception -> 2. The Back-of-Pack Truth -> 3. What Pure Roasted Ingredients Look Like -> 4. Healthy Alternative',
+          cta: 'Tag a friend who lives on "diet" snacks!',
+          score: 98
+        },
+        {
+          angleId: 'storytelling',
+          angleName: 'Sourcing & Founder Transparency',
+          title: `Why Authentic Roasted Makhana Costs ₹299 (The 5-Foot Mud Dive)`,
+          hook: `Most people think Makhana grows in a factory. It actually requires farmers to dive into 5 feet of freezing wetland mud to harvest lotus seeds by hand.`,
+          format: currentTrend.platformName,
+          audience: 'Conscious Consumers & Foodies',
+          whyWorks: 'Behind-the-scenes farming grit justifies premium pricing and creates unbreakable emotional brand loyalty.',
+          structure: '1. The Harsh Mud Harvesting -> 2. The Manual Roasting & Popping -> 3. Clean Seasoning Without Oil -> 4. The Final Crunch',
+          cta: 'Drop a heart to support clean, transparent Indian agriculture! ❤️',
+          score: 95
+        },
+        {
+          angleId: 'expert',
+          angleName: 'ASMR Sensory & Crunch Test',
+          title: `The Ultimate Microphone Crunch Test: Zero-Oil Peri Peri Makhana`,
+          hook: `Turn your volume all the way up for 3 seconds. Can a 100% clean snack sound this crispy? Listen to this crunch.`,
+          format: currentTrend.platformName,
+          audience: 'Short-Form Video Scrollers & Snack Lovers',
+          whyWorks: 'High sensory audio-visual stimulation drives 90%+ video retention rate in the first 5 seconds.',
+          structure: '1. High-Fidelity ASMR Crunch -> 2. Flavour Dusting Visual -> 3. Macros Breakdown (10g Protein) -> 4. Finger Lick Reaction',
+          cta: 'Link in bio to try our small-batch peri-peri roast with 20% off!',
+          score: 96
+        }
+      ];
     } else {
-      // Fallback
+      // General Tech & Creator Fallback
       ideas = [
         {
           angleId: 'educational',
@@ -1933,6 +2027,8 @@
 
     // Sample Hooks
     const sampleHooks = [
+      "I put a bag of potato chips and roasted Makhana under a nutrition scanner — the sodium shocker made me switch permanently.",
+      "Why Indian Makhana is quietly replacing popcorn in US & European gyms (the 0-cholesterol secret).",
       "I gave 3 AI agents $1,000 each and let them trade for 30 days — the results broke my model.",
       "Delete these 3 VS Code extensions before they secretly slow down your build times.",
       "Why 90% of solo creators fail at monetization in month 3 (and the 1% fix).",
