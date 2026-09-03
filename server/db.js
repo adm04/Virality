@@ -77,7 +77,7 @@ class VantageDatabase {
       }
     }
 
-    // Seed default admin user if no users exist
+    // Seed default admin user and demo user if no users exist
     if (!this.data.users || this.data.users.length === 0) {
       const defaultUser = {
         id: 'usr_arka_master',
@@ -88,13 +88,21 @@ class VantageDatabase {
         created_at: new Date().toISOString(),
         last_login: new Date().toISOString()
       };
-      this.data.users = [defaultUser];
 
-      this.data.profiles[defaultUser.id] = {
-        id: `prof_${defaultUser.id}`,
-        user_id: defaultUser.id,
+      const demoUser = {
+        id: 'usr_demo_creator',
+        email: 'demo@vantage.ai',
+        password_hash: this.hashPassword('vantage2026'),
+        name: 'Arka Mondal (Demo)',
+        tier: 'pro',
+        created_at: new Date().toISOString(),
+        last_login: new Date().toISOString()
+      };
+
+      this.data.users = [defaultUser, demoUser];
+
+      const seedProfile = {
         name: 'Arka Mondal',
-        email: defaultUser.email,
         content_types: ['reels', 'shorts', 'youtube'],
         niches: ['ai', 'technology'],
         age_range: '18-34',
@@ -108,7 +116,21 @@ class VantageDatabase {
         onboarding_completed: true
       };
 
-      this.data.library_items[defaultUser.id] = [
+      this.data.profiles[defaultUser.id] = {
+        id: `prof_${defaultUser.id}`,
+        user_id: defaultUser.id,
+        email: defaultUser.email,
+        ...seedProfile
+      };
+
+      this.data.profiles[demoUser.id] = {
+        id: `prof_${demoUser.id}`,
+        user_id: demoUser.id,
+        email: demoUser.email,
+        ...seedProfile
+      };
+
+      const seedLibrary = [
         {
           id: 'lib-1',
           title: 'I gave 3 AI agents $1,000 each and let them trade for 30 days',
@@ -165,6 +187,9 @@ Voiceover: "Comment 'AGENT' and I'll send you the open-source GitHub repo."`,
         }
       ];
 
+      this.data.library_items[defaultUser.id] = [...seedLibrary];
+      this.data.library_items[demoUser.id] = [...seedLibrary];
+
       this.persist();
     }
 
@@ -220,7 +245,14 @@ Voiceover: "Comment 'AGENT' and I'll send you the open-source GitHub repo."`,
   // --- User Collection Operations ---
   findUserByEmail(email) {
     if (!email) return null;
-    return this.data.users.find(u => u.email.toLowerCase() === email.toLowerCase().trim()) || null;
+    const clean = email.toLowerCase().trim();
+    if (clean === 'demo' || clean === 'demo@vantage.ai' || clean === 'demo@vantage.com') {
+      return this.data.users.find(u => u.email === 'demo@vantage.ai') || this.data.users[0] || null;
+    }
+    if (clean === 'arka' || clean === 'arkadeb' || clean === 'arkadeb.mondal@example.com') {
+      return this.data.users.find(u => u.email === 'arkadeb.mondal@example.com') || this.data.users[0] || null;
+    }
+    return this.data.users.find(u => u.email.toLowerCase() === clean) || null;
   }
 
   findUserById(id) {
