@@ -2206,11 +2206,12 @@
 
   // ================= 8. EVENT ATTACHMENTS =================
   function bindAllEvents() {
-    // Navigation
+    // Navigation items
     const navTrending = document.getElementById('nav-trending');
     const navIdeas = document.getElementById('nav-ideas');
     const navSearch = document.getElementById('nav-search');
     const navCompetitors = document.getElementById('nav-competitors');
+    const navLibrary = document.getElementById('nav-library');
     const sidebarEl = document.getElementById('sidebar');
     const toggleSidebarBtn = document.getElementById('btn-sidebar-toggle');
 
@@ -2224,6 +2225,45 @@
     navSearch?.addEventListener('click', () => { setNavActive(navSearch); document.getElementById('section-search')?.scrollIntoView({ behavior: 'smooth' }); });
     navCompetitors?.addEventListener('click', () => { setNavActive(navCompetitors); document.getElementById('section-competitors')?.scrollIntoView({ behavior: 'smooth' }); });
     navLibrary?.addEventListener('click', () => { setNavActive(navLibrary); document.getElementById('section-library')?.scrollIntoView({ behavior: 'smooth' }); });
+
+    // ScrollSpy: Automatically highlight active section in sidebar as user scrolls
+    const sections = [
+      { id: 'section-trending', nav: navTrending },
+      { id: 'section-ideas', nav: navIdeas },
+      { id: 'section-search', nav: navSearch },
+      { id: 'section-competitors', nav: navCompetitors },
+      { id: 'section-library', nav: navLibrary }
+    ];
+
+    if ('IntersectionObserver' in window) {
+      const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const match = sections.find(s => s.id === entry.target.id);
+            if (match && match.nav) {
+              setNavActive(match.nav);
+            }
+          }
+        });
+      }, { threshold: 0.25 });
+
+      sections.forEach(s => {
+        const el = document.getElementById(s.id);
+        if (el) scrollObserver.observe(el);
+      });
+    }
+
+    // Entire Sidebar User Card click opens Settings/Profile
+    const sidebarUserCard = document.getElementById('sidebar-user-card');
+    sidebarUserCard?.addEventListener('click', (e) => {
+      // Don't trigger if clicking the signout button
+      if (e.target.closest('#sidebar-logout-btn')) return;
+      if (VantageAPI.getToken()) {
+        openSettingsModal();
+      } else {
+        openAuthScreen();
+      }
+    });
 
     // Desktop SaaS Sidebar Collapse/Expand Toggle
     const setSidebarCollapsed = (collapsed) => {
