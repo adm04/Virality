@@ -624,16 +624,31 @@
     if (!list) return;
 
     const chips = [
-      { label: `Niches: ${(creatorProfile.niches || ['ai', 'technology']).map(n => n.toUpperCase()).join(' • ')}` },
-      { label: `Formats: ${(creatorProfile.content_types || ['reels', 'shorts', 'youtube']).join(' / ')}` },
-      { label: `Goal: ${creatorProfile.goals === 'monetize' ? 'Monetize & Scale' : 'Maximize Views'}` },
-      { label: `Audience: ${creatorProfile.country || 'India'} (${creatorProfile.age_range || '18-34'})` },
-      { label: `Plan: ${(currentUser.tier || 'PRO').toUpperCase()}` }
+      {
+        icon: '<svg class="lucide lucide-tag" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r=".5" fill="currentColor"/></svg>',
+        label: `Niches: ${(creatorProfile.niches || ['ai', 'technology']).map(n => n.toUpperCase()).join(' • ')}`
+      },
+      {
+        icon: '<svg class="lucide lucide-video" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/></svg>',
+        label: `Formats: ${(creatorProfile.content_types || ['reels', 'shorts', 'youtube']).join(' / ')}`
+      },
+      {
+        icon: '<svg class="lucide lucide-target" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+        label: `Goal: ${creatorProfile.goals === 'monetize' ? 'Monetize & Scale' : 'Maximize Views'}`
+      },
+      {
+        icon: '<svg class="lucide lucide-users" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+        label: `Audience: ${creatorProfile.country || 'India'} (${creatorProfile.age_range || '18-34'})`
+      },
+      {
+        icon: '<svg class="lucide lucide-shield-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>',
+        label: `Plan: ${(currentUser.tier || 'PRO').toUpperCase()}`
+      }
     ];
 
     list.innerHTML = chips.map(c => `
       <span class="persona-chip">
-        <svg class="lucide lucide-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        ${c.icon}
         <span>${escapeHtml(c.label)}</span>
       </span>
     `).join('');
@@ -663,7 +678,7 @@
     if (trends.length === 0) {
       container.innerHTML = `
         <div class="empty-state" style="grid-column: 1 / -1; padding: 48px 24px; text-align: center; background: #FFFFFF; border-radius: var(--radius-lg); border: var(--border-light);">
-          <div style="font-size: 36px; margin-bottom: 10px;">📡</div>
+          <div style="margin-bottom: 10px; color: var(--text-tertiary);"><svg class="lucide lucide-radar" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.24"/><path d="M12 18h.01"/><path d="m14 10-4 4"/></svg></div>
           <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">No Outliers Found in This Filter</h3>
           <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Try switching to another genre or viewing "All Niches".</p>
           <button class="btn btn-secondary btn-sm" id="btn-reset-trending-filter" type="button">Reset Genre & Platform Filters</button>
@@ -799,7 +814,7 @@
           audience: 'Conscious Consumers & Foodies',
           whyWorks: 'Behind-the-scenes farming grit justifies premium pricing and creates unbreakable emotional brand loyalty.',
           structure: '1. The Harsh Mud Harvesting -> 2. The Manual Roasting & Popping -> 3. Clean Seasoning Without Oil -> 4. The Final Crunch',
-          cta: 'Drop a heart to support clean, transparent Indian agriculture! ❤️',
+          cta: 'Drop a comment to support clean, transparent Indian agriculture!',
           score: 95
         },
         {
@@ -957,7 +972,7 @@
           chipsHtml += `
             <span class="filter-chip-item">
               <span>Query: "${escapeHtml(searchQuery.trim())}"</span>
-              <button class="chip-remove-btn" id="chip-remove-query">✕</button>
+              <button class="chip-remove-btn" id="chip-remove-query" aria-label="Remove search query"><svg class="lucide lucide-x" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
             </span>
           `;
         }
@@ -966,7 +981,7 @@
           chipsHtml += `
             <span class="filter-chip-item">
               <span>Topic: ${escapeHtml(tObj ? tObj.name : activeTopicFilter)}</span>
-              <button class="chip-remove-btn" id="chip-remove-topic">✕</button>
+              <button class="chip-remove-btn" id="chip-remove-topic" aria-label="Remove topic filter"><svg class="lucide lucide-x" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
             </span>
           `;
         }
@@ -975,7 +990,7 @@
           chipsHtml += `
             <span class="filter-chip-item">
               <span>Niche: ${escapeHtml(nObj ? nObj.name : activeNicheFilter.toUpperCase())}</span>
-              <button class="chip-remove-btn" id="chip-remove-niche">✕</button>
+              <button class="chip-remove-btn" id="chip-remove-niche" aria-label="Remove niche filter"><svg class="lucide lucide-x" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
             </span>
           `;
         }
@@ -1087,7 +1102,7 @@
     container.innerHTML = VantageTrendsData.CURATED_NICHES.map(item => `
       <button class="niche-item-btn ${item.id === activeNicheFilter ? 'selected' : ''}" data-niche="${item.id}" type="button">
         <span>${escapeHtml(item.name)}</span>
-        ${item.id === activeNicheFilter ? '<span>✓</span>' : ''}
+        ${item.id === activeNicheFilter ? '<svg class="lucide lucide-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
       </button>
     `).join('');
 
@@ -1170,7 +1185,7 @@
                         <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
                         <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
                       </select>
-                      <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea" type="button">✕</button>
+                      <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea" type="button" aria-label="Delete"><svg class="lucide lucide-trash-2" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></button>
                     </div>
                   </td>
                 </tr>
@@ -1209,7 +1224,7 @@
                         <svg class="lucide lucide-zap" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                         <span>Script</span>
                       </button>
-                      <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea" type="button" aria-label="Delete">✕</button>
+                      <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea" type="button" aria-label="Delete"><svg class="lucide lucide-trash-2" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></button>
                     </div>
                   </div>
 
@@ -1563,7 +1578,7 @@
         updateCreatorPersonaChips();
         updateLiveClockAndGreeting();
         closeAuthScreen();
-        showToast(`✨ Welcome, ${currentUser.name}! Vantage Virality OS is calibrated.`);
+        showToast(`Welcome, ${currentUser.name}! Vantage Virality OS is calibrated.`);
       }
     } catch (err) {
       showAuthAlert(err.message || 'Invalid credentials. Please use demo credentials: demo@vantage.ai / vantage2026');
@@ -1609,7 +1624,7 @@
         updateCreatorPersonaChips();
         updateLiveClockAndGreeting();
         closeAuthScreen();
-        showToast(`🎉 Account created! Welcome to Vantage OS, ${currentUser.name}.`);
+        showToast(`Account created! Welcome to Vantage OS, ${currentUser.name}.`);
       }
     } catch (err) {
       showAuthAlert(err.message || 'Registration failed. Please check your information.');
@@ -1632,7 +1647,7 @@
     };
     updateHeaderAndSidebarUser();
     openAuthScreen();
-    showToast('👋 You have been signed out. Please sign in to continue.');
+    showToast('You have been signed out. Please sign in to continue.');
   }
 
   function updateHeaderAndSidebarUser() {
@@ -2241,8 +2256,9 @@
 
       if (box) {
         box.innerHTML = `
-          <div style="color: var(--chart-1); font-weight: 600;">
-            ✓ Connected to Live Multi-Tenant Database & Serverless Engine &bull; Latency: ${latency}ms
+          <div style="color: var(--chart-1); font-weight: 600; display: flex; align-items: center; gap: 6px;">
+            <svg class="lucide lucide-check-circle-2" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>Connected to Live Multi-Tenant Database &bull; Latency: ${latency}ms</span>
           </div>
           <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
             Driver: Embedded JSON DB v2 &bull; Active User: ${currentUser.name} (${currentUser.tier.toUpperCase()})
@@ -2320,7 +2336,7 @@
     document.getElementById('btn-auth-autofill')?.addEventListener('click', () => {
       document.getElementById('auth-input-email').value = 'demo@vantage.ai';
       document.getElementById('auth-input-password').value = 'vantage2026';
-      showToast('📋 Filled demo credentials: demo@vantage.ai / vantage2026');
+      showToast('Filled demo credentials: demo@vantage.ai / vantage2026');
     });
 
     document.getElementById('demo-pill-email')?.addEventListener('click', () => {

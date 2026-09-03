@@ -599,33 +599,40 @@ body {
   box-sizing: border-box;
 }
 
-/* TOPBAR HEADER */
-.topbar {
+/* ================= TOP COMMAND UTILITY BAR ================= */
+.top-command-bar {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 34px;
-  gap: 20px;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.command-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .status-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: var(--radius-pill);
-  background: #FFFFFF;
-  border: var(--border-ultra-thin);
-  margin-bottom: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 .badge-demo-tag {
-  color: var(--chart-4);
+  color: #059669;
   font-weight: 800;
-  background: rgba(217, 119, 6, 0.1);
+  background: rgba(5, 150, 105, 0.1);
   padding: 1px 6px;
   border-radius: 4px;
-  border: 1px solid rgba(217, 119, 6, 0.25);
+  border: 1px solid rgba(5, 150, 105, 0.25);
+  letter-spacing: 0.4px;
 }
 
 .live-pulse {
@@ -651,14 +658,30 @@ body {
 }
 .status-text strong { color: var(--chart-1); }
 
+/* ================= WELCOME HERO & TELEMETRY GRID ================= */
+.hero-welcome-section {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 34px;
+}
+
+.hero-welcome-left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
 .hero-title {
   font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: clamp(30px, 3.6vw, 46px);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  font-weight: 800;
+  font-size: clamp(28px, 3.2vw, 42px);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  white-space: normal;
 }
 .gradient-text {
   background: linear-gradient(135deg, #0F131A 40%, #475467 100%);
@@ -666,9 +689,12 @@ body {
   -webkit-text-fill-color: transparent;
 }
 .hero-subtitle {
-  font-size: 14px;
-  color: var(--text-tertiary);
-  font-weight: 500;
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  font-weight: 450;
+  line-height: 1.45;
+  margin-bottom: 14px;
+  max-width: 660px;
 }
 
 .creator-persona-summary {
@@ -676,32 +702,164 @@ body {
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  margin-top: 12px;
 }
 .persona-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 11px;
+  padding: 5px 12px;
   border-radius: var(--radius-pill);
-  background: #FFFFFF;
-  border: var(--border-ultra-thin);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 11.5px;
   font-weight: 600;
   color: var(--text-secondary);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.15s ease;
 }
-.persona-chip.highlight {
-  color: var(--chart-1);
+.persona-chip svg {
+  color: #059669;
+  flex-shrink: 0;
+}
+.persona-chip:hover {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ALGORITHM TELEMETRY BENTO CARD */
+.hero-telemetry-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.hero-telemetry-card:hover {
   border-color: rgba(5, 150, 105, 0.3);
-  background: rgba(5, 150, 105, 0.06);
+  box-shadow: 0 6px 24px rgba(5, 150, 105, 0.08);
+  transform: translateY(-2px);
+}
+
+.telemetry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.telemetry-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-primary);
+}
+.telemetry-title-wrap svg {
+  color: #059669;
+}
+.telemetry-title {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+.telemetry-ping-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #059669;
+  background: rgba(5, 150, 105, 0.08);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+.telemetry-ping-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10B981;
+  animation: pulse-ring 1.8s infinite ease-in-out;
+}
+
+.telemetry-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 10px 12px;
+  text-align: center;
+}
+.telemetry-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.telemetry-stat-val {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+.telemetry-stat-val.text-emerald { color: #059669; }
+.telemetry-stat-val.text-purple { color: #7C3AED; }
+.telemetry-stat-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Genre Filter Bar & Lucide Pills */
+.genre-filter-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  align-self: center;
+  margin-right: 6px;
+}
+#trending-niche-filters {
+  margin-bottom: 16px;
+  overflow-x: auto;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 0;
+}
+#trending-niche-filters .format-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  font-size: 12px;
+  font-weight: 600;
+}
+#trending-niche-filters .format-pill svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+#trending-niche-filters .format-pill:hover svg {
+  transform: scale(1.15);
 }
 
 .topbar-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding-top: 4px;
+  gap: 10px;
+  flex-wrap: wrap;
   flex-shrink: 0;
 }
 
@@ -2736,13 +2894,18 @@ body {
 @media (max-width: 992px) {
   .main-viewport {
     padding: 24px 20px 80px;
-    width: calc(100% - 64px);
+    width: 100%;
+    min-width: 0;
   }
-  .topbar {
+  .top-command-bar {
     flex-direction: column;
     align-items: stretch;
-    gap: 16px;
-    margin-bottom: 24px;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .hero-welcome-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
   .topbar-actions {
     justify-content: flex-start;
