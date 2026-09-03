@@ -189,6 +189,20 @@
           </div>
         </div>
 
+        <!-- Niche / Genre Filter Pills Bar -->
+        <div class="platform-filter-bar" id="trending-niche-filters" role="tablist" aria-label="Filter Trends by Genre / Niche" style="margin-bottom: 16px; overflow-x: auto; flex-wrap: wrap; gap: 6px; padding: 4px 0;">
+          <span style="font-size: 11px; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; align-self: center; margin-right: 4px;">Genre:</span>
+          <button class="format-pill active" data-niche="all">⚡ All Niches</button>
+          <button class="format-pill" data-niche="ai">🤖 AI & ML</button>
+          <button class="format-pill" data-niche="technology">💻 Tech & DevTools</button>
+          <button class="format-pill" data-niche="business">🚀 Business & SaaS</button>
+          <button class="format-pill" data-niche="finance">💰 Finance & Crypto</button>
+          <button class="format-pill" data-niche="fitness">⚡ Fitness & Health</button>
+          <button class="format-pill" data-niche="marketing">📈 Marketing & Growth</button>
+          <button class="format-pill" data-niche="design">🎨 Design & Creative</button>
+          <button class="format-pill" data-niche="gaming">🎮 Gaming</button>
+        </div>
+
         <!-- TRENDING OPPORTUNITY CARDS GRID -->
         <div class="trend-cards-grid" id="trending-cards-container">
           <!-- Dynamically populated from trend engine -->
@@ -1127,6 +1141,21 @@
         <div class="form-group">
           <label class="form-label" for="settings-user-email">Account Email</label>
           <input type="email" id="settings-user-email" class="form-input" placeholder="e.g. arka@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Primary Active Niches & Genres</label>
+          <p style="font-size: 11.5px; color: var(--text-tertiary); margin-bottom: 6px;">Select which niches you produce content in (click to toggle):</p>
+          <div class="options-tag-grid scrollable-tag-grid" id="settings-profile-niches-grid" style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <button class="onboard-tag-btn selected" data-value="ai" type="button">AI & Machine Learning</button>
+            <button class="onboard-tag-btn selected" data-value="technology" type="button">Technology & DevTools</button>
+            <button class="onboard-tag-btn" data-value="business" type="button">Business & Startups</button>
+            <button class="onboard-tag-btn" data-value="finance" type="button">Finance & Crypto</button>
+            <button class="onboard-tag-btn" data-value="fitness" type="button">Fitness & Health</button>
+            <button class="onboard-tag-btn" data-value="marketing" type="button">Marketing & Growth</button>
+            <button class="onboard-tag-btn" data-value="design" type="button">Design & UI/UX</button>
+            <button class="onboard-tag-btn" data-value="gaming" type="button">Gaming & Streaming</button>
+            <button class="onboard-tag-btn" data-value="education" type="button">Education & Science</button>
+          </div>
         </div>
         <div class="form-group">
           <label class="form-label" for="settings-audience-bio">Audience Focus / Brand Bio</label>

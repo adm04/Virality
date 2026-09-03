@@ -222,6 +222,86 @@
           'High conversion to newsletter and creator community signups'
         ],
         tags: ['#GrowthHacking', '#TikTokAlgorithm', '#ContentStrategy', '#ViralHooks']
+      },
+      {
+        id: 'trend-fin-08',
+        topic: 'ETF Arbitrage & Retail Options Flow',
+        niche: 'finance',
+        platform: 'youtube',
+        platformName: 'YouTube Long-form',
+        outlierScore: 96,
+        outlierText: '11.8× Outlier',
+        title: 'The 3 ETF arbitrage tricks Wall Street market makers hide from retail traders.',
+        views: '920K',
+        baseline: '85K',
+        growth: '+380%',
+        signals: { momentum: 97, engagement: 94, searchDemand: 92, saturation: 18, competition: 22, freshFactor: 96, monetization: 99 },
+        whyTrending: [
+          'Extreme curiosity triggered by uncovering institutional market mechanics',
+          'High financial stakes and educational authority driving 12+ minute watch times',
+          'Huge affiliate and sponsor revenue potential'
+        ],
+        tags: ['#Investing', '#Finance', '#WallStreet', '#OptionsTrading']
+      },
+      {
+        id: 'trend-des-09',
+        topic: 'AI Design Systems & Figma Auto-Layout',
+        niche: 'design',
+        platform: 'shorts',
+        platformName: 'Shorts & Reels',
+        outlierScore: 92,
+        outlierText: '8.7× Outlier',
+        title: 'Stop designing mobile mockups manually: This Figma AI plugin builds production components in seconds.',
+        views: '650K',
+        baseline: '72K',
+        growth: '+240%',
+        signals: { momentum: 93, engagement: 91, searchDemand: 89, saturation: 24, competition: 28, freshFactor: 94, monetization: 88 },
+        whyTrending: [
+          'UI/UX community adopting generative layouts and automated typography tokens',
+          'Instant visual transformation before/after format keeps viewers watching',
+          'Heavy bookmarking and sharing on Pinterest, Twitter, and LinkedIn'
+        ],
+        tags: ['#UIUX', '#Figma', '#WebDesign', '#ProductDesign']
+      },
+      {
+        id: 'trend-gam-10',
+        topic: 'Unreal Engine 5.6 Procedural Worlds',
+        niche: 'gaming',
+        platform: 'youtube',
+        platformName: 'YouTube Long-form',
+        outlierScore: 95,
+        outlierText: '10.2× Outlier',
+        title: 'I generated an infinite photorealistic open-world game at 120 FPS without 3D modelling.',
+        views: '1.8M',
+        baseline: '180K',
+        growth: '+410%',
+        signals: { momentum: 98, engagement: 96, searchDemand: 94, saturation: 20, competition: 26, freshFactor: 97, monetization: 91 },
+        whyTrending: [
+          'Visually jaw-dropping technological showcase of Nanite and PCG algorithms',
+          'Massive gamer and indie gamedev crossover audience',
+          'Strong discussion on whether single creators can now outpace AAA studios'
+        ],
+        tags: ['#Gamedev', '#UnrealEngine5', '#Gaming', '#IndieGame']
+      },
+      {
+        id: 'trend-edu-11',
+        topic: 'Neuroscience of Deep Memory Recall',
+        niche: 'education',
+        platform: 'shorts',
+        platformName: 'Shorts & TikTok',
+        outlierScore: 94,
+        outlierText: '9.3× Outlier',
+        title: 'The 20-minute sleep cycle hack neuroscientists use to permanently memorize complex topics.',
+        views: '1.3M',
+        baseline: '130K',
+        growth: '+310%',
+        signals: { momentum: 95, engagement: 94, searchDemand: 91, saturation: 26, competition: 30, freshFactor: 93, monetization: 87 },
+        whyTrending: [
+          'Scientific authority combined with universal desire for cognitive enhancement',
+          'Students, founders, and professionals save and share across WhatsApp and Reddit',
+          'Immediate actionable protocol increases viewer retention'
+        ],
+        tags: ['#Neuroscience', '#StudyHacks', '#Learning', '#Productivity']
       }
     ],
 
@@ -423,6 +503,7 @@
 
   let currentActiveScriptIdea = null;
   let activeTrendingPlatform = 'all';
+  let activeTrendingNiche = 'all';
   let activeCreativeAngle = 'all';
   let activeLibraryStage = 'all';
   let activeLibraryView = 'kanban';
@@ -520,12 +601,38 @@
     if (!container) return;
 
     let trends = VantageTrendsData.SEED_TRENDS;
+
+    // Filter by Niche / Genre
+    if (activeTrendingNiche !== 'all') {
+      trends = trends.filter(t => t.niche === activeTrendingNiche);
+    }
+
+    // Filter by Platform
     if (activeTrendingPlatform !== 'all') {
       if (activeTrendingPlatform === 'shorts') {
         trends = trends.filter(t => t.platform === 'shorts' || t.platform === 'reels' || t.platform === 'tiktok');
       } else {
         trends = trends.filter(t => t.platform === activeTrendingPlatform);
       }
+    }
+
+    if (trends.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1; padding: 48px 24px; text-align: center; background: #FFFFFF; border-radius: var(--radius-lg); border: var(--border-light);">
+          <div style="font-size: 36px; margin-bottom: 10px;">📡</div>
+          <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);">No Outliers Found in This Filter</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Try switching to another genre or viewing "All Niches".</p>
+          <button class="btn btn-secondary btn-sm" id="btn-reset-trending-filter" type="button">Reset Genre & Platform Filters</button>
+        </div>
+      `;
+      document.getElementById('btn-reset-trending-filter')?.addEventListener('click', () => {
+        activeTrendingNiche = 'all';
+        activeTrendingPlatform = 'all';
+        document.querySelectorAll('#trending-niche-filters .format-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-niche') === 'all'));
+        document.querySelectorAll('#trending-platform-filters .format-pill').forEach(p => p.classList.toggle('active', p.getAttribute('data-platform') === 'all'));
+        renderTrendingSection();
+      });
+      return;
     }
 
     container.innerHTML = trends.map(t => {
@@ -1254,6 +1361,17 @@
     if (emailInp) emailInp.value = creatorProfile.email || currentUser.email || '';
     if (bioInp) bioInp.value = creatorProfile.audience_description || '';
 
+    // Synchronize active niches in settings grid
+    const userNiches = creatorProfile.niches || ['ai', 'technology'];
+    document.querySelectorAll('#settings-profile-niches-grid .onboard-tag-btn').forEach(btn => {
+      const val = btn.getAttribute('data-value');
+      if (userNiches.includes(val)) {
+        btn.classList.add('selected');
+      } else {
+        btn.classList.remove('selected');
+      }
+    });
+
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
   }
@@ -1428,6 +1546,36 @@
 
   // --- Onboarding Wizard ---
   function openOnboardingModal() {
+    // Pre-populate niches from creator profile
+    const userNiches = creatorProfile.niches || ['ai', 'technology'];
+    document.querySelectorAll('#grid-niches .onboard-tag-btn').forEach(btn => {
+      const val = btn.getAttribute('data-value');
+      if (userNiches.includes(val)) {
+        btn.classList.add('selected');
+      } else {
+        btn.classList.remove('selected');
+      }
+    });
+
+    // Pre-populate formats
+    const userTypes = creatorProfile.content_types || ['reels', 'shorts', 'youtube'];
+    document.querySelectorAll('#grid-content-types .onboard-tag-btn').forEach(btn => {
+      const val = btn.getAttribute('data-value');
+      if (userTypes.includes(val)) {
+        btn.classList.add('selected');
+      } else {
+        btn.classList.remove('selected');
+      }
+    });
+
+    // Pre-populate goal
+    const userGoal = creatorProfile.goals || 'views';
+    document.querySelectorAll('#grid-goals .goal-card').forEach(card => {
+      const val = card.getAttribute('data-value');
+      if (val === userGoal) card.classList.add('selected');
+      else card.classList.remove('selected');
+    });
+
     showOnboardingStep(1);
     document.getElementById('onboarding-modal')?.classList.add('active');
   }
@@ -1810,17 +1958,98 @@
       });
     });
 
+    // Trending Niche / Genre Filter Pills
+    document.querySelectorAll('#trending-niche-filters .format-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('#trending-niche-filters .format-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeTrendingNiche = pill.getAttribute('data-niche') || 'all';
+        renderTrendingSection();
+        renderIdeasSection();
+        showToast(`Filtered to genre: ${pill.textContent.trim()}`);
+      });
+    });
+
+    // Onboarding Niches Grid Selection
+    document.querySelectorAll('#grid-niches .onboard-tag-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        btn.classList.toggle('selected');
+        const count = document.querySelectorAll('#grid-niches .onboard-tag-btn.selected').length;
+        if (count === 0) {
+          btn.classList.add('selected');
+          showToast('Keep at least 1 niche selected.');
+        }
+      });
+    });
+
+    // Onboarding Formats Selection
+    document.querySelectorAll('#grid-content-types .onboard-tag-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        btn.classList.toggle('selected');
+        const count = document.querySelectorAll('#grid-content-types .onboard-tag-btn.selected').length;
+        if (count === 0) {
+          btn.classList.add('selected');
+        }
+      });
+    });
+
+    // Onboarding Goals Selection
+    document.querySelectorAll('#grid-goals .goal-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('#grid-goals .goal-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+      });
+    });
+
+    // Onboarding Niche Search Filter
+    document.getElementById('onboard-niche-search')?.addEventListener('input', (e) => {
+      const q = (e.target.value || '').toLowerCase().trim();
+      document.querySelectorAll('#grid-niches .onboard-tag-btn').forEach(btn => {
+        const text = (btn.textContent || '').toLowerCase();
+        btn.style.display = (!q || text.includes(q)) ? 'inline-flex' : 'none';
+      });
+    });
+
+    // Settings Profile Niches Grid Selection
+    document.querySelectorAll('#settings-profile-niches-grid .onboard-tag-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        btn.classList.toggle('selected');
+        const count = document.querySelectorAll('#settings-profile-niches-grid .onboard-tag-btn.selected').length;
+        if (count === 0) {
+          btn.classList.add('selected');
+          showToast('Keep at least 1 niche selected.');
+        }
+      });
+    });
+
+    // Settings Save Profile (Including Niches)
     document.getElementById('btn-save-settings-profile')?.addEventListener('click', () => {
       const name = document.getElementById('settings-user-name')?.value || creatorProfile.name;
       const email = document.getElementById('settings-user-email')?.value || creatorProfile.email;
       const bio = document.getElementById('settings-audience-bio')?.value || '';
+      const selectedNiches = Array.from(document.querySelectorAll('#settings-profile-niches-grid .onboard-tag-btn.selected'))
+        .map(b => b.getAttribute('data-value'))
+        .filter(Boolean);
 
-      creatorProfile = { ...creatorProfile, name, email, audience_description: bio, updated_at: new Date().toISOString() };
+      creatorProfile = {
+        ...creatorProfile,
+        name,
+        email,
+        niches: selectedNiches.length > 0 ? selectedNiches : (creatorProfile.niches || ['ai', 'technology']),
+        audience_description: bio,
+        updated_at: new Date().toISOString()
+      };
       VantageAPI.saveProfile(creatorProfile);
       updateCreatorPersonaChips();
       updateLiveClockAndGreeting();
+      renderTrendingSection();
+      renderIdeasSection();
+      renderSearchSection();
       closeSettingsModal();
-      showToast('Profile settings saved to database!');
+      showToast(`Profile & Niches saved: ${creatorProfile.niches.join(', ').toUpperCase()}`);
     });
 
     document.getElementById('btn-save-settings-ai')?.addEventListener('click', () => {
