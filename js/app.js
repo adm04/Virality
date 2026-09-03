@@ -1177,35 +1177,48 @@
       `;
     } else {
       board.classList.remove('list-view-mode');
+      const isSingleStage = activeLibraryStage !== 'all';
+      board.classList.toggle('single-stage-mode', isSingleStage);
+
       board.innerHTML = stages.map(st => {
-        if (activeLibraryStage !== 'all' && activeLibraryStage !== st.id) return '';
+        if (isSingleStage && activeLibraryStage !== st.id) return '';
         const cardsInStage = savedLibrary.filter(i => (i.stage || 'idea') === st.id);
         return `
           <div class="kanban-col" data-stage="${st.id}">
             <div class="kanban-col-header">
-              <span class="col-title">${st.name}</span>
-              <span class="col-badge">${cardsInStage.length}</span>
+              <div class="col-title-wrap">
+                <span class="col-title">${st.name}</span>
+                <span class="col-badge">${cardsInStage.length}</span>
+              </div>
             </div>
 
             <div class="kanban-cards-stack">
-              ${cardsInStage.length === 0 ? `<div style="font-size: 11.5px; color: var(--text-faint); padding: 16px; text-align: center;">No ideas yet</div>` : ''}
+              ${cardsInStage.length === 0 ? `<div class="kanban-empty-placeholder">No ideas in this stage yet</div>` : ''}
               ${cardsInStage.map(item => `
                 <div class="lib-saved-card" data-id="${item.id}">
                   <div class="lib-card-hook">"${escapeHtml(item.hook || item.title)}"</div>
-                  <div class="lib-card-meta">
+                  
+                  <div class="lib-card-footer-top">
                     <span class="lib-score">Score ${item.score || 92}</span>
-                    <div class="lib-card-actions">
-                      <button class="btn-text btn-open-script-studio" data-json="${escapeHtml(JSON.stringify(item))}" style="font-size: 11px; color: #a855f7; font-weight: 700;" type="button">⚡ Script</button>
-                      <select class="lib-stage-select" data-id="${item.id}">
-                        <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>Ideas</option>
-                        <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>Researching</option>
-                        <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>Scripted</option>
-                        <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>Filming</option>
-                        <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
-                        <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
-                      </select>
-                      <button class="btn-lib-del" data-id="${item.id}" type="button">✕</button>
+                    <div class="lib-card-actions-right">
+                      <button class="btn-lib-script btn-open-script-studio" data-json="${escapeHtml(JSON.stringify(item))}" type="button" title="Open AI Script Studio">
+                        <svg class="lucide lucide-zap" width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        <span>Script</span>
+                      </button>
+                      <button class="btn-lib-del" data-id="${item.id}" title="Delete Idea" type="button" aria-label="Delete">✕</button>
                     </div>
+                  </div>
+
+                  <div class="lib-card-stage-selector">
+                    <span class="lib-stage-label">Stage</span>
+                    <select class="lib-stage-select" data-id="${item.id}" aria-label="Change production stage">
+                      <option value="idea" ${item.stage === 'idea' ? 'selected' : ''}>Ideas</option>
+                      <option value="researching" ${item.stage === 'researching' ? 'selected' : ''}>Researching</option>
+                      <option value="scripted" ${item.stage === 'scripted' ? 'selected' : ''}>Scripted</option>
+                      <option value="filming" ${item.stage === 'filming' ? 'selected' : ''}>Filming</option>
+                      <option value="editing" ${item.stage === 'editing' ? 'selected' : ''}>Editing</option>
+                      <option value="published" ${item.stage === 'published' ? 'selected' : ''}>Published</option>
+                    </select>
                   </div>
                 </div>
               `).join('')}

@@ -389,7 +389,7 @@
 
       <!-- ================= SECTION 4: YOUR CONTENT LIBRARY ================= -->
       <section class="dashboard-section animate-fade delay-3" id="section-library" aria-labelledby="heading-library">
-        <div class="section-header-row">
+        <div class="section-header-row library-section-header">
           <div class="section-title-wrap">
             <div class="section-icon-badge library-badge" aria-hidden="true">
               <svg class="lucide lucide-folder-kanban" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/></svg>
@@ -400,48 +400,53 @@
             </div>
           </div>
 
-          <div class="library-toolbar-actions">
-            <!-- Stage Status Filters with Lucide SVGs -->
-            <div class="library-filter-tabs" id="library-stage-filters" role="tablist">
-              <button class="stage-tab active" data-stage="all">All Stages (<span id="lib-count-all">0</span>)</button>
-              <button class="stage-tab" data-stage="idea">
-                <svg class="lucide lucide-lightbulb" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                <span>Ideas</span>
+          <!-- Controls aligned in top header -->
+          <div class="library-top-controls">
+            <div class="library-view-switcher" role="tablist" aria-label="Library View Mode">
+              <button class="lib-view-btn active" id="btn-lib-kanban" title="Kanban Board View" type="button">
+                <svg class="lucide lucide-kanban" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 5v11"/><path d="M12 5v6"/><path d="M18 5v14"/></svg>
+                <span>Kanban</span>
               </button>
-              <button class="stage-tab" data-stage="researching">
-                <svg class="lucide lucide-flask-conical" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
-                <span>Researching</span>
-              </button>
-              <button class="stage-tab" data-stage="scripted">
-                <svg class="lucide lucide-pen-tool" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
-                <span>Scripted</span>
-              </button>
-              <button class="stage-tab" data-stage="filming">
-                <svg class="lucide lucide-video" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
-                <span>Filming</span>
-              </button>
-              <button class="stage-tab" data-stage="editing">
-                <svg class="lucide lucide-scissors" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
-                <span>Editing</span>
-              </button>
-              <button class="stage-tab" data-stage="published">
-                <svg class="lucide lucide-check-circle" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                <span>Published</span>
+              <button class="lib-view-btn" id="btn-lib-list" title="Compact List View" type="button">
+                <svg class="lucide lucide-list" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+                <span>List</span>
               </button>
             </div>
 
-            <div class="library-view-switcher">
-              <button class="lib-view-btn active" id="btn-lib-kanban" title="Kanban Board View">
-                <svg class="lucide lucide-kanban" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 5v11"/><path d="M12 5v6"/><path d="M18 5v14"/></svg>
-              </button>
-              <button class="lib-view-btn" id="btn-lib-list" title="Compact List View">
-                <svg class="lucide lucide-list" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
-              </button>
-            </div>
-
-            <button class="btn-quick-add-lib" id="btn-quick-add-idea" title="Add Custom Idea to Library" aria-label="Add Idea to Library">
+            <button class="btn-quick-add-lib" id="btn-quick-add-idea" title="Add Custom Idea to Library" aria-label="Add Idea to Library" type="button">
               <svg class="lucide lucide-plus" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
               <span>New Idea</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stage Filter Tabs Row -->
+        <div class="library-toolbar-actions">
+          <div class="library-filter-tabs" id="library-stage-filters" role="tablist" aria-label="Filter Ideas by Stage">
+            <button class="stage-tab active" data-stage="all">All Stages (<span id="lib-count-all">0</span>)</button>
+            <button class="stage-tab" data-stage="idea">
+              <svg class="lucide lucide-lightbulb" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+              <span>Ideas</span>
+            </button>
+            <button class="stage-tab" data-stage="researching">
+              <svg class="lucide lucide-flask-conical" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31M14 2v7.31M8.5 2h7M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+              <span>Researching</span>
+            </button>
+            <button class="stage-tab" data-stage="scripted">
+              <svg class="lucide lucide-pen-tool" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+              <span>Scripted</span>
+            </button>
+            <button class="stage-tab" data-stage="filming">
+              <svg class="lucide lucide-video" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
+              <span>Filming</span>
+            </button>
+            <button class="stage-tab" data-stage="editing">
+              <svg class="lucide lucide-scissors" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+              <span>Editing</span>
+            </button>
+            <button class="stage-tab" data-stage="published">
+              <svg class="lucide lucide-check-circle" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <span>Published</span>
             </button>
           </div>
         </div>
