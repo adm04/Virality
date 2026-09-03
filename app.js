@@ -1262,49 +1262,168 @@
     document.getElementById('settings-modal')?.classList.remove('active');
   }
 
-  // --- Auth Gateway ---
+  // --- Auth Portal Controller ---
   function openAuthScreen() {
-    const auth = document.getElementById('full-auth-screen');
-    if (auth) {
-      auth.classList.add('active');
-      auth.setAttribute('aria-hidden', 'false');
+    const overlay = document.getElementById('auth-portal-overlay');
+    if (overlay) {
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
     }
   }
 
   function closeAuthScreen() {
-    document.getElementById('full-auth-screen')?.classList.remove('active');
+    const overlay = document.getElementById('auth-portal-overlay');
+    if (overlay) {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
   }
 
-  async function handleAuthSubmit() {
-    const emailInp = document.getElementById('auth-email-input');
-    const passInp = document.getElementById('auth-password-input');
-    const email = (emailInp?.value || '').trim();
-    const password = (passInp?.value || '').trim();
+  function showAuthAlert(msg, type = 'error') {
+    const alertBox = document.getElementById('auth-alert-box');
+    if (!alertBox) return;
+    alertBox.className = `auth-alert ${type}`;
+    alertBox.innerHTML = `
+      <svg class="lucide lucide-${type === 'error' ? 'alert-circle' : 'check-circle-2'}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+      <span>${escapeHtml(msg)}</span>
+    `;
+    alertBox.style.display = 'flex';
+  }
+
+  function hideAuthAlert() {
+    const alertBox = document.getElementById('auth-alert-box');
+    if (alertBox) alertBox.style.display = 'none';
+  }
+
+  async function handleLogin(email, password) {
+    hideAuthAlert();
+    const btn = document.getElementById('btn-auth-signin-submit');
+    const oldText = btn ? btn.innerHTML : '';
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="live-pulse"></span> <span>Signing in...</span>`;
+    }
 
     try {
-      showToast('Authenticating with Vantage Virality Engine...');
-      const res = await VantageAPI.login(email, password);
+      let res;
+      try {
+        res = await VantageAPI.login(email, password);
+      } catch (err) {
+        const cleanEmail = (email || '').toLowerCase().trim();
+        const isDemo = (cleanEmail === 'demo' || cleanEmail === 'demo@vantage.ai' || cleanEmail === 'demo@vantage.com') && (password === 'vantage2026' || password === 'demo1234');
+        const isMaster = (cleanEmail === 'arka' || cleanEmail === 'arkadeb.mondal@example.com') && (password === 'arka1234');
+
+        if (isDemo || isMaster) {
+          const fallbackUser = isDemo
+            ? { id: 'usr_demo_creator', name: 'Arka Mondal (Demo)', email: 'demo@vantage.ai', tier: 'pro' }
+            : { id: 'usr_arka_master', name: 'Arka Mondal', email: 'arkadeb.mondal@example.com', tier: 'pro' };
+          const fallbackToken = 'vantage_demo_token_' + Date.now();
+          VantageAPI.setToken(fallbackToken);
+          res = { success: true, user: fallbackUser, profile: creatorProfile, token: fallbackToken };
+        } else {
+          throw err;
+        }
+      }
+
       if (res && res.user) {
         currentUser = res.user;
         if (res.profile) creatorProfile = res.profile;
+        if (res.token) VantageAPI.setToken(res.token);
+
+        updateHeaderAndSidebarUser();
         updateCreatorPersonaChips();
         updateLiveClockAndGreeting();
         closeAuthScreen();
-        showToast(`Welcome back, ${currentUser.name}! (Pro Access Active)`);
+        showToast(`✨ Welcome, ${currentUser.name}! Vantage Virality OS is calibrated.`);
       }
     } catch (err) {
-      // Fallback guest login
-      const guestRes = await VantageAPI.guestLogin();
-      if (guestRes && guestRes.user) {
-        currentUser = guestRes.user;
+      showAuthAlert(err.message || 'Invalid credentials. Please use demo credentials: demo@vantage.ai / vantage2026');
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = oldText;
+      }
+    }
+  }
+
+  async function handleRegister(name, email, password) {
+    hideAuthAlert();
+    const btn = document.getElementById('btn-auth-signup-submit');
+    const oldText = btn ? btn.innerHTML : '';
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="live-pulse"></span> <span>Creating workspace...</span>`;
+    }
+
+    try {
+      let res;
+      try {
+        res = await VantageAPI.register(name, email, password);
+      } catch (e) {
+        const localUser = {
+          id: 'usr_' + Date.now(),
+          name: name.trim() || 'Creator',
+          email: email.trim().toLowerCase(),
+          tier: 'pro'
+        };
+        const localToken = 'vantage_user_token_' + Date.now();
+        VantageAPI.setToken(localToken);
+        res = { success: true, user: localUser, profile: { ...creatorProfile, name: localUser.name, email: localUser.email }, token: localToken };
+      }
+
+      if (res && res.user) {
+        currentUser = res.user;
+        if (res.profile) creatorProfile = res.profile;
+        if (res.token) VantageAPI.setToken(res.token);
+
+        updateHeaderAndSidebarUser();
         updateCreatorPersonaChips();
         updateLiveClockAndGreeting();
         closeAuthScreen();
-        showToast(`Logged in with Pro Creator Access`);
-      } else {
-        showToast(`Auth error: ${err.message}`);
+        showToast(`🎉 Account created! Welcome to Vantage OS, ${currentUser.name}.`);
+      }
+    } catch (err) {
+      showAuthAlert(err.message || 'Registration failed. Please check your information.');
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = oldText;
       }
     }
+  }
+
+  function handleLogout() {
+    VantageAPI.setToken('');
+    localStorage.removeItem(VantageConfig.STORAGE_KEY_TOKEN);
+    currentUser = {
+      id: 'usr_guest',
+      name: 'Creator',
+      email: '',
+      tier: 'guest'
+    };
+    updateHeaderAndSidebarUser();
+    openAuthScreen();
+    showToast('👋 You have been signed out. Please sign in to continue.');
+  }
+
+  function updateHeaderAndSidebarUser() {
+    const name = currentUser.name || 'Arka Mondal';
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'AM';
+
+    const topbarInitials = document.getElementById('topbar-avatar-initials');
+    if (topbarInitials) topbarInitials.textContent = initials;
+
+    const topbarName = document.getElementById('topbar-chip-name');
+    if (topbarName) topbarName.textContent = name.split(' ')[0] + ' ' + (name.split(' ')[1] ? name.split(' ')[1][0] + '.' : '');
+
+    const topbarTier = document.getElementById('topbar-tier-badge');
+    if (topbarTier) topbarTier.textContent = (currentUser.tier || 'PRO').toUpperCase();
+
+    const sidebarInitials = document.getElementById('sidebar-avatar-initials');
+    if (sidebarInitials) sidebarInitials.textContent = initials;
+
+    const heroName = document.getElementById('hero-user-name');
+    if (heroName) heroName.textContent = (name.split(' ')[0] || 'Creator') + '.';
   }
 
   // --- Onboarding Wizard ---
@@ -1795,171 +1914,6 @@
         showToast('Reset to demo defaults!');
       }
     });
-
-    // ================= 8. AUTHENTICATION & SESSION CONTROLLER =================
-    function openAuthScreen() {
-      const overlay = document.getElementById('auth-portal-overlay');
-      if (overlay) {
-        overlay.classList.add('active');
-        overlay.setAttribute('aria-hidden', 'false');
-      }
-    }
-
-    function closeAuthScreen() {
-      const overlay = document.getElementById('auth-portal-overlay');
-      if (overlay) {
-        overlay.classList.remove('active');
-        overlay.setAttribute('aria-hidden', 'true');
-      }
-    }
-
-    function showAuthAlert(msg, type = 'error') {
-      const alertBox = document.getElementById('auth-alert-box');
-      if (!alertBox) return;
-      alertBox.className = `auth-alert ${type}`;
-      alertBox.innerHTML = `
-        <svg class="lucide lucide-${type === 'error' ? 'alert-circle' : 'check-circle-2'}" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
-        <span>${msg}</span>
-      `;
-      alertBox.style.display = 'flex';
-    }
-
-    function hideAuthAlert() {
-      const alertBox = document.getElementById('auth-alert-box');
-      if (alertBox) alertBox.style.display = 'none';
-    }
-
-    async function handleLogin(email, password) {
-      hideAuthAlert();
-      const btn = document.getElementById('btn-auth-signin-submit');
-      const oldText = btn ? btn.innerHTML : '';
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = `<span class="live-pulse"></span> <span>Signing in...</span>`;
-      }
-
-      try {
-        let res;
-        try {
-          res = await VantageAPI.login(email, password);
-        } catch (err) {
-          // Client-side fallback authentication for demo accounts
-          const cleanEmail = (email || '').toLowerCase().trim();
-          const isDemo = (cleanEmail === 'demo' || cleanEmail === 'demo@vantage.ai' || cleanEmail === 'demo@vantage.com') && (password === 'vantage2026' || password === 'demo1234');
-          const isMaster = (cleanEmail === 'arka' || cleanEmail === 'arkadeb.mondal@example.com') && (password === 'arka1234');
-
-          if (isDemo || isMaster) {
-            const fallbackUser = isDemo
-              ? { id: 'usr_demo_creator', name: 'Arka Mondal (Demo)', email: 'demo@vantage.ai', tier: 'pro' }
-              : { id: 'usr_arka_master', name: 'Arka Mondal', email: 'arkadeb.mondal@example.com', tier: 'pro' };
-            const fallbackToken = 'vantage_demo_token_' + Date.now();
-            VantageAPI.setToken(fallbackToken);
-            res = { success: true, user: fallbackUser, profile: creatorProfile, token: fallbackToken };
-          } else {
-            throw err;
-          }
-        }
-
-        if (res && res.user) {
-          currentUser = res.user;
-          if (res.profile) creatorProfile = res.profile;
-          if (res.token) VantageAPI.setToken(res.token);
-
-          updateHeaderAndSidebarUser();
-          updateCreatorPersonaChips();
-          updateLiveClockAndGreeting();
-          closeAuthScreen();
-          showToast(`✨ Welcome, ${currentUser.name}! Vantage Virality OS is calibrated.`);
-        }
-      } catch (err) {
-        showAuthAlert(err.message || 'Invalid credentials. Please use demo credentials: demo@vantage.ai / vantage2026');
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = oldText;
-        }
-      }
-    }
-
-    async function handleRegister(name, email, password) {
-      hideAuthAlert();
-      const btn = document.getElementById('btn-auth-signup-submit');
-      const oldText = btn ? btn.innerHTML : '';
-      if (btn) {
-        btn.disabled = true;
-        btn.innerHTML = `<span class="live-pulse"></span> <span>Creating workspace...</span>`;
-      }
-
-      try {
-        let res;
-        try {
-          res = await VantageAPI.register(name, email, password);
-        } catch (e) {
-          const localUser = {
-            id: 'usr_' + Date.now(),
-            name: name.trim() || 'Creator',
-            email: email.trim().toLowerCase(),
-            tier: 'pro'
-          };
-          const localToken = 'vantage_user_token_' + Date.now();
-          VantageAPI.setToken(localToken);
-          res = { success: true, user: localUser, profile: { ...creatorProfile, name: localUser.name, email: localUser.email }, token: localToken };
-        }
-
-        if (res && res.user) {
-          currentUser = res.user;
-          if (res.profile) creatorProfile = res.profile;
-          if (res.token) VantageAPI.setToken(res.token);
-
-          updateHeaderAndSidebarUser();
-          updateCreatorPersonaChips();
-          updateLiveClockAndGreeting();
-          closeAuthScreen();
-          showToast(`🎉 Account created! Welcome to Vantage OS, ${currentUser.name}.`);
-        }
-      } catch (err) {
-        showAuthAlert(err.message || 'Registration failed. Please check your information.');
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = oldText;
-        }
-      }
-    }
-
-    function handleLogout() {
-      VantageAPI.setToken('');
-      localStorage.removeItem(VantageConfig.STORAGE_KEY_TOKEN);
-      currentUser = {
-        id: 'usr_guest',
-        name: 'Creator',
-        email: '',
-        tier: 'guest'
-      };
-      updateHeaderAndSidebarUser();
-      openAuthScreen();
-      showToast('👋 You have been signed out. Please sign in to continue.');
-    }
-
-    function updateHeaderAndSidebarUser() {
-      const name = currentUser.name || 'Arka Mondal';
-      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'AM';
-
-      const topbarInitials = document.getElementById('topbar-avatar-initials');
-      if (topbarInitials) topbarInitials.textContent = initials;
-
-      const topbarName = document.getElementById('topbar-chip-name');
-      if (topbarName) topbarName.textContent = name.split(' ')[0] + ' ' + (name.split(' ')[1] ? name.split(' ')[1][0] + '.' : '');
-
-      const topbarTier = document.getElementById('topbar-tier-badge');
-      if (topbarTier) topbarTier.textContent = (currentUser.tier || 'PRO').toUpperCase();
-
-      const sidebarInitials = document.getElementById('sidebar-avatar-initials');
-      if (sidebarInitials) sidebarInitials.textContent = initials;
-
-      const heroName = document.getElementById('hero-user-name');
-      if (heroName) heroName.textContent = (name.split(' ')[0] || 'Creator') + '.';
-    }
 
     // Auth Event Bindings
     document.getElementById('btn-auth-1click-demo')?.addEventListener('click', () => {
