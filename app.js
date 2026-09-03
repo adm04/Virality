@@ -1843,7 +1843,13 @@
 
     document.getElementById('nav-onboarding-trigger')?.addEventListener('click', openOnboardingModal);
     document.getElementById('nav-settings')?.addEventListener('click', openSettingsModal);
-    document.getElementById('sidebar-user-avatar-btn')?.addEventListener('click', openAuthScreen);
+    document.getElementById('sidebar-user-avatar-btn')?.addEventListener('click', () => {
+      if (VantageAPI.getToken()) {
+        openSettingsModal();
+      } else {
+        openAuthScreen();
+      }
+    });
     document.getElementById('topbar-profile-btn')?.addEventListener('click', openAuthScreen);
     document.getElementById('btn-hero-calibrate')?.addEventListener('click', openOnboardingModal);
     document.getElementById('btn-edit-onboarding')?.addEventListener('click', openOnboardingModal);
