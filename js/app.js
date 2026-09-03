@@ -619,6 +619,8 @@
     const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'AM';
 
     if (sidebarInitials) sidebarInitials.textContent = initials;
+    const sidebarName = document.getElementById('sidebar-user-name');
+    if (sidebarName) sidebarName.textContent = name;
     if (!list) return;
 
     const chips = [
@@ -1110,6 +1112,8 @@
     if (!board) return;
 
     if (allCountEl) allCountEl.textContent = savedLibrary.length;
+    const sidebarLibCount = document.getElementById('sidebar-lib-count');
+    if (sidebarLibCount) sidebarLibCount.textContent = savedLibrary.length;
 
     const stages = [
       { id: 'idea', name: 'Ideas' },
@@ -1646,6 +1650,8 @@
 
     const sidebarInitials = document.getElementById('sidebar-avatar-initials');
     if (sidebarInitials) sidebarInitials.textContent = initials;
+    const sidebarName = document.getElementById('sidebar-user-name');
+    if (sidebarName) sidebarName.textContent = name;
 
     const heroName = document.getElementById('hero-user-name');
     if (heroName) heroName.textContent = (name.split(' ')[0] || 'Creator') + '.';
@@ -1830,6 +1836,8 @@
     const navIdeas = document.getElementById('nav-ideas');
     const navSearch = document.getElementById('nav-search');
     const navLibrary = document.getElementById('nav-library');
+    const sidebarEl = document.getElementById('sidebar');
+    const toggleSidebarBtn = document.getElementById('btn-sidebar-toggle');
 
     const setNavActive = (activeEl) => {
       document.querySelectorAll('.sidebar .nav-item').forEach(btn => btn.classList.remove('active'));
@@ -1841,6 +1849,49 @@
     navSearch?.addEventListener('click', () => { setNavActive(navSearch); document.getElementById('section-search')?.scrollIntoView({ behavior: 'smooth' }); });
     navLibrary?.addEventListener('click', () => { setNavActive(navLibrary); document.getElementById('section-library')?.scrollIntoView({ behavior: 'smooth' }); });
 
+    // Desktop SaaS Sidebar Collapse/Expand Toggle
+    const setSidebarCollapsed = (collapsed) => {
+      if (!sidebarEl) return;
+      sidebarEl.classList.toggle('collapsed', collapsed);
+      try {
+        localStorage.setItem('vantage_sidebar_collapsed', collapsed ? 'true' : 'false');
+      } catch (e) {}
+    };
+
+    // Restore user preference
+    try {
+      if (localStorage.getItem('vantage_sidebar_collapsed') === 'true' && window.innerWidth > 992) {
+        setSidebarCollapsed(true);
+      }
+    } catch (e) {}
+
+    toggleSidebarBtn?.addEventListener('click', () => {
+      const isCurrentlyCollapsed = sidebarEl?.classList.contains('collapsed');
+      setSidebarCollapsed(!isCurrentlyCollapsed);
+    });
+
+    // Keyboard shortcut: Cmd+B or Ctrl+B to toggle sidebar
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'b') {
+        e.preventDefault();
+        const isCurrentlyCollapsed = sidebarEl?.classList.contains('collapsed');
+        setSidebarCollapsed(!isCurrentlyCollapsed);
+      }
+    });
+
+    // Direct Sidebar Action Buttons
+    document.getElementById('nav-sidebar-script-studio')?.addEventListener('click', () => {
+      const sampleItem = savedLibrary[0] || {
+        title: 'High-Retention Virality Blueprint',
+        hook: 'I tested this retention formula on 10,000 views — here is what happened.',
+        niche: creatorProfile.niches?.[0] || 'ai',
+        format: 'Shorts & Reels'
+      };
+      openScriptStudio(sampleItem);
+    });
+
+    document.getElementById('nav-sidebar-scorer')?.addEventListener('click', openScorerModal);
+    document.getElementById('nav-sidebar-scanner')?.addEventListener('click', openChannelInspector);
     document.getElementById('nav-onboarding-trigger')?.addEventListener('click', openOnboardingModal);
     document.getElementById('nav-settings')?.addEventListener('click', openSettingsModal);
     document.getElementById('sidebar-user-avatar-btn')?.addEventListener('click', () => {

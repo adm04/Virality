@@ -31,74 +31,118 @@
   <!-- Accessible Skip Link for Screen Readers & Keyboard Navigation -->
   <a href="#main-content" class="skip-link">Skip to Main Content</a>
 
-  <!-- Ambient Light Mesh Backdrop -->
+  <!-- Dynamic Interactive WebGL Fluid Mesh Shader Backdrop -->
+  <canvas id="dynamic-shader-canvas" class="shader-background-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Light Mesh Backdrop (Subtle Depth Accent) -->
   <div class="ambient-glow glow-top-left" aria-hidden="true"></div>
   <div class="ambient-glow glow-top-right" aria-hidden="true"></div>
   <div class="ambient-glow glow-bottom-center" aria-hidden="true"></div>
 
   <div class="app-container">
 
-    <!-- ================= MINIMALIST COLLAPSED SIDEBAR ================= -->
+    <!-- ================= FULL-FEATURED DESKTOP SAAS SIDEBAR ================= -->
     <aside class="sidebar" id="sidebar" aria-label="Sidebar Navigation">
-      <div class="sidebar-top">
-        <a href="#" class="brand-mark" title="Vantage Virality OS" aria-label="Vantage Home">
-          <img src="favicon.svg" alt="Vantage Logo" width="28" height="28" style="display: block; border-radius: 6px;">
-        </a>
+      <!-- Sidebar Header / Workspace Switcher -->
+      <div class="sidebar-header">
+        <div class="sidebar-brand-group">
+          <a href="#" class="brand-mark" title="Vantage Virality OS" aria-label="Vantage Home">
+            <img src="favicon.svg" alt="Vantage Logo" width="28" height="28">
+          </a>
+          <div class="brand-text-wrap">
+            <span class="brand-title">Vantage</span>
+            <span class="brand-badge">Virality OS</span>
+          </div>
+        </div>
 
-        <nav class="nav-stack" aria-label="Primary Navigation">
-          <button class="nav-item active" data-tooltip="Trending For You (⌘1)" id="nav-trending" aria-label="Trending For You">
-            <svg class="lucide lucide-flame" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-            </svg>
-            <span class="nav-indicator" aria-hidden="true"></span>
-          </button>
-
-          <button class="nav-item" data-tooltip="Ideas For You (⌘2)" id="nav-ideas" aria-label="AI Content Ideas">
-            <svg class="lucide lucide-lightbulb" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
-            </svg>
-          </button>
-
-          <button class="nav-item" data-tooltip="Content Search (⌘3)" id="nav-search" aria-label="Search Content Intelligence">
-            <svg class="lucide lucide-search" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-            </svg>
-          </button>
-
-          <button class="nav-item" data-tooltip="Content Library (⌘4)" id="nav-library" aria-label="Your Production Library">
-            <svg class="lucide lucide-folder-kanban" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/>
-            </svg>
-          </button>
-
-          <button class="nav-item" data-tooltip="Onboarding / Profile (⌘O)" id="nav-onboarding-trigger" aria-label="Creator Onboarding & Preferences">
-            <svg class="lucide lucide-sparkles" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-            </svg>
-          </button>
-        </nav>
+        <button class="btn-sidebar-toggle" id="btn-sidebar-toggle" title="Toggle Sidebar (⌘B)" aria-label="Toggle Sidebar Navigation" type="button">
+          <svg class="lucide lucide-panel-left-close icon-collapse" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg>
+          <svg class="lucide lucide-panel-left-open icon-expand" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></svg>
+        </button>
       </div>
 
-      <div class="sidebar-bottom">
-        <button class="nav-item" data-tooltip="Account Settings" id="nav-settings" aria-label="Open Account Settings">
-          <svg class="lucide" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1 2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-        </button>
-        
-        <!-- Interactive Creator Avatar Profile Trigger -->
-        <button class="user-profile-badge" id="sidebar-user-avatar-btn" title="Creator Profile & Account" aria-label="Open Creator Profile">
-          <span class="avatar-text" id="sidebar-avatar-initials">AM</span>
-          <span class="status-online" aria-label="Online"></span>
-        </button>
+      <!-- Scrollable Navigation Stack -->
+      <div class="sidebar-scrollable-content">
+        <!-- GROUP 1: RADAR & DISCOVERY -->
+        <div class="nav-group">
+          <span class="nav-group-label">DISCOVERY</span>
+          <nav class="nav-stack">
+            <button class="nav-item active" data-tooltip="Trending Outliers (⌘1)" id="nav-trending" aria-label="Trending Outliers" type="button">
+              <svg class="lucide lucide-flame" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+              <span class="nav-label">Trending Outliers</span>
+              <span class="nav-badge-pill" id="sidebar-badge-trends">12 New</span>
+              <span class="nav-indicator" aria-hidden="true"></span>
+            </button>
 
-        <!-- Sidebar Sign Out Button -->
-        <button class="nav-item" data-tooltip="Sign Out (Switch Account)" id="sidebar-logout-btn" aria-label="Sign Out" style="margin-top: 4px;">
-          <svg class="lucide lucide-log-out" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>
-          </svg>
-        </button>
+            <button class="nav-item" data-tooltip="AI Ideas Generator (⌘2)" id="nav-ideas" aria-label="AI Content Ideas" type="button">
+              <svg class="lucide lucide-lightbulb" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+              <span class="nav-label">Ideas Generator</span>
+              <span class="nav-badge-pill">12 Angles</span>
+            </button>
+
+            <button class="nav-item" data-tooltip="Content Intelligence (⌘3)" id="nav-search" aria-label="Search Content Intelligence" type="button">
+              <svg class="lucide lucide-search" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span class="nav-label">Content Search</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- GROUP 2: CREATIVE PIPELINE -->
+        <div class="nav-group">
+          <span class="nav-group-label">PIPELINE</span>
+          <nav class="nav-stack">
+            <button class="nav-item" data-tooltip="Content Library (⌘4)" id="nav-library" aria-label="Your Production Library" type="button">
+              <svg class="lucide lucide-folder-kanban" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M8 10v4"/><path d="M12 10v2"/><path d="M16 10v6"/></svg>
+              <span class="nav-label">Content Library</span>
+              <span class="nav-badge-count" id="sidebar-lib-count">3</span>
+            </button>
+
+            <button class="nav-item" data-tooltip="AI Script Studio" id="nav-sidebar-script-studio" aria-label="AI Script Studio" type="button">
+              <svg class="lucide lucide-clapperboard" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+              <span class="nav-label">Script Studio</span>
+            </button>
+
+            <button class="nav-item" data-tooltip="Virality Hook Scorer" id="nav-sidebar-scorer" aria-label="Virality Hook Scorer" type="button">
+              <svg class="lucide lucide-sparkles" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+              <span class="nav-label">Hook Scorer</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- GROUP 3: TOOLS & PREFERENCES -->
+        <div class="nav-group">
+          <span class="nav-group-label">INTELLIGENCE</span>
+          <nav class="nav-stack">
+            <button class="nav-item" data-tooltip="Channel Outlier Scanner" id="nav-sidebar-scanner" aria-label="Channel Outlier Scanner" type="button">
+              <svg class="lucide lucide-scan" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg>
+              <span class="nav-label">Channel Scanner</span>
+            </button>
+
+            <button class="nav-item" data-tooltip="Account Settings & Niches" id="nav-settings" aria-label="Open Account Settings" type="button">
+              <svg class="lucide lucide-settings" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1 2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span class="nav-label">Settings & Profile</span>
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer: SaaS Profile Card -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card" id="sidebar-user-card">
+          <button class="user-profile-badge" id="sidebar-user-avatar-btn" title="Creator Profile & Account" aria-label="Open Creator Profile" type="button">
+            <span class="avatar-text" id="sidebar-avatar-initials">AM</span>
+            <span class="status-online" aria-label="Online"></span>
+          </button>
+          
+          <div class="user-info-text">
+            <span class="user-display-name" id="sidebar-user-name">Arka Mondal</span>
+            <span class="user-tier-badge">PRO CREATOR</span>
+          </div>
+
+          <button class="btn-sidebar-signout" id="sidebar-logout-btn" title="Sign Out (Switch Account)" aria-label="Sign Out" type="button">
+            <svg class="lucide lucide-log-out" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+          </button>
+        </div>
       </div>
     </aside>
 
@@ -1381,7 +1425,10 @@
   <!-- TOAST NOTIFICATION CONTAINER -->
   <div class="toast-container" id="toast-container" aria-live="polite" role="status"></div>
 
+  <!-- DYNAMIC WEBGL FLUID SHADER ENGINE -->
+  <script src="js/shader-background.js"></script>
+
   <!-- STANDALONE MASTER JAVASCRIPT BUNDLE -->
-  <script src="app.js?v=20260903-v9"></script>
+  <script src="app.js?v=20260903-v10"></script>
 </body>
 </html>
