@@ -10,7 +10,7 @@ function handleHealth(req, res) {
     server_time: new Date().toISOString(),
     timestamp: Math.floor(Date.now() / 1000),
     platform: process.platform,
-    uptime_seconds: Math.floor(process.uptime())
+    uptime_seconds: Math.floor(typeof process.uptime === 'function' ? process.uptime() : 0)
   };
 
   res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });

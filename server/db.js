@@ -27,6 +27,26 @@ class VantageDatabase {
   }
 
   _resolveDbPath() {
+    const os = require('os');
+    const isServerless = Boolean(
+      process.env.VERCEL ||
+      process.env.AWS_LAMBDA_FUNCTION_NAME ||
+      process.env.LAMBDA_TASK_ROOT ||
+      process.env.NOW_REGION
+    );
+
+    if (isServerless) {
+      try {
+        const tmpDir = path.join(os.tmpdir(), 'vantage_data');
+        if (!fs.existsSync(tmpDir)) {
+          fs.mkdirSync(tmpDir, { recursive: true });
+        }
+        return path.join(tmpDir, 'vantage_database.json');
+      } catch (err) {
+        return path.join(os.tmpdir(), 'vantage_database.json');
+      }
+    }
+
     try {
       const localDataDir = path.join(__dirname, '..', 'data');
       if (!fs.existsSync(localDataDir)) {
@@ -35,7 +55,7 @@ class VantageDatabase {
       return path.join(localDataDir, 'vantage_database.json');
     } catch (e) {
       try {
-        const tmpDir = path.join('/tmp', 'vantage_data');
+        const tmpDir = path.join(os.tmpdir(), 'vantage_data');
         if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
         return path.join(tmpDir, 'vantage_database.json');
       } catch (err) {

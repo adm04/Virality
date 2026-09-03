@@ -26,24 +26,24 @@ function parseBody(req) {
 }
 
 module.exports = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
-
-  if (req.method === 'OPTIONS') {
-    res.statusCode = 204;
-    res.end();
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    res.statusCode = 405;
-    res.end(JSON.stringify({ error: 'Method Not Allowed' }));
-    return;
-  }
-
   try {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+
+    if (req.method === 'OPTIONS') {
+      res.statusCode = 204;
+      res.end();
+      return;
+    }
+
+    if (req.method !== 'POST') {
+      res.statusCode = 405;
+      res.end(JSON.stringify({ error: 'Method Not Allowed' }));
+      return;
+    }
+
     const data = await parseBody(req);
     const text = (data.hook || data.title || '').trim();
 
@@ -82,7 +82,8 @@ module.exports = async (req, res) => {
       }
     }, null, 2));
   } catch (err) {
-    res.statusCode = 400;
-    res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.end(JSON.stringify({ error: 'Score service error', details: err.message }));
   }
 };

@@ -46,42 +46,48 @@ function parseBody(req) {
 }
 
 module.exports = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  try {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
-  if (req.method === 'OPTIONS') {
-    res.statusCode = 204;
-    res.end();
-    return;
-  }
-
-  if (req.method === 'GET') {
-    res.statusCode = 200;
-    res.end(JSON.stringify(inMemoryProfile, null, 2));
-    return;
-  }
-
-  if (req.method === 'POST') {
-    try {
-      const data = await parseBody(req);
-      data.updated_at = new Date().toISOString();
-      inMemoryProfile = { ...inMemoryProfile, ...data };
-
-      res.statusCode = 200;
-      res.end(JSON.stringify({
-        success: true,
-        message: 'Creator profile saved successfully',
-        profile: inMemoryProfile
-      }, null, 2));
-    } catch (err) {
-      res.statusCode = 400;
-      res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
+    if (req.method === 'OPTIONS') {
+      res.statusCode = 204;
+      res.end();
+      return;
     }
-    return;
-  }
 
-  res.statusCode = 405;
-  res.end(JSON.stringify({ error: 'Method Not Allowed' }));
+    if (req.method === 'GET') {
+      res.statusCode = 200;
+      res.end(JSON.stringify(inMemoryProfile, null, 2));
+      return;
+    }
+
+    if (req.method === 'POST') {
+      try {
+        const data = await parseBody(req);
+        data.updated_at = new Date().toISOString();
+        inMemoryProfile = { ...inMemoryProfile, ...data };
+
+        res.statusCode = 200;
+        res.end(JSON.stringify({
+          success: true,
+          message: 'Creator profile saved successfully',
+          profile: inMemoryProfile
+        }, null, 2));
+      } catch (err) {
+        res.statusCode = 400;
+        res.end(JSON.stringify({ error: 'Invalid JSON body', details: err.message }));
+      }
+      return;
+    }
+
+    res.statusCode = 405;
+    res.end(JSON.stringify({ error: 'Method Not Allowed' }));
+  } catch (err) {
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.end(JSON.stringify({ error: 'Profile service error', details: err.message }));
+  }
 };
