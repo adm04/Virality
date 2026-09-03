@@ -1977,14 +1977,24 @@
 
       if (res && res.user) {
         currentUser = res.user;
-        if (res.profile) creatorProfile = res.profile;
+        creatorProfile = {
+          ...VantageConfig.DEFAULT_CREATOR_PROFILE,
+          name: currentUser.name,
+          email: currentUser.email,
+          niches: [],
+          content_types: [],
+          onboarding_completed: false
+        };
         if (res.token) VantageAPI.setToken(res.token);
 
         updateHeaderAndSidebarUser();
         updateCreatorPersonaChips();
         updateLiveClockAndGreeting();
+        
+        // Dismiss auth portal and immediately launch the 5-step Content & Niche Onboarding Wizard
         closeAuthScreen();
-        showToast(`Account created! Welcome to Vantage OS, ${currentUser.name}.`);
+        openOnboardingModal(true);
+        showToast(`Welcome, ${currentUser.name}! Let's select your content formats and niche focus.`);
       }
     } catch (err) {
       showAuthAlert(err.message || 'Registration failed. Please check your information.');
@@ -2033,9 +2043,12 @@
   }
 
   // --- Onboarding Wizard ---
-  function openOnboardingModal() {
-    // Pre-populate niches from creator profile
-    const userNiches = creatorProfile.niches || ['ai', 'technology'];
+  function openOnboardingModal(isNewUser = false) {
+    // Determine user niches: for brand new users, let them pick fresh without forced AI/tech default
+    const userNiches = (isNewUser || !creatorProfile.onboarding_completed) 
+      ? (creatorProfile.niches || []) 
+      : (creatorProfile.niches && creatorProfile.niches.length > 0 ? creatorProfile.niches : ['fmcg', 'ai']);
+
     document.querySelectorAll('#grid-niches .onboard-tag-btn').forEach(btn => {
       const val = btn.getAttribute('data-value');
       if (userNiches.includes(val)) {
@@ -2045,8 +2058,11 @@
       }
     });
 
-    // Pre-populate formats
-    const userTypes = creatorProfile.content_types || ['reels', 'shorts', 'youtube'];
+    // Determine user formats: for brand new users, allow fresh selection
+    const userTypes = (isNewUser || !creatorProfile.onboarding_completed) 
+      ? (creatorProfile.content_types || []) 
+      : (creatorProfile.content_types && creatorProfile.content_types.length > 0 ? creatorProfile.content_types : ['reels', 'shorts', 'youtube']);
+
     document.querySelectorAll('#grid-content-types .onboard-tag-btn').forEach(btn => {
       const val = btn.getAttribute('data-value');
       if (userTypes.includes(val)) {
@@ -2092,14 +2108,14 @@
       if (progressFill) progressFill.style.width = '100%';
       if (stepCounter) stepCounter.textContent = `CALIBRATION COMPLETE`;
       if (prevBtn) prevBtn.style.display = 'block';
-      if (nextBtn) nextBtn.innerHTML = `<span>Show My Opportunities</span> <svg class="lucide lucide-sparkles" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`;
+      if (nextBtn) nextBtn.innerHTML = `<span>Enter My Calibrated Dashboard</span> <svg class="lucide lucide-sparkles" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`;
 
       const selPlatforms = Array.from(document.querySelectorAll('#grid-content-types .onboard-tag-btn.selected')).map(b => b.textContent.trim());
       const selNiches = Array.from(document.querySelectorAll('#grid-niches .onboard-tag-btn.selected')).map(b => b.textContent.trim());
       const selGoal = document.querySelector('#grid-goals .goal-card.selected h4')?.textContent.trim() || 'Get More Views';
 
-      if (document.getElementById('sum-platforms')) document.getElementById('sum-platforms').textContent = selPlatforms.join(', ') || 'Reels, Shorts, YouTube';
-      if (document.getElementById('sum-niches')) document.getElementById('sum-niches').textContent = selNiches.join(', ') || 'AI & DevTools';
+      if (document.getElementById('sum-platforms')) document.getElementById('sum-platforms').textContent = selPlatforms.join(', ') || 'Selected Formats';
+      if (document.getElementById('sum-niches')) document.getElementById('sum-niches').textContent = selNiches.join(', ') || 'Selected Niches';
       if (document.getElementById('sum-goal')) document.getElementById('sum-goal').textContent = selGoal;
     }
     refreshLucideIcons();
@@ -2113,7 +2129,7 @@
     creatorProfile = {
       ...creatorProfile,
       content_types: selContentTypes.length > 0 ? selContentTypes : ['reels', 'shorts', 'youtube'],
-      niches: selNiches.length > 0 ? selNiches : ['ai', 'technology'],
+      niches: selNiches.length > 0 ? selNiches : ['fmcg', 'ai'],
       age_range: document.getElementById('onboard-age-range')?.value || '18-34',
       country: document.getElementById('onboard-country')?.value || 'India',
       language: document.getElementById('onboard-language')?.value || 'English',
@@ -2122,12 +2138,26 @@
       updated_at: new Date().toISOString()
     };
 
-    VantageAPI.saveProfile(creatorProfile);
+    try {
+      localStorage.setItem(VantageConfig.STORAGE_KEY_PROFILE, JSON.stringify(creatorProfile));
+      VantageAPI.saveProfile(creatorProfile);
+    } catch (e) {}
+
+    // Calibrate primary active niche on the genre filter bar
+    if (creatorProfile.niches && creatorProfile.niches.length > 0) {
+      activeTrendingNiche = creatorProfile.niches[0];
+      document.querySelectorAll('#trending-niche-filters .format-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.getAttribute('data-niche') === activeTrendingNiche);
+      });
+    }
+
     updateCreatorPersonaChips();
+    updateHeaderAndSidebarUser();
     updateLiveClockAndGreeting();
     renderTrendingSection();
     renderIdeasSection();
-    showToast('Creator persona calibrated and saved!');
+    renderCompetitorSection();
+    showToast(`Vantage OS calibrated to your ${creatorProfile.niches.join(' & ')} content!`);
   }
 
   // ================= 7. DATA HELPERS =================
@@ -2920,6 +2950,9 @@
           updateLiveClockAndGreeting();
           renderLibrarySection();
           closeAuthScreen();
+          if (creatorProfile.onboarding_completed === false) {
+            openOnboardingModal(true);
+          }
         } else {
           // If session is expired or invalid, direct to Auth Portal
           openAuthScreen();
