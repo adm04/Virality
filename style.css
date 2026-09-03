@@ -820,39 +820,87 @@ body {
   letter-spacing: 0.4px;
 }
 
-/* Genre Filter Bar & Lucide Pills */
+/* ================= DEDICATED NICHE / GENRE FILTER CARD ================= */
+.niche-filter-bar-card {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 8px 16px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+  width: 100%;
+}
+
 .genre-filter-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 11px;
   font-weight: 800;
   color: var(--text-tertiary);
   text-transform: uppercase;
-  letter-spacing: 0.6px;
-  align-self: center;
-  margin-right: 6px;
+  letter-spacing: 0.8px;
+  padding-right: 12px;
+  margin-right: 4px;
+  border-right: 1px solid rgba(0, 0, 0, 0.09);
+  flex-shrink: 0;
 }
-#trending-niche-filters {
-  margin-bottom: 16px;
-  overflow-x: auto;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 4px 0;
+.genre-filter-label svg {
+  color: #059669;
 }
-#trending-niche-filters .format-pill {
+
+.niche-filter-bar-card .format-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 13px;
+  padding: 6px 12px;
   font-size: 12px;
   font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(248, 250, 252, 0.8);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  font-family: var(--font-body);
 }
-#trending-niche-filters .format-pill svg {
+
+.niche-filter-bar-card .format-pill svg {
   width: 13px;
   height: 13px;
   flex-shrink: 0;
-  transition: transform 0.15s ease;
+  color: var(--text-tertiary);
+  transition: transform 0.15s ease, color 0.15s ease;
 }
-#trending-niche-filters .format-pill:hover svg {
-  transform: scale(1.15);
+
+.niche-filter-bar-card .format-pill:hover {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  border-color: rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+.niche-filter-bar-card .format-pill:hover svg {
+  color: var(--text-primary);
+  transform: scale(1.12);
+}
+
+.niche-filter-bar-card .format-pill.active {
+  background: #0F131A;
+  color: #FFFFFF;
+  border-color: #0F131A;
+  box-shadow: 0 2px 8px rgba(15, 19, 26, 0.14);
+}
+.niche-filter-bar-card .format-pill.active svg {
+  color: #10B981;
 }
 
 .topbar-actions {
@@ -3135,17 +3183,21 @@ body {
     justify-content: space-between;
     gap: 8px;
   }
-  .platform-filter-bar {
+  .platform-filter-bar,
+  .niche-filter-bar-card {
     width: 100%;
     max-width: 100%;
     display: flex;
+    flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-bottom: 4px;
+    padding: 7px 12px;
     gap: 6px;
+    box-sizing: border-box;
   }
-  .platform-filter-bar::-webkit-scrollbar {
+  .platform-filter-bar::-webkit-scrollbar,
+  .niche-filter-bar-card::-webkit-scrollbar {
     display: none;
   }
   .format-pill, .angle-chip, .stage-tab {
