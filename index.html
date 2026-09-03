@@ -84,6 +84,12 @@
               <svg class="lucide lucide-search" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               <span class="nav-label">Content Search</span>
             </button>
+
+            <button class="nav-item" data-tooltip="Competitor Radar (Instagram & YouTube)" id="nav-competitors" aria-label="Competitor Radar" type="button">
+              <svg class="lucide lucide-crosshair" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+              <span class="nav-label">Competitor Radar</span>
+              <span class="nav-badge-pill">Live</span>
+            </button>
           </nav>
         </div>
 
@@ -496,6 +502,73 @@
         <!-- SEARCH RESULTS MATRIX -->
         <div class="bento-grid" id="search-results-grid">
           <!-- Dynamically rendered -->
+        </div>
+      </section>
+
+      <!-- ================= SECTION: COMPETITOR & CREATOR TRACKING RADAR ================= -->
+      <section class="dashboard-section animate-fade delay-3" id="section-competitors" aria-labelledby="heading-competitors">
+        <div class="section-header-row">
+          <div class="section-title-wrap">
+            <div class="section-icon-badge competitor-badge" aria-hidden="true">
+              <svg class="lucide lucide-crosshair" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+            </div>
+            <div>
+              <h2 class="section-heading" id="heading-competitors">Competitor & Creator Radar</h2>
+              <p class="section-subtext">Directly monitor competitors on YouTube and Instagram to reverse-engineer viral outlier hooks.</p>
+            </div>
+          </div>
+
+          <div class="section-actions-row">
+            <!-- Platform Switcher: All / YouTube / Instagram -->
+            <div class="platform-filter-bar" id="competitor-platform-filters" role="tablist" aria-label="Filter Competitors by Platform">
+              <button class="format-pill active" data-platform="all" type="button">All Channels</button>
+              <button class="format-pill" data-platform="youtube" type="button">
+                <svg class="lucide lucide-youtube" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><polygon points="10 15 15 12 10 9 10 15"/></svg>
+                <span>YouTube</span>
+              </button>
+              <button class="format-pill" data-platform="instagram" type="button">
+                <svg class="lucide lucide-instagram" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                <span>Instagram</span>
+              </button>
+            </div>
+
+            <button class="btn btn-secondary btn-sm" id="btn-open-channel-inspector-direct" type="button">
+              <svg class="lucide lucide-scan" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg>
+              <span>Deep Channel Scanner</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- COMPETITOR SEARCH & QUICK-FETCH BAR -->
+        <div class="competitor-fetch-bar-card">
+          <form class="competitor-fetch-input-group" id="form-fetch-competitor" onsubmit="return false;">
+            <svg class="lucide lucide-search" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="input-competitor-handle" class="competitor-fetch-input" placeholder="Fetch any YouTube channel or Instagram handle (e.g. @mkbhd, @fireship, @farmley, @slurpifarm)..." autocomplete="off">
+            <select id="select-competitor-platform" class="competitor-platform-select" aria-label="Select Platform">
+              <option value="youtube">YouTube</option>
+              <option value="instagram">Instagram</option>
+            </select>
+            <button class="btn btn-primary btn-sm" id="btn-fetch-competitor" type="submit">
+              <svg class="lucide lucide-scan" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg>
+              <span>Fetch Analytics</span>
+            </button>
+          </form>
+
+          <!-- Quick presets for popular competitors across niches -->
+          <div class="competitor-presets-row">
+            <span class="preset-label">Quick Presets:</span>
+            <button class="preset-chip" data-handle="Fireship" data-platform="youtube" type="button">@Fireship (Tech)</button>
+            <button class="preset-chip" data-handle="MKBHD" data-platform="youtube" type="button">@MKBHD (Gadgets)</button>
+            <button class="preset-chip" data-handle="farmley" data-platform="instagram" type="button">@farmley (FMCG Snacks)</button>
+            <button class="preset-chip" data-handle="slurpifarm" data-platform="instagram" type="button">@slurpifarm (Healthy Food)</button>
+            <button class="preset-chip" data-handle="AlexHormozi" data-platform="youtube" type="button">@AlexHormozi (Business)</button>
+            <button class="preset-chip" data-handle="mreflow" data-platform="youtube" type="button">@MattWolfe (AI)</button>
+          </div>
+        </div>
+
+        <!-- COMPETITOR CARDS GRID (3-4 Cards Per Row) -->
+        <div class="competitor-cards-grid" id="competitor-cards-container">
+          <!-- Rendered dynamically -->
         </div>
       </section>
 

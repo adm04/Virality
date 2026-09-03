@@ -1422,6 +1422,366 @@
     }
   }
 
+  // ================= COMPETITOR & CREATOR TRACKING RADAR ENGINE =================
+  const DEFAULT_COMPETITORS = [
+    {
+      id: 'comp-1',
+      name: 'Fireship',
+      handle: '@Fireship',
+      platform: 'youtube',
+      niche: 'Tech & DevTools',
+      followers: '3.2M subs',
+      baselineViews: '125K',
+      uploadRate: '3 / week',
+      avatarText: 'FS',
+      topOutlier: {
+        title: 'AI Coding Agents Just Made Junior Devs Obsolete in 100 Seconds',
+        views: '1.8M',
+        multiplier: '14.4x',
+        hook: '99% of developers are writing code the wrong way in 2026. Here is why.',
+        whyViral: 'High controversy title + immediate code demonstration + extreme fear-of-missing-out angle.'
+      }
+    },
+    {
+      id: 'comp-2',
+      name: 'Farmley Foods',
+      handle: '@farmley',
+      platform: 'instagram',
+      niche: 'FMCG & D2C Snacks',
+      followers: '240K fans',
+      baselineViews: '18K',
+      uploadRate: '5 / week',
+      avatarText: 'FL',
+      topOutlier: {
+        title: 'Why 90% of "Diet" Makhana from Local Stores is secretly Fried in Palm Oil',
+        views: '260K',
+        multiplier: '14.4x',
+        hook: 'Flip your makhana packet right now. If you see this one word, throw it away.',
+        whyViral: 'Visual lab-style food test exposing commercial tricks + instant actionable kitchen check.'
+      }
+    },
+    {
+      id: 'comp-3',
+      name: 'Marques Brownlee',
+      handle: '@MKBHD',
+      platform: 'youtube',
+      niche: 'Gadgets & Tech',
+      followers: '19.1M subs',
+      baselineViews: '850K',
+      uploadRate: '2 / week',
+      avatarText: 'MK',
+      topOutlier: {
+        title: 'The Worst Product I Have Ever Reviewed: The Death of Humane AI Pin',
+        views: '9.8M',
+        multiplier: '11.5x',
+        hook: 'This gadget is thoroughly, unequivocally unusable. Here is 7 days with it.',
+        whyViral: 'Brutal unvarnished honesty from an industry titan + high stakes consumer protection.'
+      }
+    },
+    {
+      id: 'comp-4',
+      name: 'Slurrp Farm',
+      handle: '@slurpifarm',
+      platform: 'instagram',
+      niche: 'FMCG Clean Food',
+      followers: '380K fans',
+      baselineViews: '24K',
+      uploadRate: '4 / week',
+      avatarText: 'SF',
+      topOutlier: {
+        title: 'Reading the Ingredients of "Healthy" Children Biscuits under a Microscope',
+        views: '310K',
+        multiplier: '12.9x',
+        hook: 'We sent 5 top supermarket cookies to a certified food lab. The results terrified us.',
+        whyViral: 'Parental anxiety trigger + scientific proof format + wholesome zero-sugar alternative pitch.'
+      }
+    },
+    {
+      id: 'comp-5',
+      name: 'Alex Hormozi',
+      handle: '@AlexHormozi',
+      platform: 'youtube',
+      niche: 'Business & SaaS',
+      followers: '3.1M subs',
+      baselineViews: '110K',
+      uploadRate: '4 / week',
+      avatarText: 'AH',
+      topOutlier: {
+        title: 'How To Make $1,000,000 in 2026 (Even If You Have $0 Skills)',
+        views: '1.6M',
+        multiplier: '14.5x',
+        hook: 'If I lost all my money and had 30 days to survive, this is the exact offer I would sell.',
+        whyViral: 'Step-by-step whiteboard breakdown with zero gatekeeping and high conviction pacing.'
+      }
+    },
+    {
+      id: 'comp-6',
+      name: 'Pieter Levels',
+      handle: '@levelsio',
+      platform: 'instagram',
+      niche: 'Tech & Startups',
+      followers: '290K fans',
+      baselineViews: '35K',
+      uploadRate: '3 / week',
+      avatarText: 'PL',
+      topOutlier: {
+        title: 'How 1 Solo Engineer Built an AI Startup Doing $150,000/mo from a Laptop in Bali',
+        views: '480K',
+        multiplier: '13.7x',
+        hook: 'No venture capital, no employees, just 1 PHP file and Claude 3.7. Here is my setup.',
+        whyViral: 'Anti-establishment indie maker lifestyle validation + minimal tech stack simplicity.'
+      }
+    },
+    {
+      id: 'comp-7',
+      name: 'True Elements',
+      handle: '@trueelements',
+      platform: 'instagram',
+      niche: 'FMCG & D2C Snacks',
+      followers: '190K fans',
+      baselineViews: '12K',
+      uploadRate: '4 / week',
+      avatarText: 'TE',
+      topOutlier: {
+        title: 'Roasted Seeds vs Fried Chips: Why Your 4 PM Snack is Causing Afternoon Brain Fog',
+        views: '165K',
+        multiplier: '13.7x',
+        hook: 'Why do you crash every day at 4 PM? It is not lack of sleep. It is this snack.',
+        whyViral: 'Relatable daily physical symptom connected directly to a clean food solution.'
+      }
+    },
+    {
+      id: 'comp-8',
+      name: 'Hybrid Calisthenics',
+      handle: '@HybridCalisthenics',
+      platform: 'youtube',
+      niche: 'Fitness & Health',
+      followers: '4.4M subs',
+      baselineViews: '90K',
+      uploadRate: '2 / week',
+      avatarText: 'HC',
+      topOutlier: {
+        title: 'Can You Really Build A Full Chest With Only Wall Pushups?',
+        views: '1.2M',
+        multiplier: '13.3x',
+        hook: 'You do not need a $2,000 gym membership. Let us start together right here.',
+        whyViral: 'Zero-intimidation beginner friendly tone + progressive overload demonstration.'
+      }
+    }
+  ];
+
+  let activeCompetitorPlatform = 'all';
+  let trackedCompetitors = null;
+
+  function getTrackedCompetitors() {
+    if (trackedCompetitors) return trackedCompetitors;
+    try {
+      const stored = localStorage.getItem('vantage_tracked_competitors');
+      if (stored) {
+        trackedCompetitors = JSON.parse(stored);
+        return trackedCompetitors;
+      }
+    } catch (e) {}
+    trackedCompetitors = [...DEFAULT_COMPETITORS];
+    return trackedCompetitors;
+  }
+
+  function saveTrackedCompetitors(list) {
+    trackedCompetitors = list;
+    try {
+      localStorage.setItem('vantage_tracked_competitors', JSON.stringify(list));
+    } catch (e) {}
+  }
+
+  function renderCompetitorSection() {
+    const container = document.getElementById('competitor-cards-container');
+    if (!container) return;
+
+    const competitors = getTrackedCompetitors();
+    const filtered = competitors.filter(c => {
+      if (activeCompetitorPlatform === 'all') return true;
+      return c.platform.toLowerCase() === activeCompetitorPlatform.toLowerCase();
+    });
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; padding: 32px; text-align: center; background: rgba(255,255,255,0.85); border-radius: 12px; border: 1px dashed rgba(0,0,0,0.12);">
+          <svg class="lucide lucide-crosshair" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 8px; color: var(--text-tertiary);"><circle cx="12" cy="12" r="10"/><line x1="22" x2="18" y1="12" y2="12"/><line x1="6" x2="2" y1="12" y2="12"/><line x1="12" x2="12" y1="6" y2="2"/><line x1="12" x2="12" y1="22" y2="18"/></svg>
+          <div style="font-weight: 700; font-size: 14px; color: var(--text-primary);">No competitors found for this platform.</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Use the input bar above to fetch any creator on YouTube or Instagram.</div>
+        </div>
+      `;
+      refreshLucideIcons();
+      return;
+    }
+
+    container.innerHTML = filtered.map(comp => `
+      <div class="competitor-card" data-comp-id="${escapeHtml(comp.id)}">
+        <div>
+          <div class="comp-card-header">
+            <div class="comp-avatar">
+              <span>${escapeHtml(comp.avatarText || comp.name.substring(0, 2).toUpperCase())}</span>
+              <span class="comp-platform-badge ${escapeHtml(comp.platform)}">
+                ${comp.platform === 'youtube' 
+                  ? '<svg class="lucide lucide-play" width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>'
+                  : '<svg class="lucide lucide-camera" width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>'
+                }
+              </span>
+            </div>
+            <div class="comp-header-info">
+              <div class="comp-name-row">
+                <span class="comp-title">${escapeHtml(comp.name)}</span>
+                <svg class="lucide lucide-badge-check" width="13" height="13" viewBox="0 0 24 24" fill="#059669" stroke="#FFFFFF" stroke-width="2"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <span class="comp-handle">${escapeHtml(comp.handle)}</span>
+            </div>
+            <span class="comp-niche-pill">${escapeHtml(comp.niche)}</span>
+          </div>
+
+          <div class="comp-metrics-row">
+            <div class="comp-metric-item">
+              <span class="comp-metric-val">${escapeHtml(comp.followers)}</span>
+              <span class="comp-metric-label">Audience</span>
+            </div>
+            <div class="comp-metric-item">
+              <span class="comp-metric-val" style="color: #059669;">${escapeHtml(comp.baselineViews)}</span>
+              <span class="comp-metric-label">Median Baseline</span>
+            </div>
+            <div class="comp-metric-item">
+              <span class="comp-metric-val">${escapeHtml(comp.uploadRate)}</span>
+              <span class="comp-metric-label">Velocity</span>
+            </div>
+          </div>
+
+          <div class="comp-outlier-box">
+            <div class="comp-outlier-head">
+              <span class="comp-outlier-badge">${escapeHtml(comp.topOutlier.multiplier)} Outlier</span>
+              <span class="comp-outlier-views">${escapeHtml(comp.topOutlier.views)} views</span>
+            </div>
+            <div class="comp-outlier-title">"${escapeHtml(comp.topOutlier.title)}"</div>
+            <div class="comp-outlier-hook">${escapeHtml(comp.topOutlier.hook)}</div>
+          </div>
+        </div>
+
+        <div class="comp-card-footer">
+          <button class="btn btn-primary btn-sm btn-comp-reverse-hook" data-comp-id="${escapeHtml(comp.id)}" type="button" title="Open AI Script Studio with this competitor hook">
+            <svg class="lucide lucide-sparkles" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            <span>Reverse Hook</span>
+          </button>
+          <button class="btn btn-secondary btn-sm btn-comp-inspect" data-handle="${escapeHtml(comp.handle)}" data-platform="${escapeHtml(comp.platform)}" type="button" title="View all outlier video anomalies">
+            <svg class="lucide lucide-scan" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/></svg>
+            <span>Inspect</span>
+          </button>
+        </div>
+      </div>
+    `).join('');
+
+    // Bind card buttons
+    container.querySelectorAll('.btn-comp-reverse-hook').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const compId = btn.getAttribute('data-comp-id');
+        const comp = getTrackedCompetitors().find(c => c.id === compId);
+        if (comp) {
+          openScriptStudio();
+          const topicInput = document.getElementById('script-topic-input');
+          if (topicInput) topicInput.value = `Counter-Hook against ${comp.name}: ${comp.topOutlier.title}`;
+          const angleSelect = document.getElementById('script-angle-select');
+          if (angleSelect) angleSelect.value = 'Contrarian Challenge';
+          showToast(`Loaded competitor outlier into AI Script Studio!`);
+        }
+      });
+    });
+
+    container.querySelectorAll('.btn-comp-inspect').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const handle = btn.getAttribute('data-handle');
+        const handleInput = document.getElementById('channel-handle-input');
+        if (handleInput) handleInput.value = handle.replace('@', '');
+        openChannelInspector();
+        runChannelScan(handle);
+      });
+    });
+
+    refreshLucideIcons();
+  }
+
+  async function handleFetchCompetitor(handleInput, platform = 'youtube') {
+    if (!handleInput || !handleInput.trim()) {
+      showToast('Please enter a creator or competitor handle (e.g. @farmley or @mkbhd).');
+      return;
+    }
+
+    const cleanHandle = handleInput.trim().replace(/^@/, '');
+    const fullHandle = `@${cleanHandle}`;
+
+    const list = getTrackedCompetitors();
+    const existing = list.find(c => c.handle.toLowerCase() === fullHandle.toLowerCase());
+    if (existing) {
+      showToast(`Competitor ${fullHandle} is already on your tracking radar!`);
+      document.getElementById('section-competitors')?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    const fetchBtn = document.getElementById('btn-fetch-competitor');
+    const oldHtml = fetchBtn ? fetchBtn.innerHTML : '';
+    if (fetchBtn) {
+      fetchBtn.disabled = true;
+      fetchBtn.innerHTML = `<span>Fetching...</span>`;
+    }
+
+    // Simulate intelligent API fetching with realistic metrics based on platform and name
+    await new Promise(r => setTimeout(r, 600));
+
+    const isFmcg = /makhana|farm|food|snack|protein|cookie|slurp/i.test(cleanHandle);
+    const isTech = /code|dev|tech|mkbhd|fireship|ai|agent|hack/i.test(cleanHandle);
+    
+    let niche = isFmcg ? 'FMCG & D2C Snacks' : (isTech ? 'Tech & DevTools' : 'Creator Intelligence');
+    let followers = `${Math.floor(Math.random() * 400 + 120)}K ${platform === 'youtube' ? 'subs' : 'fans'}`;
+    let baseline = `${Math.floor(Math.random() * 35 + 15)}K`;
+    let multiplier = (Math.random() * 5 + 8).toFixed(1) + 'x';
+    let outlierViews = `${Math.floor(Math.random() * 500 + 200)}K`;
+
+    const newComp = {
+      id: `comp-${Date.now()}`,
+      name: cleanHandle.charAt(0).toUpperCase() + cleanHandle.slice(1),
+      handle: fullHandle,
+      platform: platform,
+      niche: niche,
+      followers: followers,
+      baselineViews: baseline,
+      uploadRate: '3-5 / week',
+      avatarText: cleanHandle.substring(0, 2).toUpperCase(),
+      topOutlier: {
+        title: isFmcg 
+          ? `Why Supermarket "Healthy" ${cleanHandle} Snacks are Hidden Sugar Bombs`
+          : `How ${cleanHandle} Hit Top 1% View Velocity in 48 Hours with AI`,
+        views: outlierViews,
+        multiplier: multiplier,
+        hook: isFmcg 
+          ? `Stop buying this if you care about your health. Here is what they don't tell you.`
+          : `Nobody in this industry wants to admit this truth about modern algorithms.`,
+        whyViral: 'High friction pattern-interrupt hook + proof-backed visual demo.'
+      }
+    };
+
+    list.unshift(newComp);
+    saveTrackedCompetitors(list);
+    renderCompetitorSection();
+
+    if (fetchBtn) {
+      fetchBtn.disabled = false;
+      fetchBtn.innerHTML = oldHtml;
+    }
+
+    const input = document.getElementById('input-competitor-handle');
+    if (input) input.value = '';
+
+    showToast(`Successfully added ${fullHandle} to your Competitor Radar!`);
+    refreshLucideIcons();
+  }
+
   // --- Trend Inspector Drawer ---
   function openTrendInspector(trendId) {
     const trend = VantageTrendsData.SEED_TRENDS.find(t => t.id === trendId) || VantageTrendsData.SEED_TRENDS[0];
@@ -1850,7 +2210,7 @@
     const navTrending = document.getElementById('nav-trending');
     const navIdeas = document.getElementById('nav-ideas');
     const navSearch = document.getElementById('nav-search');
-    const navLibrary = document.getElementById('nav-library');
+    const navCompetitors = document.getElementById('nav-competitors');
     const sidebarEl = document.getElementById('sidebar');
     const toggleSidebarBtn = document.getElementById('btn-sidebar-toggle');
 
@@ -1862,6 +2222,7 @@
     navTrending?.addEventListener('click', () => { setNavActive(navTrending); document.getElementById('section-trending')?.scrollIntoView({ behavior: 'smooth' }); });
     navIdeas?.addEventListener('click', () => { setNavActive(navIdeas); document.getElementById('section-ideas')?.scrollIntoView({ behavior: 'smooth' }); });
     navSearch?.addEventListener('click', () => { setNavActive(navSearch); document.getElementById('section-search')?.scrollIntoView({ behavior: 'smooth' }); });
+    navCompetitors?.addEventListener('click', () => { setNavActive(navCompetitors); document.getElementById('section-competitors')?.scrollIntoView({ behavior: 'smooth' }); });
     navLibrary?.addEventListener('click', () => { setNavActive(navLibrary); document.getElementById('section-library')?.scrollIntoView({ behavior: 'smooth' }); });
 
     // Desktop SaaS Sidebar Collapse/Expand Toggle
@@ -2150,6 +2511,39 @@
         showToast(`Filtered to genre: ${pill.textContent.trim()}`);
       });
     });
+
+    // Competitor Platform Filter Pills
+    document.querySelectorAll('#competitor-platform-filters .format-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('#competitor-platform-filters .format-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeCompetitorPlatform = pill.getAttribute('data-platform') || 'all';
+        renderCompetitorSection();
+      });
+    });
+
+    // Competitor Fetch Form Submission
+    document.getElementById('form-fetch-competitor')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const handle = document.getElementById('input-competitor-handle')?.value;
+      const platform = document.getElementById('select-competitor-platform')?.value || 'youtube';
+      handleFetchCompetitor(handle, platform);
+    });
+
+    // Competitor Quick Preset Chips
+    document.querySelectorAll('.competitor-presets-row .preset-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const handle = chip.getAttribute('data-handle');
+        const platform = chip.getAttribute('data-platform') || 'youtube';
+        const handleInput = document.getElementById('input-competitor-handle');
+        const selectPlatform = document.getElementById('select-competitor-platform');
+        if (handleInput) handleInput.value = handle;
+        if (selectPlatform) selectPlatform.value = platform;
+        handleFetchCompetitor(handle, platform);
+      });
+    });
+
+    document.getElementById('btn-open-channel-inspector-direct')?.addEventListener('click', openChannelInspector);
 
     // Onboarding Niches Grid Selection
     document.querySelectorAll('#grid-niches .onboard-tag-btn').forEach(btn => {
@@ -2464,6 +2858,7 @@
     renderTopicDropdownList();
     renderNicheDropdownList();
     renderSearchSection();
+    renderCompetitorSection();
     renderLibrarySection();
     renderIdeasSection();
     refreshLucideIcons();
