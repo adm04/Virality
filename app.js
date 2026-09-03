@@ -342,23 +342,125 @@
           'ASMR popping & roasting sounds capture 85%+ video completion rate'
         ],
         tags: ['#FMCGMarketing', '#BehindTheScenes', '#MakhanaRoasting', '#D2CBrand']
+      },
+      {
+        id: 'trend-life-women-01',
+        topic: 'Slow Morning "5-to-9" Routine for Working Women',
+        niche: 'lifestyle-women',
+        platform: 'reels',
+        platformName: 'Instagram Reels',
+        outlierScore: 97,
+        outlierText: '12.4× Outlier',
+        title: 'The "5-to-9 Before The 9-to-5" Routine That Rebuilt My Nervous System as a 26-Year-Old in Bangalore.',
+        views: '1.8M',
+        baseline: '145K',
+        growth: '+480%',
+        signals: { momentum: 98, engagement: 97, searchDemand: 94, saturation: 26, competition: 24, freshFactor: 96, monetization: 92 },
+        whyTrending: [
+          'Anti-hustle "intentional slow living" counter-trend is exploding across working women',
+          'High aesthetic sensory appeal: cold brew, matcha, lighting, journaling triggers high bookmark rate',
+          'Relatability trigger: balancing corporate pressure with nervous system regulation'
+        ],
+        tags: ['#WomenInLifestyle', '#MorningRoutine', '#SlowLiving', '#CorporateGirlie', '#IntentionalLiving']
+      },
+      {
+        id: 'trend-life-women-02',
+        topic: 'Capsule Wardrobe & High-End Minimalist Styling',
+        niche: 'lifestyle-women',
+        platform: 'shorts',
+        platformName: 'YouTube Shorts',
+        outlierScore: 96,
+        outlierText: '11.8× Outlier',
+        title: 'How to Look 10x More Expensive on a Normal Budget: 5 Fabric & Silhouette Rules Most Women Miss.',
+        views: '2.4M',
+        baseline: '180K',
+        growth: '+410%',
+        signals: { momentum: 96, engagement: 98, searchDemand: 96, saturation: 31, competition: 28, freshFactor: 92, monetization: 98 },
+        whyTrending: [
+          'De-influencing trend: teaching people how to buy fewer, higher quality pieces instead of fast fashion hauls',
+          'Extreme visual contrast between wrong fabric draping vs correct tailoring',
+          'Extremely high comment debate and bookmark rate'
+        ],
+        tags: ['#CapsuleWardrobe', '#WomenStyle', '#QuietLuxury', '#MinimalistFashion', '#AestheticLifestyle']
+      },
+      {
+        id: 'trend-life-men-01',
+        topic: 'Dopamine Reset & Daily Non-Negotiable System for Men',
+        niche: 'lifestyle-men',
+        platform: 'youtube',
+        platformName: 'YouTube Long-form',
+        outlierScore: 95,
+        outlierText: '13.2× Outlier',
+        title: '7 Daily Habits That Quietly Give Men an Unfair Advantage in Their 20s & 30s (Without Extreme Hustle).',
+        views: '1.9M',
+        baseline: '130K',
+        growth: '+510%',
+        signals: { momentum: 97, engagement: 96, searchDemand: 95, saturation: 28, competition: 25, freshFactor: 95, monetization: 94 },
+        whyTrending: [
+          'Move away from toxic "sigma hustle" towards grounded, sustainable masculine discipline and energy',
+          'Solves the universal modern male fatigue problem: brain fog, low dopamine, screen overload',
+          'High average view duration (74%+ completion on 14-min deep dive)'
+        ],
+        tags: ['#MenInLifestyle', '#SelfImprovement', '#DopamineDetox', '#MenHabits', '#Discipline']
+      },
+      {
+        id: 'trend-life-men-02',
+        topic: 'Minimalist Bachelor Sanctuary & Focus Desk Setup',
+        niche: 'lifestyle-men',
+        platform: 'shorts',
+        platformName: 'YouTube Shorts',
+        outlierScore: 93,
+        outlierText: '9.8× Outlier',
+        title: 'How I Turned My Plain Metro 1BHK into a Sanctuary of Focus & Calm for Under $400.',
+        views: '1.3M',
+        baseline: '115K',
+        growth: '+320%',
+        signals: { momentum: 94, engagement: 95, searchDemand: 91, saturation: 24, competition: 22, freshFactor: 93, monetization: 91 },
+        whyTrending: [
+          'Home decor for young single men is one of the most underserved high-growth niches on YouTube & Reels',
+          'Warm ambient lighting, cable management, and clean walnut wood aesthetics trigger instant viral bookmarks',
+          'Direct Amazon / IKEA affiliate conversion potential'
+        ],
+        tags: ['#MenSpace', '#DeskSetup', '#ApartmentTour', '#MinimalistLiving', '#MenLifestyle']
+      },
+      {
+        id: 'trend-life-general-01',
+        topic: 'Realistic Metro City Money & Lifestyle Diary',
+        niche: 'lifestyle',
+        platform: 'reels',
+        platformName: 'Instagram Reels',
+        outlierScore: 94,
+        outlierText: '10.2× Outlier',
+        title: 'The Zero-Deprivation Budget: How I Live Well in a Tier-1 City Without Burning 80% of My Paycheck.',
+        views: '1.5M',
+        baseline: '130K',
+        growth: '+390%',
+        signals: { momentum: 95, engagement: 96, searchDemand: 93, saturation: 29, competition: 24, freshFactor: 94, monetization: 93 },
+        whyTrending: [
+          'High financial voyeurism: audiences love seeing real expense spreadsheets broken down candidly',
+          'Emotional reassurance for 20-somethings navigating urban inflation',
+          'High viral sharing with friends and partners'
+        ],
+        tags: ['#LifestyleVlog', '#CityLiving', '#MoneyDiary', '#FinancialWellness', '#DailyHabits']
       }
     ],
 
     CURATED_TOPICS: [
-      { id: 'all', name: 'All Topics', count: 9 },
+      { id: 'all', name: 'All Topics', count: 14 },
+      { id: 'women-lifestyle', name: 'Women Lifestyle & Slow Living', count: 2, niche: 'lifestyle-women' },
+      { id: 'men-lifestyle', name: 'Men Habits, Style & Mindset', count: 2, niche: 'lifestyle-men' },
       { id: 'makhana-snack', name: 'Makhana & Clean Snacking D2C', count: 2, niche: 'fmcg' },
       { id: 'ai-agents', name: 'AI Autonomous Agents', count: 3, niche: 'ai' },
       { id: 'vscode', name: 'VS Code & Tooling Optimization', count: 2, niche: 'technology' },
       { id: 'indie-saas', name: 'Solopreneur Micro-SaaS', count: 2, niche: 'business' },
-      { id: 'local-llm', name: 'Local LLMs & DeepSeek R1', count: 3, niche: 'ai' },
-      { id: 'podcast-tech', name: 'AI Agent Economic Shift', count: 1, niche: 'technology' },
-      { id: 'fitness-timing', name: 'Cortisol & Workout Science', count: 1, niche: 'fitness' },
-      { id: 'viral-loops', name: 'Zero-Budget Growth Funnels', count: 2, niche: 'marketing' }
+      { id: 'fitness-timing', name: 'Cortisol & Workout Science', count: 1, niche: 'fitness' }
     ],
 
     CURATED_NICHES: [
       { id: 'all', name: 'All Creator Niches' },
+      { id: 'lifestyle-women', name: '🌸 Women in Lifestyle' },
+      { id: 'lifestyle-men', name: '⚡ Men in Lifestyle' },
+      { id: 'lifestyle', name: '🌿 Lifestyle & Daily Living' },
       { id: 'fmcg', name: 'FMCG & D2C Brands' },
       { id: 'ai', name: 'AI & Machine Learning' },
       { id: 'technology', name: 'Technology & DevTools' },
@@ -663,7 +765,11 @@
 
     // Filter by Niche / Genre
     if (activeTrendingNiche !== 'all') {
-      trends = trends.filter(t => t.niche === activeTrendingNiche);
+      if (activeTrendingNiche === 'lifestyle') {
+        trends = trends.filter(t => t.niche === 'lifestyle' || t.niche === 'lifestyle-women' || t.niche === 'lifestyle-men');
+      } else {
+        trends = trends.filter(t => t.niche === activeTrendingNiche);
+      }
     }
 
     // Filter by Platform
@@ -778,6 +884,138 @@
     const aiRes = await VantageAPI.generateAngles(currentTrend.topic, currentTrend.niche, currentTrend.platformName, creatorProfile);
     if (aiRes && aiRes.angles) {
       ideas = aiRes.angles;
+    } else if (currentTrend.niche === 'lifestyle-women') {
+      // Women in Lifestyle Dedicated Viral Angles
+      ideas = [
+        {
+          angleId: 'educational',
+          angleName: 'Intentional Slow Living Routine',
+          title: `The "5-to-9 Before The 9-to-5" Routine for Corporate Women`,
+          hook: `I stopped looking at my phone before 9 AM and replaced it with this 20-minute nervous system reset. My daily anxiety dropped by 80%.`,
+          format: currentTrend.platformName,
+          audience: 'Corporate & Working Women (22–35)',
+          whyWorks: 'Replaces toxic productivity with realistic, aesthetic calm. High bookmark and DM save rate.',
+          structure: '1. The Bedside Phone Trap -> 2. The 20-Min Sunlight & Hydration Protocol -> 3. Brain Dump Journaling -> 4. Entering Work Calmly',
+          cta: 'Save this to try on Monday morning!',
+          score: 98
+        },
+        {
+          angleId: 'controversial',
+          angleName: 'Capsule Wardrobe Rules',
+          title: `7 Quiet-Luxury Rules That Make Any Outfit Look 10x More Expensive`,
+          hook: `Looking elegant has zero to do with designer logos. It is 100% about these 3 subtle fabric and drape contrasts.`,
+          format: currentTrend.platformName,
+          audience: 'Women Minimalist & Aesthetic Fashion Viewers',
+          whyWorks: 'De-influencing fast fashion creates instant credibility and high perceived value.',
+          structure: '1. The 3-Color Rule -> 2. Heavy Cotton vs Polyester Draping -> 3. Minimal Hardware -> 4. Real Outfit Formula',
+          cta: 'Comment "WARDROBE" for my complete capsule essentials guide!',
+          score: 97
+        },
+        {
+          angleId: 'storytelling',
+          angleName: 'Realistic Wellness & Gut Health',
+          title: `3 Overhyped Wellness Habits I Ditched (And What Actually Healed Me)`,
+          hook: `I spent thousands on trendy wellness powders so you don't have to. Here are the 3 I threw away and the 1 morning ritual that actually fixed my gut.`,
+          format: currentTrend.platformName,
+          audience: 'Health & Mindful Living Seekers',
+          whyWorks: 'Pattern-interrupting de-influencing sparks massive comment debate and sharing with friends.',
+          structure: '1. The Expensive Powder Myth -> 2. Cortisol Shockers -> 3. The 1 Simple Habit -> 4. Results 30 Days Later',
+          cta: 'Tag a friend who needs to hear this today!',
+          score: 96
+        },
+        {
+          angleId: 'expert',
+          angleName: 'Solo Metro Living Sanctuary',
+          title: `How I Turned a Rented Metro 1BHK into an Aesthetic Sanctuary on a Budget`,
+          hook: `Living alone in a chaotic city taught me that your home is your mental reset button. Here is how I eliminated visual clutter with zero permanent changes.`,
+          format: currentTrend.platformName,
+          audience: 'Renters & Independent Urban Women',
+          whyWorks: 'Warm ambient visuals + practical rental friendly tips drive 90%+ completion rate.',
+          structure: '1. Rental Limitations -> 2. Warm Indirect Lighting Magic -> 3. Concealing Clutter -> 4. The Final Cozy Evening Reveal',
+          cta: 'Drop a heart if your home is your safe space!',
+          score: 95
+        }
+      ];
+    } else if (currentTrend.niche === 'lifestyle-men') {
+      // Men in Lifestyle Dedicated Viral Angles
+      ideas = [
+        {
+          angleId: 'educational',
+          angleName: 'Dopamine & Energy Optimization',
+          title: `7 Daily Habits That Quietly Give Men an Unfair Edge in Their 20s & 30s`,
+          hook: `Most men are not tired from working hard—they are leaking mental energy before 10 AM through these 3 invisible digital habits.`,
+          format: currentTrend.platformName,
+          audience: 'Men Seeking Mental Clarity & Physical Drive',
+          whyWorks: 'Targets widespread male brain fog with a grounded, non-toxic protocol.',
+          structure: '1. The Morning Dopamine Trap -> 2. Physical Friction Protocol -> 3. Deep Work Windows -> 4. Evening Shutdown',
+          cta: 'Save this post and pick 1 habit to test tomorrow.',
+          score: 98
+        },
+        {
+          angleId: 'controversial',
+          angleName: 'Minimalist Wardrobe Matrix',
+          title: `The 5-Piece Wardrobe Foundation Every Man Needs in 2026`,
+          hook: `Stop buying 20 random shirts you never wear. If you master these 5 timeless silhouettes, you will never struggle with what to wear again.`,
+          format: currentTrend.platformName,
+          audience: 'Men Looking to Upgrade Confidence & Style',
+          whyWorks: 'Pragmatic, checklist-style fashion advice removes decision fatigue.',
+          structure: '1. The Fitting Trap -> 2. Neutral Palette Combinations -> 3. The 5 Core Pieces -> 4. Day-to-Night Outfits',
+          cta: 'Which piece do you already own? Comment below!',
+          score: 96
+        },
+        {
+          angleId: 'storytelling',
+          angleName: 'Bachelor Focus Sanctuary',
+          title: `Turning a Plain Bedroom into a High-Performance Focus Space for Under $400`,
+          hook: `If your room is visually cluttered, your thoughts will always feel scattered. Here is how I eliminated visual friction in 1 weekend.`,
+          format: currentTrend.platformName,
+          audience: 'Remote Workers, Developers & Creators',
+          whyWorks: 'Extreme before/after room transformation captures high bookmark rates and IKEA/Amazon affiliate clicks.',
+          structure: '1. Visual Noise Audit -> 2. Cable Management Mastery -> 3. Warm Ambient Desk Lighting -> 4. Before & After Tour',
+          cta: 'Links to all items in my bio!',
+          score: 95
+        },
+        {
+          angleId: 'expert',
+          angleName: 'Digital Detox & Quiet Confidence',
+          title: `What Happened When I Deleted TikTok & Short-Form Video for 30 Days`,
+          hook: `I replaced 3 hours of doomscrolling with 20 minutes of walking and journaling. By day 14, my focus came back completely.`,
+          format: currentTrend.platformName,
+          audience: 'Self-Improvement Driven Men',
+          whyWorks: 'Universal modern struggle with an inspiring, actionable payoff.',
+          structure: '1. The Withdrawal Phase (Days 1-5) -> 2. Mental Clarity Return (Days 6-14) -> 3. The Productivity Spike -> 4. Final Rule',
+          cta: 'Could you do 7 days without doomscrolling? Be honest below.',
+          score: 97
+        }
+      ];
+    } else if (currentTrend.niche === 'lifestyle') {
+      // General Lifestyle & Living Angles
+      ideas = [
+        {
+          angleId: 'educational',
+          angleName: 'Urban Money Diary',
+          title: `The Zero-Deprivation Metro Budget: Living Well Without Burning Your Savings`,
+          hook: `Here is the uncensored breakdown of my monthly expenses in a Tier-1 city, and the 2 things I refuse to cut corners on.`,
+          format: currentTrend.platformName,
+          audience: 'Young Professionals & Metro Couples',
+          whyWorks: 'Financial voyeurism drives massive organic comments and shares.',
+          structure: '1. The Total Inflow -> 2. Rent & Essentials -> 3. Joy Purchases -> 4. The 20% Automated Savings Rule',
+          cta: 'Comment your city below: Is it getting more expensive?',
+          score: 96
+        },
+        {
+          angleId: 'controversial',
+          angleName: 'The Sunday Reset Protocol',
+          title: `The 90-Minute Sunday Reset That Makes Mondays Feel Effortless`,
+          hook: `If you dread Monday morning, you don't hate your job—you just have a chaotic Sunday transition. Try this 4-step system tonight.`,
+          format: currentTrend.platformName,
+          audience: 'Anyone Struggling with Sunday Night Anxiety',
+          whyWorks: 'High empathy, actionable time-saving checklist with weekend viral spikes.',
+          structure: '1. Physical Space Reset (30m) -> 2. Digital Inbox Zero (20m) -> 3. Weekly Wardrobe & Meals (20m) -> 4. Unplug (20m)',
+          cta: 'Share this with someone who gets the Sunday Scaries!',
+          score: 97
+        }
+      ];
     } else if (currentTrend.niche === 'fmcg') {
       // FMCG & D2C Physical Product Angles (e.g. Makhana, Clean Snacking)
       ideas = [
@@ -1566,6 +1804,60 @@
         multiplier: '13.3x',
         hook: 'You do not need a $2,000 gym membership. Let us start together right here.',
         whyViral: 'Zero-intimidation beginner friendly tone + progressive overload demonstration.'
+      }
+    },
+    {
+      id: 'comp-9',
+      name: 'Komal Pandey',
+      handle: '@komalpandey',
+      platform: 'instagram',
+      niche: 'Women in Lifestyle',
+      followers: '1.9M fans',
+      baselineViews: '380K',
+      uploadRate: '3 / week',
+      avatarText: 'KP',
+      topOutlier: {
+        title: 'How to Style 1 White Shirt in 10 Completely Different Ways (Zero Extra Clothes)',
+        views: '2.8M',
+        multiplier: '7.4x',
+        hook: 'Stop saying you have nothing to wear. Take your plain white shirt—here is outfit number 1.',
+        whyViral: 'Extreme creative utility + fast-paced aesthetic transitions that demand multiple rewatches.'
+      }
+    },
+    {
+      id: 'comp-10',
+      name: 'Tim Dessaint',
+      handle: '@timdessaint',
+      platform: 'youtube',
+      niche: 'Men in Lifestyle',
+      followers: '1.4M subs',
+      baselineViews: '160K',
+      uploadRate: '1 / week',
+      avatarText: 'TD',
+      topOutlier: {
+        title: '7 Wardrobe & Posture Rules That Quietly Make Men Look 10x More Confident',
+        views: '1.9M',
+        multiplier: '11.8x',
+        hook: 'Good style is not about loud clothes. It is 80% fit, 15% posture, and 5% knowing when to stop.',
+        whyViral: 'Pragmatic, non-judgmental style education tailored specifically for modern men.'
+      }
+    },
+    {
+      id: 'comp-11',
+      name: 'Ali Abdaal',
+      handle: '@aliabdaal',
+      platform: 'youtube',
+      niche: 'Lifestyle & Habits',
+      followers: '5.6M subs',
+      baselineViews: '320K',
+      uploadRate: '2 / week',
+      avatarText: 'AA',
+      topOutlier: {
+        title: 'How to Design a Calmer Weekly Routine (That Saves 10 Hours Every Week)',
+        views: '3.4M',
+        multiplier: '10.6x',
+        hook: 'If your calendar stresses you out, here is the exact 4-box time audit that changed my entire life.',
+        whyViral: 'Deep actionable life system that gives viewers tangible relief from daily overwhelm.'
       }
     }
   ];
