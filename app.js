@@ -2349,6 +2349,15 @@
       showToast('Copied Demo Password: vantage2026');
     });
 
+    document.getElementById('btn-close-auth-portal')?.addEventListener('click', () => {
+      const token = VantageAPI.getToken();
+      if (token) {
+        closeAuthScreen();
+      } else {
+        showToast('Please sign in or use 1-Click Demo to enter the dashboard.');
+      }
+    });
+
     document.getElementById('btn-auth-toggle-pass')?.addEventListener('click', () => {
       const passInput = document.getElementById('auth-input-password');
       const toggleBtn = document.getElementById('btn-auth-toggle-pass');

@@ -1372,7 +1372,14 @@
 
   <!-- ================= VANTAGE AUTHENTICATION & LOGIN PORTAL ================= -->
   <div class="auth-portal-overlay" id="auth-portal-overlay" aria-modal="true" role="dialog" aria-labelledby="auth-portal-title">
+    <!-- DYNAMIC WHITE TECH DOTS ANIMATION CANVAS -->
+    <canvas id="auth-tech-dots-canvas" class="auth-dots-canvas" aria-hidden="true"></canvas>
+
     <div class="auth-card">
+      <button class="auth-modal-close-btn" id="btn-close-auth-portal" title="Back to Dashboard" aria-label="Close Authentication Portal" type="button">
+        <svg class="lucide lucide-x" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+
       <div class="auth-card-header">
         <div class="auth-brand-badge">
           <svg class="lucide lucide-shield-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
@@ -1493,7 +1500,10 @@
   <!-- DYNAMIC WEBGL FLUID SHADER ENGINE -->
   <script src="js/shader-background.js"></script>
 
+  <!-- SOPHISTICATED TECH DOTS ANIMATION ENGINE FOR AUTH -->
+  <script src="js/auth-dots-animation.js"></script>
+
   <!-- STANDALONE MASTER JAVASCRIPT BUNDLE -->
-  <script src="app.js?v=20260903-v10"></script>
+  <script src="app.js?v=20260903-v11"></script>
 </body>
 </html>
